@@ -11,3 +11,4 @@ public class Receptor extends Persona {
     this.edad=edad;
     this.organo=organoNecesitado;
     }
+}
