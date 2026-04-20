@@ -7,10 +7,12 @@ import uy.edu.curso.tda.TDAListaEnlazada;
 
 public class GestorReceptores {
 
-    private final TDAListaEnlazada<Receptor> listaReceptores;
+    private final TDAListaEnlazada<Receptor> listaDeReceptores;
+    private TDAListaEnlazada<Receptor> colaDePrioridadDeReceptores;
 
     public GestorReceptores() {
-        this.listaReceptores = new ListaEnlazada<>();
+        this.listaDeReceptores = new ListaEnlazada<>();
+        this.colaDePrioridadDeReceptores = new ListaEnlazada<>();
     }
 
     public Persona registrarReceptor(String cedulaDeIdentidad, String nombre, String tipoDeOrganoNecesitado,
@@ -18,17 +20,21 @@ public class GestorReceptores {
         Receptor nuevoReceptor = new Receptor(cedulaDeIdentidad, nombre, tipoDeSangre, 
                                               tipoDeOrganoNecesitado, edad, puntajeDePrioridad);
 
-        this.listaReceptores.agregar(nuevoReceptor);
+        this.listaDeReceptores.agregar(nuevoReceptor);
 
         return nuevoReceptor;
+    }
+
+    public void insertarReceptorEnLaCola(Persona receptor) {
+        
     }
 
     public Receptor buscarReceptor(String cedulaDeIdentidadReceptor) {
         int i = 0;
 
-        while (i < listaReceptores.tamaño()) {
-            if (listaReceptores.obtener(i).getCedulaDeIdentidad().equals(cedulaDeIdentidadReceptor)) {
-                return listaReceptores.obtener(i);
+        while (i < this.listaDeReceptores.tamaño()) {
+            if (this.listaDeReceptores.obtener(i).getCedulaDeIdentidad().equals(cedulaDeIdentidadReceptor)) {
+                return this.listaDeReceptores.obtener(i);
             }
             i++;
         }
@@ -39,9 +45,9 @@ public class GestorReceptores {
     public void eliminarReceptor(String cedulaDeIdentidadReceptor) {
         int i = 0;
 
-        while (i < listaReceptores.tamaño()) {
-            if (listaReceptores.obtener(i).getCedulaDeIdentidad().equals(cedulaDeIdentidadReceptor)) {
-                listaReceptores.remover(i);
+        while (i < this.listaDeReceptores.tamaño()) {
+            if (this.listaDeReceptores.obtener(i).getCedulaDeIdentidad().equals(cedulaDeIdentidadReceptor)) {
+                this.listaDeReceptores.remover(i);
                 break;
             }
             i++;
@@ -53,9 +59,9 @@ public class GestorReceptores {
         StringBuilder pagina = new StringBuilder();
 
         pagina.append("----------------------- DATOS DE RECEPTORES -----------------------\n");
-        while (i < listaReceptores.tamaño()) {
+        while (i < this.listaDeReceptores.tamaño()) {
             StringBuilder renglon = new StringBuilder();
-            Receptor receptor = this.listaReceptores.obtener(i);
+            Receptor receptor = this.listaDeReceptores.obtener(i);
 
             renglon.append(receptor.getNombre());
             renglon.append(", ");
