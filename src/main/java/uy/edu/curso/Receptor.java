@@ -3,15 +3,20 @@ package uy.edu.curso;
 
 public class Receptor extends Persona {
 
-    byte puntajePrioridad;
+    private byte puntajeDePrioridad;
 
-    public Receptor(String nombre, String tipoSangre, int cedula, 
-                    byte edad, String organoNecesitado, byte puntajePrioridad) {
-        this.puntajePrioridad = puntajePrioridad;
-        this.nombre = nombre;
-        this.tipoSangre = tipoSangre;
-        this.cedula = cedula;
-        this.edad = edad;
-        this.organo = organoNecesitado;
+    public Receptor(String cedulaDeIdentidad, String nombre, String tipoDeSangre, 
+                    String tipoDeOrganoNecesitado, byte edad, byte puntajeDePrioridad) {
+        super(cedulaDeIdentidad, nombre, tipoDeSangre, tipoDeOrganoNecesitado, edad);
+        this.puntajeDePrioridad = puntajeDePrioridad;
     }
+
+    public byte getPuntajeDePrioridad() {
+        return this.puntajeDePrioridad;
+    }
+
+    public void setPuntajeDePrioridad(byte puntajeDePrioridad) {
+        this.puntajeDePrioridad = puntajeDePrioridad;
+    }
+
 }

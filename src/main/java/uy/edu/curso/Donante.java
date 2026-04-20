@@ -3,12 +3,9 @@ package uy.edu.curso;
 
 public class Donante extends Persona {
 
-    public Donante(String nombre, String tipoSangre, int cedula, byte edad, String organoADonar) {
-        this.nombre = nombre;
-        this.tipoSangre = tipoSangre;
-        this.cedula = cedula;
-        this.edad = edad;
-        this.organo = organoADonar;
+    public Donante(String cedulaDeIdentidad, String nombre, String tipoDeSangre, 
+                    String tipoDeOrganoNecesitado, byte edad) {
+        super(cedulaDeIdentidad, nombre, tipoDeSangre, tipoDeOrganoNecesitado, edad);
     }
 
 }

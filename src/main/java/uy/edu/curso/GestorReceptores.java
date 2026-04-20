@@ -12,10 +12,10 @@ public class GestorReceptores {
     public void registrarReceptor(Receptor receptor) {
 
         int i = 0;
-        while ((i < listaReceptores.size() && listaReceptores.get(i).puntajePrioridad > receptor.puntajePrioridad)) {
+        while ((i < listaReceptores.size() && listaReceptores.get(i).getPuntajeDePrioridad() > receptor.getPuntajeDePrioridad())) {
             i++;
         }
-        while ((i < listaReceptores.size()) && (listaReceptores.get(i).puntajePrioridad == receptor.puntajePrioridad)
+        while ((i < listaReceptores.size()) && (listaReceptores.get(i).getPuntajeDePrioridad() == receptor.getPuntajeDePrioridad())
                 && (listaReceptores.get(i).edad > receptor.edad)) {
             i++;
         }
@@ -23,11 +23,11 @@ public class GestorReceptores {
 
     }
 
-    public void eliminarReceptor(int cedula) {
+    public void eliminarReceptor(String cedula) {
         int i = 0;
         while (i < listaReceptores.size()) {
 
-            if (listaReceptores.get(i).cedula == cedula) {
+            if (listaReceptores.get(i).getCedulaDeIdentidad().equals(cedula)) {
                 listaReceptores.remove(i);
                 break;
             }
@@ -35,11 +35,11 @@ public class GestorReceptores {
         }
     }
 
-    public Receptor buscarReceptor(int cedula) {
+    public Receptor buscarReceptor(String cedula) {
         int i = 0;
         while (i < listaReceptores.size()) {
 
-            if (listaReceptores.get(i).cedula == cedula) {
+            if (listaReceptores.get(i).getCedulaDeIdentidad().equals(cedula)) {
                 return listaReceptores.get(i);
             }
             i++;
@@ -53,8 +53,8 @@ public class GestorReceptores {
         pagina.append("DATOS DE RECEPTORES:");
         while (i < listaReceptores.size()) {
             StringBuilder renglon = new StringBuilder();
-            renglon.append(listaReceptores.get(i).nombre + ", " + listaReceptores.get(i).cedula + ", "
-                    + listaReceptores.get(i).organo + ", " + listaReceptores.get(i).tipoSangre + ", "
+            renglon.append(listaReceptores.get(i).getNombre() + ", " + listaReceptores.get(i).getCedulaDeIdentidad() + ", "
+                    + listaReceptores.get(i).getTipoDeOrgano() + ", " + listaReceptores.get(i).getTipoDeSangre() + ", "
                     + listaReceptores.get(i).edad + ".");
             pagina.append(renglon.toString());
             i++;

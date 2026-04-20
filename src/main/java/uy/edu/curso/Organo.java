@@ -4,17 +4,17 @@ public class Organo {
     String nombre;
     String tipoSangre;
     Boolean esInfantil;
-    int cedulaDonante;
+    String cedulaDonante;
 
     public Organo(String nombre, Donante donante) {
         this.nombre = nombre;
-        this.tipoSangre = donante.tipoSangre;
+        this.tipoSangre = donante.tipoDeSangre;
         if (donante.edad < 18) {
             this.esInfantil = true;
         } else {
             this.esInfantil = false;
         }
-        this.cedulaDonante=donante.cedula;
+        this.cedulaDonante=donante.cedulaDeIdentidad;
     }
 
     // PODEMOS AUTOMATIZAR ESTO Y QUE DESDE EL RECEPTOR SE PUEDA CREAR UN ORGANO,

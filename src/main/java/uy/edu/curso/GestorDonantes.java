@@ -15,11 +15,11 @@ public class GestorDonantes {
         listaDonantes.add(donante);
     }
 
-    public void eliminarDonante (int cedula){
+    public void eliminarDonante (String cedula){
         int i = 0;
         while (i<listaDonantes.size()){
             
-            if (listaDonantes.get(i).cedula ==cedula){
+            if (listaDonantes.get(i).cedulaDeIdentidad.equals(cedula)){
                 listaDonantes.remove(i);
                 break;
             }
@@ -27,11 +27,11 @@ public class GestorDonantes {
         }
     }
 
-    public Donante buscarDonante(int cedula) {
+    public Donante buscarDonante(String cedula) {
         int i = 0;
         while (i < listaDonantes.size()) {
 
-            if (listaDonantes.get(i).cedula == cedula) {
+            if (listaDonantes.get(i).cedulaDeIdentidad.equals(cedula)) {
                 return listaDonantes.get(i);
             }
             i++;
@@ -45,7 +45,7 @@ public class GestorDonantes {
         pagina.append("DATOS DE DONANTES:");
         while (i<listaDonantes.size()){
             StringBuilder renglon = new StringBuilder ();
-            renglon.append(listaDonantes.get(i).nombre + ", " + listaDonantes.get(i).cedula + ", " + listaDonantes.get(i).organo + ", " + listaDonantes.get(i).tipoSangre + ", " +listaDonantes.get(i).edad + ".");
+            renglon.append(listaDonantes.get(i).nombre + ", " + listaDonantes.get(i).cedulaDeIdentidad + ", " + listaDonantes.get(i).tipoDeOrgano + ", " + listaDonantes.get(i).tipoDeSangre + ", " +listaDonantes.get(i).edad + ".");
             pagina.append(renglon.toString());
             i++;
         }
