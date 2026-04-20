@@ -7,12 +7,12 @@ import uy.edu.curso.classes.Receptor;
 import uy.edu.curso.tda.TDAColaEnlazada;
 import uy.edu.curso.tda.TDAListaEnlazada;
 
-public class GestorReceptores {
+public class GestorReceptoresImpl {
 
     private final TDAListaEnlazada<Receptor> listaDeReceptores;
-    private TDAColaEnlazada<Receptor> colaDePrioridadDeReceptores;
+    private final TDAColaEnlazada<Receptor> colaDePrioridadDeReceptores;
 
-    public GestorReceptores() {
+    public GestorReceptoresImpl() {
         this.listaDeReceptores = new ListaEnlazada<>();
         this.colaDePrioridadDeReceptores = new ColaEnlazada<>();
     }
@@ -41,7 +41,6 @@ public class GestorReceptores {
                 this.colaDePrioridadDeReceptores.agregar(i, nuevoReceptor);
                 return;
             }
-
             i++;
         }
         this.colaDePrioridadDeReceptores.poneEnCola((Receptor) nuevoReceptor);
@@ -51,8 +50,10 @@ public class GestorReceptores {
         int i = 0;
 
         while (i < this.listaDeReceptores.tamaño()) {
-            if (this.listaDeReceptores.obtener(i).getCedulaDeIdentidad().equals(cedulaDeIdentidadReceptor)) {
-                return this.listaDeReceptores.obtener(i);
+            Receptor receptorEncontrado = this.listaDeReceptores.obtener(i);
+
+            if (receptorEncontrado.getCedulaDeIdentidad().equals(cedulaDeIdentidadReceptor)) {
+                return receptorEncontrado;
             }
             i++;
         }
@@ -62,13 +63,25 @@ public class GestorReceptores {
 
     public void eliminarReceptor(String cedulaDeIdentidadReceptor) {
         int i = 0;
+        int j = 0;
 
         while (i < this.listaDeReceptores.tamaño()) {
-            if (this.listaDeReceptores.obtener(i).getCedulaDeIdentidad().equals(cedulaDeIdentidadReceptor)) {
+            Receptor receptorEncontrado = this.listaDeReceptores.obtener(i);
+
+            if (receptorEncontrado.getCedulaDeIdentidad().equals(cedulaDeIdentidadReceptor)) {
                 this.listaDeReceptores.remover(i);
                 break;
             }
             i++;
+        }
+        while (j < this.colaDePrioridadDeReceptores.tamaño()) {
+            Receptor receptorEncontrado = this.colaDePrioridadDeReceptores.obtener(j);
+
+            if (receptorEncontrado.getCedulaDeIdentidad().equals(cedulaDeIdentidadReceptor)) {
+                this.colaDePrioridadDeReceptores.remover(j);
+                break;
+            }
+            j++;
         }
     }
 
