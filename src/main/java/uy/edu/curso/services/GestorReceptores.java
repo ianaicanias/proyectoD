@@ -1,24 +1,26 @@
 package uy.edu.curso.services;
 
+import uy.edu.curso.ColaEnlazada;
 import uy.edu.curso.ListaEnlazada;
 import uy.edu.curso.classes.Persona;
 import uy.edu.curso.classes.Receptor;
+import uy.edu.curso.tda.TDAColaEnlazada;
 import uy.edu.curso.tda.TDAListaEnlazada;
 
 public class GestorReceptores {
 
     private final TDAListaEnlazada<Receptor> listaDeReceptores;
-    private TDAListaEnlazada<Receptor> colaDePrioridadDeReceptores;
+    private TDAColaEnlazada<Receptor> colaDePrioridadDeReceptores;
 
     public GestorReceptores() {
         this.listaDeReceptores = new ListaEnlazada<>();
-        this.colaDePrioridadDeReceptores = new ListaEnlazada<>();
+        this.colaDePrioridadDeReceptores = new ColaEnlazada<>();
     }
 
     public Persona registrarReceptor(String cedulaDeIdentidad, String nombre, String tipoDeOrganoNecesitado,
-                                     String tipoDeSangre, byte edad, byte puntajeDePrioridad) {
-        Receptor nuevoReceptor = new Receptor(cedulaDeIdentidad, nombre, tipoDeSangre, 
-                                              tipoDeOrganoNecesitado, edad, puntajeDePrioridad);
+            String tipoDeSangre, byte edad, byte puntajeDePrioridad) {
+        Receptor nuevoReceptor = new Receptor(cedulaDeIdentidad, nombre, tipoDeSangre,
+                tipoDeOrganoNecesitado, edad, puntajeDePrioridad);
 
         this.listaDeReceptores.agregar(nuevoReceptor);
 
@@ -26,7 +28,23 @@ public class GestorReceptores {
     }
 
     public void insertarReceptorEnLaCola(Persona receptor) {
-        
+        int i = 0;
+        Receptor nuevoReceptor = (Receptor) receptor;
+
+        while (i < this.colaDePrioridadDeReceptores.tamaño()) {
+            Receptor receptorActual = this.colaDePrioridadDeReceptores.obtener(i);
+            boolean mayorPrioridad = nuevoReceptor.getPuntajeDePrioridad() > receptorActual.getPuntajeDePrioridad();
+            boolean igualPrioridadConDesempate = (nuevoReceptor.getPuntajeDePrioridad() == receptorActual.getPuntajeDePrioridad())
+                    && (nuevoReceptor.getEdad() < receptorActual.getEdad());
+
+            if (mayorPrioridad || igualPrioridadConDesempate) {
+                this.colaDePrioridadDeReceptores.agregar(i, nuevoReceptor);
+                return;
+            }
+
+            i++;
+        }
+        this.colaDePrioridadDeReceptores.poneEnCola((Receptor) nuevoReceptor);
     }
 
     public Receptor buscarReceptor(String cedulaDeIdentidadReceptor) {
