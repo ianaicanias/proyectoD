@@ -14,9 +14,9 @@ public class GestorReceptores {
     }
 
     public Persona registrarReceptor(String cedulaDeIdentidad, String nombre, String tipoDeOrganoNecesitado,
-            String tipoDeSangre, byte edad, byte puntajeDePrioridad) {
-        Receptor nuevoReceptor = new Receptor(cedulaDeIdentidad, nombre, tipoDeSangre, tipoDeOrganoNecesitado, edad,
-                puntajeDePrioridad);
+                                     String tipoDeSangre, byte edad, byte puntajeDePrioridad) {
+        Receptor nuevoReceptor = new Receptor(cedulaDeIdentidad, nombre, tipoDeSangre, 
+                                              tipoDeOrganoNecesitado, edad, puntajeDePrioridad);
 
         this.listaReceptores.agregar(nuevoReceptor);
 
