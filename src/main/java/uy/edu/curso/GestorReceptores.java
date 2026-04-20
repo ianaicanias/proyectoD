@@ -2,6 +2,7 @@ package uy.edu.curso;
 
 import java.util.LinkedList;
 
+
 public class GestorReceptores {
     private LinkedList<Receptor> listaReceptores;
 
