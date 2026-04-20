@@ -1,4 +1,4 @@
-package uy.edu.curso;
+package uy.edu.curso.classes;
 
 
 public abstract class Persona {

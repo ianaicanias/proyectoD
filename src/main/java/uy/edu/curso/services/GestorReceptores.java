@@ -1,6 +1,8 @@
-package uy.edu.curso;
+package uy.edu.curso.services;
 
 import java.util.LinkedList;
+
+import uy.edu.curso.classes.Receptor;
 
 
 public class GestorReceptores {
@@ -17,7 +19,7 @@ public class GestorReceptores {
             i++;
         }
         while ((i < listaReceptores.size()) && (listaReceptores.get(i).getPuntajeDePrioridad() == receptor.getPuntajeDePrioridad())
-                && (listaReceptores.get(i).edad > receptor.edad)) {
+                && (listaReceptores.get(i).getEdad() > receptor.getEdad())) {
             i++;
         }
         listaReceptores.add(i, receptor);
@@ -56,7 +58,7 @@ public class GestorReceptores {
             StringBuilder renglon = new StringBuilder();
             renglon.append(listaReceptores.get(i).getNombre() + ", " + listaReceptores.get(i).getCedulaDeIdentidad() + ", "
                     + listaReceptores.get(i).getTipoDeOrgano() + ", " + listaReceptores.get(i).getTipoDeSangre() + ", "
-                    + listaReceptores.get(i).edad + ".");
+                    + listaReceptores.get(i).getEdad() + ".");
             pagina.append(renglon.toString());
             i++;
         }

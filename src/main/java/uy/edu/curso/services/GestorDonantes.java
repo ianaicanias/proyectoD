@@ -1,6 +1,7 @@
-package uy.edu.curso;
+package uy.edu.curso.services;
 
 import java.util.LinkedList;
+import uy.edu.curso.classes.Donante;
 
 
 public class GestorDonantes {
@@ -19,7 +20,7 @@ public class GestorDonantes {
         int i = 0;
         while (i<listaDonantes.size()){
             
-            if (listaDonantes.get(i).cedulaDeIdentidad.equals(cedula)){
+            if (listaDonantes.get(i).getCedulaDeIdentidad().equals(cedula)){
                 listaDonantes.remove(i);
                 break;
             }
@@ -31,7 +32,7 @@ public class GestorDonantes {
         int i = 0;
         while (i < listaDonantes.size()) {
 
-            if (listaDonantes.get(i).cedulaDeIdentidad.equals(cedula)) {
+            if (listaDonantes.get(i).getCedulaDeIdentidad().equals(cedula)) {
                 return listaDonantes.get(i);
             }
             i++;

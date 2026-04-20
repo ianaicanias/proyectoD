@@ -1,5 +1,4 @@
-package uy.edu.curso;
-
+package uy.edu.curso.classes;
 
 public class Donante extends Persona {
 

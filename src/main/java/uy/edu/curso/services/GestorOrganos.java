@@ -1,6 +1,8 @@
-package uy.edu.curso;
+package uy.edu.curso.services;
 
 import java.util.LinkedList;
+
+import uy.edu.curso.classes.Organo;
 
 public class GestorOrganos {
     private LinkedList<Organo> listaOrganos;
