@@ -5,11 +5,11 @@ import java.util.LinkedList;
 import uy.edu.curso.classes.Donante;
 
 
-public class GestorDonantesImpl {
+public class GestorDeDonantesImpl {
 
     private LinkedList<Donante> listaDonantes;
 
-    public GestorDonantesImpl() {
+    public GestorDeDonantesImpl() {
         this.listaDonantes = new LinkedList<>();
     }
 

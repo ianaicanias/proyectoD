@@ -4,19 +4,22 @@ import uy.edu.curso.ColaEnlazada;
 import uy.edu.curso.ListaEnlazada;
 import uy.edu.curso.classes.Persona;
 import uy.edu.curso.classes.Receptor;
+import uy.edu.curso.interfaces.GestorDeReceptores;
 import uy.edu.curso.tda.TDAColaEnlazada;
 import uy.edu.curso.tda.TDAListaEnlazada;
 
-public class GestorReceptoresImpl {
+
+public class GestorDeReceptoresImpl implements GestorDeReceptores {
 
     private final TDAListaEnlazada<Receptor> listaDeReceptores;
     private final TDAColaEnlazada<Receptor> colaDePrioridadDeReceptores;
 
-    public GestorReceptoresImpl() {
+    public GestorDeReceptoresImpl() {
         this.listaDeReceptores = new ListaEnlazada<>();
         this.colaDePrioridadDeReceptores = new ColaEnlazada<>();
     }
 
+    @Override
     public Persona registrarReceptor(String cedulaDeIdentidad, String nombre, String tipoDeOrganoNecesitado,
             String tipoDeSangre, byte edad, byte puntajeDePrioridad) {
         Receptor nuevoReceptor = new Receptor(cedulaDeIdentidad, nombre, tipoDeSangre,
@@ -27,6 +30,7 @@ public class GestorReceptoresImpl {
         return nuevoReceptor;
     }
 
+    @Override
     public void insertarReceptorEnLaCola(Persona receptor) {
         int i = 0;
         Receptor nuevoReceptor = (Receptor) receptor;
@@ -46,6 +50,7 @@ public class GestorReceptoresImpl {
         this.colaDePrioridadDeReceptores.poneEnCola((Receptor) nuevoReceptor);
     }
 
+    @Override
     public Receptor buscarReceptor(String cedulaDeIdentidadReceptor) {
         int i = 0;
 
@@ -61,6 +66,7 @@ public class GestorReceptoresImpl {
         return null;
     }
 
+    @Override
     public void eliminarReceptor(String cedulaDeIdentidadReceptor) {
         int i = 0;
         int j = 0;
@@ -85,6 +91,7 @@ public class GestorReceptoresImpl {
         }
     }
 
+    @Override
     public String listarReceptores() {
         int i = 0;
         StringBuilder pagina = new StringBuilder();

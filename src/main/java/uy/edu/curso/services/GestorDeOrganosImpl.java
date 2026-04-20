@@ -4,10 +4,11 @@ import java.util.LinkedList;
 
 import uy.edu.curso.classes.Organo;
 
-public class GestorOrganosImpl {
+
+public class GestorDeOrganosImpl {
     private LinkedList<Organo> listaOrganos;
 
-    public GestorOrganosImpl() {
+    public GestorDeOrganosImpl() {
         this.listaOrganos = new LinkedList<>();
     }
 
