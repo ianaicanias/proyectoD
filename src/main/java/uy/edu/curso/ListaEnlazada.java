@@ -13,7 +13,7 @@ package uy.edu.curso;
 import java.util.Comparator;
 import java.util.function.Predicate;
 
-import uy.edu.curso.tda.TDALista;
+import uy.edu.curso.tda.TDAListaEnlazada;
 
 
 /**
@@ -34,7 +34,7 @@ import uy.edu.curso.tda.TDALista;
  *
  * @param <T> el tipo de los elementos almacenados en la lista
  */
-public class ListaEnlazada<T> implements TDALista<T> {
+public class ListaEnlazada<T> implements TDAListaEnlazada<T> {
 
     /**
      * Nodo que representa el primer elemento de la lista.
@@ -308,7 +308,7 @@ public class ListaEnlazada<T> implements TDALista<T> {
      * @return una lista ordenada según el criterio indicado
      */
     @Override
-    public TDALista<T> ordenar(Comparator<T> comparator) {
+    public TDAListaEnlazada<T> ordenar(Comparator<T> comparator) {
         Nodo<T> actual = this.primero;
         ListaEnlazada<T> nuevaLista = new ListaEnlazada<>();
         int j;

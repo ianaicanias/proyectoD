@@ -1,6 +1,7 @@
 package uy.edu.curso.services;
 
 import java.util.LinkedList;
+
 import uy.edu.curso.classes.Donante;
 
 
@@ -46,7 +47,7 @@ public class GestorDonantes {
         pagina.append("DATOS DE DONANTES:");
         while (i<listaDonantes.size()){
             StringBuilder renglon = new StringBuilder ();
-            renglon.append(listaDonantes.get(i).nombre + ", " + listaDonantes.get(i).cedulaDeIdentidad + ", " + listaDonantes.get(i).tipoDeOrgano + ", " + listaDonantes.get(i).tipoDeSangre + ", " +listaDonantes.get(i).edad + ".");
+            renglon.append(listaDonantes.get(i).getNombre() + ", " + listaDonantes.get(i).getCedulaDeIdentidad() + ", " + listaDonantes.get(i).getTipoDeOrgano() + ", " + listaDonantes.get(i).getTipoDeSangre() + ", " +listaDonantes.get(i).getEdad() + ".");
             pagina.append(renglon.toString());
             i++;
         }

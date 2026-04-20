@@ -1,67 +1,76 @@
 package uy.edu.curso.services;
 
-import java.util.LinkedList;
-
+import uy.edu.curso.ListaEnlazada;
+import uy.edu.curso.classes.Persona;
 import uy.edu.curso.classes.Receptor;
-
+import uy.edu.curso.tda.TDAListaEnlazada;
 
 public class GestorReceptores {
-    private LinkedList<Receptor> listaReceptores;
+
+    private final TDAListaEnlazada<Receptor> listaReceptores;
 
     public GestorReceptores() {
-        this.listaReceptores = new LinkedList<>();
+        this.listaReceptores = new ListaEnlazada<>();
     }
 
-    public void registrarReceptor(Receptor receptor) {
+    public Persona registrarReceptor(String cedulaDeIdentidad, String nombre, String tipoDeOrganoNecesitado,
+            String tipoDeSangre, byte edad, byte puntajeDePrioridad) {
+        Receptor nuevoReceptor = new Receptor(cedulaDeIdentidad, nombre, tipoDeSangre, tipoDeOrganoNecesitado, edad,
+                puntajeDePrioridad);
 
-        int i = 0;
-        while ((i < listaReceptores.size() && listaReceptores.get(i).getPuntajeDePrioridad() > receptor.getPuntajeDePrioridad())) {
-            i++;
-        }
-        while ((i < listaReceptores.size()) && (listaReceptores.get(i).getPuntajeDePrioridad() == receptor.getPuntajeDePrioridad())
-                && (listaReceptores.get(i).getEdad() > receptor.getEdad())) {
-            i++;
-        }
-        listaReceptores.add(i, receptor);
+        this.listaReceptores.agregar(nuevoReceptor);
 
+        return nuevoReceptor;
     }
 
-    public void eliminarReceptor(String cedula) {
+    public Receptor buscarReceptor(String cedulaDeIdentidadReceptor) {
         int i = 0;
-        while (i < listaReceptores.size()) {
 
-            if (listaReceptores.get(i).getCedulaDeIdentidad().equals(cedula)) {
-                listaReceptores.remove(i);
+        while (i < listaReceptores.tamaño()) {
+            if (listaReceptores.obtener(i).getCedulaDeIdentidad().equals(cedulaDeIdentidadReceptor)) {
+                return listaReceptores.obtener(i);
+            }
+            i++;
+        }
+
+        return null;
+    }
+
+    public void eliminarReceptor(String cedulaDeIdentidadReceptor) {
+        int i = 0;
+
+        while (i < listaReceptores.tamaño()) {
+            if (listaReceptores.obtener(i).getCedulaDeIdentidad().equals(cedulaDeIdentidadReceptor)) {
+                listaReceptores.remover(i);
                 break;
             }
             i++;
         }
     }
 
-    public Receptor buscarReceptor(String cedula) {
-        int i = 0;
-        while (i < listaReceptores.size()) {
-
-            if (listaReceptores.get(i).getCedulaDeIdentidad().equals(cedula)) {
-                return listaReceptores.get(i);
-            }
-            i++;
-        }
-        return null;
-    }
-
     public String listarReceptores() {
         int i = 0;
         StringBuilder pagina = new StringBuilder();
-        pagina.append("DATOS DE RECEPTORES:");
-        while (i < listaReceptores.size()) {
+
+        pagina.append("----------------------- DATOS DE RECEPTORES -----------------------\n");
+        while (i < listaReceptores.tamaño()) {
             StringBuilder renglon = new StringBuilder();
-            renglon.append(listaReceptores.get(i).getNombre() + ", " + listaReceptores.get(i).getCedulaDeIdentidad() + ", "
-                    + listaReceptores.get(i).getTipoDeOrgano() + ", " + listaReceptores.get(i).getTipoDeSangre() + ", "
-                    + listaReceptores.get(i).getEdad() + ".");
+            Receptor receptor = this.listaReceptores.obtener(i);
+
+            renglon.append(receptor.getNombre());
+            renglon.append(", ");
+            renglon.append(receptor.getCedulaDeIdentidad());
+            renglon.append(", ");
+            renglon.append(receptor.getTipoDeOrgano());
+            renglon.append(", ");
+            renglon.append(receptor.getTipoDeSangre());
+            renglon.append(", ");
+            renglon.append(receptor.getEdad());
+            renglon.append(".");
             pagina.append(renglon.toString());
             i++;
         }
+
         return pagina.toString();
     }
 

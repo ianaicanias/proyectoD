@@ -21,7 +21,7 @@ import java.util.function.Predicate;
  *
  * @param <T> el tipo de los elementos almacenados en la lista
  */
-public interface TDALista<T> {
+public interface TDAListaEnlazada<T> {
 
     /**
      * Agrega un elemento al final de la lista.
@@ -130,7 +130,7 @@ public interface TDALista<T> {
      * @param comparator el comparador que define el orden de los elementos
      * @return una lista ordenada según el criterio indicado
      */
-    TDALista<T> ordenar(Comparator<T> comparator);
+    TDAListaEnlazada<T> ordenar(Comparator<T> comparator);
 
     /**
      * Retorna la cantidad de elementos almacenados en la lista.
