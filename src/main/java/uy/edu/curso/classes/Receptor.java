@@ -5,8 +5,8 @@ public class Receptor extends Persona {
 
     private byte puntajeDePrioridad;
 
-    public Receptor(String cedulaDeIdentidad, String nombre, String tipoDeSangre, 
-                    String tipoDeOrganoNecesitado, byte edad, byte puntajeDePrioridad) {
+    public Receptor(String cedulaDeIdentidad, String nombre, String tipoDeOrganoNecesitado, 
+            String tipoDeSangre, byte edad, byte puntajeDePrioridad) {
         super(cedulaDeIdentidad, nombre, tipoDeSangre, tipoDeOrganoNecesitado, edad);
         this.puntajeDePrioridad = puntajeDePrioridad;
     }

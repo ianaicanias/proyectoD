@@ -33,8 +33,8 @@ public class GestorDeReceptoresImpl implements GestorDeReceptores {
         if (this.buscarReceptor(cedulaDeIdentidad) != null) {
             return null;
         }
-        Receptor nuevoReceptor = new Receptor(cedulaDeIdentidad, nombre, tipoDeSangre,
-                tipoDeOrganoNecesitado, edad, puntajeDePrioridad);
+        Receptor nuevoReceptor = new Receptor(cedulaDeIdentidad, nombre, tipoDeOrganoNecesitado,
+                tipoDeSangre, edad, puntajeDePrioridad);
 
         this.listaDeReceptores.agregar(nuevoReceptor);
 
