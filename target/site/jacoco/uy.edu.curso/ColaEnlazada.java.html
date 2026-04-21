@@ -1,0 +1,101 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="es"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>ColaEnlazada.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">proyectoD</a> &gt; <a href="index.source.html" class="el_package">uy.edu.curso</a> &gt; <span class="el_source">ColaEnlazada.java</span></div><h1>ColaEnlazada.java</h1><pre class="source lang-java linenums">/*
+ * Clase: ColaEnlazada.
+ * Programadores: Axel Ferreira, Ianai Canias, Thiago Soca, Valentín Guerrico.
+ * Fecha: 15/04/2026.
+ * Copyright: Todos los derechos reservados para los programadores de este archivo, 2026.
+ *
+ * Resumen:
+ * La siguiente clase representa la lógica necesaria implementada de TDACola, para poder
+ * utilizar una cola enlazada mediante un primero y un frente determinados.
+ */
+package uy.edu.curso;
+
+import uy.edu.curso.tda.TDAColaEnlazada;
+
+/**
+ * Define una cola enlazada que extiende ListaEnlazada e implementa la interfaz TDACola,
+ * con todos sus métodos implementados.
+ *
+ * &lt;p&gt;
+ * Una cola permite almacenar elementos siguiendo el principio FIFO (First In, First Out),
+ * donde el primer elemento en ingresar es el primero en ser retirado.
+ * &lt;/p&gt;
+ *
+ * @param &lt;T&gt; el tipo de los elementos almacenados en la cola
+ */
+<span class="fc" id="L26">public class ColaEnlazada&lt;T&gt; extends ListaEnlazada&lt;T&gt; implements TDAColaEnlazada&lt;T&gt; {</span>
+
+    /**
+     * Nodo que apunta al último elemento ingresado en la cola (frente de salida).
+     */
+    protected Nodo&lt;T&gt; frente;
+
+    /**
+     * Retorna el dato del elemento que se encuentra al frente de la cola.
+     *
+     * @return el dato del elemento al frente de la cola
+     * @throws NullPointerException si la cola está vacía
+     */
+    @Override
+    public T frente() {
+<span class="pc bpc" id="L41" title="1 of 2 branches missed.">        if (this.frente == null) {</span>
+<span class="nc" id="L42">            throw new NullPointerException(&quot;No hay elementos en la cola.&quot;);</span>
+        }
+
+<span class="fc" id="L45">        return this.frente.getDato();</span>
+    }
+
+    /**
+     * Agrega un elemento al final de la cola.
+     *
+     * @param dato el elemento a agregar
+     * @return {@code true} si el elemento fue agregado correctamente;
+     *         {@code false} si el dato es nulo
+     */
+    @Override
+    public boolean poneEnCola(T dato) {
+<span class="pc bpc" id="L57" title="1 of 2 branches missed.">        if (dato != null) {</span>
+<span class="fc bfc" id="L58" title="All 2 branches covered.">            if (this.frente == null) {</span>
+<span class="fc" id="L59">                this.primero = new Nodo&lt;&gt;(dato, null);</span>
+<span class="fc" id="L60">                this.frente = this.primero;</span>
+
+<span class="fc" id="L62">                return true;</span>
+            }
+<span class="fc" id="L64">            Nodo&lt;T&gt; nodo = new Nodo&lt;&gt;(dato, null);</span>
+<span class="fc" id="L65">            this.frente.setSiguiente(nodo);</span>
+<span class="fc" id="L66">            this.frente = nodo;</span>
+
+<span class="fc" id="L68">            return true;</span>
+        }
+        
+<span class="nc" id="L71">        return false;</span>
+    }
+
+    /**
+     * Remueve y retorna el elemento que se encuentra al inicio de la cola.
+     *
+     * &lt;p&gt;
+     * El elemento removido es el que lleva más tiempo en la cola,
+     * siguiendo el principio FIFO.
+     * &lt;/p&gt;
+     *
+     * @return el elemento removido, o {@code null} si la cola está vacía
+     */
+    @Override
+    public T quitaDeCola() {
+<span class="pc bpc" id="L86" title="1 of 2 branches missed.">        if (this.primero == null) {</span>
+<span class="nc" id="L87">            return null;</span>
+        }
+<span class="fc" id="L89">        Nodo&lt;T&gt; nodoEliminado = this.primero;</span>
+<span class="fc" id="L90">        this.primero = nodoEliminado.getSiguiente();</span>
+
+<span class="fc bfc" id="L92" title="All 2 branches covered.">        if (this.primero == null) {</span>
+<span class="fc" id="L93">            this.frente = null;</span>
+        }
+<span class="fc" id="L95">        nodoEliminado.setSiguiente(null);</span>
+
+<span class="fc" id="L97">        return nodoEliminado.getDato();</span>
+    }
+
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.11.202310140853</span></div></body></html>

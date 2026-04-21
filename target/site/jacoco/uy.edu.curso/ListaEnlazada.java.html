@@ -1,0 +1,371 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="es"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>ListaEnlazada.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">proyectoD</a> &gt; <a href="index.source.html" class="el_package">uy.edu.curso</a> &gt; <span class="el_source">ListaEnlazada.java</span></div><h1>ListaEnlazada.java</h1><pre class="source lang-java linenums">/*
+ * Clase: ListaEnlazada.
+ * Programadores: Axel Ferreira, Ianai Canias, Thiago Soca, Valentín Guerrico.
+ * Fecha: 15/04/2026.
+ * Copyright: Todos los derechos reservados para los programadores de este archivo, 2026.
+ * 
+ * Resumen: 
+ * La siguiente clase representa la lógica necesaria implementada de TDALista, para poder
+ * utilizar una lista enlazada mediante un primero y un frente determinados.
+ */
+package uy.edu.curso;
+
+import java.util.Comparator;
+import java.util.function.Predicate;
+
+import uy.edu.curso.tda.TDAListaEnlazada;
+
+
+/**
+ * Define una lista enlazada que implementa la interfaz TDALista,
+ * con todos sus métodos implementados.
+ *
+ * &lt;p&gt;
+ * Una lista permite almacenar elementos en una secuencia ordenada por posición,
+ * admitiendo inserciones, accesos, eliminaciones, búsquedas y operaciones de
+ * ordenamiento.
+ * &lt;/p&gt;
+ *
+ * &lt;p&gt;
+ * Las posiciones de los elementos se interpretan mediante índices enteros.
+ * Salvo que la implementación indique lo contrario, se asume indexación basada
+ * en 0.
+ * &lt;/p&gt;
+ *
+ * @param &lt;T&gt; el tipo de los elementos almacenados en la lista
+ */
+<span class="fc" id="L37">public class ListaEnlazada&lt;T&gt; implements TDAListaEnlazada&lt;T&gt; {</span>
+
+    /**
+     * Nodo que representa el primer elemento de la lista.
+     */ 
+    protected Nodo&lt;T&gt; primero;
+
+    /**
+     * Obtiene el dato del primer elemento de la lista.
+     * 
+     * @return dato del nodo que contiene al primer elemento de la lista.
+     */
+    public T primero() {
+<span class="nc bnc" id="L50" title="All 2 branches missed.">        if (this.primero == null) {</span>
+<span class="nc" id="L51">            return null;</span>
+        }
+        
+<span class="nc" id="L54">        return primero.getDato();</span>
+    }
+
+    /**
+     * Agrega un elemento al final de la lista.
+     *
+     * @param elemento el elemento a agregar
+     */
+    @Override
+    public void agregar(T elemento) {
+<span class="fc" id="L64">        Nodo&lt;T&gt; nuevoNodo = new Nodo&lt;&gt;(elemento, null);</span>
+<span class="fc" id="L65">        Nodo&lt;T&gt; actual = this.primero;</span>
+
+<span class="fc bfc" id="L67" title="All 2 branches covered.">        if (actual == null) {</span>
+<span class="fc" id="L68">            this.primero = nuevoNodo;</span>
+<span class="fc" id="L69">        } else {</span>
+<span class="fc bfc" id="L70" title="All 2 branches covered.">            while (actual.getSiguiente() != null) {</span>
+<span class="fc" id="L71">                actual = actual.getSiguiente();</span>
+            }
+<span class="fc" id="L73">            actual.setSiguiente(nuevoNodo);</span>
+        }
+<span class="fc" id="L75">    }</span>
+
+    /**
+     * Agrega un elemento en la posición indicada.
+     *
+     * &lt;p&gt;
+     * Los elementos ubicados desde esa posición en adelante
+     * desplazan su índice una posición hacia la derecha.
+     * &lt;/p&gt;
+     *
+     * @param index la posición en la que se insertará el elemento
+     * @param elemento  el elemento a agregar
+     * @throws IndexOutOfBoundsException si el índice está fuera de rango
+     */
+    @Override
+    public void agregar(int index, T elemento) {
+<span class="fc" id="L91">        Nodo&lt;T&gt; nuevoNodo = new Nodo&lt;&gt;(elemento, null);</span>
+<span class="fc" id="L92">        Nodo&lt;T&gt; actual = this.primero;</span>
+
+<span class="pc bpc" id="L94" title="2 of 4 branches missed.">        if (index &lt; 0 || index &gt; this.tamaño()) {</span>
+<span class="nc" id="L95">            throw new IndexOutOfBoundsException();</span>
+        }
+<span class="pc bpc" id="L97" title="1 of 4 branches missed.">        if (actual == null || index == 0) {</span>
+<span class="fc" id="L98">            nuevoNodo.setSiguiente(actual);</span>
+<span class="fc" id="L99">            this.primero = nuevoNodo;</span>
+<span class="fc" id="L100">        } else {</span>
+<span class="fc" id="L101">            int i = 1;</span>
+
+<span class="pc bpc" id="L103" title="3 of 4 branches missed.">            while (i &lt; index &amp;&amp; actual.getSiguiente() != null) {</span>
+<span class="nc" id="L104">                actual = actual.getSiguiente();</span>
+<span class="nc" id="L105">                i++;</span>
+            }
+<span class="fc" id="L107">            Nodo&lt;T&gt; nodoProximoAlSiguiente = actual.getSiguiente();</span>
+
+<span class="fc" id="L109">            actual.setSiguiente(nuevoNodo);</span>
+<span class="fc" id="L110">            nuevoNodo.setSiguiente(nodoProximoAlSiguiente);</span>
+        }
+<span class="fc" id="L112">    }</span>
+
+    /**
+     * Obtiene el elemento almacenado en la posición indicada.
+     *
+     * @param index la posición del elemento a recuperar
+     * @return el elemento ubicado en la posición indicada
+     * @throws IndexOutOfBoundsException si el índice está fuera de rango
+     */
+    @Override
+    public T obtener(int index) {
+<span class="fc" id="L123">        Nodo&lt;T&gt; actual = this.primero;</span>
+<span class="fc" id="L124">        int i = 0;</span>
+        
+<span class="pc bpc" id="L126" title="2 of 4 branches missed.">        if (index &lt; 0 || index &gt; this.tamaño()) {</span>
+<span class="nc" id="L127">            throw new IndexOutOfBoundsException();</span>
+        }
+<span class="fc bfc" id="L129" title="All 2 branches covered.">        while (i &lt; index) {</span>
+<span class="fc" id="L130">            actual = actual.getSiguiente();</span>
+<span class="fc" id="L131">            i++;</span>
+        }
+
+<span class="fc" id="L134">        return actual.getDato();</span>
+    }
+
+    /**
+     * Remueve y devuelve el elemento almacenado en la posición indicada.
+     *
+     * &lt;p&gt;
+     * Los elementos posteriores, si existen, desplazan su índice
+     * una posición hacia la izquierda.
+     * &lt;/p&gt;
+     *
+     * @param index la posición del elemento a remover
+     * @return el elemento removido
+     * @throws IndexOutOfBoundsException si el índice está fuera de rango
+     */
+    @Override
+    public T remover(int index) {
+<span class="fc" id="L151">        Nodo&lt;T&gt; actual = this.primero;</span>
+        Nodo&lt;T&gt; nodoEliminado;
+<span class="fc" id="L153">        int i = 1;</span>
+
+<span class="pc bpc" id="L155" title="2 of 4 branches missed.">        if (index &lt; 0 || index &gt; this.tamaño()) {</span>
+<span class="nc" id="L156">            throw new IndexOutOfBoundsException();</span>
+        }
+<span class="pc bpc" id="L158" title="1 of 2 branches missed.">        if (actual == null) {</span>
+<span class="nc" id="L159">            return null;</span>
+        }
+<span class="fc bfc" id="L161" title="All 2 branches covered.">        if (index == 0) {</span>
+<span class="fc" id="L162">            T primerDato = actual.getDato();</span>
+<span class="fc" id="L163">            this.primero = actual.getSiguiente();</span>
+<span class="fc" id="L164">            actual.setSiguiente(null);</span>
+
+<span class="fc" id="L166">            return primerDato;</span>
+        }
+<span class="pc bpc" id="L168" title="1 of 2 branches missed.">        while (i &lt; index) {</span>
+<span class="nc" id="L169">            actual = actual.getSiguiente();</span>
+<span class="nc" id="L170">            i++;</span>
+        }
+<span class="fc" id="L172">        nodoEliminado = actual.getSiguiente();</span>
+<span class="fc" id="L173">        actual.setSiguiente(nodoEliminado.getSiguiente());</span>
+<span class="fc" id="L174">        nodoEliminado.setSiguiente(null);</span>
+
+<span class="fc" id="L176">        return nodoEliminado.getDato();</span>
+    }
+
+    /**
+     * Remueve la primera ocurrencia del elemento indicado en la lista.
+     *
+     * &lt;p&gt;
+     * La comparación del elemento queda sujeta al criterio definido
+     * por la implementación, normalmente mediante {@code equals}.
+     * &lt;/p&gt;
+     *
+     * @param elemento el elemento a remover
+     * @return {@code true} si el elemento fue encontrado y removido;
+     *         {@code false} en caso contrario
+     */
+    @Override
+    public boolean remover(T elemento) {
+<span class="nc" id="L193">        Nodo&lt;T&gt; actual = this.primero;</span>
+        Nodo&lt;T&gt; eliminado;
+
+<span class="nc bnc" id="L196" title="All 2 branches missed.">        if (actual == null) {</span>
+<span class="nc" id="L197">            return false;</span>
+        }
+<span class="nc bnc" id="L199" title="All 2 branches missed.">        if (actual.getDato().equals(elemento)) {</span>
+<span class="nc" id="L200">            this.primero = actual.getSiguiente();</span>
+
+<span class="nc" id="L202">            return true;</span>
+        }
+<span class="nc bnc" id="L204" title="All 2 branches missed.">        while (actual.getSiguiente() != null) {</span>
+<span class="nc" id="L205">            T datoActual = actual.getSiguiente().getDato();</span>
+
+<span class="nc bnc" id="L207" title="All 2 branches missed.">            if (datoActual.equals(elemento)) {</span>
+<span class="nc" id="L208">                eliminado = actual.getSiguiente();</span>
+<span class="nc" id="L209">                actual.setSiguiente(eliminado.getSiguiente());</span>
+<span class="nc" id="L210">                eliminado.setSiguiente(null);</span>
+
+<span class="nc" id="L212">                return true;</span>
+            }
+<span class="nc" id="L214">            actual = actual.getSiguiente();</span>
+        }
+
+<span class="nc" id="L217">        return false;</span>
+    }
+
+    /**
+     * Determina si la lista contiene el elemento indicado.
+     *
+     * &lt;p&gt;
+     * La comparación del elemento queda sujeta al criterio definido
+     * por la implementación, normalmente mediante {@code equals}.
+     * &lt;/p&gt;
+     *
+     * @param elemento el elemento a buscar
+     * @return {@code true} si el elemento está presente en la lista;
+     *         {@code false} en caso contrario
+     */
+    @Override
+    public boolean contiene(T elemento) {
+<span class="nc" id="L234">        Nodo&lt;T&gt; actual = this.primero;</span>
+
+<span class="nc bnc" id="L236" title="All 2 branches missed.">        if (actual == null) {</span>
+<span class="nc" id="L237">            return false;</span>
+        }
+<span class="nc bnc" id="L239" title="All 2 branches missed.">        while (actual != null) {</span>
+<span class="nc bnc" id="L240" title="All 2 branches missed.">            if (actual.getDato().equals(elemento)) {</span>
+<span class="nc" id="L241">                return true;</span>
+            }
+<span class="nc" id="L243">            actual = actual.getSiguiente();</span>
+        }
+
+<span class="nc" id="L246">        return false;</span>
+    }
+
+    /**
+     * Retorna el índice de la primera ocurrencia del elemento indicado.
+     *
+     * &lt;p&gt;
+     * La comparación del elemento queda sujeta al criterio definido
+     * por la implementación, normalmente mediante {@code equals}.
+     * &lt;/p&gt;
+     *
+     * @param elemento el elemento a buscar
+     * @return el índice de la primera ocurrencia del elemento, o {@code -1}
+     *         si el elemento no se encuentra en la lista
+     */
+    @Override
+    public int indiceDe(T elemento) {
+<span class="nc" id="L263">        Nodo&lt;T&gt; actual = this.primero;</span>
+<span class="nc" id="L264">        int i = 0;</span>
+
+<span class="nc bnc" id="L266" title="All 2 branches missed.">        while (actual != null) {</span>
+<span class="nc bnc" id="L267" title="All 2 branches missed.">            if (actual.getDato().equals(elemento)) {</span>
+<span class="nc" id="L268">                return i;</span>
+            }
+<span class="nc" id="L270">            actual = actual.getSiguiente();</span>
+<span class="nc" id="L271">            i++;</span>
+        }
+
+<span class="nc" id="L274">        return -1;</span>
+    }
+
+    /**
+     * Busca y retorna el primer elemento que cumple con el criterio dado.
+     *
+     * @param criterio el predicado que define la condición de búsqueda
+     * @return el primer elemento que cumple el criterio, o {@code null}
+     *         si no existe ninguno
+     */
+    @Override
+    public T buscar(Predicate&lt;T&gt; criterio) {
+<span class="nc" id="L286">        Nodo&lt;T&gt; actual = this.primero;</span>
+
+<span class="nc bnc" id="L288" title="All 2 branches missed.">        while (actual != null) {</span>
+<span class="nc bnc" id="L289" title="All 2 branches missed.">            if (criterio.test(actual.getDato())) {</span>
+<span class="nc" id="L290">                return actual.getDato();</span>
+            }
+<span class="nc" id="L292">            actual = actual.getSiguiente();</span>
+        }
+
+<span class="nc" id="L295">        return null;</span>
+    }
+
+    /**
+     * Retorna una nueva lista con los elementos ordenados 
+     * según el comparador dado.
+     *
+     * &lt;p&gt;
+     * El criterio de orden está determinado por el objeto {@link Comparator}
+     * recibido como parámetro.
+     * &lt;/p&gt;
+     *
+     * @param comparator el comparador que define el orden de los elementos
+     * @return una lista ordenada según el criterio indicado
+     */
+    @Override
+    public TDAListaEnlazada&lt;T&gt; ordenar(Comparator&lt;T&gt; comparator) {
+<span class="nc" id="L312">        Nodo&lt;T&gt; actual = this.primero;</span>
+<span class="nc" id="L313">        ListaEnlazada&lt;T&gt; nuevaLista = new ListaEnlazada&lt;&gt;();</span>
+        int j;
+
+<span class="nc bnc" id="L316" title="All 2 branches missed.">        while (actual != null) {</span>
+<span class="nc" id="L317">            j = 0;</span>
+
+<span class="nc bnc" id="L319" title="All 4 branches missed.">            while (j &lt; nuevaLista.tamaño() &amp;&amp; comparator.compare(actual.getDato(), nuevaLista.obtener(j)) &gt; 0) {</span>
+<span class="nc" id="L320">                j++;</span>
+            }
+<span class="nc" id="L322">            nuevaLista.agregar(j, actual.getDato());</span>
+<span class="nc" id="L323">            actual = actual.getSiguiente();</span>
+        }
+
+<span class="nc" id="L326">        return nuevaLista;</span>
+    }
+
+    /**
+     * Retorna la cantidad de elementos almacenados en la lista.
+     *
+     * @return la cantidad de elementos de la lista
+     */
+    @Override
+    public int tamaño() {
+<span class="fc" id="L336">        int i = 0;</span>
+<span class="fc" id="L337">        Nodo&lt;T&gt; actual = this.primero;</span>
+
+<span class="fc bfc" id="L339" title="All 2 branches covered.">        while (actual != null) {</span>
+<span class="fc" id="L340">            i++;</span>
+<span class="fc" id="L341">            actual = actual.getSiguiente();</span>
+        }
+
+<span class="fc" id="L344">        return i;</span>
+    }
+
+    /**
+     * Determina si la lista no contiene elementos.
+     *
+     * @return {@code true} si la lista está vacía;
+     *         {@code false} en caso contrario
+     */
+    @Override
+    public boolean esVacio() {
+<span class="fc bfc" id="L355" title="All 2 branches covered.">        return primero == null;</span>
+    }
+
+    /**
+     * Elimina todos los elementos de la lista.
+     *
+     * &lt;p&gt;
+     * Luego de invocar este método, la lista queda vacía.
+     * &lt;/p&gt;
+     */
+    @Override
+    public void vaciar() {
+<span class="nc" id="L367">        primero = null;</span>
+<span class="nc" id="L368">    }</span>
+    
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.11.202310140853</span></div></body></html>
