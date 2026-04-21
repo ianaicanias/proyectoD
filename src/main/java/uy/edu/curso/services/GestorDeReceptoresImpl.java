@@ -19,9 +19,20 @@ public class GestorDeReceptoresImpl implements GestorDeReceptores {
         this.colaDePrioridadDeReceptores = new ColaEnlazada<>();
     }
 
+    public TDAListaEnlazada<Receptor> getListaDeReceptores() {
+        return this.listaDeReceptores;
+    }
+
+    public TDAColaEnlazada<Receptor> getColaDePrioridadDeReceptores() {
+        return this.colaDePrioridadDeReceptores;
+    }
+
     @Override
     public Persona registrarReceptor(String cedulaDeIdentidad, String nombre, String tipoDeOrganoNecesitado,
             String tipoDeSangre, byte edad, byte puntajeDePrioridad) {
+        if (this.buscarReceptor(cedulaDeIdentidad) != null) {
+            return null;
+        }
         Receptor nuevoReceptor = new Receptor(cedulaDeIdentidad, nombre, tipoDeSangre,
                 tipoDeOrganoNecesitado, edad, puntajeDePrioridad);
 

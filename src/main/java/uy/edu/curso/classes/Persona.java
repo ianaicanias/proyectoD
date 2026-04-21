@@ -3,7 +3,7 @@ package uy.edu.curso.classes;
 
 public abstract class Persona {
 
-    protected String cedulaDeIdentidad;
+    protected final String cedulaDeIdentidad;
     protected String nombre;
     protected String tipoDeSangre;
     protected String tipoDeOrgano;
@@ -35,10 +35,6 @@ public abstract class Persona {
 
     public byte getEdad() {
         return edad;
-    }
-
-    public void setCedulaDeIdentidad(String cedulaDeIdentidad) {
-        this.cedulaDeIdentidad = cedulaDeIdentidad;
     }
 
     public void setNombre(String nombre) {
