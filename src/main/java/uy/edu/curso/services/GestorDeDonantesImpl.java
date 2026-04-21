@@ -3,10 +3,11 @@ package uy.edu.curso.services;
 import uy.edu.curso.ListaEnlazada;
 import uy.edu.curso.classes.Donante;
 import uy.edu.curso.classes.Persona;
+import uy.edu.curso.interfaces.GestorDeDonantes;
 import uy.edu.curso.tda.TDAListaEnlazada;
 
 
-public class GestorDeDonantesImpl {
+public class GestorDeDonantesImpl implements GestorDeDonantes {
 
     private final TDAListaEnlazada<Donante> listaDonantes;
 
@@ -18,6 +19,7 @@ public class GestorDeDonantesImpl {
         return this.listaDonantes;
     }
 
+    @Override
     public Persona registrarDonante(String cedulaDeIdentidad, String nombre, String tipoDeOrganoDonado, 
             String tipoDeSangre, byte edad) {
         if (this.buscarDonante(cedulaDeIdentidad) != null) {
@@ -30,6 +32,7 @@ public class GestorDeDonantesImpl {
         return donante;
     }
 
+    @Override
     public Donante buscarDonante(String cedulaDeIdentidad) {
         int i = 0;
 
@@ -45,6 +48,7 @@ public class GestorDeDonantesImpl {
         return null;
     }
 
+    @Override
     public void eliminarDonante(String cedulaDeIdentidad) {
         int i = 0;
         
@@ -59,6 +63,7 @@ public class GestorDeDonantesImpl {
         }
     }
 
+    @Override
     public String listarDonantes() {
         int i = 0;
         StringBuilder pagina = new StringBuilder();
