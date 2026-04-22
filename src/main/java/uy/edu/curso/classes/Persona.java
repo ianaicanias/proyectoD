@@ -18,23 +18,23 @@ public abstract class Persona {
     }
 
     public String getCedulaDeIdentidad() {
-        return cedulaDeIdentidad;
+        return this.cedulaDeIdentidad;
     }
 
     public String getNombre() {
-        return nombre;
+        return this.nombre;
     }
 
     public String getTipoDeSangre() {
-        return tipoDeSangre;
+        return this.tipoDeSangre;
     }
 
     public String getTipoDeOrgano() {
-        return tipoDeOrgano;
+        return this.tipoDeOrgano;
     }
 
     public byte getEdad() {
-        return edad;
+        return this.edad;
     }
 
     public void setNombre(String nombre) {
