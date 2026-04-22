@@ -10,6 +10,14 @@ public class Organo {
     private String tipoDeSangre;
     private String cedulaDeIdentidadDelDonante;
 
+    public Organo(String nombre, Donante donante) {
+        this.identificador = ++contadorDeOrganosExistentes;
+        this.nombre = nombre;
+        this.tipoDeSangre = donante.getTipoDeSangre();
+        this.esInfantil = donante.getEdad() < 18;
+        this.cedulaDeIdentidadDelDonante = donante.getCedulaDeIdentidad();
+    }
+
     public long getIdentificador() {
         return this.identificador;
     }
@@ -40,14 +48,6 @@ public class Organo {
 
     public void setCedulaDeIdentidadDelDonante(String cedulaDeIdentidadDelDonante) {
         this.cedulaDeIdentidadDelDonante = cedulaDeIdentidadDelDonante;
-    }
-
-    public Organo(String nombre, Donante donante) {
-        this.identificador = ++contadorDeOrganosExistentes;
-        this.nombre = nombre;
-        this.tipoDeSangre = donante.getTipoDeSangre();
-        this.esInfantil = donante.getEdad() < 18;
-        this.cedulaDeIdentidadDelDonante = donante.getCedulaDeIdentidad();
     }
 
 }
