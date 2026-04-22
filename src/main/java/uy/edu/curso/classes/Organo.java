@@ -3,10 +3,16 @@ package uy.edu.curso.classes;
 
 public class Organo {
 
+    private static long contadorDeOrganosExistentes = 0;
+    private final long identificador;
+    private final boolean esInfantil;
     private String nombre;
     private String tipoDeSangre;
     private String cedulaDeIdentidadDelDonante;
-    private boolean esInfantil;
+
+    public long getIdentificador() {
+        return this.identificador;
+    }
 
     public String getNombre() {
         return this.nombre;
@@ -36,15 +42,12 @@ public class Organo {
         this.cedulaDeIdentidadDelDonante = cedulaDeIdentidadDelDonante;
     }
 
-    public void setEsInfantil(boolean esInfantil) {
-        this.esInfantil = esInfantil;
-    }
-
     public Organo(String nombre, Donante donante) {
+        this.identificador = ++contadorDeOrganosExistentes;
         this.nombre = nombre;
-        this.tipoDeSangre = donante.tipoDeSangre;
-        this.esInfantil = donante.edad < 18;
-        this.cedulaDeIdentidadDelDonante = donante.cedulaDeIdentidad;
+        this.tipoDeSangre = donante.getTipoDeSangre();
+        this.esInfantil = donante.getEdad() < 18;
+        this.cedulaDeIdentidadDelDonante = donante.getCedulaDeIdentidad();
     }
 
 }
