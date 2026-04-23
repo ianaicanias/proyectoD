@@ -9,6 +9,7 @@ import uy.edu.curso.interfaces.Organo;
 import uy.edu.curso.interfaces.Receptor;
 import uy.edu.curso.tda.TDAListaEnlazada;
 
+
 public class GestorDeOrganosImpl implements GestorDeOrganos {
 
     private final TDAListaEnlazada<Organo> listaDeOrganos;
@@ -171,4 +172,5 @@ public class GestorDeOrganosImpl implements GestorDeOrganos {
 
         return null;
     }
+    
 }
