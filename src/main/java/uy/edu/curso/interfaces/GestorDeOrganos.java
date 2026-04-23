@@ -19,4 +19,8 @@ public interface GestorDeOrganos {
 
     String listarOrganosDisponibles();
 
+    boolean esCompatible(String donante, String receptor);
+
+    Receptor asignarOrganoAReceptor(Organo organo, GestorDeReceptores receptores);
+
 }
