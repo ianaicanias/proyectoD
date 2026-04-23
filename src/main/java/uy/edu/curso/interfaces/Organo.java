@@ -1,5 +1,6 @@
 package uy.edu.curso.interfaces;
 
+
 public interface Organo {
 
     long getIdentificador();
