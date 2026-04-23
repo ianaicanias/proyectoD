@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="es"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>OrganoImpl.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">proyectoD</a> &gt; <a href="index.source.html" class="el_package">uy.edu.curso.classes</a> &gt; <span class="el_source">OrganoImpl.java</span></div><h1>OrganoImpl.java</h1><pre class="source lang-java linenums">package uy.edu.curso.classes;
+
+import uy.edu.curso.interfaces.Donante;
+import uy.edu.curso.interfaces.Organo;
+
+
+public class OrganoImpl implements Organo {
+
+<span class="fc" id="L9">    private static long contadorDeOrganosExistentes = 0;</span>
+    private final long identificador;
+    private final boolean esInfantil;
+    private String nombre;
+    private String tipoDeSangre;
+    private String cedulaDeIdentidadDelDonante;
+
+<span class="fc" id="L16">    public OrganoImpl(String nombre, Donante donante) {</span>
+<span class="fc" id="L17">        this.identificador = ++contadorDeOrganosExistentes;</span>
+<span class="fc" id="L18">        this.nombre = nombre;</span>
+<span class="fc" id="L19">        this.tipoDeSangre = donante.getTipoDeSangre();</span>
+<span class="pc bpc" id="L20" title="1 of 2 branches missed.">        this.esInfantil = donante.getEdad() &lt; 18;</span>
+<span class="fc" id="L21">        this.cedulaDeIdentidadDelDonante = donante.getCedulaDeIdentidad();</span>
+<span class="fc" id="L22">    }</span>
+
+    @Override
+    public long getIdentificador() {
+<span class="fc" id="L26">        return this.identificador;</span>
+    }
+
+    @Override
+    public String getNombre() {
+<span class="fc" id="L31">        return this.nombre;</span>
+    }
+
+    @Override
+    public String getTipoDeSangre() {
+<span class="fc" id="L36">        return this.tipoDeSangre;</span>
+    }
+
+    @Override
+    public String getCedulaDeIdentidadDelDonante() {
+<span class="fc" id="L41">        return this.cedulaDeIdentidadDelDonante;</span>
+    }
+
+    @Override
+    public boolean getEsInfantil() {
+<span class="fc" id="L46">        return this.esInfantil;</span>
+    }
+
+    @Override
+    public void setNombre(String nombre) {
+<span class="nc" id="L51">        this.nombre = nombre;</span>
+<span class="nc" id="L52">    }</span>
+
+    @Override
+    public void setTipoDeSangre(String tipoDeSangre) {
+<span class="nc" id="L56">        this.tipoDeSangre = tipoDeSangre;</span>
+<span class="nc" id="L57">    }</span>
+
+    @Override
+    public void setCedulaDeIdentidadDelDonante(String cedulaDeIdentidadDelDonante) {
+<span class="nc" id="L61">        this.cedulaDeIdentidadDelDonante = cedulaDeIdentidadDelDonante;</span>
+<span class="nc" id="L62">    }</span>
+
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.11.202310140853</span></div></body></html>

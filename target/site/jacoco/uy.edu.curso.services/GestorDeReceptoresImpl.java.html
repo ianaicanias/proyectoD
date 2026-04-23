@@ -2,9 +2,9 @@
 
 import uy.edu.curso.ColaEnlazada;
 import uy.edu.curso.ListaEnlazada;
-import uy.edu.curso.classes.Persona;
-import uy.edu.curso.classes.Receptor;
+import uy.edu.curso.classes.ReceptorImpl;
 import uy.edu.curso.interfaces.GestorDeReceptores;
+import uy.edu.curso.interfaces.Receptor;
 import uy.edu.curso.tda.TDAColaEnlazada;
 import uy.edu.curso.tda.TDAListaEnlazada;
 
@@ -19,114 +19,116 @@ public class GestorDeReceptoresImpl implements GestorDeReceptores {
 <span class="fc" id="L19">        this.colaDePrioridadDeReceptores = new ColaEnlazada&lt;&gt;();</span>
 <span class="fc" id="L20">    }</span>
 
+    @Override
     public TDAListaEnlazada&lt;Receptor&gt; getListaDeReceptores() {
-<span class="fc" id="L23">        return this.listaDeReceptores;</span>
+<span class="fc" id="L24">        return this.listaDeReceptores;</span>
     }
 
+    @Override
     public TDAColaEnlazada&lt;Receptor&gt; getColaDePrioridadDeReceptores() {
-<span class="fc" id="L27">        return this.colaDePrioridadDeReceptores;</span>
+<span class="fc" id="L29">        return this.colaDePrioridadDeReceptores;</span>
     }
 
     @Override
-    public Persona registrarReceptor(String cedulaDeIdentidad, String nombre, String tipoDeOrganoNecesitado,
+    public Receptor registrarReceptor(String cedulaDeIdentidad, String nombre, String tipoDeOrganoNecesitado,
             String tipoDeSangre, byte edad, byte puntajeDePrioridad) {
-<span class="fc bfc" id="L33" title="All 2 branches covered.">        if (this.buscarReceptor(cedulaDeIdentidad) != null) {</span>
-<span class="fc" id="L34">            return null;</span>
+<span class="fc bfc" id="L35" title="All 2 branches covered.">        if (this.buscarReceptor(cedulaDeIdentidad) != null) {</span>
+<span class="fc" id="L36">            return null;</span>
         }
-<span class="fc" id="L36">        Receptor nuevoReceptor = new Receptor(cedulaDeIdentidad, nombre, tipoDeSangre,</span>
-<span class="fc" id="L37">                tipoDeOrganoNecesitado, edad, puntajeDePrioridad);</span>
+<span class="fc" id="L38">        Receptor nuevoReceptor = new ReceptorImpl(cedulaDeIdentidad, nombre, tipoDeOrganoNecesitado,</span>
+                tipoDeSangre, edad, puntajeDePrioridad);
 
-<span class="fc" id="L39">        this.listaDeReceptores.agregar(nuevoReceptor);</span>
+<span class="fc" id="L41">        this.listaDeReceptores.agregar(nuevoReceptor);</span>
 
-<span class="fc" id="L41">        return nuevoReceptor;</span>
+<span class="fc" id="L43">        return nuevoReceptor;</span>
     }
 
     @Override
-    public void insertarReceptorEnLaCola(Persona receptor) {
-<span class="fc" id="L46">        int i = 0;</span>
-<span class="fc" id="L47">        Receptor nuevoReceptor = (Receptor) receptor;</span>
+    public void insertarReceptorEnLaCola(Receptor nuevoReceptor) {
+<span class="fc" id="L48">        int i = 0;</span>
 
-<span class="fc bfc" id="L49" title="All 2 branches covered.">        while (i &lt; this.colaDePrioridadDeReceptores.tamaño()) {</span>
-<span class="fc" id="L50">            Receptor receptorActual = this.colaDePrioridadDeReceptores.obtener(i);</span>
-<span class="fc bfc" id="L51" title="All 2 branches covered.">            boolean mayorPrioridad = nuevoReceptor.getPuntajeDePrioridad() &gt; receptorActual.getPuntajeDePrioridad();</span>
-<span class="fc bfc" id="L52" title="All 4 branches covered.">            boolean igualPrioridadConDesempate = (nuevoReceptor.getPuntajeDePrioridad() == receptorActual.getPuntajeDePrioridad())</span>
-<span class="fc" id="L53">                    &amp;&amp; (nuevoReceptor.getEdad() &lt; receptorActual.getEdad());</span>
+<span class="fc bfc" id="L50" title="All 2 branches covered.">        while (i &lt; this.colaDePrioridadDeReceptores.tamaño()) {</span>
+<span class="fc" id="L51">            Receptor receptorActual = this.colaDePrioridadDeReceptores.obtener(i);</span>
+<span class="fc bfc" id="L52" title="All 2 branches covered.">            boolean mayorPrioridad = nuevoReceptor.getPuntajeDePrioridad() &gt; receptorActual.getPuntajeDePrioridad();</span>
+<span class="fc bfc" id="L53" title="All 2 branches covered.">            boolean igualPrioridadConDesempate = (nuevoReceptor.getPuntajeDePrioridad() == receptorActual.getPuntajeDePrioridad())</span>
+<span class="fc bfc" id="L54" title="All 2 branches covered.">                    &amp;&amp; (nuevoReceptor.getEdad() &lt; receptorActual.getEdad());</span>
 
-<span class="fc bfc" id="L55" title="All 4 branches covered.">            if (mayorPrioridad || igualPrioridadConDesempate) {</span>
-<span class="fc" id="L56">                this.colaDePrioridadDeReceptores.agregar(i, nuevoReceptor);</span>
-<span class="fc" id="L57">                return;</span>
+<span class="fc bfc" id="L56" title="All 4 branches covered.">            if (mayorPrioridad || igualPrioridadConDesempate) {</span>
+<span class="fc" id="L57">                this.colaDePrioridadDeReceptores.agregar(i, nuevoReceptor);</span>
+<span class="fc" id="L58">                return;</span>
             }
-<span class="fc" id="L59">            i++;</span>
-        }
-<span class="fc" id="L61">        this.colaDePrioridadDeReceptores.poneEnCola((Receptor) nuevoReceptor);</span>
-<span class="fc" id="L62">    }</span>
+<span class="fc" id="L60">            i++;</span>
+<span class="fc" id="L61">        }</span>
+<span class="fc" id="L62">        this.colaDePrioridadDeReceptores.poneEnCola((Receptor) nuevoReceptor);</span>
+<span class="fc" id="L63">    }</span>
 
     @Override
     public Receptor buscarReceptor(String cedulaDeIdentidadReceptor) {
-<span class="fc" id="L66">        int i = 0;</span>
+<span class="fc" id="L67">        int i = 0;</span>
 
-<span class="fc bfc" id="L68" title="All 2 branches covered.">        while (i &lt; this.listaDeReceptores.tamaño()) {</span>
-<span class="fc" id="L69">            Receptor receptorEncontrado = this.listaDeReceptores.obtener(i);</span>
+<span class="fc bfc" id="L69" title="All 2 branches covered.">        while (i &lt; this.listaDeReceptores.tamaño()) {</span>
+<span class="fc" id="L70">            Receptor receptorEncontrado = this.listaDeReceptores.obtener(i);</span>
 
-<span class="fc bfc" id="L71" title="All 2 branches covered.">            if (receptorEncontrado.getCedulaDeIdentidad().equals(cedulaDeIdentidadReceptor)) {</span>
-<span class="fc" id="L72">                return receptorEncontrado;</span>
+<span class="fc bfc" id="L72" title="All 2 branches covered.">            if (receptorEncontrado.getCedulaDeIdentidad().equals(cedulaDeIdentidadReceptor)) {</span>
+<span class="fc" id="L73">                return receptorEncontrado;</span>
             }
-<span class="fc" id="L74">            i++;</span>
-        }
+<span class="fc" id="L75">            i++;</span>
+<span class="fc" id="L76">        }</span>
 
-<span class="fc" id="L77">        return null;</span>
+<span class="fc" id="L78">        return null;</span>
     }
 
     @Override
     public void eliminarReceptor(String cedulaDeIdentidadReceptor) {
-<span class="fc" id="L82">        int i = 0;</span>
-<span class="fc" id="L83">        int j = 0;</span>
+<span class="fc" id="L83">        int i = 0;</span>
+<span class="fc" id="L84">        int j = 0;</span>
 
-<span class="fc bfc" id="L85" title="All 2 branches covered.">        while (i &lt; this.listaDeReceptores.tamaño()) {</span>
-<span class="fc" id="L86">            Receptor receptorEncontrado = this.listaDeReceptores.obtener(i);</span>
+<span class="fc bfc" id="L86" title="All 2 branches covered.">        while (i &lt; this.listaDeReceptores.tamaño()) {</span>
+<span class="fc" id="L87">            Receptor receptorEncontrado = this.listaDeReceptores.obtener(i);</span>
 
-<span class="fc bfc" id="L88" title="All 2 branches covered.">            if (receptorEncontrado.getCedulaDeIdentidad().equals(cedulaDeIdentidadReceptor)) {</span>
-<span class="fc" id="L89">                this.listaDeReceptores.remover(i);</span>
-<span class="fc" id="L90">                break;</span>
+<span class="fc bfc" id="L89" title="All 2 branches covered.">            if (receptorEncontrado.getCedulaDeIdentidad().equals(cedulaDeIdentidadReceptor)) {</span>
+<span class="fc" id="L90">                this.listaDeReceptores.remover(i);</span>
+<span class="fc" id="L91">                break;</span>
             }
-<span class="fc" id="L92">            i++;</span>
-        }
-<span class="fc bfc" id="L94" title="All 2 branches covered.">        while (j &lt; this.colaDePrioridadDeReceptores.tamaño()) {</span>
-<span class="fc" id="L95">            Receptor receptorEncontrado = this.colaDePrioridadDeReceptores.obtener(j);</span>
+<span class="fc" id="L93">            i++;</span>
+<span class="fc" id="L94">        }</span>
+<span class="fc bfc" id="L95" title="All 2 branches covered.">        while (j &lt; this.colaDePrioridadDeReceptores.tamaño()) {</span>
+<span class="fc" id="L96">            Receptor receptorEncontrado = this.colaDePrioridadDeReceptores.obtener(j);</span>
 
-<span class="fc bfc" id="L97" title="All 2 branches covered.">            if (receptorEncontrado.getCedulaDeIdentidad().equals(cedulaDeIdentidadReceptor)) {</span>
-<span class="fc" id="L98">                this.colaDePrioridadDeReceptores.remover(j);</span>
-<span class="fc" id="L99">                break;</span>
+<span class="fc bfc" id="L98" title="All 2 branches covered.">            if (receptorEncontrado.getCedulaDeIdentidad().equals(cedulaDeIdentidadReceptor)) {</span>
+<span class="fc" id="L99">                this.colaDePrioridadDeReceptores.remover(j);</span>
+<span class="fc" id="L100">                break;</span>
             }
-<span class="fc" id="L101">            j++;</span>
-        }
-<span class="fc" id="L103">    }</span>
+<span class="fc" id="L102">            j++;</span>
+<span class="fc" id="L103">        }</span>
+<span class="fc" id="L104">    }</span>
 
     @Override
     public String listarReceptores() {
-<span class="fc" id="L107">        int i = 0;</span>
-<span class="fc" id="L108">        StringBuilder pagina = new StringBuilder();</span>
+<span class="fc" id="L108">        int i = 0;</span>
+<span class="fc" id="L109">        StringBuilder pagina = new StringBuilder();</span>
 
-<span class="fc" id="L110">        pagina.append(&quot;----------------------- DATOS DE RECEPTORES -----------------------\n&quot;);</span>
-<span class="fc bfc" id="L111" title="All 2 branches covered.">        while (i &lt; this.listaDeReceptores.tamaño()) {</span>
-<span class="fc" id="L112">            StringBuilder renglon = new StringBuilder();</span>
-<span class="fc" id="L113">            Receptor receptor = this.listaDeReceptores.obtener(i);</span>
+<span class="fc" id="L111">        pagina.append(&quot;----------------------- DATOS DE RECEPTORES -----------------------\n&quot;);</span>
+<span class="fc bfc" id="L112" title="All 2 branches covered.">        while (i &lt; this.listaDeReceptores.tamaño()) {</span>
+<span class="fc" id="L113">            StringBuilder renglon = new StringBuilder();</span>
+<span class="fc" id="L114">            Receptor receptor = this.listaDeReceptores.obtener(i);</span>
 
-<span class="fc" id="L115">            renglon.append(receptor.getNombre());</span>
-<span class="fc" id="L116">            renglon.append(&quot;, &quot;);</span>
-<span class="fc" id="L117">            renglon.append(receptor.getCedulaDeIdentidad());</span>
-<span class="fc" id="L118">            renglon.append(&quot;, &quot;);</span>
-<span class="fc" id="L119">            renglon.append(receptor.getTipoDeOrgano());</span>
-<span class="fc" id="L120">            renglon.append(&quot;, &quot;);</span>
-<span class="fc" id="L121">            renglon.append(receptor.getTipoDeSangre());</span>
-<span class="fc" id="L122">            renglon.append(&quot;, &quot;);</span>
-<span class="fc" id="L123">            renglon.append(receptor.getEdad());</span>
-<span class="fc" id="L124">            renglon.append(&quot;.&quot;);</span>
-<span class="fc" id="L125">            pagina.append(renglon.toString());</span>
-<span class="fc" id="L126">            i++;</span>
-        }
+<span class="fc" id="L116">            renglon.append(receptor.getNombre());</span>
+<span class="fc" id="L117">            renglon.append(&quot;, &quot;);</span>
+<span class="fc" id="L118">            renglon.append(receptor.getCedulaDeIdentidad());</span>
+<span class="fc" id="L119">            renglon.append(&quot;, &quot;);</span>
+<span class="fc" id="L120">            renglon.append(receptor.getTipoDeOrgano());</span>
+<span class="fc" id="L121">            renglon.append(&quot;, &quot;);</span>
+<span class="fc" id="L122">            renglon.append(receptor.getTipoDeSangre());</span>
+<span class="fc" id="L123">            renglon.append(&quot;, &quot;);</span>
+<span class="fc" id="L124">            renglon.append(receptor.getEdad());</span>
+<span class="fc" id="L125">            renglon.append(&quot;.&quot;);</span>
+<span class="fc" id="L126">            pagina.append(renglon.toString());</span>
+<span class="fc" id="L127">            pagina.append(&quot;\n&quot;);</span>
+<span class="fc" id="L128">            i++;</span>
+<span class="fc" id="L129">        }</span>
 
-<span class="fc" id="L129">        return pagina.toString();</span>
+<span class="fc" id="L131">        return pagina.toString();</span>
     }
 
 }
