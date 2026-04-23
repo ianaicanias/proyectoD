@@ -15,6 +15,7 @@ public class GestorDeDonantesImpl implements GestorDeDonantes {
         this.listaDeDonantes = new ListaEnlazada<>();
     }
 
+    @Override
     public TDAListaEnlazada<Donante> getListaDeDonantes() {
         return this.listaDeDonantes;
     }

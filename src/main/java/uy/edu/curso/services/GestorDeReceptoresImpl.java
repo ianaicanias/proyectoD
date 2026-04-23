@@ -19,10 +19,12 @@ public class GestorDeReceptoresImpl implements GestorDeReceptores {
         this.colaDePrioridadDeReceptores = new ColaEnlazada<>();
     }
 
+    @Override
     public TDAListaEnlazada<Receptor> getListaDeReceptores() {
         return this.listaDeReceptores;
     }
 
+    @Override
     public TDAColaEnlazada<Receptor> getColaDePrioridadDeReceptores() {
         return this.colaDePrioridadDeReceptores;
     }

@@ -3,22 +3,25 @@ package uy.edu.curso.services;
 import uy.edu.curso.ListaEnlazada;
 import uy.edu.curso.classes.OrganoImpl;
 import uy.edu.curso.interfaces.Donante;
+import uy.edu.curso.interfaces.GestorDeOrganos;
 import uy.edu.curso.interfaces.Organo;
 import uy.edu.curso.tda.TDAListaEnlazada;
 
 
-public class GestorDeOrganosImpl {
+public class GestorDeOrganosImpl implements GestorDeOrganos {
 
-    private TDAListaEnlazada<Organo> listaDeOrganos;
+    private final TDAListaEnlazada<Organo> listaDeOrganos;
 
     public GestorDeOrganosImpl() {
         this.listaDeOrganos = new ListaEnlazada<>();
     }
 
+    @Override
     public TDAListaEnlazada<Organo> getListaDeOrganos() {
         return this.listaDeOrganos;
     }
 
+    @Override
     public Organo registrarOrgano(String nombreDelOrgano, Donante donanteDelOrgano) {
         Organo nuevoOrganoRegistrado = new OrganoImpl(nombreDelOrgano, donanteDelOrgano);
 
@@ -27,6 +30,7 @@ public class GestorDeOrganosImpl {
         return nuevoOrganoRegistrado;
     }
 
+    @Override
     public Organo buscarOrganoPorIdentificador(long identificadorDelOrgano) {
         int i = 0;
 
@@ -42,6 +46,7 @@ public class GestorDeOrganosImpl {
         return null;
     }
 
+    @Override
     public TDAListaEnlazada<Organo> buscarOrganosPorNombre(String nombreDelOrgano) {
         TDAListaEnlazada<Organo> listaDeOrganosConCoincidenciaDeNombre = new ListaEnlazada<>();
         int i = 0;
@@ -58,6 +63,7 @@ public class GestorDeOrganosImpl {
         return listaDeOrganosConCoincidenciaDeNombre;
     }
 
+    @Override
     public TDAListaEnlazada<Organo> buscarOrganosPorTipoDeSangre(String tipoDeSangre) {
         TDAListaEnlazada<Organo> listaDeOrganosConCoincidenciaDeTipoDeSangre = new ListaEnlazada<>();
         int i = 0;
@@ -74,6 +80,7 @@ public class GestorDeOrganosImpl {
         return listaDeOrganosConCoincidenciaDeTipoDeSangre;
     }
 
+    @Override
     public void eliminarOrgano(long identificadorDelOrgano) {
         int i = 0;
 
@@ -88,6 +95,7 @@ public class GestorDeOrganosImpl {
         }
     }
 
+    @Override
     public String listarOrganosDisponibles() {
         int i = 0;
         StringBuilder pagina = new StringBuilder();
