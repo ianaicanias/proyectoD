@@ -4,9 +4,10 @@ import uy.edu.curso.ListaEnlazada;
 import uy.edu.curso.classes.OrganoImpl;
 import uy.edu.curso.interfaces.Donante;
 import uy.edu.curso.interfaces.GestorDeOrganos;
+import uy.edu.curso.interfaces.GestorDeReceptores;
 import uy.edu.curso.interfaces.Organo;
+import uy.edu.curso.interfaces.Receptor;
 import uy.edu.curso.tda.TDAListaEnlazada;
-
 
 public class GestorDeOrganosImpl implements GestorDeOrganos {
 
@@ -23,11 +24,9 @@ public class GestorDeOrganosImpl implements GestorDeOrganos {
 
     @Override
     public Organo registrarOrgano(String nombreDelOrgano, Donante donanteDelOrgano) {
-        Organo nuevoOrganoRegistrado = new OrganoImpl(nombreDelOrgano, donanteDelOrgano);
-
-        this.listaDeOrganos.agregar(nuevoOrganoRegistrado);
-
-        return nuevoOrganoRegistrado;
+        Organo nuevoOrgano = new OrganoImpl(nombreDelOrgano, donanteDelOrgano);
+        this.listaDeOrganos.agregar(nuevoOrgano);
+        return nuevoOrgano;
     }
 
     @Override
@@ -35,10 +34,10 @@ public class GestorDeOrganosImpl implements GestorDeOrganos {
         int i = 0;
 
         while (i < this.listaDeOrganos.tamaño()) {
-            long identificadorEncontrado = this.listaDeOrganos.obtener(i).getIdentificador();
+            Organo organo = this.listaDeOrganos.obtener(i);
 
-            if (identificadorEncontrado == identificadorDelOrgano) {
-                return this.listaDeOrganos.obtener(i);
+            if (organo.getIdentificador() == identificadorDelOrgano) {
+                return organo;
             }
             i++;
         }
@@ -48,36 +47,36 @@ public class GestorDeOrganosImpl implements GestorDeOrganos {
 
     @Override
     public TDAListaEnlazada<Organo> buscarOrganosPorNombre(String nombreDelOrgano) {
-        TDAListaEnlazada<Organo> listaDeOrganosConCoincidenciaDeNombre = new ListaEnlazada<>();
+        TDAListaEnlazada<Organo> resultado = new ListaEnlazada<>();
         int i = 0;
 
         while (i < this.listaDeOrganos.tamaño()) {
-            String nombreDelOrganoEncontrado = this.listaDeOrganos.obtener(i).getNombre();
+            Organo organo = this.listaDeOrganos.obtener(i);
 
-            if (nombreDelOrganoEncontrado.equals(nombreDelOrgano)) {
-                listaDeOrganosConCoincidenciaDeNombre.agregar(this.listaDeOrganos.obtener(i));
+            if (organo.getNombre().equalsIgnoreCase(nombreDelOrgano)) {
+                resultado.agregar(organo);
             }
             i++;
         }
 
-        return listaDeOrganosConCoincidenciaDeNombre;
+        return resultado;
     }
 
     @Override
-    public TDAListaEnlazada<Organo> buscarOrganosPorTipoDeSangre(String tipoDeSangreDelOrgano) {
-        TDAListaEnlazada<Organo> listaDeOrganosConCoincidenciaDeTipoDeSangre = new ListaEnlazada<>();
+    public TDAListaEnlazada<Organo> buscarOrganosPorTipoDeSangre(String tipoDeSangre) {
+        TDAListaEnlazada<Organo> resultado = new ListaEnlazada<>();
         int i = 0;
 
         while (i < this.listaDeOrganos.tamaño()) {
-            String tipoDeSangreEncontrado = this.listaDeOrganos.obtener(i).getTipoDeSangre();
+            Organo organo = this.listaDeOrganos.obtener(i);
 
-            if (tipoDeSangreEncontrado.equals(tipoDeSangreDelOrgano)) {
-                listaDeOrganosConCoincidenciaDeTipoDeSangre.agregar(this.listaDeOrganos.obtener(i));
+            if (organo.getTipoDeSangre().equalsIgnoreCase(tipoDeSangre)) {
+                resultado.agregar(organo);
             }
             i++;
         }
 
-        return listaDeOrganosConCoincidenciaDeTipoDeSangre;
+        return resultado;
     }
 
     @Override
@@ -85,11 +84,11 @@ public class GestorDeOrganosImpl implements GestorDeOrganos {
         int i = 0;
 
         while (i < this.listaDeOrganos.tamaño()) {
-            long identificadorEncontrado = this.listaDeOrganos.obtener(i).getIdentificador();
+            Organo organo = this.listaDeOrganos.obtener(i);
 
-            if (identificadorEncontrado == identificadorDelOrgano) {
+            if (organo.getIdentificador() == identificadorDelOrgano) {
                 this.listaDeOrganos.remover(i);
-                return;
+                break;
             }
             i++;
         }
@@ -98,29 +97,78 @@ public class GestorDeOrganosImpl implements GestorDeOrganos {
     @Override
     public String listarOrganosDisponibles() {
         int i = 0;
-        StringBuilder pagina = new StringBuilder();
+        StringBuilder resultado = new StringBuilder();
 
-        pagina.append("----------------------- DATOS DE ÓRGANOS DISPONIBLES -----------------------\n");
         while (i < this.listaDeOrganos.tamaño()) {
-            StringBuilder renglon = new StringBuilder();
             Organo organo = this.listaDeOrganos.obtener(i);
-
-            renglon.append(organo.getIdentificador());
-            renglon.append(", ");
-            renglon.append(organo.getNombre());
-            renglon.append(", ");
-            renglon.append(organo.getTipoDeSangre());
-            renglon.append(", ");
-            renglon.append(organo.getCedulaDeIdentidadDelDonante());
-            renglon.append(", ");
-            renglon.append(organo.getEsInfantil());
-            renglon.append(".");
-            pagina.append(renglon.toString());
-            pagina.append("\n");
+            resultado.append(organo.getNombre()).append("\n");
             i++;
         }
 
-        return pagina.toString();
+        return resultado.toString();
     }
 
+    // -------------------- PARTE 3 --------------------
+
+    @Override
+    public boolean esCompatible(String donante, String receptor) {
+
+        if (donante.equals("O-")) return true;
+
+        if (donante.equals("O+")) {
+            return receptor.equals("O+") || receptor.equals("A+") || receptor.equals("B+") || receptor.equals("AB+");
+        }
+
+        if (donante.equals("A-")) {
+            return receptor.equals("A-") || receptor.equals("A+") || receptor.equals("AB-") || receptor.equals("AB+");
+        }
+
+        if (donante.equals("A+")) {
+            return receptor.equals("A+") || receptor.equals("AB+");
+        }
+
+        if (donante.equals("B-")) {
+            return receptor.equals("B-") || receptor.equals("B+") || receptor.equals("AB-") || receptor.equals("AB+");
+        }
+
+        if (donante.equals("B+")) {
+            return receptor.equals("B+") || receptor.equals("AB+");
+        }
+
+        if (donante.equals("AB-")) {
+            return receptor.equals("AB-") || receptor.equals("AB+");
+        }
+
+        if (donante.equals("AB+")) {
+            return receptor.equals("AB+");
+        }
+
+        return false;
+    }
+
+    @Override
+    public Receptor asignarOrganoAReceptor(Organo organo, GestorDeReceptores receptores) {
+
+        int i = 0;
+
+        while (i < receptores.getColaDePrioridadDeReceptores().tamaño()) {
+
+            Receptor r = receptores.getColaDePrioridadDeReceptores().obtener(i);
+
+            boolean mismoOrgano = r.getTipoDeOrgano().equalsIgnoreCase(organo.getNombre());
+            boolean compatible = esCompatible(organo.getTipoDeSangre(), r.getTipoDeSangre());
+
+            if (mismoOrgano && compatible) {
+
+                receptores.eliminarReceptor(r.getCedulaDeIdentidad());
+                this.eliminarOrgano(organo.getIdentificador());
+
+                return r;
+            }
+
+            i++;
+        }
+
+        return null;
+    }
 }
