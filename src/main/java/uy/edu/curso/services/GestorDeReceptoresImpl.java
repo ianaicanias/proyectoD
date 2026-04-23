@@ -2,9 +2,9 @@ package uy.edu.curso.services;
 
 import uy.edu.curso.ColaEnlazada;
 import uy.edu.curso.ListaEnlazada;
-import uy.edu.curso.classes.Persona;
-import uy.edu.curso.classes.Receptor;
+import uy.edu.curso.classes.ReceptorImpl;
 import uy.edu.curso.interfaces.GestorDeReceptores;
+import uy.edu.curso.interfaces.Receptor;
 import uy.edu.curso.tda.TDAColaEnlazada;
 import uy.edu.curso.tda.TDAListaEnlazada;
 
@@ -28,12 +28,12 @@ public class GestorDeReceptoresImpl implements GestorDeReceptores {
     }
 
     @Override
-    public Persona registrarReceptor(String cedulaDeIdentidad, String nombre, String tipoDeOrganoNecesitado,
+    public Receptor registrarReceptor(String cedulaDeIdentidad, String nombre, String tipoDeOrganoNecesitado,
             String tipoDeSangre, byte edad, byte puntajeDePrioridad) {
         if (this.buscarReceptor(cedulaDeIdentidad) != null) {
             return null;
         }
-        Receptor nuevoReceptor = new Receptor(cedulaDeIdentidad, nombre, tipoDeOrganoNecesitado,
+        Receptor nuevoReceptor = new ReceptorImpl(cedulaDeIdentidad, nombre, tipoDeOrganoNecesitado,
                 tipoDeSangre, edad, puntajeDePrioridad);
 
         this.listaDeReceptores.agregar(nuevoReceptor);
@@ -42,9 +42,8 @@ public class GestorDeReceptoresImpl implements GestorDeReceptores {
     }
 
     @Override
-    public void insertarReceptorEnLaCola(Persona receptor) {
+    public void insertarReceptorEnLaCola(Receptor nuevoReceptor) {
         int i = 0;
-        Receptor nuevoReceptor = (Receptor) receptor;
 
         while (i < this.colaDePrioridadDeReceptores.tamaño()) {
             Receptor receptorActual = this.colaDePrioridadDeReceptores.obtener(i);
@@ -123,6 +122,7 @@ public class GestorDeReceptoresImpl implements GestorDeReceptores {
             renglon.append(receptor.getEdad());
             renglon.append(".");
             pagina.append(renglon.toString());
+            pagina.append("\n");
             i++;
         }
 

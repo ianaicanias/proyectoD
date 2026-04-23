@@ -1,16 +1,14 @@
 package uy.edu.curso.interfaces;
 
-import uy.edu.curso.classes.Persona;
-
 
 public interface GestorDeReceptores {
 
-    Persona registrarReceptor(String cedulaDeIdentidad, String nombre, String tipoDeOrganoNecesitado,
+    Receptor registrarReceptor(String cedulaDeIdentidad, String nombre, String tipoDeOrganoNecesitado,
             String tipoDeSangre, byte edad, byte puntajeDePrioridad);
 
-    void insertarReceptorEnLaCola(Persona receptor);
+    void insertarReceptorEnLaCola(Receptor receptor);
 
-    Persona buscarReceptor(String cedulaDeIdentidad);
+    Receptor buscarReceptor(String cedulaDeIdentidad);
 
     void eliminarReceptor(String cedulaDeIdentidad);
 

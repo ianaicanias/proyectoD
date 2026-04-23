@@ -1,33 +1,33 @@
 package uy.edu.curso.services;
 
 import uy.edu.curso.ListaEnlazada;
-import uy.edu.curso.classes.Donante;
-import uy.edu.curso.classes.Persona;
+import uy.edu.curso.classes.DonanteImpl;
+import uy.edu.curso.interfaces.Donante;
 import uy.edu.curso.interfaces.GestorDeDonantes;
 import uy.edu.curso.tda.TDAListaEnlazada;
 
 
 public class GestorDeDonantesImpl implements GestorDeDonantes {
 
-    private final TDAListaEnlazada<Donante> listaDonantes;
+    private final TDAListaEnlazada<Donante> listaDeDonantes;
 
     public GestorDeDonantesImpl() {
-        this.listaDonantes = new ListaEnlazada<>();
+        this.listaDeDonantes = new ListaEnlazada<>();
     }
 
     public TDAListaEnlazada<Donante> getListaDeDonantes() {
-        return this.listaDonantes;
+        return this.listaDeDonantes;
     }
 
     @Override
-    public Persona registrarDonante(String cedulaDeIdentidad, String nombre, String tipoDeOrganoDonado, 
+    public Donante registrarDonante(String cedulaDeIdentidad, String nombre, String tipoDeOrganoDonado, 
             String tipoDeSangre, byte edad) {
         if (this.buscarDonante(cedulaDeIdentidad) != null) {
             return null;
         }
-        Donante donante = new Donante(cedulaDeIdentidad, nombre, tipoDeOrganoDonado, tipoDeSangre, edad);
+        Donante donante = new DonanteImpl(cedulaDeIdentidad, nombre, tipoDeOrganoDonado, tipoDeSangre, edad);
 
-        this.listaDonantes.agregar(donante);
+        this.listaDeDonantes.agregar(donante);
         
         return donante;
     }
@@ -36,11 +36,11 @@ public class GestorDeDonantesImpl implements GestorDeDonantes {
     public Donante buscarDonante(String cedulaDeIdentidad) {
         int i = 0;
 
-        while (i < listaDonantes.tamaño()) {
-            String cedulaDeIdentidadDonanteEncontrado = listaDonantes.obtener(i).getCedulaDeIdentidad();
+        while (i < this.listaDeDonantes.tamaño()) {
+            String cedulaDeIdentidadDonanteEncontrado = this.listaDeDonantes.obtener(i).getCedulaDeIdentidad();
 
             if (cedulaDeIdentidadDonanteEncontrado.equals(cedulaDeIdentidad)) {
-                return listaDonantes.obtener(i);
+                return this.listaDeDonantes.obtener(i);
             }
             i++;
         }
@@ -52,11 +52,11 @@ public class GestorDeDonantesImpl implements GestorDeDonantes {
     public void eliminarDonante(String cedulaDeIdentidad) {
         int i = 0;
         
-        while (i < listaDonantes.tamaño()) {
-            String cedulaDeIdentidadDonanteEncontrado = listaDonantes.obtener(i).getCedulaDeIdentidad();
+        while (i < this.listaDeDonantes.tamaño()) {
+            String cedulaDeIdentidadDonanteEncontrado = this.listaDeDonantes.obtener(i).getCedulaDeIdentidad();
 
             if (cedulaDeIdentidadDonanteEncontrado.equals(cedulaDeIdentidad)) {
-                listaDonantes.remover(i);
+                this.listaDeDonantes.remover(i);
                 break;
             }
             i++;
@@ -69,19 +69,22 @@ public class GestorDeDonantesImpl implements GestorDeDonantes {
         StringBuilder pagina = new StringBuilder();
 
         pagina.append("---------------------- DATOS DE DONANTES ----------------------\n");
-        while (i < listaDonantes.tamaño()) {
+        while (i < this.listaDeDonantes.tamaño()) {
             StringBuilder renglon = new StringBuilder();
-            renglon.append(listaDonantes.obtener(i).getNombre());
+            Donante donanteEncontrado = this.listaDeDonantes.obtener(i);
+
+            renglon.append(donanteEncontrado.getNombre());
             renglon.append(", ");
-            renglon.append(listaDonantes.obtener(i).getCedulaDeIdentidad());
+            renglon.append(donanteEncontrado.getCedulaDeIdentidad());
             renglon.append(", ");
-            renglon.append(listaDonantes.obtener(i).getTipoDeOrgano());
+            renglon.append(donanteEncontrado.getTipoDeOrgano());
             renglon.append(", ");
-            renglon.append(listaDonantes.obtener(i).getTipoDeSangre());
+            renglon.append(donanteEncontrado.getTipoDeSangre());
             renglon.append(", ");
-            renglon.append(listaDonantes.obtener(i).getEdad()); 
+            renglon.append(donanteEncontrado.getEdad()); 
             renglon.append(".");
             pagina.append(renglon.toString());
+            pagina.append("\n");
             i++;
         }
 

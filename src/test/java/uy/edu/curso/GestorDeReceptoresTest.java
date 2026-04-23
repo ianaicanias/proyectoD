@@ -10,7 +10,7 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
-import uy.edu.curso.classes.Receptor;
+import uy.edu.curso.interfaces.Receptor;
 import uy.edu.curso.services.GestorDeReceptoresImpl;
 
 
@@ -316,6 +316,7 @@ public class GestorDeReceptoresTest {
         resultadoEsperado.append(", ");
         resultadoEsperado.append(receptorCreado1.getEdad());
         resultadoEsperado.append(".");
+        resultadoEsperado.append("\n");
         resultadoEsperado.append(receptorCreado2.getNombre());
         resultadoEsperado.append(", ");
         resultadoEsperado.append(receptorCreado2.getCedulaDeIdentidad());
@@ -326,6 +327,7 @@ public class GestorDeReceptoresTest {
         resultadoEsperado.append(", ");
         resultadoEsperado.append(receptorCreado2.getEdad());
         resultadoEsperado.append(".");
+        resultadoEsperado.append("\n");
         resultadoEsperado.append(receptorCreado3.getNombre());
         resultadoEsperado.append(", ");
         resultadoEsperado.append(receptorCreado3.getCedulaDeIdentidad());
@@ -336,6 +338,7 @@ public class GestorDeReceptoresTest {
         resultadoEsperado.append(", ");
         resultadoEsperado.append(receptorCreado3.getEdad());
         resultadoEsperado.append(".");
+        resultadoEsperado.append("\n");
 
         // Act
         String listadoDeReceptores = gestorDeReceptoresImpl.listarReceptores();
