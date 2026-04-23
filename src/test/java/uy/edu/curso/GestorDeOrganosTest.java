@@ -68,10 +68,15 @@ public class GestorDeOrganosTest {
 
     @Test
     @DisplayName("Buscar Organo Inexistente")
-    public void buscarOrganoPorId_null() {
-        Organo encontrado = gestor.buscarOrganoPorIdentificador(999);
+    public void buscarOrgano_inexistente() {
+        Donante d = gestorDonantes.registrarDonante("123", "Valentín", "Riñón", "A+", (byte) 20);
 
-        assertNull(encontrado);
+        gestor.registrarOrgano("Riñón", d);
+        gestor.registrarOrgano("Corazón", d);
+
+        Organo resultado = gestor.buscarOrganoPorIdentificador(999);
+
+        assertNull(resultado);
     }
 
     @Test
@@ -99,6 +104,18 @@ public class GestorDeOrganosTest {
     }
 
     @Test
+    @DisplayName("Buscar por Nombre Inexistente")
+    public void buscarPorNombre_inexistente() {
+        Donante d = gestorDonantes.registrarDonante("123", "Valentín", "Riñón", "A+", (byte) 20);
+
+        gestor.registrarOrgano("Riñón", d);
+
+        var lista = gestor.buscarOrganosPorNombre("Pulmón");
+
+        assertEquals(0, lista.tamaño());
+    }
+
+    @Test
     @DisplayName("Buscar por Tipo de Sangre")
     public void buscarPorSangre_ok() {
         Donante d = gestorDonantes.registrarDonante("123", "Valentín", "Riñón", "A+", (byte) 20);
@@ -123,6 +140,18 @@ public class GestorDeOrganosTest {
     }
 
     @Test
+    @DisplayName("Buscar por Tipo de Sangre Inexistente")
+    public void buscarPorSangre_inexistente() {
+        Donante d = gestorDonantes.registrarDonante("123", "Valentín", "Riñón", "A+", (byte) 20);
+
+        gestor.registrarOrgano("Riñón", d);
+
+        var lista = gestor.buscarOrganosPorTipoDeSangre("O-");
+
+        assertEquals(0, lista.tamaño());
+    }
+
+    @Test
     @DisplayName("Eliminar Organo")
     public void eliminarOrgano_ok() {
         Donante d = gestorDonantes.registrarDonante("123", "Valentín", "Riñón", "A+", (byte) 20);
@@ -136,9 +165,14 @@ public class GestorDeOrganosTest {
     @Test
     @DisplayName("Eliminar Organo Inexistente")
     public void eliminarOrgano_inexistente() {
+        Donante d = gestorDonantes.registrarDonante("123", "Valentín", "Riñón", "A+", (byte) 20);
+
+        gestor.registrarOrgano("Riñón", d);
+        gestor.registrarOrgano("Corazón", d);
+
         gestor.eliminarOrgano(999);
 
-        assertEquals(0, gestor.getListaDeOrganos().tamaño());
+        assertEquals(2, gestor.getListaDeOrganos().tamaño());
     }
 
     @Test

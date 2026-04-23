@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<testsuite xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="https://maven.apache.org/surefire/maven-surefire-plugin/xsd/surefire-test-report-3.0.xsd" version="3.0" name="uy.edu.curso.GestorDeReceptoresTest" time="0.058" tests="17" errors="0" skipped="0" failures="0">
+<testsuite xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="https://maven.apache.org/surefire/maven-surefire-plugin/xsd/surefire-test-report-3.0.xsd" version="3.0" name="uy.edu.curso.GestorDeDonantesTest" time="0.096" tests="10" errors="0" skipped="0" failures="0">
   <properties>
     <property name="java.specification.version" value="25"/>
     <property name="sun.cpu.isalist" value="amd64"/>
@@ -60,24 +60,14 @@
     <property name="sun.io.unicode.encoding" value="UnicodeLittle"/>
     <property name="java.class.version" value="69.0"/>
   </properties>
-  <testcase name="buscarReceptor_listaVacia_retornaNullIndicandoQueNoExisteElReceptor" classname="uy.edu.curso.GestorDeReceptoresTest" time="0.002">
-    <system-out><![CDATA[Inicializando los tests. . .
-]]></system-out>
-  </testcase>
-  <testcase name="eliminarReceptor_receptorEnListaYCola_eliminaDeAmbasEstructuras" classname="uy.edu.curso.GestorDeReceptoresTest" time="0.005"/>
-  <testcase name="GestorDeReceptoresImpl_creacionDeUnGestorDeReceptores_seInicializanTantoLaListaComoLaColaCorrectamente" classname="uy.edu.curso.GestorDeReceptoresTest" time="0.002"/>
-  <testcase name="insertarReceptorEnLaCola_colaVacia_receptorEsElPrimeroYElUltimo" classname="uy.edu.curso.GestorDeReceptoresTest" time="0.001"/>
-  <testcase name="insertarReceptorEnLaCola_receptoresCreadosEnLaListaDeReceptores_insertaCorrectamenteEnLaColaDePrioridadALosReceptoresPorOrdenDePrioridad" classname="uy.edu.curso.GestorDeReceptoresTest" time="0.002"/>
-  <testcase name="insertarReceptorEnLaCola_dosReceptoresConMismoPuntaje_elMenorEnEdadQuedaPrimeroEnLaCola" classname="uy.edu.curso.GestorDeReceptoresTest" time="0.002"/>
-  <testcase name="insertarReceptorEnLaCola_receptorCreadoEnLaListaDeReceptores_insertaCorrectamenteEnLaColaDePrioridadAlReceptor" classname="uy.edu.curso.GestorDeReceptoresTest" time="0.001"/>
-  <testcase name="eliminarReceptor_receptorSoloEnLista_eliminaSoloDeLaLista" classname="uy.edu.curso.GestorDeReceptoresTest" time="0.002"/>
-  <testcase name="listarReceptores_listaConReceptoresCreados_retornaUnaListaConTodosLosReceptoresExistentes" classname="uy.edu.curso.GestorDeReceptoresTest" time="0.002"/>
-  <testcase name="eliminarReceptor_receptorAlFinalDeLaCola_eliminaCorrectamente" classname="uy.edu.curso.GestorDeReceptoresTest" time="0.001"/>
-  <testcase name="eliminarReceptor_listaConReceptorCreado_encuentraYEliminaElReceptorSolicitado" classname="uy.edu.curso.GestorDeReceptoresTest" time="0.001"/>
-  <testcase name="registrarReceptor_datosValidos_receptorRegistradoCorrectamente" classname="uy.edu.curso.GestorDeReceptoresTest" time="0.002"/>
-  <testcase name="buscarReceptor_listaConReceptorCreado_encuentraYDevuelveElReceptorSolicitado" classname="uy.edu.curso.GestorDeReceptoresTest" time="0.001"/>
-  <testcase name="listarReceptores_listaVacia_retornaSoloElEncabezado" classname="uy.edu.curso.GestorDeReceptoresTest" time="0.001"/>
-  <testcase name="insertarReceptorEnLaCola_mismoPuntajeMismaEdad_elPrimeroRegistradoQuedaPrimero" classname="uy.edu.curso.GestorDeReceptoresTest" time="0.001"/>
-  <testcase name="registrarReceptor_datosDuplicados_retornaNullIndicandoQueYaExisteElReceptorIngresado" classname="uy.edu.curso.GestorDeReceptoresTest" time="0.001"/>
-  <testcase name="eliminarReceptor_receptorNoExistente_noHaceCambiosEnLasEstructuras" classname="uy.edu.curso.GestorDeReceptoresTest" time="0.001"/>
+  <testcase name="buscarDonante_despuesDeEliminar_retornaNull" classname="uy.edu.curso.GestorDeDonantesTest" time="0.031"/>
+  <testcase name="registrarDonante_duplicado" classname="uy.edu.curso.GestorDeDonantesTest" time="0.002"/>
+  <testcase name="registrarDonante_ok" classname="uy.edu.curso.GestorDeDonantesTest" time="0.004"/>
+  <testcase name="buscarDonante_ok" classname="uy.edu.curso.GestorDeDonantesTest" time="0.002"/>
+  <testcase name="buscarDonante_null" classname="uy.edu.curso.GestorDeDonantesTest" time="0.001"/>
+  <testcase name="listarDonantes_vacio" classname="uy.edu.curso.GestorDeDonantesTest" time="0.001"/>
+  <testcase name="eliminarDonante_inexistente_noCambiaLaLista" classname="uy.edu.curso.GestorDeDonantesTest" time="0.001"/>
+  <testcase name="listarDonantes_ok" classname="uy.edu.curso.GestorDeDonantesTest" time="0.001"/>
+  <testcase name="registrarDonante_varios_datosGuardadosCorrectamente" classname="uy.edu.curso.GestorDeDonantesTest" time="0.0"/>
+  <testcase name="eliminarDonante_ok" classname="uy.edu.curso.GestorDeDonantesTest" time="0.0"/>
 </testsuite>
