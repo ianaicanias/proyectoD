@@ -1,25 +1,29 @@
 package uy.edu.curso.services;
 
 import uy.edu.curso.ListaEnlazada;
-import uy.edu.curso.classes.Transplante;
+import uy.edu.curso.classes.TransplanteImpl;
+import uy.edu.curso.interfaces.GestorDeTransplantes;
 import uy.edu.curso.interfaces.Organo;
 import uy.edu.curso.interfaces.Receptor;
+import uy.edu.curso.interfaces.Transplante;
 import uy.edu.curso.tda.TDAColaEnlazada;
 import uy.edu.curso.tda.TDAListaEnlazada;
 
 
-public class GestorDeTransplantes {
+public class GestorDeTransplantesImpl implements GestorDeTransplantes {
 
     private final TDAListaEnlazada<Transplante> listaDeTransplantesRealizados;
 
-    public GestorDeTransplantes() {
+    public GestorDeTransplantesImpl() {
         this.listaDeTransplantesRealizados = new ListaEnlazada<>();
     }
 
+    @Override
     public TDAListaEnlazada<Transplante> getListaDeTransplantesRealizados() {
         return this.listaDeTransplantesRealizados;
     }
 
+    @Override
     public void asignarOrganoAReceptor(Organo organo, TDAListaEnlazada<Receptor> listaDeReceptores, 
             TDAColaEnlazada<Receptor> colaDePrioridadDeReceptores, TDAListaEnlazada<Organo> listaDeOrganosDisponibles) {
         for (int i = 0; i < colaDePrioridadDeReceptores.tamaño(); i++) {
@@ -28,7 +32,7 @@ public class GestorDeTransplantes {
             boolean esMismoOrgano = organo.getNombre().equals(receptorEncontrado.getTipoDeOrgano());
 
             if (esCompatible && esMismoOrgano) {
-                Transplante nuevoTransplanteRealizado = new Transplante(receptorEncontrado, organo);
+                TransplanteImpl nuevoTransplanteRealizado = new TransplanteImpl(receptorEncontrado, organo);
 
                 colaDePrioridadDeReceptores.remover(receptorEncontrado);
                 listaDeReceptores.remover(receptorEncontrado);
@@ -41,6 +45,7 @@ public class GestorDeTransplantes {
         }
     }
 
+    @Override
     public Transplante buscarTransplante(long identificadorDelTransplante) {
         int i = 0;
 
@@ -56,6 +61,7 @@ public class GestorDeTransplantes {
         return null;
     }
 
+    @Override
     public String listarTransplantesRealizados() {
         StringBuilder pagina = new StringBuilder();
         int i = 0;
