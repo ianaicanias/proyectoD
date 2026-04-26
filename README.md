@@ -8,7 +8,7 @@ Axel Ferreira, Valentín Guerrico, Ianai Canias y Thiago Soca
 
 ## Descripción del Proyecto
 
-BioQueue es un sistema de gestión de trasplantes de órganos que permite administrar donantes, receptores y órganos disponibles, así como mantener un registro de los transplantes que se han realizado, automatizando el proceso de asignación de órganos según compatibilidad sanguínea y prioridad médica.
+BioQueue es un sistema de gestión de trasplantes de órganos que permite administrar donantes, receptores y órganos disponibles, así como mantener un registro de los trasplantes que se han realizado, automatizando el proceso de asignación de órganos según compatibilidad sanguínea y prioridad médica.
 
 ## Funcionalidades
 
@@ -16,7 +16,7 @@ BioQueue es un sistema de gestión de trasplantes de órganos que permite admini
 - Registro de receptores con cola de prioridad por urgencia médica.
 - Asignación automática de órganos según compatibilidad sanguínea.
 - Historial de trasplantes realizados.
-- Gestión de donantes, receptores, órganos y transplantes realizados.
+- Gestión de donantes, receptores, órganos y trasplantes realizados.
 
 ## Estructura del Proyecto
 
