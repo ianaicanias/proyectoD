@@ -22,13 +22,13 @@ public class BioQueueFacade {
     private final GestorDeReceptores gestorDeReceptores;
     private final GestorDeDonantes gestorDeDonantes;
     private final GestorDeOrganos gestorDeOrganos;
-    private final GestorDeTrasplantes gestorDeTransplantes;
+    private final GestorDeTrasplantes gestorDeTrasplantes;
 
     private BioQueueFacade() {
         this.gestorDeReceptores = new GestorDeReceptoresImpl();
         this.gestorDeDonantes = new GestorDeDonantesImpl();
         this.gestorDeOrganos = new GestorDeOrganosImpl();
-        this.gestorDeTransplantes = new GestorDeTrasplantesImpl();
+        this.gestorDeTrasplantes = new GestorDeTrasplantesImpl();
     }
 
     public static BioQueueFacade getInstancia() {
@@ -62,7 +62,7 @@ public class BioQueueFacade {
         TDAColaEnlazada<Receptor> colaDePrioridadDeReceptores = this.gestorDeReceptores.getColaDePrioridadDeReceptores();
         TDAListaEnlazada<Organo> listaDeOrganosDisponibles = this.gestorDeOrganos.getListaDeOrganosDisponibles();
 
-        this.gestorDeTransplantes.asignarOrganoAReceptor(nuevoOrgano, listaDeReceptores, 
+        this.gestorDeTrasplantes.asignarOrganoAReceptor(nuevoOrgano, listaDeReceptores, 
                 colaDePrioridadDeReceptores, listaDeOrganosDisponibles);
     }
 
@@ -86,8 +86,8 @@ public class BioQueueFacade {
         return this.gestorDeOrganos.buscarOrganosPorTipoDeSangre(tipoDeSangre);
     }
 
-    public Trasplante buscarTransplante(long identificadorDelTransplante) {
-        return this.gestorDeTransplantes.buscarTransplante(identificadorDelTransplante);
+    public Trasplante buscarTrasplante(long identificadorDelTrasplante) {
+        return this.gestorDeTrasplantes.buscarTrasplante(identificadorDelTrasplante);
     }
 
     public void eliminarReceptor(String cedulaDelReceptor) {
@@ -114,8 +114,8 @@ public class BioQueueFacade {
         return this.gestorDeOrganos.listarOrganosDisponibles();
     }
 
-    public String listarTransplantesRealizados() {
-        return this.gestorDeTransplantes.listarTransplantesRealizados();
+    public String listarTrasplantesRealizados() {
+        return this.gestorDeTrasplantes.listarTrasplantesRealizados();
     }
 
 }
