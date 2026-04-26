@@ -1,7 +1,8 @@
 package uy.edu.curso;
 
 import org.junit.jupiter.api.AfterAll;
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNull;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
@@ -10,155 +11,186 @@ import org.junit.jupiter.api.Test;
 import uy.edu.curso.interfaces.Donante;
 import uy.edu.curso.services.GestorDeDonantesImpl;
 
+
+@DisplayName("Tests para el Gestor de Donantes")
 public class GestorDeDonantesTest {
 
-    private static GestorDeDonantesImpl gestor;
+    private static GestorDeDonantesImpl gestorDeDonantes;
 
     @BeforeAll
-    public static void init() {
-        gestor = new GestorDeDonantesImpl();
+    public static void inicializacion() {
+        gestorDeDonantes = new GestorDeDonantesImpl();
     }
 
     @AfterAll
-    public static void end() {
-        System.out.println("Tests de donantes finalizados");
+    public static void finalizacion() {
+        System.out.println("Tests del gestor de donantes finalizados. . .");
     }
 
     @BeforeEach
-    public void reset() {
-        gestor = new GestorDeDonantesImpl();
+    public void limpiarDatos() {
+        gestorDeDonantes = new GestorDeDonantesImpl();
     }
 
     @Test
     @DisplayName("Registrar Donante")
-    public void registrarDonante_ok() {
-        Donante d = gestor.registrarDonante("123", "Valentín", "Riñón", "A+", (byte) 20);
+    public void registrarDonante_datosValidos_donanteRegistradoCorrectamente() {
+        // Arrange - Act
+        Donante donante = gestorDeDonantes.registrarDonante("123", "Valentín", "Riñón", "A+", (byte) 20);
 
-        assertEquals("123", d.getCedulaDeIdentidad());
-        assertEquals("Valentín", d.getNombre());
-        assertEquals("Riñón", d.getTipoDeOrgano());
-        assertEquals("A+", d.getTipoDeSangre());
-        assertEquals(20, d.getEdad());
-        assertEquals(1, gestor.getListaDeDonantes().tamaño());
+        // Assert
+        assertEquals("123", donante.getCedulaDeIdentidad());
+        assertEquals("Valentín", donante.getNombre());
+        assertEquals("Riñón", donante.getTipoDeOrgano());
+        assertEquals("A+", donante.getTipoDeSangre());
+        assertEquals(20, donante.getEdad());
+        assertEquals(1, gestorDeDonantes.getListaDeDonantes().tamaño());
     }
 
     @Test
     @DisplayName("Registrar Donante Duplicado")
-    public void registrarDonante_duplicado() {
-        gestor.registrarDonante("123", "Valentín", "Riñón", "A+", (byte) 20);
-        Donante duplicado = gestor.registrarDonante("123", "Valentín", "Riñón", "A+", (byte) 20);
+    public void registrarDonante_cedulaDuplicada_devuelveNullYNoAgrega() {
+        // Arrange
+        gestorDeDonantes.registrarDonante("123", "Valentín", "Riñón", "A+", (byte) 20);
 
+        // Act
+        Donante duplicado = gestorDeDonantes.registrarDonante("123", "Valentín", "Riñón", "A+", (byte) 20);
+
+        // Assert
         assertNull(duplicado);
-        assertEquals(1, gestor.getListaDeDonantes().tamaño());
+        assertEquals(1, gestorDeDonantes.getListaDeDonantes().tamaño());
     }
 
     @Test
     @DisplayName("Buscar Donante")
-    public void buscarDonante_ok() {
-        Donante esperado = gestor.registrarDonante("123", "Valentín", "Riñón", "A+", (byte) 20);
-        Donante encontrado = gestor.buscarDonante("123");
+    public void buscarDonante_cedulaExistente_devuelveDonante() {
+        // Arrange
+        Donante esperado = gestorDeDonantes.registrarDonante("123", "Valentín", "Riñón", "A+", (byte) 20);
 
+        // Act
+        Donante encontrado = gestorDeDonantes.buscarDonante("123");
+
+        // Assert
         assertEquals(esperado, encontrado);
     }
 
     @Test
     @DisplayName("Buscar Donante Inexistente")
-    public void buscarDonante_null() {
-        Donante encontrado = gestor.buscarDonante("999");
+    public void buscarDonante_cedulaInexistente_devuelveNull() {
+        // Act
+        Donante encontrado = gestorDeDonantes.buscarDonante("999");
 
+        // Assert
         assertNull(encontrado);
     }
 
     @Test
     @DisplayName("Eliminar Donante")
-    public void eliminarDonante_ok() {
-        gestor.registrarDonante("123", "Valentín", "Riñón", "A+", (byte) 20);
+    public void eliminarDonante_cedulaExistente_donanteEliminado() {
+        // Arrange
+        gestorDeDonantes.registrarDonante("123", "Valentín", "Riñón", "A+", (byte) 20);
 
-        gestor.eliminarDonante("123");
+        // Act
+        gestorDeDonantes.eliminarDonante("123");
 
-        assertNull(gestor.buscarDonante("123"));
-        assertEquals(0, gestor.getListaDeDonantes().tamaño());
+        // Assert
+        assertNull(gestorDeDonantes.buscarDonante("123"));
+        assertEquals(0, gestorDeDonantes.getListaDeDonantes().tamaño());
     }
 
     @Test
     @DisplayName("Eliminar Donante Inexistente")
-    public void eliminarDonante_inexistente_noCambiaLaLista() {
-        gestor.registrarDonante("123", "Valentín", "Riñón", "A+", (byte) 20);
+    public void eliminarDonante_cedulaInexistente_listaSinCambios() {
+        // Arrange
+        gestorDeDonantes.registrarDonante("123", "Valentín", "Riñón", "A+", (byte) 20);
 
-        gestor.eliminarDonante("999");
+        // Act
+        gestorDeDonantes.eliminarDonante("999");
 
-        assertEquals(1, gestor.getListaDeDonantes().tamaño());
+        // Assert
+        assertEquals(1, gestorDeDonantes.getListaDeDonantes().tamaño());
     }
 
     @Test
     @DisplayName("Buscar Donante Luego de Eliminarlo")
-    public void buscarDonante_despuesDeEliminar_retornaNull() {
-        gestor.registrarDonante("123", "Valentín", "Riñón", "A+", (byte) 20);
+    public void buscarDonante_despuesDeEliminar_devuelveNull() {
+        // Arrange
+        gestorDeDonantes.registrarDonante("123", "Valentín", "Riñón", "A+", (byte) 20);
+        gestorDeDonantes.eliminarDonante("123");
 
-        gestor.eliminarDonante("123");
+        // Act
+        Donante resultado = gestorDeDonantes.buscarDonante("123");
 
-        Donante resultado = gestor.buscarDonante("123");
-
+        // Assert
         assertNull(resultado);
     }
 
     @Test
     @DisplayName("Registrar Varios Donantes")
-    public void registrarDonante_varios_datosGuardadosCorrectamente() {
-        gestor.registrarDonante("123", "Valentín", "Riñón", "A+", (byte) 20);
-        gestor.registrarDonante("456", "Valentín", "Corazón", "O-", (byte) 25);
-        gestor.registrarDonante("789", "Valentín", "Hígado", "B+", (byte) 30);
+    public void registrarDonante_variosRegistros_listaConTresElementos() {
+        // Arrange - Act
+        gestorDeDonantes.registrarDonante("123", "Valentín", "Riñón", "A+", (byte) 20);
+        gestorDeDonantes.registrarDonante("456", "Valentín", "Corazón", "O-", (byte) 25);
+        gestorDeDonantes.registrarDonante("789", "Valentín", "Hígado", "B+", (byte) 30);
 
-        assertEquals(3, gestor.getListaDeDonantes().tamaño());
+        // Assert
+        assertEquals(3, gestorDeDonantes.getListaDeDonantes().tamaño());
     }
 
     @Test
     @DisplayName("Listar Donantes")
-    public void listarDonantes_ok() {
-        Donante d1 = gestor.registrarDonante("123", "Valentín", "Riñón", "A+", (byte) 20);
-        Donante d2 = gestor.registrarDonante("456", "Valentín", "Corazón", "O-", (byte) 25);
+    public void listarDonantes_conDatos_devuelveListadoCorrecto() {
+        // Arrange
+        Donante donante1 = gestorDeDonantes.registrarDonante("123", "Valentín", "Riñón", "A+", (byte) 20);
+        Donante donante2 = gestorDeDonantes.registrarDonante("456", "Valentín", "Corazón", "O-", (byte) 25);
 
         StringBuilder esperado = new StringBuilder();
 
         esperado.append("---------------------- DATOS DE DONANTES ----------------------\n");
-        esperado.append(d1.getNombre());
+        esperado.append(donante1.getNombre());
         esperado.append(", ");
-        esperado.append(d1.getCedulaDeIdentidad());
+        esperado.append(donante1.getCedulaDeIdentidad());
         esperado.append(", ");
-        esperado.append(d1.getTipoDeOrgano());
+        esperado.append(donante1.getTipoDeOrgano());
         esperado.append(", ");
-        esperado.append(d1.getTipoDeSangre());
+        esperado.append(donante1.getTipoDeSangre());
         esperado.append(", ");
-        esperado.append(d1.getEdad());
+        esperado.append(donante1.getEdad());
         esperado.append(".");
         esperado.append("\n");
 
-        esperado.append(d2.getNombre());
+        esperado.append(donante2.getNombre());
         esperado.append(", ");
-        esperado.append(d2.getCedulaDeIdentidad());
+        esperado.append(donante2.getCedulaDeIdentidad());
         esperado.append(", ");
-        esperado.append(d2.getTipoDeOrgano());
+        esperado.append(donante2.getTipoDeOrgano());
         esperado.append(", ");
-        esperado.append(d2.getTipoDeSangre());
+        esperado.append(donante2.getTipoDeSangre());
         esperado.append(", ");
-        esperado.append(d2.getEdad());
+        esperado.append(donante2.getEdad());
         esperado.append(".");
         esperado.append("\n");
 
-        String resultado = gestor.listarDonantes();
+        // Act
+        String resultado = gestorDeDonantes.listarDonantes();
 
+        // Assert
         assertEquals(esperado.toString(), resultado);
     }
 
     @Test
     @DisplayName("Listar Donantes Vacío")
-    public void listarDonantes_vacio() {
+    public void listarDonantes_sinDatos_devuelveEncabezadoSolo() {
+        // Arrange
         StringBuilder esperado = new StringBuilder();
 
         esperado.append("---------------------- DATOS DE DONANTES ----------------------\n");
 
-        String resultado = gestor.listarDonantes();
+        // Act
+        String resultado = gestorDeDonantes.listarDonantes();
 
+        // Assert
         assertEquals(esperado.toString(), resultado);
     }
+
 }
