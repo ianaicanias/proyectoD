@@ -20,6 +20,7 @@ public class GestorDeDonantesTest {
     @BeforeAll
     public static void inicializacion() {
         gestorDeDonantes = new GestorDeDonantesImpl();
+        System.out.println("Inicializando los tests. . .");
     }
 
     @AfterAll

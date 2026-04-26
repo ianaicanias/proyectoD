@@ -1,0 +1,87 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="es"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>GestorDeTrasplantesImpl.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">proyectoD</a> &gt; <a href="index.source.html" class="el_package">uy.edu.curso.services</a> &gt; <span class="el_source">GestorDeTrasplantesImpl.java</span></div><h1>GestorDeTrasplantesImpl.java</h1><pre class="source lang-java linenums">package uy.edu.curso.services;
+
+import uy.edu.curso.ListaEnlazada;
+import uy.edu.curso.classes.TrasplanteImpl;
+import uy.edu.curso.interfaces.GestorDeTrasplantes;
+import uy.edu.curso.interfaces.Organo;
+import uy.edu.curso.interfaces.Receptor;
+import uy.edu.curso.interfaces.Trasplante;
+import uy.edu.curso.tda.TDAColaEnlazada;
+import uy.edu.curso.tda.TDAListaEnlazada;
+
+
+public class GestorDeTrasplantesImpl implements GestorDeTrasplantes {
+
+    private final TDAListaEnlazada&lt;Trasplante&gt; listaDeTrasplantesRealizados;
+
+<span class="fc" id="L17">    public GestorDeTrasplantesImpl() {</span>
+<span class="fc" id="L18">        this.listaDeTrasplantesRealizados = new ListaEnlazada&lt;&gt;();</span>
+<span class="fc" id="L19">    }</span>
+
+    @Override
+    public TDAListaEnlazada&lt;Trasplante&gt; getListaDeTrasplantesRealizados() {
+<span class="fc" id="L23">        return this.listaDeTrasplantesRealizados;</span>
+    }
+
+    @Override
+    public void asignarOrganoAReceptor(Organo organo, TDAListaEnlazada&lt;Receptor&gt; listaDeReceptores, 
+            TDAColaEnlazada&lt;Receptor&gt; colaDePrioridadDeReceptores, TDAListaEnlazada&lt;Organo&gt; listaDeOrganosDisponibles) {
+<span class="fc" id="L29">        int tamañoDeLaColaDePrioridad = colaDePrioridadDeReceptores.tamaño();</span>
+
+<span class="fc bfc" id="L31" title="All 2 branches covered.">        for (int i = 0; i &lt; tamañoDeLaColaDePrioridad; i++) {</span>
+<span class="fc" id="L32">            Receptor receptorEncontrado = colaDePrioridadDeReceptores.obtener(i);</span>
+<span class="fc" id="L33">            boolean esCompatible = organo.esCompatible(receptorEncontrado.getTipoDeSangre());</span>
+<span class="fc" id="L34">            boolean esMismoOrgano = organo.getNombre().equals(receptorEncontrado.getTipoDeOrgano());</span>
+
+<span class="pc bpc" id="L36" title="1 of 4 branches missed.">            if (esCompatible &amp;&amp; esMismoOrgano) {</span>
+<span class="fc" id="L37">                Trasplante nuevoTrasplanteRealizado = new TrasplanteImpl(receptorEncontrado, organo);</span>
+
+<span class="fc" id="L39">                colaDePrioridadDeReceptores.remover(receptorEncontrado);</span>
+<span class="fc" id="L40">                listaDeReceptores.remover(receptorEncontrado);</span>
+<span class="fc" id="L41">                listaDeOrganosDisponibles.remover(organo);</span>
+
+<span class="fc" id="L43">                this.listaDeTrasplantesRealizados.agregar(nuevoTrasplanteRealizado);</span>
+
+<span class="fc" id="L45">                break;</span>
+            }
+        }
+<span class="fc" id="L48">    }</span>
+
+    @Override
+    public Trasplante buscarTrasplante(long identificadorDelTrasplante) {
+<span class="fc" id="L52">        int tamañoDeLaListaDeTrasplantesRealizados = this.listaDeTrasplantesRealizados.tamaño();</span>
+<span class="fc" id="L53">        int i = 0;</span>
+
+<span class="fc bfc" id="L55" title="All 2 branches covered.">        while (i &lt; tamañoDeLaListaDeTrasplantesRealizados) {</span>
+<span class="fc" id="L56">            Trasplante trasplanteEncontrado = this.listaDeTrasplantesRealizados.obtener(i);</span>
+
+<span class="fc bfc" id="L58" title="All 2 branches covered.">            if (trasplanteEncontrado.getIdentificador() == identificadorDelTrasplante) {</span>
+<span class="fc" id="L59">                return trasplanteEncontrado;</span>
+            }
+<span class="fc" id="L61">            i++;</span>
+<span class="fc" id="L62">        }</span>
+
+<span class="fc" id="L64">        return null;</span>
+    }
+
+    @Override
+    public String listarTrasplantesRealizados() {
+<span class="fc" id="L69">        int tamañoDeLaListaDeTrasplantesRealizados = this.listaDeTrasplantesRealizados.tamaño();</span>
+<span class="fc" id="L70">        int i = 0;</span>
+<span class="fc" id="L71">        StringBuilder pagina = new StringBuilder();</span>
+
+<span class="fc" id="L73">        pagina.append(&quot;-------------------- LISTA DE TRASPLANTES REALIZADOS --------------------\n&quot;);</span>
+<span class="fc bfc" id="L74" title="All 2 branches covered.">        while (i &lt; tamañoDeLaListaDeTrasplantesRealizados) {</span>
+<span class="fc" id="L75">            Trasplante trasplanteEncontrado = this.listaDeTrasplantesRealizados.obtener(i);</span>
+<span class="fc" id="L76">            String renglon = trasplanteEncontrado.toString();</span>
+
+<span class="fc" id="L78">            pagina.append(renglon);</span>
+<span class="fc" id="L79">            pagina.append(&quot;\n--------------------------------------------\n&quot;);</span>
+<span class="fc" id="L80">            i++;</span>
+<span class="fc" id="L81">        }</span>
+
+<span class="fc" id="L83">        return pagina.toString();</span>
+    }
+
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.11.202310140853</span></div></body></html>

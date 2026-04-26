@@ -190,16 +190,16 @@ import uy.edu.curso.tda.TDAListaEnlazada;
      */
     @Override
     public boolean remover(T elemento) {
-<span class="nc" id="L193">        Nodo&lt;T&gt; actual = this.primero;</span>
+<span class="fc" id="L193">        Nodo&lt;T&gt; actual = this.primero;</span>
         Nodo&lt;T&gt; eliminado;
 
-<span class="nc bnc" id="L196" title="All 2 branches missed.">        if (actual == null) {</span>
+<span class="pc bpc" id="L196" title="1 of 2 branches missed.">        if (actual == null) {</span>
 <span class="nc" id="L197">            return false;</span>
         }
-<span class="nc bnc" id="L199" title="All 2 branches missed.">        if (actual.getDato().equals(elemento)) {</span>
-<span class="nc" id="L200">            this.primero = actual.getSiguiente();</span>
+<span class="pc bpc" id="L199" title="1 of 2 branches missed.">        if (actual.getDato().equals(elemento)) {</span>
+<span class="fc" id="L200">            this.primero = actual.getSiguiente();</span>
 
-<span class="nc" id="L202">            return true;</span>
+<span class="fc" id="L202">            return true;</span>
         }
 <span class="nc bnc" id="L204" title="All 2 branches missed.">        while (actual.getSiguiente() != null) {</span>
 <span class="nc" id="L205">            T datoActual = actual.getSiguiente().getDato();</span>
@@ -231,14 +231,14 @@ import uy.edu.curso.tda.TDAListaEnlazada;
      */
     @Override
     public boolean contiene(T elemento) {
-<span class="nc" id="L234">        Nodo&lt;T&gt; actual = this.primero;</span>
+<span class="fc" id="L234">        Nodo&lt;T&gt; actual = this.primero;</span>
 
-<span class="nc bnc" id="L236" title="All 2 branches missed.">        if (actual == null) {</span>
-<span class="nc" id="L237">            return false;</span>
+<span class="fc bfc" id="L236" title="All 2 branches covered.">        if (actual == null) {</span>
+<span class="fc" id="L237">            return false;</span>
         }
-<span class="nc bnc" id="L239" title="All 2 branches missed.">        while (actual != null) {</span>
-<span class="nc bnc" id="L240" title="All 2 branches missed.">            if (actual.getDato().equals(elemento)) {</span>
-<span class="nc" id="L241">                return true;</span>
+<span class="pc bpc" id="L239" title="1 of 2 branches missed.">        while (actual != null) {</span>
+<span class="pc bpc" id="L240" title="1 of 2 branches missed.">            if (actual.getDato().equals(elemento)) {</span>
+<span class="fc" id="L241">                return true;</span>
             }
 <span class="nc" id="L243">            actual = actual.getSiguiente();</span>
         }
