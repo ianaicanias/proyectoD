@@ -59,7 +59,7 @@ public class GestorDeReceptoresImpl implements GestorDeReceptores {
             }
             i++;
         }
-        this.colaDePrioridadDeReceptores.poneEnCola((Receptor) nuevoReceptor);
+        this.colaDePrioridadDeReceptores.poneEnCola(nuevoReceptor);
     }
 
     @Override

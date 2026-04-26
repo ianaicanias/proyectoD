@@ -5,18 +5,18 @@ public interface Organo {
 
     long getIdentificador();
 
+    boolean getEsInfantil();
+
     String getNombre();
 
     String getTipoDeSangre();
 
-    String getCedulaDeIdentidadDelDonante();
-
-    boolean getEsInfantil();
+    Donante getDonanteDelOrgano();
 
     void setNombre(String nombre);
 
     void setTipoDeSangre(String tipoDeSangre);
 
-    void setCedulaDeIdentidadDelDonante(String cedulaDeIdentidadDelDonante);
+    boolean esCompatible(String tipoDeSangreDelReceptor);
 
 }
