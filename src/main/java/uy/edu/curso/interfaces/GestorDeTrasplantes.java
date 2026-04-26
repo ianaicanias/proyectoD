@@ -11,7 +11,7 @@ public interface GestorDeTrasplantes {
     void asignarOrganoAReceptor(Organo organo, TDAListaEnlazada<Receptor> listaDeReceptores, 
             TDAColaEnlazada<Receptor> colaDePrioridadDeReceptores, TDAListaEnlazada<Organo> listaDeOrganosDisponibles);
     
-    Trasplante buscarTrasplante(long identificadorDelTransplante);
+    Trasplante buscarTrasplante(long identificadorDelTrasplante);
 
     String listarTrasplantesRealizados();
 
