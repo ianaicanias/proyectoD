@@ -5,7 +5,7 @@ import uy.edu.curso.tda.TDAListaEnlazada;
 
 public interface GestorDeOrganos {
 
-    TDAListaEnlazada<Organo> getListaDeOrganos();
+    TDAListaEnlazada<Organo> getListaDeOrganosDisponibles();
 
     Organo registrarOrgano(String nombreDelOrgano, Donante donanteDelOrgano);
 

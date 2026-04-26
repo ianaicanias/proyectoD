@@ -1,7 +1,8 @@
 package uy.edu.curso;
 
 import org.junit.jupiter.api.AfterAll;
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNull;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
@@ -11,6 +12,7 @@ import uy.edu.curso.interfaces.Donante;
 import uy.edu.curso.interfaces.Organo;
 import uy.edu.curso.services.GestorDeDonantesImpl;
 import uy.edu.curso.services.GestorDeOrganosImpl;
+
 
 public class GestorDeOrganosTest {
 
@@ -41,7 +43,7 @@ public class GestorDeOrganosTest {
         Organo o = gestor.registrarOrgano("Riñón", d);
 
         assertEquals("Riñón", o.getNombre());
-        assertEquals(d.getCedulaDeIdentidad(), o.getCedulaDeIdentidadDelDonante());
+        assertEquals(d.getCedulaDeIdentidad(), o.getDonanteDelOrgano().getCedulaDeIdentidad());
     }
 
     @Test
@@ -52,7 +54,7 @@ public class GestorDeOrganosTest {
         gestor.registrarOrgano("Riñón", d);
         gestor.registrarOrgano("Corazón", d);
 
-        assertEquals(2, gestor.getListaDeOrganos().tamaño());
+        assertEquals(2, gestor.getListaDeOrganosDisponibles().tamaño());
     }
 
     @Test
@@ -172,7 +174,7 @@ public class GestorDeOrganosTest {
 
         gestor.eliminarOrgano(999);
 
-        assertEquals(2, gestor.getListaDeOrganos().tamaño());
+        assertEquals(2, gestor.getListaDeOrganosDisponibles().tamaño());
     }
 
     @Test
@@ -190,7 +192,7 @@ public class GestorDeOrganosTest {
         esperado.append(", ");
         esperado.append(o.getTipoDeSangre());
         esperado.append(", ");
-        esperado.append(o.getCedulaDeIdentidadDelDonante());
+        esperado.append(o.getDonanteDelOrgano().getCedulaDeIdentidad());
         esperado.append(", ");
         esperado.append(o.getEsInfantil());
         esperado.append(".");

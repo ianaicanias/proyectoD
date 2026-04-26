@@ -17,28 +17,29 @@ public class GestorDeOrganosImpl implements GestorDeOrganos {
     }
 
     @Override
-    public TDAListaEnlazada<Organo> getListaDeOrganos() {
+    public TDAListaEnlazada<Organo> getListaDeOrganosDisponibles() {
         return this.listaDeOrganos;
     }
 
     @Override
     public Organo registrarOrgano(String nombreDelOrgano, Donante donanteDelOrgano) {
-        Organo nuevoOrganoRegistrado = new OrganoImpl(nombreDelOrgano, donanteDelOrgano);
+        Organo nuevoOrgano = new OrganoImpl(nombreDelOrgano, donanteDelOrgano);
 
-        this.listaDeOrganos.agregar(nuevoOrganoRegistrado);
+        this.listaDeOrganos.agregar(nuevoOrgano);
 
-        return nuevoOrganoRegistrado;
+        return nuevoOrgano;
     }
 
     @Override
     public Organo buscarOrganoPorIdentificador(long identificadorDelOrgano) {
+        int tamañoDeLaListaDeOrganos = this.listaDeOrganos.tamaño();
         int i = 0;
 
-        while (i < this.listaDeOrganos.tamaño()) {
-            long identificadorEncontrado = this.listaDeOrganos.obtener(i).getIdentificador();
+        while (i < tamañoDeLaListaDeOrganos) {
+            Organo organo = this.listaDeOrganos.obtener(i);
 
-            if (identificadorEncontrado == identificadorDelOrgano) {
-                return this.listaDeOrganos.obtener(i);
+            if (organo.getIdentificador() == identificadorDelOrgano) {
+                return organo;
             }
             i++;
         }
@@ -48,48 +49,51 @@ public class GestorDeOrganosImpl implements GestorDeOrganos {
 
     @Override
     public TDAListaEnlazada<Organo> buscarOrganosPorNombre(String nombreDelOrgano) {
-        TDAListaEnlazada<Organo> listaDeOrganosConCoincidenciaDeNombre = new ListaEnlazada<>();
+        TDAListaEnlazada<Organo> resultado = new ListaEnlazada<>();
+        int tamañoDeLaListaDeOrganos = this.listaDeOrganos.tamaño();
         int i = 0;
 
-        while (i < this.listaDeOrganos.tamaño()) {
-            String nombreDelOrganoEncontrado = this.listaDeOrganos.obtener(i).getNombre();
+        while (i < tamañoDeLaListaDeOrganos) {
+            Organo organo = this.listaDeOrganos.obtener(i);
 
-            if (nombreDelOrganoEncontrado.equals(nombreDelOrgano)) {
-                listaDeOrganosConCoincidenciaDeNombre.agregar(this.listaDeOrganos.obtener(i));
+            if (organo.getNombre().equalsIgnoreCase(nombreDelOrgano)) {
+                resultado.agregar(organo);
             }
             i++;
         }
 
-        return listaDeOrganosConCoincidenciaDeNombre;
+        return resultado;
     }
 
     @Override
-    public TDAListaEnlazada<Organo> buscarOrganosPorTipoDeSangre(String tipoDeSangreDelOrgano) {
-        TDAListaEnlazada<Organo> listaDeOrganosConCoincidenciaDeTipoDeSangre = new ListaEnlazada<>();
+    public TDAListaEnlazada<Organo> buscarOrganosPorTipoDeSangre(String tipoDeSangre) {
+        TDAListaEnlazada<Organo> resultado = new ListaEnlazada<>();
+        int tamañoDeLaListaDeOrganos = this.listaDeOrganos.tamaño();
         int i = 0;
 
-        while (i < this.listaDeOrganos.tamaño()) {
-            String tipoDeSangreEncontrado = this.listaDeOrganos.obtener(i).getTipoDeSangre();
+        while (i < tamañoDeLaListaDeOrganos) {
+            Organo organo = this.listaDeOrganos.obtener(i);
 
-            if (tipoDeSangreEncontrado.equals(tipoDeSangreDelOrgano)) {
-                listaDeOrganosConCoincidenciaDeTipoDeSangre.agregar(this.listaDeOrganos.obtener(i));
+            if (organo.getTipoDeSangre().equalsIgnoreCase(tipoDeSangre)) {
+                resultado.agregar(organo);
             }
             i++;
         }
 
-        return listaDeOrganosConCoincidenciaDeTipoDeSangre;
+        return resultado;
     }
 
     @Override
     public void eliminarOrgano(long identificadorDelOrgano) {
+        int tamañoDeLaListaDeOrganos = this.listaDeOrganos.tamaño();
         int i = 0;
 
-        while (i < this.listaDeOrganos.tamaño()) {
-            long identificadorEncontrado = this.listaDeOrganos.obtener(i).getIdentificador();
+        while (i < tamañoDeLaListaDeOrganos) {
+            Organo organo = this.listaDeOrganos.obtener(i);
 
-            if (identificadorEncontrado == identificadorDelOrgano) {
+            if (organo.getIdentificador() == identificadorDelOrgano) {
                 this.listaDeOrganos.remover(i);
-                return;
+                break;
             }
             i++;
         }
@@ -97,30 +101,29 @@ public class GestorDeOrganosImpl implements GestorDeOrganos {
 
     @Override
     public String listarOrganosDisponibles() {
+        int tamañoDeLaListaDeOrganos = this.listaDeOrganos.tamaño();
         int i = 0;
-        StringBuilder pagina = new StringBuilder();
+        StringBuilder resultado = new StringBuilder();
 
-        pagina.append("----------------------- DATOS DE ÓRGANOS DISPONIBLES -----------------------\n");
-        while (i < this.listaDeOrganos.tamaño()) {
-            StringBuilder renglon = new StringBuilder();
+        resultado.append("----------------------- DATOS DE ÓRGANOS DISPONIBLES -----------------------\n");
+        while (i < tamañoDeLaListaDeOrganos) {
             Organo organo = this.listaDeOrganos.obtener(i);
 
-            renglon.append(organo.getIdentificador());
-            renglon.append(", ");
-            renglon.append(organo.getNombre());
-            renglon.append(", ");
-            renglon.append(organo.getTipoDeSangre());
-            renglon.append(", ");
-            renglon.append(organo.getCedulaDeIdentidadDelDonante());
-            renglon.append(", ");
-            renglon.append(organo.getEsInfantil());
-            renglon.append(".");
-            pagina.append(renglon.toString());
-            pagina.append("\n");
+            resultado.append(organo.getIdentificador());
+            resultado.append(", ");
+            resultado.append(organo.getNombre());
+            resultado.append(", ");
+            resultado.append(organo.getTipoDeSangre());
+            resultado.append(", ");
+            resultado.append(organo.getDonanteDelOrgano().getCedulaDeIdentidad());
+            resultado.append(", ");
+            resultado.append(organo.getEsInfantil());
+            resultado.append(".");
+            resultado.append("\n");
             i++;
         }
 
-        return pagina.toString();
+        return resultado.toString();
     }
-
+    
 }

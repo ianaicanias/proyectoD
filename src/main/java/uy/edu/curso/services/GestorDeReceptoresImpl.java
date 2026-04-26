@@ -45,9 +45,10 @@ public class GestorDeReceptoresImpl implements GestorDeReceptores {
 
     @Override
     public void insertarReceptorEnLaCola(Receptor nuevoReceptor) {
+        int tamañoDeLaColaDePrioridad = this.colaDePrioridadDeReceptores.tamaño();
         int i = 0;
 
-        while (i < this.colaDePrioridadDeReceptores.tamaño()) {
+        while (i < tamañoDeLaColaDePrioridad) {
             Receptor receptorActual = this.colaDePrioridadDeReceptores.obtener(i);
             boolean mayorPrioridad = nuevoReceptor.getPuntajeDePrioridad() > receptorActual.getPuntajeDePrioridad();
             boolean igualPrioridadConDesempate = (nuevoReceptor.getPuntajeDePrioridad() == receptorActual.getPuntajeDePrioridad())
@@ -59,14 +60,15 @@ public class GestorDeReceptoresImpl implements GestorDeReceptores {
             }
             i++;
         }
-        this.colaDePrioridadDeReceptores.poneEnCola((Receptor) nuevoReceptor);
+        this.colaDePrioridadDeReceptores.poneEnCola(nuevoReceptor);
     }
 
     @Override
     public Receptor buscarReceptor(String cedulaDeIdentidadReceptor) {
+        int tamañoDeLaListaDeReceptores = this.listaDeReceptores.tamaño();
         int i = 0;
 
-        while (i < this.listaDeReceptores.tamaño()) {
+        while (i < tamañoDeLaListaDeReceptores) {
             Receptor receptorEncontrado = this.listaDeReceptores.obtener(i);
 
             if (receptorEncontrado.getCedulaDeIdentidad().equals(cedulaDeIdentidadReceptor)) {
@@ -80,10 +82,12 @@ public class GestorDeReceptoresImpl implements GestorDeReceptores {
 
     @Override
     public void eliminarReceptor(String cedulaDeIdentidadReceptor) {
+        int tamañoDeLaListaDeReceptores = this.listaDeReceptores.tamaño();
+        int tamañoDeLaColaDePrioridad = this.colaDePrioridadDeReceptores.tamaño();
         int i = 0;
         int j = 0;
 
-        while (i < this.listaDeReceptores.tamaño()) {
+        while (i < tamañoDeLaListaDeReceptores) {
             Receptor receptorEncontrado = this.listaDeReceptores.obtener(i);
 
             if (receptorEncontrado.getCedulaDeIdentidad().equals(cedulaDeIdentidadReceptor)) {
@@ -92,7 +96,7 @@ public class GestorDeReceptoresImpl implements GestorDeReceptores {
             }
             i++;
         }
-        while (j < this.colaDePrioridadDeReceptores.tamaño()) {
+        while (j < tamañoDeLaColaDePrioridad) {
             Receptor receptorEncontrado = this.colaDePrioridadDeReceptores.obtener(j);
 
             if (receptorEncontrado.getCedulaDeIdentidad().equals(cedulaDeIdentidadReceptor)) {
@@ -105,11 +109,12 @@ public class GestorDeReceptoresImpl implements GestorDeReceptores {
 
     @Override
     public String listarReceptores() {
+        int tamañoDeLaListaDeReceptores = this.listaDeReceptores.tamaño();
         int i = 0;
         StringBuilder pagina = new StringBuilder();
 
         pagina.append("----------------------- DATOS DE RECEPTORES -----------------------\n");
-        while (i < this.listaDeReceptores.tamaño()) {
+        while (i < tamañoDeLaListaDeReceptores) {
             StringBuilder renglon = new StringBuilder();
             Receptor receptor = this.listaDeReceptores.obtener(i);
 

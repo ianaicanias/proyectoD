@@ -35,9 +35,10 @@ public class GestorDeDonantesImpl implements GestorDeDonantes {
 
     @Override
     public Donante buscarDonante(String cedulaDeIdentidad) {
+        int tamañoDeLaListaDeDonantes = this.listaDeDonantes.tamaño();
         int i = 0;
 
-        while (i < this.listaDeDonantes.tamaño()) {
+        while (i < tamañoDeLaListaDeDonantes) {
             String cedulaDeIdentidadDonanteEncontrado = this.listaDeDonantes.obtener(i).getCedulaDeIdentidad();
 
             if (cedulaDeIdentidadDonanteEncontrado.equals(cedulaDeIdentidad)) {
@@ -51,9 +52,10 @@ public class GestorDeDonantesImpl implements GestorDeDonantes {
 
     @Override
     public void eliminarDonante(String cedulaDeIdentidad) {
+        int tamañoDeLaListaDeDonantes = this.listaDeDonantes.tamaño();
         int i = 0;
         
-        while (i < this.listaDeDonantes.tamaño()) {
+        while (i < tamañoDeLaListaDeDonantes) {
             String cedulaDeIdentidadDonanteEncontrado = this.listaDeDonantes.obtener(i).getCedulaDeIdentidad();
 
             if (cedulaDeIdentidadDonanteEncontrado.equals(cedulaDeIdentidad)) {
@@ -66,11 +68,12 @@ public class GestorDeDonantesImpl implements GestorDeDonantes {
 
     @Override
     public String listarDonantes() {
+        int tamañoDeLaListaDeDonantes = this.listaDeDonantes.tamaño();
         int i = 0;
         StringBuilder pagina = new StringBuilder();
 
         pagina.append("---------------------- DATOS DE DONANTES ----------------------\n");
-        while (i < this.listaDeDonantes.tamaño()) {
+        while (i < tamañoDeLaListaDeDonantes) {
             StringBuilder renglon = new StringBuilder();
             Donante donanteEncontrado = this.listaDeDonantes.obtener(i);
 
