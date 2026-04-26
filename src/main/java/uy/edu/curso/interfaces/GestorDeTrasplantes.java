@@ -4,15 +4,15 @@ import uy.edu.curso.tda.TDAColaEnlazada;
 import uy.edu.curso.tda.TDAListaEnlazada;
 
 
-public interface GestorDeTransplantes {
+public interface GestorDeTrasplantes {
 
-    TDAListaEnlazada<Transplante> getListaDeTransplantesRealizados();
+    TDAListaEnlazada<Trasplante> getListaDeTrasplantesRealizados();
 
     void asignarOrganoAReceptor(Organo organo, TDAListaEnlazada<Receptor> listaDeReceptores, 
             TDAColaEnlazada<Receptor> colaDePrioridadDeReceptores, TDAListaEnlazada<Organo> listaDeOrganosDisponibles);
     
-    Transplante buscarTransplante(long identificadorDelTransplante);
+    Trasplante buscarTrasplante(long identificadorDelTransplante);
 
-    String listarTransplantesRealizados();
+    String listarTrasplantesRealizados();
 
 }

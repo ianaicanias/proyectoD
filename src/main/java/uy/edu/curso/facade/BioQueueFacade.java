@@ -4,14 +4,14 @@ import uy.edu.curso.interfaces.Donante;
 import uy.edu.curso.interfaces.GestorDeDonantes;
 import uy.edu.curso.interfaces.GestorDeOrganos;
 import uy.edu.curso.interfaces.GestorDeReceptores;
-import uy.edu.curso.interfaces.GestorDeTransplantes;
+import uy.edu.curso.interfaces.GestorDeTrasplantes;
 import uy.edu.curso.interfaces.Organo;
 import uy.edu.curso.interfaces.Receptor;
-import uy.edu.curso.interfaces.Transplante;
+import uy.edu.curso.interfaces.Trasplante;
 import uy.edu.curso.services.GestorDeDonantesImpl;
 import uy.edu.curso.services.GestorDeOrganosImpl;
 import uy.edu.curso.services.GestorDeReceptoresImpl;
-import uy.edu.curso.services.GestorDeTransplantesImpl;
+import uy.edu.curso.services.GestorDeTrasplantesImpl;
 import uy.edu.curso.tda.TDAColaEnlazada;
 import uy.edu.curso.tda.TDAListaEnlazada;
 
@@ -22,13 +22,13 @@ public class BioQueueFacade {
     private final GestorDeReceptores gestorDeReceptores;
     private final GestorDeDonantes gestorDeDonantes;
     private final GestorDeOrganos gestorDeOrganos;
-    private final GestorDeTransplantes gestorDeTransplantes;
+    private final GestorDeTrasplantes gestorDeTransplantes;
 
     private BioQueueFacade() {
         this.gestorDeReceptores = new GestorDeReceptoresImpl();
         this.gestorDeDonantes = new GestorDeDonantesImpl();
         this.gestorDeOrganos = new GestorDeOrganosImpl();
-        this.gestorDeTransplantes = new GestorDeTransplantesImpl();
+        this.gestorDeTransplantes = new GestorDeTrasplantesImpl();
     }
 
     public static BioQueueFacade getInstancia() {
@@ -86,7 +86,7 @@ public class BioQueueFacade {
         return this.gestorDeOrganos.buscarOrganosPorTipoDeSangre(tipoDeSangre);
     }
 
-    public Transplante buscarTransplante(long identificadorDelTransplante) {
+    public Trasplante buscarTransplante(long identificadorDelTransplante) {
         return this.gestorDeTransplantes.buscarTransplante(identificadorDelTransplante);
     }
 
