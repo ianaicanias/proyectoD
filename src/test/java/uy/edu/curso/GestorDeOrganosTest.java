@@ -54,7 +54,7 @@ public class GestorDeOrganosTest {
         gestor.registrarOrgano("Riñón", d);
         gestor.registrarOrgano("Corazón", d);
 
-        assertEquals(2, gestor.getListaDeOrganos().tamaño());
+        assertEquals(2, gestor.getListaDeOrganosDisponibles().tamaño());
     }
 
     @Test
@@ -174,7 +174,7 @@ public class GestorDeOrganosTest {
 
         gestor.eliminarOrgano(999);
 
-        assertEquals(2, gestor.getListaDeOrganos().tamaño());
+        assertEquals(2, gestor.getListaDeOrganosDisponibles().tamaño());
     }
 
     @Test

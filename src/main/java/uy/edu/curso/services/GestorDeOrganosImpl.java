@@ -17,7 +17,7 @@ public class GestorDeOrganosImpl implements GestorDeOrganos {
     }
 
     @Override
-    public TDAListaEnlazada<Organo> getListaDeOrganos() {
+    public TDAListaEnlazada<Organo> getListaDeOrganosDisponibles() {
         return this.listaDeOrganos;
     }
 
@@ -32,9 +32,10 @@ public class GestorDeOrganosImpl implements GestorDeOrganos {
 
     @Override
     public Organo buscarOrganoPorIdentificador(long identificadorDelOrgano) {
+        int tamañoDeLaListaDeOrganos = this.listaDeOrganos.tamaño();
         int i = 0;
 
-        while (i < this.listaDeOrganos.tamaño()) {
+        while (i < tamañoDeLaListaDeOrganos) {
             Organo organo = this.listaDeOrganos.obtener(i);
 
             if (organo.getIdentificador() == identificadorDelOrgano) {
@@ -49,9 +50,10 @@ public class GestorDeOrganosImpl implements GestorDeOrganos {
     @Override
     public TDAListaEnlazada<Organo> buscarOrganosPorNombre(String nombreDelOrgano) {
         TDAListaEnlazada<Organo> resultado = new ListaEnlazada<>();
+        int tamañoDeLaListaDeOrganos = this.listaDeOrganos.tamaño();
         int i = 0;
 
-        while (i < this.listaDeOrganos.tamaño()) {
+        while (i < tamañoDeLaListaDeOrganos) {
             Organo organo = this.listaDeOrganos.obtener(i);
 
             if (organo.getNombre().equalsIgnoreCase(nombreDelOrgano)) {
@@ -66,9 +68,10 @@ public class GestorDeOrganosImpl implements GestorDeOrganos {
     @Override
     public TDAListaEnlazada<Organo> buscarOrganosPorTipoDeSangre(String tipoDeSangre) {
         TDAListaEnlazada<Organo> resultado = new ListaEnlazada<>();
+        int tamañoDeLaListaDeOrganos = this.listaDeOrganos.tamaño();
         int i = 0;
 
-        while (i < this.listaDeOrganos.tamaño()) {
+        while (i < tamañoDeLaListaDeOrganos) {
             Organo organo = this.listaDeOrganos.obtener(i);
 
             if (organo.getTipoDeSangre().equalsIgnoreCase(tipoDeSangre)) {
@@ -82,9 +85,10 @@ public class GestorDeOrganosImpl implements GestorDeOrganos {
 
     @Override
     public void eliminarOrgano(long identificadorDelOrgano) {
+        int tamañoDeLaListaDeOrganos = this.listaDeOrganos.tamaño();
         int i = 0;
 
-        while (i < this.listaDeOrganos.tamaño()) {
+        while (i < tamañoDeLaListaDeOrganos) {
             Organo organo = this.listaDeOrganos.obtener(i);
 
             if (organo.getIdentificador() == identificadorDelOrgano) {
@@ -97,11 +101,12 @@ public class GestorDeOrganosImpl implements GestorDeOrganos {
 
     @Override
     public String listarOrganosDisponibles() {
+        int tamañoDeLaListaDeOrganos = this.listaDeOrganos.tamaño();
         int i = 0;
         StringBuilder resultado = new StringBuilder();
 
         resultado.append("----------------------- DATOS DE ÓRGANOS DISPONIBLES -----------------------\n");
-        while (i < this.listaDeOrganos.tamaño()) {
+        while (i < tamañoDeLaListaDeOrganos) {
             Organo organo = this.listaDeOrganos.obtener(i);
 
             resultado.append(organo.getIdentificador());

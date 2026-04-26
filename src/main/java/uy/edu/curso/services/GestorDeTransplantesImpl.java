@@ -26,13 +26,15 @@ public class GestorDeTransplantesImpl implements GestorDeTransplantes {
     @Override
     public void asignarOrganoAReceptor(Organo organo, TDAListaEnlazada<Receptor> listaDeReceptores, 
             TDAColaEnlazada<Receptor> colaDePrioridadDeReceptores, TDAListaEnlazada<Organo> listaDeOrganosDisponibles) {
-        for (int i = 0; i < colaDePrioridadDeReceptores.tamaño(); i++) {
+        int tamañoDeLaColaDePrioridad = colaDePrioridadDeReceptores.tamaño();
+
+        for (int i = 0; i < tamañoDeLaColaDePrioridad; i++) {
             Receptor receptorEncontrado = colaDePrioridadDeReceptores.obtener(i);
             boolean esCompatible = organo.esCompatible(receptorEncontrado.getTipoDeSangre());
             boolean esMismoOrgano = organo.getNombre().equals(receptorEncontrado.getTipoDeOrgano());
 
             if (esCompatible && esMismoOrgano) {
-                TransplanteImpl nuevoTransplanteRealizado = new TransplanteImpl(receptorEncontrado, organo);
+                Transplante nuevoTransplanteRealizado = new TransplanteImpl(receptorEncontrado, organo);
 
                 colaDePrioridadDeReceptores.remover(receptorEncontrado);
                 listaDeReceptores.remover(receptorEncontrado);
@@ -47,9 +49,10 @@ public class GestorDeTransplantesImpl implements GestorDeTransplantes {
 
     @Override
     public Transplante buscarTransplante(long identificadorDelTransplante) {
+        int tamañoDeLaListaDeTransplantesRealizados = this.listaDeTransplantesRealizados.tamaño();
         int i = 0;
 
-        while (i < this.listaDeTransplantesRealizados.tamaño()) {
+        while (i < tamañoDeLaListaDeTransplantesRealizados) {
             Transplante transplanteEncontrado = this.listaDeTransplantesRealizados.obtener(i);
 
             if (transplanteEncontrado.getIdentificador() == identificadorDelTransplante) {
@@ -63,11 +66,12 @@ public class GestorDeTransplantesImpl implements GestorDeTransplantes {
 
     @Override
     public String listarTransplantesRealizados() {
-        StringBuilder pagina = new StringBuilder();
+        int tamañoDeLaListaDeTransplantesRealizados = this.listaDeTransplantesRealizados.tamaño();
         int i = 0;
+        StringBuilder pagina = new StringBuilder();
 
         pagina.append("-------------------- LISTA DE TRANSPLANTES REALIZADOS --------------------\n");
-        while (i < this.listaDeTransplantesRealizados.tamaño()) {
+        while (i < tamañoDeLaListaDeTransplantesRealizados) {
             Transplante transplanteEncontrado = this.listaDeTransplantesRealizados.obtener(i);
             String renglon = transplanteEncontrado.toString();
 
