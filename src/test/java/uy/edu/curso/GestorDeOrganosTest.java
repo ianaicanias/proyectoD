@@ -25,6 +25,7 @@ public class GestorDeOrganosTest {
     public static void inicializacion() {
         gestorDeOrganos = new GestorDeOrganosImpl();
         gestorDonantes = new GestorDeDonantesImpl();
+        System.out.println("Inicializando los tests. . .");
     }
 
     @AfterAll

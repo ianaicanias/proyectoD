@@ -38,8 +38,8 @@ import uy.edu.curso.tda.TDAColaEnlazada;
      */
     @Override
     public T frente() {
-<span class="pc bpc" id="L41" title="1 of 2 branches missed.">        if (this.frente == null) {</span>
-<span class="nc" id="L42">            throw new NullPointerException(&quot;No hay elementos en la cola.&quot;);</span>
+<span class="fc bfc" id="L41" title="All 2 branches covered.">        if (this.frente == null) {</span>
+<span class="fc" id="L42">            throw new NullPointerException(&quot;No hay elementos en la cola.&quot;);</span>
         }
 
 <span class="fc" id="L45">        return this.frente.getDato();</span>
@@ -54,7 +54,7 @@ import uy.edu.curso.tda.TDAColaEnlazada;
      */
     @Override
     public boolean poneEnCola(T dato) {
-<span class="pc bpc" id="L57" title="1 of 2 branches missed.">        if (dato != null) {</span>
+<span class="fc bfc" id="L57" title="All 2 branches covered.">        if (dato != null) {</span>
 <span class="fc bfc" id="L58" title="All 2 branches covered.">            if (this.frente == null) {</span>
 <span class="fc" id="L59">                this.primero = new Nodo&lt;&gt;(dato, null);</span>
 <span class="fc" id="L60">                this.frente = this.primero;</span>
@@ -68,7 +68,7 @@ import uy.edu.curso.tda.TDAColaEnlazada;
 <span class="fc" id="L68">            return true;</span>
         }
         
-<span class="nc" id="L71">        return false;</span>
+<span class="fc" id="L71">        return false;</span>
     }
 
     /**
@@ -83,8 +83,8 @@ import uy.edu.curso.tda.TDAColaEnlazada;
      */
     @Override
     public T quitaDeCola() {
-<span class="pc bpc" id="L86" title="1 of 2 branches missed.">        if (this.primero == null) {</span>
-<span class="nc" id="L87">            return null;</span>
+<span class="fc bfc" id="L86" title="All 2 branches covered.">        if (this.primero == null) {</span>
+<span class="fc" id="L87">            return null;</span>
         }
 <span class="fc" id="L89">        Nodo&lt;T&gt; nodoEliminado = this.primero;</span>
 <span class="fc" id="L90">        this.primero = nodoEliminado.getSiguiente();</span>
