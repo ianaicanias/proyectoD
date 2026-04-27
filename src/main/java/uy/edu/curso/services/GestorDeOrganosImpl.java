@@ -66,7 +66,7 @@ public class GestorDeOrganosImpl implements GestorDeOrganos {
     }
 
     @Override
-    public TDAListaEnlazada<Organo> buscarOrganosPorTipoDeSangre(String tipoDeSangre) {
+    public TDAListaEnlazada<Organo> buscarOrganosPorTipoDeSangre(String tipoDeSangreDelOrgano) {
         TDAListaEnlazada<Organo> resultado = new ListaEnlazada<>();
         int tamañoDeLaListaDeOrganos = this.listaDeOrganos.tamaño();
         int i = 0;
@@ -74,7 +74,7 @@ public class GestorDeOrganosImpl implements GestorDeOrganos {
         while (i < tamañoDeLaListaDeOrganos) {
             Organo organo = this.listaDeOrganos.obtener(i);
 
-            if (organo.getTipoDeSangre().equalsIgnoreCase(tipoDeSangre)) {
+            if (organo.getTipoDeSangre().equalsIgnoreCase(tipoDeSangreDelOrgano)) {
                 resultado.agregar(organo);
             }
             i++;

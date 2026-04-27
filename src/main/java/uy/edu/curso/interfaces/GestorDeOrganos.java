@@ -13,7 +13,7 @@ public interface GestorDeOrganos {
 
     TDAListaEnlazada<Organo> buscarOrganosPorNombre(String nombreDelOrgano);
 
-    TDAListaEnlazada<Organo> buscarOrganosPorTipoDeSangre(String tipoDeSangre);
+    TDAListaEnlazada<Organo> buscarOrganosPorTipoDeSangre(String tipoDeSangreDelOrgano);
 
     void eliminarOrgano(long identificadorDelOrgano);
 

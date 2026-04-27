@@ -8,14 +8,14 @@ import uy.edu.curso.interfaces.Trasplante;
 
 public class TrasplanteImpl implements Trasplante {
 
-<span class="fc" id="L11">    private static long CANTIDAD_DE_TRASPLANTES_REALIZADOS = 0;</span>
+<span class="fc" id="L11">    private static long cantidadDeTrasplanteRealizados = 0;</span>
     private final long identificador;
     private final Receptor receptorDelTrasplante;
     private final Organo organoTrasplantado;
     private final Donante donanteDelOrganoDelTrasplante;
 
 <span class="fc" id="L17">    public TrasplanteImpl(Receptor receptorDelTrasplante, Organo organoTrasplantado) {</span>
-<span class="fc" id="L18">        this.identificador = ++CANTIDAD_DE_TRASPLANTES_REALIZADOS;</span>
+<span class="fc" id="L18">        this.identificador = ++cantidadDeTrasplanteRealizados;</span>
 <span class="fc" id="L19">        this.receptorDelTrasplante = receptorDelTrasplante;</span>
 <span class="fc" id="L20">        this.organoTrasplantado = organoTrasplantado;</span>
 <span class="fc" id="L21">        this.donanteDelOrganoDelTrasplante = organoTrasplantado.getDonanteDelOrgano();</span>

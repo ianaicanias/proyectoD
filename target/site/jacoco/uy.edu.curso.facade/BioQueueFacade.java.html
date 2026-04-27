@@ -12,7 +12,6 @@ import uy.edu.curso.services.GestorDeDonantesImpl;
 import uy.edu.curso.services.GestorDeOrganosImpl;
 import uy.edu.curso.services.GestorDeReceptoresImpl;
 import uy.edu.curso.services.GestorDeTrasplantesImpl;
-import uy.edu.curso.tda.TDAColaEnlazada;
 import uy.edu.curso.tda.TDAListaEnlazada;
 
 
@@ -24,98 +23,98 @@ public class BioQueueFacade {
     private final GestorDeOrganos gestorDeOrganos;
     private final GestorDeTrasplantes gestorDeTrasplantes;
 
-<span class="fc" id="L27">    private BioQueueFacade() {</span>
-<span class="fc" id="L28">        this.gestorDeReceptores = new GestorDeReceptoresImpl();</span>
-<span class="fc" id="L29">        this.gestorDeDonantes = new GestorDeDonantesImpl();</span>
-<span class="fc" id="L30">        this.gestorDeOrganos = new GestorDeOrganosImpl();</span>
-<span class="fc" id="L31">        this.gestorDeTrasplantes = new GestorDeTrasplantesImpl();</span>
-<span class="fc" id="L32">    }</span>
+<span class="fc" id="L26">    private BioQueueFacade() {</span>
+<span class="fc" id="L27">        this.gestorDeReceptores = new GestorDeReceptoresImpl();</span>
+<span class="fc" id="L28">        this.gestorDeDonantes = new GestorDeDonantesImpl();</span>
+<span class="fc" id="L29">        this.gestorDeOrganos = new GestorDeOrganosImpl();</span>
+<span class="fc" id="L30">        this.gestorDeTrasplantes = new GestorDeTrasplantesImpl();</span>
+<span class="fc" id="L31">    }</span>
 
     public static BioQueueFacade getInstancia() {
-<span class="fc bfc" id="L35" title="All 2 branches covered.">        if (instancia == null) {</span>
-<span class="fc" id="L36">            instancia = new BioQueueFacade();</span>
+<span class="fc bfc" id="L34" title="All 2 branches covered.">        if (instancia == null) {</span>
+<span class="fc" id="L35">            instancia = new BioQueueFacade();</span>
         }
 
-<span class="fc" id="L39">        return instancia;</span>
+<span class="fc" id="L38">        return instancia;</span>
     }
 
     public Receptor registrarReceptor(String cedulaDeIdentidad, String nombre, String tipoDeOrganoNecesitado, 
             String tipoDeSangre, byte edad, byte puntajeDePrioridad) {
-<span class="fc" id="L44">        return this.gestorDeReceptores.registrarReceptor(cedulaDeIdentidad, nombre, tipoDeOrganoNecesitado, </span>
-                tipoDeSangre, edad, puntajeDePrioridad);
+<span class="fc" id="L43">        return this.gestorDeReceptores.registrarReceptor(cedulaDeIdentidad, nombre, tipoDeOrganoNecesitado, </span>
+<span class="fc" id="L44">                tipoDeSangre, edad, puntajeDePrioridad);</span>
     }
 
-    public void insertarReceptorEnLaCola(Receptor receptor) {
-<span class="fc" id="L49">        this.gestorDeReceptores.insertarReceptorEnLaCola(receptor);</span>
-<span class="fc" id="L50">    }</span>
+    public void insertarReceptorEnLaListaDePrioridad(Receptor receptor) {
+<span class="fc" id="L48">        this.gestorDeReceptores.insertarReceptorEnLaListaDePrioridad(receptor);</span>
+<span class="fc" id="L49">    }</span>
 
     public Donante registrarDonante(String cedulaDeIdentidad, String nombre, String tipoDeOrganoDonado, String tipoDeSangre, byte edad) {
-<span class="fc" id="L53">        Donante nuevoDonante = this.gestorDeDonantes.registrarDonante(cedulaDeIdentidad, nombre, tipoDeOrganoDonado, tipoDeSangre, edad);</span>
-<span class="fc" id="L54">        this.registrarOrgano(tipoDeOrganoDonado, nuevoDonante);</span>
+<span class="fc" id="L52">        Donante nuevoDonante = this.gestorDeDonantes.registrarDonante(cedulaDeIdentidad, nombre, tipoDeOrganoDonado, tipoDeSangre, edad);</span>
+<span class="fc" id="L53">        this.registrarOrgano(tipoDeOrganoDonado, nuevoDonante);</span>
 
-<span class="fc" id="L56">        return nuevoDonante;</span>
+<span class="fc" id="L55">        return nuevoDonante;</span>
     }
 
     private void registrarOrgano(String nombreDelOrgano, Donante donanteDelOrgano) {
-<span class="fc" id="L60">        Organo nuevoOrgano = this.gestorDeOrganos.registrarOrgano(nombreDelOrgano, donanteDelOrgano);</span>
-<span class="fc" id="L61">        TDAListaEnlazada&lt;Receptor&gt; listaDeReceptores = this.gestorDeReceptores.getListaDeReceptores();</span>
-<span class="fc" id="L62">        TDAColaEnlazada&lt;Receptor&gt; colaDePrioridadDeReceptores = this.gestorDeReceptores.getColaDePrioridadDeReceptores();</span>
-<span class="fc" id="L63">        TDAListaEnlazada&lt;Organo&gt; listaDeOrganosDisponibles = this.gestorDeOrganos.getListaDeOrganosDisponibles();</span>
+<span class="fc" id="L59">        Organo nuevoOrgano = this.gestorDeOrganos.registrarOrgano(nombreDelOrgano, donanteDelOrgano);</span>
+<span class="fc" id="L60">        TDAListaEnlazada&lt;Receptor&gt; listaDeReceptores = this.gestorDeReceptores.getListaDeReceptores();</span>
+<span class="fc" id="L61">        TDAListaEnlazada&lt;Receptor&gt; listaDePrioridadDeReceptores = this.gestorDeReceptores.getListaDePrioridadDeReceptores();</span>
+<span class="fc" id="L62">        TDAListaEnlazada&lt;Organo&gt; listaDeOrganosDisponibles = this.gestorDeOrganos.getListaDeOrganosDisponibles();</span>
 
-<span class="fc" id="L65">        this.gestorDeTrasplantes.asignarOrganoAReceptor(nuevoOrgano, listaDeReceptores, </span>
-                colaDePrioridadDeReceptores, listaDeOrganosDisponibles);
-<span class="fc" id="L67">    }</span>
+<span class="fc" id="L64">        this.gestorDeTrasplantes.asignarOrganoAReceptor(nuevoOrgano, listaDeReceptores, </span>
+<span class="fc" id="L65">                listaDePrioridadDeReceptores, listaDeOrganosDisponibles);</span>
+<span class="fc" id="L66">    }</span>
 
     public Receptor buscarReceptor(String cedulaDeIdentidad) {
-<span class="fc" id="L70">        return this.gestorDeReceptores.buscarReceptor(cedulaDeIdentidad);</span>
+<span class="fc" id="L69">        return this.gestorDeReceptores.buscarReceptor(cedulaDeIdentidad);</span>
     }
 
     public Donante buscarDonante(String cedulaDeIdentidad) {
-<span class="fc" id="L74">        return this.gestorDeDonantes.buscarDonante(cedulaDeIdentidad);</span>
+<span class="fc" id="L73">        return this.gestorDeDonantes.buscarDonante(cedulaDeIdentidad);</span>
     }
 
     public Organo buscarOrganoPorIdentificador(long identificadorDelOrgano) {
-<span class="fc" id="L78">        return this.gestorDeOrganos.buscarOrganoPorIdentificador(identificadorDelOrgano);</span>
+<span class="fc" id="L77">        return this.gestorDeOrganos.buscarOrganoPorIdentificador(identificadorDelOrgano);</span>
     }
 
     public TDAListaEnlazada&lt;Organo&gt; buscarOrganosPorNombre(String nombreDelOrgano) {
-<span class="fc" id="L82">        return this.gestorDeOrganos.buscarOrganosPorNombre(nombreDelOrgano);</span>
+<span class="fc" id="L81">        return this.gestorDeOrganos.buscarOrganosPorNombre(nombreDelOrgano);</span>
     }
 
     public TDAListaEnlazada&lt;Organo&gt; buscarOrganosPorTipoDeSangre(String tipoDeSangre) {
-<span class="fc" id="L86">        return this.gestorDeOrganos.buscarOrganosPorTipoDeSangre(tipoDeSangre);</span>
+<span class="fc" id="L85">        return this.gestorDeOrganos.buscarOrganosPorTipoDeSangre(tipoDeSangre);</span>
     }
 
     public Trasplante buscarTrasplante(long identificadorDelTrasplante) {
-<span class="fc" id="L90">        return this.gestorDeTrasplantes.buscarTrasplante(identificadorDelTrasplante);</span>
+<span class="fc" id="L89">        return this.gestorDeTrasplantes.buscarTrasplante(identificadorDelTrasplante);</span>
     }
 
     public void eliminarReceptor(String cedulaDelReceptor) {
-<span class="fc" id="L94">        this.gestorDeReceptores.eliminarReceptor(cedulaDelReceptor);</span>
-<span class="fc" id="L95">    }</span>
+<span class="fc" id="L93">        this.gestorDeReceptores.eliminarReceptor(cedulaDelReceptor);</span>
+<span class="fc" id="L94">    }</span>
 
     public void eliminarDonante(String cedulaDelDonante) {
-<span class="fc" id="L98">        this.gestorDeDonantes.eliminarDonante(cedulaDelDonante);</span>
-<span class="fc" id="L99">    }</span>
+<span class="fc" id="L97">        this.gestorDeDonantes.eliminarDonante(cedulaDelDonante);</span>
+<span class="fc" id="L98">    }</span>
 
     public void eliminarOrgano(long identificadorDelOrgano) {
-<span class="fc" id="L102">        this.gestorDeOrganos.eliminarOrgano(identificadorDelOrgano);</span>
-<span class="fc" id="L103">    }</span>
+<span class="fc" id="L101">        this.gestorDeOrganos.eliminarOrgano(identificadorDelOrgano);</span>
+<span class="fc" id="L102">    }</span>
 
     public String listarReceptores() {
-<span class="fc" id="L106">        return this.gestorDeReceptores.listarReceptores();</span>
+<span class="fc" id="L105">        return this.gestorDeReceptores.listarReceptores();</span>
     }
 
     public String listarDonantes() {
-<span class="fc" id="L110">        return this.gestorDeDonantes.listarDonantes();</span>
+<span class="fc" id="L109">        return this.gestorDeDonantes.listarDonantes();</span>
     }
 
     public String listarOrganosDisponibles() {
-<span class="fc" id="L114">        return this.gestorDeOrganos.listarOrganosDisponibles();</span>
+<span class="fc" id="L113">        return this.gestorDeOrganos.listarOrganosDisponibles();</span>
     }
 
     public String listarTrasplantesRealizados() {
-<span class="fc" id="L118">        return this.gestorDeTrasplantes.listarTrasplantesRealizados();</span>
+<span class="fc" id="L117">        return this.gestorDeTrasplantes.listarTrasplantesRealizados();</span>
     }
 
 }
