@@ -118,7 +118,7 @@ public class Main {
 
         Receptor receptor = bioQueue.registrarReceptor(cedula, nombre, tipoOrgano, tipoDeSangre, edad, puntaje);
 
-        bioQueue.insertarReceptorEnLaCola(receptor);
+        bioQueue.insertarReceptorEnLaListaDePrioridad(receptor);
         System.out.println("Receptor registrado correctamente.");
     }
 

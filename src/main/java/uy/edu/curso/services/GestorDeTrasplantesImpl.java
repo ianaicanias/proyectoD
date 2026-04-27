@@ -6,7 +6,6 @@ import uy.edu.curso.interfaces.GestorDeTrasplantes;
 import uy.edu.curso.interfaces.Organo;
 import uy.edu.curso.interfaces.Receptor;
 import uy.edu.curso.interfaces.Trasplante;
-import uy.edu.curso.tda.TDAColaEnlazada;
 import uy.edu.curso.tda.TDAListaEnlazada;
 
 
@@ -25,18 +24,18 @@ public class GestorDeTrasplantesImpl implements GestorDeTrasplantes {
 
     @Override
     public void asignarOrganoAReceptor(Organo organo, TDAListaEnlazada<Receptor> listaDeReceptores, 
-            TDAColaEnlazada<Receptor> colaDePrioridadDeReceptores, TDAListaEnlazada<Organo> listaDeOrganosDisponibles) {
-        int tamañoDeLaColaDePrioridad = colaDePrioridadDeReceptores.tamaño();
+            TDAListaEnlazada<Receptor> listaDePrioridadDeReceptores, TDAListaEnlazada<Organo> listaDeOrganosDisponibles) {
+        int tamañoDeLaColaDePrioridad = listaDePrioridadDeReceptores.tamaño();
 
         for (int i = 0; i < tamañoDeLaColaDePrioridad; i++) {
-            Receptor receptorEncontrado = colaDePrioridadDeReceptores.obtener(i);
+            Receptor receptorEncontrado = listaDePrioridadDeReceptores.obtener(i);
             boolean esCompatible = organo.esCompatible(receptorEncontrado.getTipoDeSangre());
             boolean esMismoOrgano = organo.getNombre().equals(receptorEncontrado.getTipoDeOrgano());
 
             if (esCompatible && esMismoOrgano) {
                 Trasplante nuevoTrasplanteRealizado = new TrasplanteImpl(receptorEncontrado, organo);
 
-                colaDePrioridadDeReceptores.remover(receptorEncontrado);
+                listaDePrioridadDeReceptores.remover(receptorEncontrado);
                 listaDeReceptores.remover(receptorEncontrado);
                 listaDeOrganosDisponibles.remover(organo);
 

@@ -1,11 +1,10 @@
 package uy.edu.curso;
 
+import org.junit.jupiter.api.AfterAll;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static org.junit.jupiter.api.Assertions.assertNull;
 import static org.junit.jupiter.api.Assertions.assertTrue;
-
-import org.junit.jupiter.api.AfterAll;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.MethodOrderer;
@@ -250,14 +249,14 @@ public class BioQueueFacadeTest {
 
     @Test
     @Order(12)
-    @DisplayName("Insertar Receptor en la Cola de Prioridad")
+    @DisplayName("Insertar Receptor en la Lista de Prioridad")
     public void insertarReceptorEnLaCola_receptorRegistrado_seInsertaCorrectamenteEnLaCola() {
         // Arrange
         Receptor receptorCreado = bioQueueFacade.registrarReceptor("99999999", "Juan Perez", 
                 "Riñón", "A+", (byte) 30, (byte) 80);
 
         // Act
-        bioQueueFacade.insertarReceptorEnLaCola(receptorCreado);
+        bioQueueFacade.insertarReceptorEnLaListaDePrioridad(receptorCreado);
 
         // Assert
         assertNotNull(bioQueueFacade.listarReceptores());
@@ -270,7 +269,7 @@ public class BioQueueFacadeTest {
         // Arrange
         Receptor receptor = bioQueueFacade.registrarReceptor("11111111", "Juan Perez", 
                 "Riñón", "A+", (byte) 30, (byte) 80);
-        bioQueueFacade.insertarReceptorEnLaCola(receptor);
+        bioQueueFacade.insertarReceptorEnLaListaDePrioridad(receptor);
         bioQueueFacade.registrarDonante("96465787", "Maria Lopez", 
                 "Riñón", "A+", (byte) 25);
         Donante donante2 = bioQueueFacade.registrarDonante("27372647", "Leandro Lopez", 
