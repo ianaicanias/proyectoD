@@ -14,6 +14,7 @@ import uy.edu.curso.interfaces.Receptor;
 import uy.edu.curso.services.GestorDeReceptoresImpl;
 
 
+@DisplayName("Tests para el Gestor de Receptores")
 public class GestorDeReceptoresTest {
 
     private static GestorDeReceptoresImpl gestorDeReceptoresImpl;
@@ -26,7 +27,7 @@ public class GestorDeReceptoresTest {
 
     @AfterAll
     public static void finalizacion() {
-        System.out.println("Se ejecutaron todos los tests. . .");
+        System.out.println("Tests del gestor de receptores finalizados. . .");
     }
 
     @BeforeEach

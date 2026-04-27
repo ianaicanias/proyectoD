@@ -12,206 +12,253 @@ import uy.edu.curso.interfaces.Donante;
 import uy.edu.curso.interfaces.Organo;
 import uy.edu.curso.services.GestorDeDonantesImpl;
 import uy.edu.curso.services.GestorDeOrganosImpl;
+import uy.edu.curso.tda.TDAListaEnlazada;
 
 
+@DisplayName("Tests para el Gestor de Órganos")
 public class GestorDeOrganosTest {
 
-    private static GestorDeOrganosImpl gestor;
+    private static GestorDeOrganosImpl gestorDeOrganos;
     private static GestorDeDonantesImpl gestorDonantes;
 
     @BeforeAll
-    public static void init() {
-        gestor = new GestorDeOrganosImpl();
+    public static void inicializacion() {
+        gestorDeOrganos = new GestorDeOrganosImpl();
         gestorDonantes = new GestorDeDonantesImpl();
+        System.out.println("Inicializando los tests. . .");
     }
 
     @AfterAll
-    public static void end() {
-        System.out.println("Tests de órganos finalizados");
+    public static void finalizacion() {
+        System.out.println("Tests del gestor de órganos finalizados. . .");
     }
 
     @BeforeEach
-    public void reset() {
-        gestor = new GestorDeOrganosImpl();
+    public void limpiarDatos() {
+        gestorDeOrganos = new GestorDeOrganosImpl();
         gestorDonantes = new GestorDeDonantesImpl();
     }
 
     @Test
-    @DisplayName("Registrar Organo")
-    public void registrarOrgano_ok() {
-        Donante d = gestorDonantes.registrarDonante("123", "Valentín", "Riñón", "A+", (byte) 20);
-        Organo o = gestor.registrarOrgano("Riñón", d);
+    @DisplayName("Registrar Órgano")
+    public void registrarOrgano_datosValidos_organoRegistradoCorrectamente() {
+        // Arrange
+        Donante donante = gestorDonantes.registrarDonante("123", "Valentín", "Riñón", "A+", (byte) 20);
 
-        assertEquals("Riñón", o.getNombre());
-        assertEquals(d.getCedulaDeIdentidad(), o.getDonanteDelOrgano().getCedulaDeIdentidad());
+        // Act
+        Organo organo = gestorDeOrganos.registrarOrgano("Riñón", donante);
+
+        // Assert
+        assertEquals("Riñón", organo.getNombre());
+        assertEquals(donante.getCedulaDeIdentidad(), organo.getDonanteDelOrgano().getCedulaDeIdentidad());
     }
 
     @Test
-    @DisplayName("Registrar Varios Organos")
-    public void registrarOrgano_varios() {
-        Donante d = gestorDonantes.registrarDonante("123", "Valentín", "Riñón", "A+", (byte) 20);
+    @DisplayName("Registrar Varios Órganos")
+    public void registrarOrgano_variosRegistros_listaConDosElementos() {
+        // Arrange
+        Donante donante = gestorDonantes.registrarDonante("123", "Valentín", "Riñón", "A+", (byte) 20);
 
-        gestor.registrarOrgano("Riñón", d);
-        gestor.registrarOrgano("Corazón", d);
+        // Act
+        gestorDeOrganos.registrarOrgano("Riñón", donante);
+        gestorDeOrganos.registrarOrgano("Corazón", donante);
 
-        assertEquals(2, gestor.getListaDeOrganosDisponibles().tamaño());
+        // Assert
+        assertEquals(2, gestorDeOrganos.getListaDeOrganosDisponibles().tamaño());
     }
 
     @Test
-    @DisplayName("Buscar Organo por ID")
-    public void buscarOrganoPorId_ok() {
-        Donante d = gestorDonantes.registrarDonante("123", "Valentín", "Riñón", "A+", (byte) 20);
-        Organo o = gestor.registrarOrgano("Riñón", d);
+    @DisplayName("Buscar Órgano por ID")
+    public void buscarOrganoPorIdentificador_idExistente_devuelveOrgano() {
+        // Arrange
+        Donante donante = gestorDonantes.registrarDonante("123", "Valentín", "Riñón", "A+", (byte) 20);
+        Organo organo = gestorDeOrganos.registrarOrgano("Riñón", donante);
 
-        Organo encontrado = gestor.buscarOrganoPorIdentificador(o.getIdentificador());
+        // Act
+        Organo encontrado = gestorDeOrganos.buscarOrganoPorIdentificador(organo.getIdentificador());
 
-        assertEquals(o, encontrado);
+        // Assert
+        assertEquals(organo, encontrado);
     }
 
     @Test
-    @DisplayName("Buscar Organo Inexistente")
-    public void buscarOrgano_inexistente() {
-        Donante d = gestorDonantes.registrarDonante("123", "Valentín", "Riñón", "A+", (byte) 20);
+    @DisplayName("Buscar Órgano Inexistente")
+    public void buscarOrganoPorIdentificador_idInexistente_devuelveNull() {
+        // Arrange
+        Donante donante = gestorDonantes.registrarDonante("123", "Valentín", "Riñón", "A+", (byte) 20);
 
-        gestor.registrarOrgano("Riñón", d);
-        gestor.registrarOrgano("Corazón", d);
+        gestorDeOrganos.registrarOrgano("Riñón", donante);
+        gestorDeOrganos.registrarOrgano("Corazón", donante);
 
-        Organo resultado = gestor.buscarOrganoPorIdentificador(999);
+        // Act
+        Organo resultado = gestorDeOrganos.buscarOrganoPorIdentificador(999);
 
+        // Assert
         assertNull(resultado);
     }
 
     @Test
     @DisplayName("Buscar por Nombre")
-    public void buscarPorNombre_ok() {
-        Donante d = gestorDonantes.registrarDonante("123", "Valentín", "Riñón", "A+", (byte) 20);
-        gestor.registrarOrgano("Riñón", d);
+    public void buscarOrganosPorNombre_nombreExistente_unResultado() {
+        // Arrange
+        Donante donante = gestorDonantes.registrarDonante("123", "Valentín", "Riñón", "A+", (byte) 20);
+        gestorDeOrganos.registrarOrgano("Riñón", donante);
 
-        var lista = gestor.buscarOrganosPorNombre("Riñón");
+        // Act
+        TDAListaEnlazada<Organo> lista = gestorDeOrganos.buscarOrganosPorNombre("Riñón");
 
+        // Assert
         assertEquals(1, lista.tamaño());
     }
 
     @Test
     @DisplayName("Buscar por Nombre con Dos Resultados")
-    public void buscarPorNombre_dos() {
-        Donante d = gestorDonantes.registrarDonante("123", "Valentín", "Riñón", "A+", (byte) 20);
+    public void buscarOrganosPorNombre_nombreExistente_dosResultados() {
+        // Arrange
+        Donante donante = gestorDonantes.registrarDonante("123", "Valentín", "Riñón", "A+", (byte) 20);
 
-        gestor.registrarOrgano("Riñón", d);
-        gestor.registrarOrgano("Riñón", d);
+        gestorDeOrganos.registrarOrgano("Riñón", donante);
+        gestorDeOrganos.registrarOrgano("Riñón", donante);
 
-        var lista = gestor.buscarOrganosPorNombre("Riñón");
+        // Act
+        TDAListaEnlazada<Organo> lista = gestorDeOrganos.buscarOrganosPorNombre("Riñón");
 
+        // Assert
         assertEquals(2, lista.tamaño());
     }
 
     @Test
     @DisplayName("Buscar por Nombre Inexistente")
-    public void buscarPorNombre_inexistente() {
-        Donante d = gestorDonantes.registrarDonante("123", "Valentín", "Riñón", "A+", (byte) 20);
+    public void buscarOrganosPorNombre_nombreInexistente_listaVacia() {
+        // Arrange
+        Donante donante = gestorDonantes.registrarDonante("123", "Valentín", "Riñón", "A+", (byte) 20);
 
-        gestor.registrarOrgano("Riñón", d);
+        gestorDeOrganos.registrarOrgano("Riñón", donante);
 
-        var lista = gestor.buscarOrganosPorNombre("Pulmón");
+        // Act
+        TDAListaEnlazada<Organo> lista = gestorDeOrganos.buscarOrganosPorNombre("Pulmón");
 
+        // Assert
         assertEquals(0, lista.tamaño());
     }
 
     @Test
     @DisplayName("Buscar por Tipo de Sangre")
-    public void buscarPorSangre_ok() {
-        Donante d = gestorDonantes.registrarDonante("123", "Valentín", "Riñón", "A+", (byte) 20);
-        gestor.registrarOrgano("Riñón", d);
+    public void buscarOrganosPorTipoDeSangre_tipoExistente_unResultado() {
+        // Arrange
+        Donante donante = gestorDonantes.registrarDonante("123", "Valentín", "Riñón", "A+", (byte) 20);
+        gestorDeOrganos.registrarOrgano("Riñón", donante);
 
-        var lista = gestor.buscarOrganosPorTipoDeSangre("A+");
+        // Act
+        TDAListaEnlazada<Organo> lista = gestorDeOrganos.buscarOrganosPorTipoDeSangre("A+");
 
+        // Assert
         assertEquals(1, lista.tamaño());
     }
 
     @Test
     @DisplayName("Buscar por Tipo de Sangre con Dos Resultados")
-    public void buscarPorSangre_dos() {
-        Donante d = gestorDonantes.registrarDonante("123", "Valentín", "Riñón", "A+", (byte) 20);
+    public void buscarOrganosPorTipoDeSangre_tipoExistente_dosResultados() {
+        // Arrange
+        Donante donante = gestorDonantes.registrarDonante("123", "Valentín", "Riñón", "A+", (byte) 20);
 
-        gestor.registrarOrgano("Riñón", d);
-        gestor.registrarOrgano("Corazón", d);
+        gestorDeOrganos.registrarOrgano("Riñón", donante);
+        gestorDeOrganos.registrarOrgano("Corazón", donante);
 
-        var lista = gestor.buscarOrganosPorTipoDeSangre("A+");
+        // Act
+        TDAListaEnlazada<Organo> lista = gestorDeOrganos.buscarOrganosPorTipoDeSangre("A+");
 
+        // Assert
         assertEquals(2, lista.tamaño());
     }
 
     @Test
     @DisplayName("Buscar por Tipo de Sangre Inexistente")
-    public void buscarPorSangre_inexistente() {
-        Donante d = gestorDonantes.registrarDonante("123", "Valentín", "Riñón", "A+", (byte) 20);
+    public void buscarOrganosPorTipoDeSangre_tipoInexistente_listaVacia() {
+        // Arrange
+        Donante donante = gestorDonantes.registrarDonante("123", "Valentín", "Riñón", "A+", (byte) 20);
 
-        gestor.registrarOrgano("Riñón", d);
+        gestorDeOrganos.registrarOrgano("Riñón", donante);
 
-        var lista = gestor.buscarOrganosPorTipoDeSangre("O-");
+        // Act
+        TDAListaEnlazada<Organo> lista = gestorDeOrganos.buscarOrganosPorTipoDeSangre("O-");
 
+        // Assert
         assertEquals(0, lista.tamaño());
     }
 
     @Test
-    @DisplayName("Eliminar Organo")
-    public void eliminarOrgano_ok() {
-        Donante d = gestorDonantes.registrarDonante("123", "Valentín", "Riñón", "A+", (byte) 20);
-        Organo o = gestor.registrarOrgano("Riñón", d);
+    @DisplayName("Eliminar Órgano")
+    public void eliminarOrgano_idExistente_organoEliminado() {
+        // Arrange
+        Donante donante = gestorDonantes.registrarDonante("123", "Valentín", "Riñón", "A+", (byte) 20);
+        Organo organo = gestorDeOrganos.registrarOrgano("Riñón", donante);
 
-        gestor.eliminarOrgano(o.getIdentificador());
+        // Act
+        gestorDeOrganos.eliminarOrgano(organo.getIdentificador());
 
-        assertNull(gestor.buscarOrganoPorIdentificador(o.getIdentificador()));
+        // Assert
+        assertNull(gestorDeOrganos.buscarOrganoPorIdentificador(organo.getIdentificador()));
     }
 
     @Test
-    @DisplayName("Eliminar Organo Inexistente")
-    public void eliminarOrgano_inexistente() {
-        Donante d = gestorDonantes.registrarDonante("123", "Valentín", "Riñón", "A+", (byte) 20);
+    @DisplayName("Eliminar Órgano Inexistente")
+    public void eliminarOrgano_idInexistente_listaSinCambios() {
+        // Arrange
+        Donante donante = gestorDonantes.registrarDonante("123", "Valentín", "Riñón", "A+", (byte) 20);
 
-        gestor.registrarOrgano("Riñón", d);
-        gestor.registrarOrgano("Corazón", d);
+        gestorDeOrganos.registrarOrgano("Riñón", donante);
+        gestorDeOrganos.registrarOrgano("Corazón", donante);
 
-        gestor.eliminarOrgano(999);
+        // Act
+        gestorDeOrganos.eliminarOrgano(999);
 
-        assertEquals(2, gestor.getListaDeOrganosDisponibles().tamaño());
+        // Assert
+        assertEquals(2, gestorDeOrganos.getListaDeOrganosDisponibles().tamaño());
     }
 
     @Test
-    @DisplayName("Listar Organos")
-    public void listarOrganos_ok() {
-        Donante d = gestorDonantes.registrarDonante("123", "Valentín", "Riñón", "A+", (byte) 20);
-        Organo o = gestor.registrarOrgano("Riñón", d);
+    @DisplayName("Listar Órganos")
+    public void listarOrganos_conDatos_devuelveListadoCorrecto() {
+        // Arrange
+        Donante donante = gestorDonantes.registrarDonante("123", "Valentín", "Riñón", "A+", (byte) 20);
+        Organo organo = gestorDeOrganos.registrarOrgano("Riñón", donante);
 
         StringBuilder esperado = new StringBuilder();
 
         esperado.append("----------------------- DATOS DE ÓRGANOS DISPONIBLES -----------------------\n");
-        esperado.append(o.getIdentificador());
+        esperado.append(organo.getIdentificador());
         esperado.append(", ");
-        esperado.append(o.getNombre());
+        esperado.append(organo.getNombre());
         esperado.append(", ");
-        esperado.append(o.getTipoDeSangre());
+        esperado.append(organo.getTipoDeSangre());
         esperado.append(", ");
-        esperado.append(o.getDonanteDelOrgano().getCedulaDeIdentidad());
+        esperado.append(organo.getDonanteDelOrgano().getCedulaDeIdentidad());
         esperado.append(", ");
-        esperado.append(o.getEsInfantil());
+        esperado.append(organo.getEsInfantil());
         esperado.append(".");
         esperado.append("\n");
 
-        String resultado = gestor.listarOrganosDisponibles();
+        // Act
+        String resultado = gestorDeOrganos.listarOrganosDisponibles();
 
+        // Assert
         assertEquals(esperado.toString(), resultado);
     }
 
     @Test
-    @DisplayName("Listar Organos Vacío")
-    public void listarOrganos_vacio() {
+    @DisplayName("Listar Órganos Vacío")
+    public void listarOrganos_sinDatos_devuelveEncabezadoSolo() {
+        // Arrange
         StringBuilder esperado = new StringBuilder();
 
         esperado.append("----------------------- DATOS DE ÓRGANOS DISPONIBLES -----------------------\n");
 
-        String resultado = gestor.listarOrganosDisponibles();
+        // Act
+        String resultado = gestorDeOrganos.listarOrganosDisponibles();
 
+        // Assert
         assertEquals(esperado.toString(), resultado);
     }
+
 }

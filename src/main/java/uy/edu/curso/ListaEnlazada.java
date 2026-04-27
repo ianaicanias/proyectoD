@@ -100,7 +100,7 @@ public class ListaEnlazada<T> implements TDAListaEnlazada<T> {
         } else {
             int i = 1;
 
-            while (i < index && actual.getSiguiente() != null) {
+            while (i < index) {
                 actual = actual.getSiguiente();
                 i++;
             }
