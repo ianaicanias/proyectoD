@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<testsuite xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="https://maven.apache.org/surefire/maven-surefire-plugin/xsd/surefire-test-report-3.0.xsd" version="3.0" name="uy.edu.curso.ListaEnlazadaTest" time="0.063" tests="26" errors="0" skipped="0" failures="0">
+<testsuite xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="https://maven.apache.org/surefire/maven-surefire-plugin/xsd/surefire-test-report-3.0.xsd" version="3.0" name="uy.edu.curso.ListaEnlazadaTest" time="0.048" tests="26" errors="0" skipped="0" failures="0">
   <properties>
     <property name="java.specification.version" value="17"/>
     <property name="sun.cpu.isalist" value="amd64"/>
@@ -15,7 +15,7 @@
     <property name="sun.java.launcher" value="SUN_STANDARD"/>
     <property name="user.country" value="ES"/>
     <property name="sun.boot.library.path" value="C:\Program Files\Eclipse Adoptium\jdk-17.0.16.8-hotspot\bin"/>
-    <property name="sun.java.command" value="C:\Users\gf352\AppData\Local\Temp\surefire8394043002010527815\surefirebooter-20260427002856012_3.jar C:\Users\gf352\AppData\Local\Temp\surefire8394043002010527815 2026-04-27T00-28-55_815-jvmRun1 surefire-20260427002856012_1tmp surefire_0-20260427002856012_2tmp"/>
+    <property name="sun.java.command" value="C:\Users\gf352\AppData\Local\Temp\surefire1689437472516299703\surefirebooter-20260427005353535_3.jar C:\Users\gf352\AppData\Local\Temp\surefire1689437472516299703 2026-04-27T00-53-53_316-jvmRun1 surefire-20260427005353535_1tmp surefire_0-20260427005353535_2tmp"/>
     <property name="jdk.debug" value="release"/>
     <property name="surefire.test.class.path" value="C:\Users\gf352\OneDrive\Desktop\proyectoD\target\test-classes;C:\Users\gf352\OneDrive\Desktop\proyectoD\target\classes;C:\Users\gf352\.m2\repository\org\junit\jupiter\junit-jupiter\5.10.0\junit-jupiter-5.10.0.jar;C:\Users\gf352\.m2\repository\org\junit\jupiter\junit-jupiter-api\5.10.0\junit-jupiter-api-5.10.0.jar;C:\Users\gf352\.m2\repository\org\opentest4j\opentest4j\1.3.0\opentest4j-1.3.0.jar;C:\Users\gf352\.m2\repository\org\junit\platform\junit-platform-commons\1.10.0\junit-platform-commons-1.10.0.jar;C:\Users\gf352\.m2\repository\org\apiguardian\apiguardian-api\1.1.2\apiguardian-api-1.1.2.jar;C:\Users\gf352\.m2\repository\org\junit\jupiter\junit-jupiter-params\5.10.0\junit-jupiter-params-5.10.0.jar;C:\Users\gf352\.m2\repository\org\junit\jupiter\junit-jupiter-engine\5.10.0\junit-jupiter-engine-5.10.0.jar;C:\Users\gf352\.m2\repository\org\junit\platform\junit-platform-engine\1.10.0\junit-platform-engine-1.10.0.jar;"/>
     <property name="sun.cpu.endian" value="little"/>
@@ -30,7 +30,7 @@
     <property name="line.separator" value="&#10;"/>
     <property name="java.vm.specification.vendor" value="Oracle Corporation"/>
     <property name="java.specification.name" value="Java Platform API Specification"/>
-    <property name="surefire.real.class.path" value="C:\Users\gf352\AppData\Local\Temp\surefire8394043002010527815\surefirebooter-20260427002856012_3.jar"/>
+    <property name="surefire.real.class.path" value="C:\Users\gf352\AppData\Local\Temp\surefire1689437472516299703\surefirebooter-20260427005353535_3.jar"/>
     <property name="user.script" value=""/>
     <property name="sun.management.compiler" value="HotSpot 64-Bit Tiered Compilers"/>
     <property name="java.runtime.version" value="17.0.16+8"/>
@@ -58,33 +58,33 @@
     <property name="sun.io.unicode.encoding" value="UnicodeLittle"/>
     <property name="java.class.version" value="61.0"/>
   </properties>
-  <testcase name="remover_listaVaciaCreada_devuelveFalseIndicandoQueNoSePuedeEliminarAlgoQueNoExiste" classname="uy.edu.curso.ListaEnlazadaTest" time="0.001">
+  <testcase name="remover_listaVaciaCreada_devuelveFalseIndicandoQueNoSePuedeEliminarAlgoQueNoExiste" classname="uy.edu.curso.ListaEnlazadaTest" time="0.003">
     <system-out><![CDATA[Inicializando los tests. . .
 ]]></system-out>
   </testcase>
-  <testcase name="remover_listaVaciaCreada_devuelveNuloIndicandoQueNoEsPosibleEliminarElElementoDeLaLista" classname="uy.edu.curso.ListaEnlazadaTest" time="0.001"/>
-  <testcase name="indiceDe_listaVacia_devuelveMenosUno" classname="uy.edu.curso.ListaEnlazadaTest" time="0.002"/>
-  <testcase name="agregar_listaCreadaYSolicitudConIndiceMayorAlTamanio_lanzaIndexOutOfBoundsException" classname="uy.edu.curso.ListaEnlazadaTest" time="0.002"/>
+  <testcase name="remover_listaVaciaCreada_devuelveNuloIndicandoQueNoEsPosibleEliminarElElementoDeLaLista" classname="uy.edu.curso.ListaEnlazadaTest" time="0.0"/>
+  <testcase name="indiceDe_listaVacia_devuelveMenosUno" classname="uy.edu.curso.ListaEnlazadaTest" time="0.001"/>
+  <testcase name="agregar_listaCreadaYSolicitudConIndiceMayorAlTamanio_lanzaIndexOutOfBoundsException" classname="uy.edu.curso.ListaEnlazadaTest" time="0.003"/>
   <testcase name="indiceDe_elementosDuplicados_devuelvePrimerIndice" classname="uy.edu.curso.ListaEnlazadaTest" time="0.001"/>
-  <testcase name="vaciar_listaCreadaConElementos_listaVaciaSinElementos" classname="uy.edu.curso.ListaEnlazadaTest" time="0.0"/>
+  <testcase name="vaciar_listaCreadaConElementos_listaVaciaSinElementos" classname="uy.edu.curso.ListaEnlazadaTest" time="0.001"/>
   <testcase name="agregar_listaCreadaYSolicitudConIndiceNegativo_lanzaIndexOutOfBoundsException" classname="uy.edu.curso.ListaEnlazadaTest" time="0.001"/>
-  <testcase name="remover_indiceNegativo_lanzaIndexOutOfBoundsException" classname="uy.edu.curso.ListaEnlazadaTest" time="0.003"/>
-  <testcase name="contiene_elementoInexistente_devuelveFalse" classname="uy.edu.curso.ListaEnlazadaTest" time="0.001"/>
-  <testcase name="agregar_listaConElementosCargados_agregaElElementoAlFinalDeLaLista" classname="uy.edu.curso.ListaEnlazadaTest" time="0.001"/>
-  <testcase name="agregar_listaConElementosCargados_agregaElNuevoElementoEnLaAntepenultimaPosicionDeLaLista" classname="uy.edu.curso.ListaEnlazadaTest" time="0.004"/>
+  <testcase name="remover_indiceNegativo_lanzaIndexOutOfBoundsException" classname="uy.edu.curso.ListaEnlazadaTest" time="0.001"/>
+  <testcase name="contiene_elementoInexistente_devuelveFalse" classname="uy.edu.curso.ListaEnlazadaTest" time="0.0"/>
+  <testcase name="agregar_listaConElementosCargados_agregaElElementoAlFinalDeLaLista" classname="uy.edu.curso.ListaEnlazadaTest" time="0.0"/>
+  <testcase name="agregar_listaConElementosCargados_agregaElNuevoElementoEnLaAntepenultimaPosicionDeLaLista" classname="uy.edu.curso.ListaEnlazadaTest" time="0.001"/>
   <testcase name="buscar_elementoExistente_devuelveElemento" classname="uy.edu.curso.ListaEnlazadaTest" time="0.001"/>
-  <testcase name="primero_listaEnlazadaConElementosCargados_seObtieneElPrimerElementoCargadoEnLaLista" classname="uy.edu.curso.ListaEnlazadaTest" time="0.001"/>
-  <testcase name="buscar_elementoInexistente_devuelveNull" classname="uy.edu.curso.ListaEnlazadaTest" time="0.002"/>
-  <testcase name="indiceDe_elementoInexistente_devuelveMenosUno" classname="uy.edu.curso.ListaEnlazadaTest" time="0.003"/>
-  <testcase name="obtener_indiceNegativo_lanzaIndexOutOfBoundsException" classname="uy.edu.curso.ListaEnlazadaTest" time="0.003"/>
-  <testcase name="ordenar_listaVacia_devuelveListaVacia" classname="uy.edu.curso.ListaEnlazadaTest" time="0.001"/>
+  <testcase name="primero_listaEnlazadaConElementosCargados_seObtieneElPrimerElementoCargadoEnLaLista" classname="uy.edu.curso.ListaEnlazadaTest" time="0.0"/>
+  <testcase name="buscar_elementoInexistente_devuelveNull" classname="uy.edu.curso.ListaEnlazadaTest" time="0.001"/>
+  <testcase name="indiceDe_elementoInexistente_devuelveMenosUno" classname="uy.edu.curso.ListaEnlazadaTest" time="0.0"/>
+  <testcase name="obtener_indiceNegativo_lanzaIndexOutOfBoundsException" classname="uy.edu.curso.ListaEnlazadaTest" time="0.0"/>
+  <testcase name="ordenar_listaVacia_devuelveListaVacia" classname="uy.edu.curso.ListaEnlazadaTest" time="0.0"/>
   <testcase name="contiene_listaVacia_devuelveFalse" classname="uy.edu.curso.ListaEnlazadaTest" time="0.002"/>
   <testcase name="remover_listaCreadaConElementos_devuelveFalseIndicandoQueNoSePudoEncontrarElElementoARemover" classname="uy.edu.curso.ListaEnlazadaTest" time="0.0"/>
   <testcase name="obtener_indiceMayorAlTamanio_lanzaIndexOutOfBoundsException" classname="uy.edu.curso.ListaEnlazadaTest" time="0.001"/>
   <testcase name="primero_listaEnlazadaVaciaCreada_seObtieneNullIndicandoQueEstaVacia" classname="uy.edu.curso.ListaEnlazadaTest" time="0.001"/>
-  <testcase name="ordenar_listaConElementos_desordenados_devuelveListaOrdenadaAscendente" classname="uy.edu.curso.ListaEnlazadaTest" time="0.004"/>
+  <testcase name="ordenar_listaConElementos_desordenados_devuelveListaOrdenadaAscendente" classname="uy.edu.curso.ListaEnlazadaTest" time="0.001"/>
   <testcase name="indiceDe_elementoAlFinal_devuelveIndiceCorrecto" classname="uy.edu.curso.ListaEnlazadaTest" time="0.002"/>
   <testcase name="indiceDe_elementoEnMedio_devuelveIndiceCorrecto" classname="uy.edu.curso.ListaEnlazadaTest" time="0.001"/>
-  <testcase name="remover_indiceMayorAlTamanio_lanzaIndexOutOfBoundsException" classname="uy.edu.curso.ListaEnlazadaTest" time="0.0"/>
+  <testcase name="remover_indiceMayorAlTamanio_lanzaIndexOutOfBoundsException" classname="uy.edu.curso.ListaEnlazadaTest" time="0.001"/>
   <testcase name="indiceDe_elementoAlInicio_devuelveCero" classname="uy.edu.curso.ListaEnlazadaTest" time="0.001"/>
 </testsuite>
