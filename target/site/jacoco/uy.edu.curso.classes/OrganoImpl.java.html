@@ -24,7 +24,7 @@ public class OrganoImpl implements Organo {
 
 <span class="fc" id="L25">    public OrganoImpl(String nombre, Donante donante) {</span>
 <span class="fc" id="L26">        this.identificador = ++contadorDeOrganosExistentes;</span>
-<span class="pc bpc" id="L27" title="1 of 2 branches missed.">        this.esInfantil = donante.getEdad() &lt; 18;</span>
+<span class="fc bfc" id="L27" title="All 2 branches covered.">        this.esInfantil = donante.getEdad() &lt; 18;</span>
 <span class="fc" id="L28">        this.donanteDelOrgano = donante;</span>
 <span class="fc" id="L29">        this.nombre = nombre;</span>
 <span class="fc" id="L30">        this.tipoDeSangre = donante.getTipoDeSangre();</span>
@@ -57,13 +57,13 @@ public class OrganoImpl implements Organo {
 
     @Override
     public void setNombre(String nombre) {
-<span class="nc" id="L60">        this.nombre = nombre;</span>
-<span class="nc" id="L61">    }</span>
+<span class="fc" id="L60">        this.nombre = nombre;</span>
+<span class="fc" id="L61">    }</span>
 
     @Override
     public void setTipoDeSangre(String tipoDeSangre) {
-<span class="nc" id="L65">        this.tipoDeSangre = tipoDeSangre;</span>
-<span class="nc" id="L66">    }</span>
+<span class="fc" id="L65">        this.tipoDeSangre = tipoDeSangre;</span>
+<span class="fc" id="L66">    }</span>
 
     @Override
     public boolean esCompatible(String tipoDeSangreDelReceptor) {

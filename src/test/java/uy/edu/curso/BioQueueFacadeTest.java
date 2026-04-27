@@ -176,7 +176,7 @@ public class BioQueueFacadeTest {
                 "Riñón", "A+", (byte) 30);
 
         // Act
-        TDAListaEnlazada<Organo> resultado = bioQueueFacade.buscarOrganosPorNombre("Riñón");
+        TDAListaEnlazada<Organo> resultado = bioQueueFacade.buscarOrganosPorNombre(donante.getTipoDeOrgano());
 
         // Assert
         assertNotNull(resultado);
@@ -192,7 +192,7 @@ public class BioQueueFacadeTest {
                 "Corazón", "B+", (byte) 25);
 
         // Act
-        TDAListaEnlazada<Organo> resultado = bioQueueFacade.buscarOrganosPorTipoDeSangre("B+");
+        TDAListaEnlazada<Organo> resultado = bioQueueFacade.buscarOrganosPorTipoDeSangre(donante.getTipoDeSangre());
 
         // Assert
         assertNotNull(resultado);
@@ -208,8 +208,8 @@ public class BioQueueFacadeTest {
                 "Corazón", "O+", (byte) 50, (byte) 90);
 
         // Act
-        bioQueueFacade.eliminarReceptor("55555555");
-        Receptor receptorEncontrado = bioQueueFacade.buscarReceptor("55555555");
+        bioQueueFacade.eliminarReceptor(receptor.getCedulaDeIdentidad());
+        Receptor receptorEncontrado = bioQueueFacade.buscarReceptor(receptor.getCedulaDeIdentidad());
 
         // Assert
         assertNull(receptorEncontrado);
@@ -224,8 +224,8 @@ public class BioQueueFacadeTest {
                 "Páncreas", "AB+", (byte) 45);
 
         // Act
-        bioQueueFacade.eliminarDonante("66666666");
-        Donante donanteEncontrado = bioQueueFacade.buscarDonante("66666666");
+        bioQueueFacade.eliminarDonante(donante.getCedulaDeIdentidad());
+        Donante donanteEncontrado = bioQueueFacade.buscarDonante(donante.getCedulaDeIdentidad());
 
         // Assert
         assertNull(donanteEncontrado);
@@ -238,7 +238,7 @@ public class BioQueueFacadeTest {
         // Arrange
         Donante donante = bioQueueFacade.registrarDonante("77777777", "Sofia Diaz", 
                 "Hígado", "O-", (byte) 28);
-        Organo organo = bioQueueFacade.buscarOrganosPorNombre("Hígado").obtener(0);
+        Organo organo = bioQueueFacade.buscarOrganosPorNombre(donante.getTipoDeOrgano()).obtener(0);
 
         // Act
         bioQueueFacade.eliminarOrgano(organo.getIdentificador());

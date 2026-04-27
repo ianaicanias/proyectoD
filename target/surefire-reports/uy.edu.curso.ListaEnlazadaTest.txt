@@ -1,4 +1,4 @@
 -------------------------------------------------------------------------------
-Test set: uy.edu.curso.BioQueueFacadeTest
+Test set: uy.edu.curso.ListaEnlazadaTest
 -------------------------------------------------------------------------------
-Tests run: 13, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.151 s -- in uy.edu.curso.BioQueueFacadeTest
+Tests run: 26, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.070 s -- in uy.edu.curso.ListaEnlazadaTest
