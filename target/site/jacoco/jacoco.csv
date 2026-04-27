@@ -2,13 +2,13 @@ GROUP,PACKAGE,CLASS,INSTRUCTION_MISSED,INSTRUCTION_COVERED,BRANCH_MISSED,BRANCH_
 proyectoD,uy.edu.curso.services,GestorDeDonantesImpl,0,177,0,12,0,50,0,12,0,6
 proyectoD,uy.edu.curso.services,GestorDeReceptoresImpl,0,266,0,28,0,75,0,22,0,8
 proyectoD,uy.edu.curso.services,GestorDeOrganosImpl,0,218,0,18,0,66,0,17,0,8
-proyectoD,uy.edu.curso.services,GestorDeTrasplantesImpl,0,130,1,11,0,38,1,10,0,5
+proyectoD,uy.edu.curso.services,GestorDeTrasplantesImpl,0,130,0,12,0,38,0,11,0,5
 proyectoD,uy.edu.curso.classes,Persona,16,33,0,0,8,12,4,6,4,6
 proyectoD,uy.edu.curso.classes,TrasplanteImpl,0,48,0,0,0,15,0,7,0,7
 proyectoD,uy.edu.curso.classes,ReceptorImpl,4,14,0,0,2,4,1,2,1,2
 proyectoD,uy.edu.curso.classes,OrganoImpl,10,269,1,9,4,20,3,12,2,8
 proyectoD,uy.edu.curso.classes,DonanteImpl,0,8,0,0,0,2,0,1,0,1
-proyectoD,uy.edu.curso.facade,BioQueueFacade,148,0,2,0,37,0,20,0,19,0
-proyectoD,uy.edu.curso,ListaEnlazada,153,188,36,30,49,60,30,17,5,9
+proyectoD,uy.edu.curso.facade,BioQueueFacade,0,148,0,2,0,37,0,20,0,19
+proyectoD,uy.edu.curso,ListaEnlazada,121,220,31,35,38,71,27,20,5,9
 proyectoD,uy.edu.curso,ColaEnlazada,9,65,3,7,3,19,3,6,0,4
 proyectoD,uy.edu.curso,Nodo,3,19,0,0,2,8,1,4,1,4

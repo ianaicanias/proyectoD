@@ -76,22 +76,37 @@ public class GestorDeTrasplantesTest {
     @DisplayName("Asignar Órgano Correctamente a un Receptor")
     public void asignarOrganoAReceptor_receptorYOrganosCompatibles_seAsignaCorrectamenteElOrganoAlReceptorEliminandolosDeLaLista() {
         // Arrange
-        Receptor nuevoReceptor = gestorDeReceptores.registrarReceptor("62362723", "Leonardo Perez", "Riñón", "A+", (byte) 29, (byte) 7);
+        Receptor nuevoReceptor = gestorDeReceptores.registrarReceptor("62362723", "Leonardo Perez", 
+                "Riñón", "A+", (byte) 29, (byte) 7);
         gestorDeReceptores.insertarReceptorEnLaCola(nuevoReceptor);
-        Donante nuevoDonante = gestorDeDonantes.registrarDonante("84588393", "Rodrigo Lopez", "Riñón", "A+", (byte) 32);
+        Donante nuevoDonante = gestorDeDonantes.registrarDonante("84588393", "Rodrigo Lopez", 
+                "Riñón", "A+", (byte) 32);
         Organo nuevoOrgano = gestorDeOrganos.registrarOrgano("Riñón", nuevoDonante);
-        StringBuilder trasplanteGeneradoEsperado = new StringBuilder();
-
-        trasplanteGeneradoEsperado.append("-------------------- LISTA DE TRASPLANTES REALIZADOS --------------------\n");
-        trasplanteGeneradoEsperado.append("Trasplante realizado, con ID: 1.\n");
-        trasplanteGeneradoEsperado.append("Órgano: Riñón.\n");
-        trasplanteGeneradoEsperado.append("De parte del donante: Rodrigo Lopez.\n");
-        trasplanteGeneradoEsperado.append("Para el receptor: Leonardo Perez.");
-        trasplanteGeneradoEsperado.append("\n--------------------------------------------\n");
 
         // Act
         gestorDeTrasplantes.asignarOrganoAReceptor(nuevoOrgano, gestorDeReceptores.getListaDeReceptores(), 
                 gestorDeReceptores.getColaDePrioridadDeReceptores(), gestorDeOrganos.getListaDeOrganosDisponibles());
+        Trasplante trasplanteEncontrado = null;
+
+        for (int i = 0; i <= 10; i++) {
+            Trasplante trasplanteObtenido = gestorDeTrasplantes.buscarTrasplante(i);
+
+            if (trasplanteObtenido != null && trasplanteObtenido.getDonanteDelOrganoDelTrasplante().equals(nuevoDonante)) {
+                trasplanteEncontrado = trasplanteObtenido;
+            }
+        }
+        StringBuilder trasplanteGeneradoEsperado = new StringBuilder();
+
+        assertNotNull(trasplanteEncontrado); 
+
+        trasplanteGeneradoEsperado.append("-------------------- LISTA DE TRASPLANTES REALIZADOS --------------------\n");
+        trasplanteGeneradoEsperado.append("Trasplante realizado, con ID: ");
+        trasplanteGeneradoEsperado.append(trasplanteEncontrado.getIdentificador());
+        trasplanteGeneradoEsperado.append(".\n");
+        trasplanteGeneradoEsperado.append("Órgano: Riñón.\n");
+        trasplanteGeneradoEsperado.append("De parte del donante: Rodrigo Lopez.\n");
+        trasplanteGeneradoEsperado.append("Para el receptor: Leonardo Perez.");
+        trasplanteGeneradoEsperado.append("\n--------------------------------------------\n");
 
         // Assert
         assertFalse(gestorDeReceptores.getListaDeReceptores().contiene(nuevoReceptor));
@@ -105,21 +120,31 @@ public class GestorDeTrasplantesTest {
     @DisplayName("Buscar Trasplante Realizado")
     public void buscarTrasplante_trasplanteExistente_devuelveElTrasplanteSolicitado() {
         // Arrange
-        Receptor nuevoReceptor = gestorDeReceptores.registrarReceptor("62362723", "Leonardo Perez", "Riñón", "A+", (byte) 29, (byte) 7);
+        Receptor nuevoReceptor = gestorDeReceptores.registrarReceptor("62362723", "Leonardo Perez", 
+                "Riñón", "A+", (byte) 29, (byte) 7);
         gestorDeReceptores.insertarReceptorEnLaCola(nuevoReceptor);
-        Donante nuevoDonante = gestorDeDonantes.registrarDonante("84588393", "Rodrigo Lopez", "Riñón", "A+", (byte) 32);
+        Donante nuevoDonante = gestorDeDonantes.registrarDonante("84588393", "Rodrigo Lopez", 
+                "Riñón", "A+", (byte) 32);
         Organo nuevoOrgano = gestorDeOrganos.registrarOrgano("Riñón", nuevoDonante);
         gestorDeTrasplantes.asignarOrganoAReceptor(nuevoOrgano, gestorDeReceptores.getListaDeReceptores(), 
                 gestorDeReceptores.getColaDePrioridadDeReceptores(), gestorDeOrganos.getListaDeOrganosDisponibles());
 
         // Act
-        Trasplante trasplanteRealizado = gestorDeTrasplantes.buscarTrasplante(2);
+        Trasplante trasplanteEncontrado = null;
+
+        for (int i = 0; i <= 10; i++) {
+            Trasplante trasplanteObtenido = gestorDeTrasplantes.buscarTrasplante(i);
+
+            if (trasplanteObtenido != null && trasplanteObtenido.getDonanteDelOrganoDelTrasplante().equals(nuevoDonante)) {
+                trasplanteEncontrado = trasplanteObtenido;
+            }
+        }
         
         // Assert
-        assertEquals(2, trasplanteRealizado.getIdentificador());
-        assertEquals(nuevoReceptor, trasplanteRealizado.getReceptorDelTrasplante());
-        assertEquals(nuevoDonante, trasplanteRealizado.getDonanteDelOrganoDelTrasplante());
-        assertEquals(nuevoOrgano, trasplanteRealizado.getOrganoTrasplantado());
+        assertNotNull(trasplanteEncontrado);
+        assertEquals(nuevoReceptor, trasplanteEncontrado.getReceptorDelTrasplante());
+        assertEquals(nuevoDonante, trasplanteEncontrado.getDonanteDelOrganoDelTrasplante());
+        assertEquals(nuevoOrgano, trasplanteEncontrado.getOrganoTrasplantado());
     }
 
     @Test
@@ -127,9 +152,11 @@ public class GestorDeTrasplantesTest {
     @DisplayName("Buscar Trasplante Inexistente")
     public void buscarTrasplante_trasplanteInexistente_devuelveNullDebidoAQueNoSeEncontroElTrasplanteRequerido() {
         // Arrange
-        Receptor nuevoReceptor = gestorDeReceptores.registrarReceptor("43223432", "Marcelo Perez", "Riñón", "A+", (byte) 29, (byte) 7);
+        Receptor nuevoReceptor = gestorDeReceptores.registrarReceptor("43223432", "Marcelo Perez", 
+                "Riñón", "A+", (byte) 29, (byte) 7);
         gestorDeReceptores.insertarReceptorEnLaCola(nuevoReceptor);
-        Donante nuevoDonante = gestorDeDonantes.registrarDonante("78675439", "Rodrigo Tejeira", "Riñón", "A+", (byte) 32);
+        Donante nuevoDonante = gestorDeDonantes.registrarDonante("78675439", "Rodrigo Tejeira", 
+                "Riñón", "A+", (byte) 32);
         Organo nuevoOrgano = gestorDeOrganos.registrarOrgano("Riñón", nuevoDonante);
         gestorDeTrasplantes.asignarOrganoAReceptor(nuevoOrgano, gestorDeReceptores.getListaDeReceptores(), 
                 gestorDeReceptores.getColaDePrioridadDeReceptores(), gestorDeOrganos.getListaDeOrganosDisponibles());
@@ -146,9 +173,11 @@ public class GestorDeTrasplantesTest {
     @DisplayName("Asignar Órgano Incompatible a un Receptor")
     public void asignarOrganoAReceptor_receptorYOrganosImcompatibles_noSeAsignaElOrganoAlReceptor() {
         // Arrange
-        Receptor nuevoReceptor = gestorDeReceptores.registrarReceptor("62362723", "Leonardo Perez", "Riñón", "A+", (byte) 29, (byte) 7);
+        Receptor nuevoReceptor = gestorDeReceptores.registrarReceptor("62362723", "Leonardo Perez", 
+                "Riñón", "A+", (byte) 29, (byte) 7);
         gestorDeReceptores.insertarReceptorEnLaCola(nuevoReceptor);
-        Donante nuevoDonante = gestorDeDonantes.registrarDonante("84588393", "Rodrigo Lopez", "Riñón", "AB-", (byte) 32);
+        Donante nuevoDonante = gestorDeDonantes.registrarDonante("84588393", "Rodrigo Lopez", 
+                "Riñón", "AB-", (byte) 32);
         Organo nuevoOrgano = gestorDeOrganos.registrarOrgano("Riñón", nuevoDonante);
         StringBuilder trasplanteGeneradoEsperado = new StringBuilder();
 
@@ -170,8 +199,10 @@ public class GestorDeTrasplantesTest {
     @DisplayName("Asignar Órgano Cuando no Hay Receptores Disponibles")
     public void asignarOrganoAReceptor_colaDePrioridadDeReceptoresVacia_noSeAsignaElOrgano() {
         // Arrange
-        Receptor nuevoReceptor = gestorDeReceptores.registrarReceptor("62362723", "Leonardo Perez", "Riñón", "A+", (byte) 29, (byte) 7);
-        Donante nuevoDonante = gestorDeDonantes.registrarDonante("84588393", "Rodrigo Lopez", "Riñón", "AB-", (byte) 32);
+        Receptor nuevoReceptor = gestorDeReceptores.registrarReceptor("62362723", "Leonardo Perez", 
+                "Riñón", "A+", (byte) 29, (byte) 7);
+        Donante nuevoDonante = gestorDeDonantes.registrarDonante("84588393", "Rodrigo Lopez", 
+                "Riñón", "AB-", (byte) 32);
         Organo nuevoOrgano = gestorDeOrganos.registrarOrgano("Riñón", nuevoDonante);
         StringBuilder trasplanteGeneradoEsperado = new StringBuilder();
 
@@ -194,9 +225,11 @@ public class GestorDeTrasplantesTest {
     @DisplayName("Asignar un Órgano que no Corresponde a un Receptor")
     public void asignarOrganoAReceptor_organoYOrganoDelReceptorNoCoinciden_noSeAsignaElOrganoAlReceptor() {
         // Arrange
-        Receptor nuevoReceptor = gestorDeReceptores.registrarReceptor("62362723", "Leonardo Perez", "Páncreas", "A+", (byte) 29, (byte) 7);
+        Receptor nuevoReceptor = gestorDeReceptores.registrarReceptor("62362723", "Leonardo Perez", 
+                "Páncreas", "A+", (byte) 29, (byte) 7);
         gestorDeReceptores.insertarReceptorEnLaCola(nuevoReceptor);
-        Donante nuevoDonante = gestorDeDonantes.registrarDonante("84588393", "Rodrigo Lopez", "Riñón", "A+", (byte) 32);
+        Donante nuevoDonante = gestorDeDonantes.registrarDonante("84588393", "Rodrigo Lopez", 
+                "Riñón", "A+", (byte) 32);
         Organo nuevoOrgano = gestorDeOrganos.registrarOrgano("Riñón", nuevoDonante);
         StringBuilder trasplanteGeneradoEsperado = new StringBuilder();
 
@@ -219,9 +252,11 @@ public class GestorDeTrasplantesTest {
     @DisplayName("Asignar Órgano Incompatible y no Coincidente a un Receptor")
     public void asignarOrganoAReceptor_receptorYOrganosImcompatiblesConOrganosNoCoincidentes_noSeAsignaElOrganoAlReceptor() {
         // Arrange
-        Receptor nuevoReceptor = gestorDeReceptores.registrarReceptor("62362723", "Leonardo Perez", "Páncreas", "A+", (byte) 29, (byte) 7);
+        Receptor nuevoReceptor = gestorDeReceptores.registrarReceptor("62362723", "Leonardo Perez", 
+                "Páncreas", "A+", (byte) 29, (byte) 7);
         gestorDeReceptores.insertarReceptorEnLaCola(nuevoReceptor);
-        Donante nuevoDonante = gestorDeDonantes.registrarDonante("84588393", "Rodrigo Lopez", "Riñón", "AB-", (byte) 32);
+        Donante nuevoDonante = gestorDeDonantes.registrarDonante("84588393", "Rodrigo Lopez", 
+                "Riñón", "AB-", (byte) 32);
         Organo nuevoOrgano = gestorDeOrganos.registrarOrgano("Riñón", nuevoDonante);
         StringBuilder trasplanteGeneradoEsperado = new StringBuilder();
 

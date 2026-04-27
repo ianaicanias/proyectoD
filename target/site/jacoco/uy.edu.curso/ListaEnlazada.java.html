@@ -165,9 +165,9 @@ import uy.edu.curso.tda.TDAListaEnlazada;
 
 <span class="fc" id="L166">            return primerDato;</span>
         }
-<span class="pc bpc" id="L168" title="1 of 2 branches missed.">        while (i &lt; index) {</span>
-<span class="nc" id="L169">            actual = actual.getSiguiente();</span>
-<span class="nc" id="L170">            i++;</span>
+<span class="fc bfc" id="L168" title="All 2 branches covered.">        while (i &lt; index) {</span>
+<span class="fc" id="L169">            actual = actual.getSiguiente();</span>
+<span class="fc" id="L170">            i++;</span>
         }
 <span class="fc" id="L172">        nodoEliminado = actual.getSiguiente();</span>
 <span class="fc" id="L173">        actual.setSiguiente(nodoEliminado.getSiguiente());</span>
@@ -196,23 +196,23 @@ import uy.edu.curso.tda.TDAListaEnlazada;
 <span class="pc bpc" id="L196" title="1 of 2 branches missed.">        if (actual == null) {</span>
 <span class="nc" id="L197">            return false;</span>
         }
-<span class="pc bpc" id="L199" title="1 of 2 branches missed.">        if (actual.getDato().equals(elemento)) {</span>
+<span class="fc bfc" id="L199" title="All 2 branches covered.">        if (actual.getDato().equals(elemento)) {</span>
 <span class="fc" id="L200">            this.primero = actual.getSiguiente();</span>
 
 <span class="fc" id="L202">            return true;</span>
         }
-<span class="nc bnc" id="L204" title="All 2 branches missed.">        while (actual.getSiguiente() != null) {</span>
-<span class="nc" id="L205">            T datoActual = actual.getSiguiente().getDato();</span>
+<span class="pc bpc" id="L204" title="1 of 2 branches missed.">        while (actual.getSiguiente() != null) {</span>
+<span class="fc" id="L205">            T datoActual = actual.getSiguiente().getDato();</span>
 
-<span class="nc bnc" id="L207" title="All 2 branches missed.">            if (datoActual.equals(elemento)) {</span>
-<span class="nc" id="L208">                eliminado = actual.getSiguiente();</span>
-<span class="nc" id="L209">                actual.setSiguiente(eliminado.getSiguiente());</span>
-<span class="nc" id="L210">                eliminado.setSiguiente(null);</span>
+<span class="fc bfc" id="L207" title="All 2 branches covered.">            if (datoActual.equals(elemento)) {</span>
+<span class="fc" id="L208">                eliminado = actual.getSiguiente();</span>
+<span class="fc" id="L209">                actual.setSiguiente(eliminado.getSiguiente());</span>
+<span class="fc" id="L210">                eliminado.setSiguiente(null);</span>
 
-<span class="nc" id="L212">                return true;</span>
+<span class="fc" id="L212">                return true;</span>
             }
-<span class="nc" id="L214">            actual = actual.getSiguiente();</span>
-<span class="nc" id="L215">        }</span>
+<span class="fc" id="L214">            actual = actual.getSiguiente();</span>
+<span class="fc" id="L215">        }</span>
 
 <span class="nc" id="L217">        return false;</span>
     }
