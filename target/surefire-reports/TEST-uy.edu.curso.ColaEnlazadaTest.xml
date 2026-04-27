@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<testsuite xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="https://maven.apache.org/surefire/maven-surefire-plugin/xsd/surefire-test-report-3.0.xsd" version="3.0" name="uy.edu.curso.ListaEnlazadaTest" time="0.063" tests="26" errors="0" skipped="0" failures="0">
+<testsuite xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="https://maven.apache.org/surefire/maven-surefire-plugin/xsd/surefire-test-report-3.0.xsd" version="3.0" name="uy.edu.curso.ColaEnlazadaTest" time="0.017" tests="4" errors="0" skipped="0" failures="0">
   <properties>
     <property name="java.specification.version" value="17"/>
     <property name="sun.cpu.isalist" value="amd64"/>
@@ -58,33 +58,11 @@
     <property name="sun.io.unicode.encoding" value="UnicodeLittle"/>
     <property name="java.class.version" value="61.0"/>
   </properties>
-  <testcase name="remover_listaVaciaCreada_devuelveFalseIndicandoQueNoSePuedeEliminarAlgoQueNoExiste" classname="uy.edu.curso.ListaEnlazadaTest" time="0.001">
+  <testcase name="frente_colaEnlazadaVaciaCreada_lanzaNullPointerException" classname="uy.edu.curso.ColaEnlazadaTest" time="0.007">
     <system-out><![CDATA[Inicializando los tests. . .
 ]]></system-out>
   </testcase>
-  <testcase name="remover_listaVaciaCreada_devuelveNuloIndicandoQueNoEsPosibleEliminarElElementoDeLaLista" classname="uy.edu.curso.ListaEnlazadaTest" time="0.001"/>
-  <testcase name="indiceDe_listaVacia_devuelveMenosUno" classname="uy.edu.curso.ListaEnlazadaTest" time="0.002"/>
-  <testcase name="agregar_listaCreadaYSolicitudConIndiceMayorAlTamanio_lanzaIndexOutOfBoundsException" classname="uy.edu.curso.ListaEnlazadaTest" time="0.002"/>
-  <testcase name="indiceDe_elementosDuplicados_devuelvePrimerIndice" classname="uy.edu.curso.ListaEnlazadaTest" time="0.001"/>
-  <testcase name="vaciar_listaCreadaConElementos_listaVaciaSinElementos" classname="uy.edu.curso.ListaEnlazadaTest" time="0.0"/>
-  <testcase name="agregar_listaCreadaYSolicitudConIndiceNegativo_lanzaIndexOutOfBoundsException" classname="uy.edu.curso.ListaEnlazadaTest" time="0.001"/>
-  <testcase name="remover_indiceNegativo_lanzaIndexOutOfBoundsException" classname="uy.edu.curso.ListaEnlazadaTest" time="0.003"/>
-  <testcase name="contiene_elementoInexistente_devuelveFalse" classname="uy.edu.curso.ListaEnlazadaTest" time="0.001"/>
-  <testcase name="agregar_listaConElementosCargados_agregaElElementoAlFinalDeLaLista" classname="uy.edu.curso.ListaEnlazadaTest" time="0.001"/>
-  <testcase name="agregar_listaConElementosCargados_agregaElNuevoElementoEnLaAntepenultimaPosicionDeLaLista" classname="uy.edu.curso.ListaEnlazadaTest" time="0.004"/>
-  <testcase name="buscar_elementoExistente_devuelveElemento" classname="uy.edu.curso.ListaEnlazadaTest" time="0.001"/>
-  <testcase name="primero_listaEnlazadaConElementosCargados_seObtieneElPrimerElementoCargadoEnLaLista" classname="uy.edu.curso.ListaEnlazadaTest" time="0.001"/>
-  <testcase name="buscar_elementoInexistente_devuelveNull" classname="uy.edu.curso.ListaEnlazadaTest" time="0.002"/>
-  <testcase name="indiceDe_elementoInexistente_devuelveMenosUno" classname="uy.edu.curso.ListaEnlazadaTest" time="0.003"/>
-  <testcase name="obtener_indiceNegativo_lanzaIndexOutOfBoundsException" classname="uy.edu.curso.ListaEnlazadaTest" time="0.003"/>
-  <testcase name="ordenar_listaVacia_devuelveListaVacia" classname="uy.edu.curso.ListaEnlazadaTest" time="0.001"/>
-  <testcase name="contiene_listaVacia_devuelveFalse" classname="uy.edu.curso.ListaEnlazadaTest" time="0.002"/>
-  <testcase name="remover_listaCreadaConElementos_devuelveFalseIndicandoQueNoSePudoEncontrarElElementoARemover" classname="uy.edu.curso.ListaEnlazadaTest" time="0.0"/>
-  <testcase name="obtener_indiceMayorAlTamanio_lanzaIndexOutOfBoundsException" classname="uy.edu.curso.ListaEnlazadaTest" time="0.001"/>
-  <testcase name="primero_listaEnlazadaVaciaCreada_seObtieneNullIndicandoQueEstaVacia" classname="uy.edu.curso.ListaEnlazadaTest" time="0.001"/>
-  <testcase name="ordenar_listaConElementos_desordenados_devuelveListaOrdenadaAscendente" classname="uy.edu.curso.ListaEnlazadaTest" time="0.004"/>
-  <testcase name="indiceDe_elementoAlFinal_devuelveIndiceCorrecto" classname="uy.edu.curso.ListaEnlazadaTest" time="0.002"/>
-  <testcase name="indiceDe_elementoEnMedio_devuelveIndiceCorrecto" classname="uy.edu.curso.ListaEnlazadaTest" time="0.001"/>
-  <testcase name="remover_indiceMayorAlTamanio_lanzaIndexOutOfBoundsException" classname="uy.edu.curso.ListaEnlazadaTest" time="0.0"/>
-  <testcase name="indiceDe_elementoAlInicio_devuelveCero" classname="uy.edu.curso.ListaEnlazadaTest" time="0.001"/>
+  <testcase name="poneEnCola_y_quitaDeCola_elementosSeAtiendenEnOrdenFIFO" classname="uy.edu.curso.ColaEnlazadaTest" time="0.001"/>
+  <testcase name="poneEnCola_colaEnlazadaCreadaConElementos_devuelveFalseIndicandoQueNoSePudoAgregarUnNulo" classname="uy.edu.curso.ColaEnlazadaTest" time="0.002"/>
+  <testcase name="quitaDeCola_colaEnlazadaVaciaCreada_devuelveNullIndicandoQueNoSePuedeQuitarPorqueLaListaEstaVacia" classname="uy.edu.curso.ColaEnlazadaTest" time="0.001"/>
 </testsuite>
