@@ -12,7 +12,6 @@ import uy.edu.curso.services.GestorDeDonantesImpl;
 import uy.edu.curso.services.GestorDeOrganosImpl;
 import uy.edu.curso.services.GestorDeReceptoresImpl;
 import uy.edu.curso.services.GestorDeTrasplantesImpl;
-import uy.edu.curso.tda.TDAColaEnlazada;
 import uy.edu.curso.tda.TDAListaEnlazada;
 
 
@@ -45,8 +44,8 @@ public class BioQueueFacade {
                 tipoDeSangre, edad, puntajeDePrioridad);
     }
 
-    public void insertarReceptorEnLaCola(Receptor receptor) {
-        this.gestorDeReceptores.insertarReceptorEnLaCola(receptor);
+    public void insertarReceptorEnLaListaDePrioridad(Receptor receptor) {
+        this.gestorDeReceptores.insertarReceptorEnLaListaDePrioridad(receptor);
     }
 
     public Donante registrarDonante(String cedulaDeIdentidad, String nombre, String tipoDeOrganoDonado, String tipoDeSangre, byte edad) {
@@ -59,11 +58,11 @@ public class BioQueueFacade {
     private void registrarOrgano(String nombreDelOrgano, Donante donanteDelOrgano) {
         Organo nuevoOrgano = this.gestorDeOrganos.registrarOrgano(nombreDelOrgano, donanteDelOrgano);
         TDAListaEnlazada<Receptor> listaDeReceptores = this.gestorDeReceptores.getListaDeReceptores();
-        TDAColaEnlazada<Receptor> colaDePrioridadDeReceptores = this.gestorDeReceptores.getColaDePrioridadDeReceptores();
+        TDAListaEnlazada<Receptor> listaDePrioridadDeReceptores = this.gestorDeReceptores.getListaDePrioridadDeReceptores();
         TDAListaEnlazada<Organo> listaDeOrganosDisponibles = this.gestorDeOrganos.getListaDeOrganosDisponibles();
 
         this.gestorDeTrasplantes.asignarOrganoAReceptor(nuevoOrgano, listaDeReceptores, 
-                colaDePrioridadDeReceptores, listaDeOrganosDisponibles);
+                listaDePrioridadDeReceptores, listaDeOrganosDisponibles);
     }
 
     public Receptor buscarReceptor(String cedulaDeIdentidad) {

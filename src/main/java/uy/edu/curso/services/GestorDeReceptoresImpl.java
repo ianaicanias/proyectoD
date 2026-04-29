@@ -1,22 +1,20 @@
 package uy.edu.curso.services;
 
-import uy.edu.curso.ColaEnlazada;
 import uy.edu.curso.ListaEnlazada;
 import uy.edu.curso.classes.ReceptorImpl;
 import uy.edu.curso.interfaces.GestorDeReceptores;
 import uy.edu.curso.interfaces.Receptor;
-import uy.edu.curso.tda.TDAColaEnlazada;
 import uy.edu.curso.tda.TDAListaEnlazada;
 
 
 public class GestorDeReceptoresImpl implements GestorDeReceptores {
 
     private final TDAListaEnlazada<Receptor> listaDeReceptores;
-    private final TDAColaEnlazada<Receptor> colaDePrioridadDeReceptores;
+    private final TDAListaEnlazada<Receptor> listaDePrioridadDeReceptores;
 
     public GestorDeReceptoresImpl() {
         this.listaDeReceptores = new ListaEnlazada<>();
-        this.colaDePrioridadDeReceptores = new ColaEnlazada<>();
+        this.listaDePrioridadDeReceptores = new ListaEnlazada<>();
     }
 
     @Override
@@ -25,8 +23,8 @@ public class GestorDeReceptoresImpl implements GestorDeReceptores {
     }
 
     @Override
-    public TDAColaEnlazada<Receptor> getColaDePrioridadDeReceptores() {
-        return this.colaDePrioridadDeReceptores;
+    public TDAListaEnlazada<Receptor> getListaDePrioridadDeReceptores() {
+        return this.listaDePrioridadDeReceptores;
     }
 
     @Override
@@ -44,23 +42,23 @@ public class GestorDeReceptoresImpl implements GestorDeReceptores {
     }
 
     @Override
-    public void insertarReceptorEnLaCola(Receptor nuevoReceptor) {
-        int tamañoDeLaColaDePrioridad = this.colaDePrioridadDeReceptores.tamaño();
+    public void insertarReceptorEnLaListaDePrioridad(Receptor nuevoReceptor) {
+        int tamañoDeLaListaDePrioridad = this.listaDePrioridadDeReceptores.tamaño();
         int i = 0;
 
-        while (i < tamañoDeLaColaDePrioridad) {
-            Receptor receptorActual = this.colaDePrioridadDeReceptores.obtener(i);
+        while (i < tamañoDeLaListaDePrioridad) {
+            Receptor receptorActual = this.listaDePrioridadDeReceptores.obtener(i);
             boolean mayorPrioridad = nuevoReceptor.getPuntajeDePrioridad() > receptorActual.getPuntajeDePrioridad();
             boolean igualPrioridadConDesempate = (nuevoReceptor.getPuntajeDePrioridad() == receptorActual.getPuntajeDePrioridad())
                     && (nuevoReceptor.getEdad() < receptorActual.getEdad());
 
             if (mayorPrioridad || igualPrioridadConDesempate) {
-                this.colaDePrioridadDeReceptores.agregar(i, nuevoReceptor);
+                this.listaDePrioridadDeReceptores.agregar(i, nuevoReceptor);
                 return;
             }
             i++;
         }
-        this.colaDePrioridadDeReceptores.poneEnCola(nuevoReceptor);
+        this.listaDePrioridadDeReceptores.agregar(nuevoReceptor);
     }
 
     @Override
@@ -83,7 +81,7 @@ public class GestorDeReceptoresImpl implements GestorDeReceptores {
     @Override
     public void eliminarReceptor(String cedulaDeIdentidadReceptor) {
         int tamañoDeLaListaDeReceptores = this.listaDeReceptores.tamaño();
-        int tamañoDeLaColaDePrioridad = this.colaDePrioridadDeReceptores.tamaño();
+        int tamañoDeLaListaDePrioridad = this.listaDePrioridadDeReceptores.tamaño();
         int i = 0;
         int j = 0;
 
@@ -96,11 +94,11 @@ public class GestorDeReceptoresImpl implements GestorDeReceptores {
             }
             i++;
         }
-        while (j < tamañoDeLaColaDePrioridad) {
-            Receptor receptorEncontrado = this.colaDePrioridadDeReceptores.obtener(j);
+        while (j < tamañoDeLaListaDePrioridad) {
+            Receptor receptorEncontrado = this.listaDePrioridadDeReceptores.obtener(j);
 
             if (receptorEncontrado.getCedulaDeIdentidad().equals(cedulaDeIdentidadReceptor)) {
-                this.colaDePrioridadDeReceptores.remover(j);
+                this.listaDePrioridadDeReceptores.remover(j);
                 break;
             }
             j++;
