@@ -3,17 +3,18 @@ package uy.edu.curso.classes;
 import uy.edu.curso.interfaces.Donante;
 import uy.edu.curso.interfaces.Organo;
 
+
 public class OrganoImpl implements Organo {
 
-    private static final String[][] COMPATIBILIDADES = {
-        { "A+", "A+", "AB+" },
-        { "A-", "A+", "A-", "AB+", "AB-" },
-        { "B+", "B+", "AB+" },
-        { "B-", "B+", "B-", "AB+", "AB-" },
-        { "AB+", "AB+" },
-        { "AB-", "AB+", "AB-" },
-        { "O+", "A+", "B+", "AB+", "O+" },
-        { "O-", "A+", "A-", "B+", "B-", "AB+", "AB-", "O+", "O-" }
+    private static final String[] COMPATIBILIDADES = { 
+        "A+A+", "A+AB+", 
+        "A-A+", "A-A-", "A-AB+", "A-AB-", 
+        "B+B+", "B+AB+", 
+        "B-B+", "B-B-", "B-AB+", "B-AB-", 
+        "AB+AB+", 
+        "AB-AB+", "AB-AB-",
+        "O+A+", "O+B+", "O+AB+", "O+O+",
+        "O-A+", "O-A-", "O-B+", "O-B-", "O-AB+", "O-AB-", "O-O+", "O-O-"
     };
     private static long contadorDeOrganosExistentes = 0;
     private final long identificador;
@@ -67,13 +68,11 @@ public class OrganoImpl implements Organo {
 
     @Override
     public boolean esCompatible(String tipoDeSangreDelReceptor) {
-        for (String[] fila : COMPATIBILIDADES) {
-            if (fila[0].equals(this.tipoDeSangre)) {
-                for (int i = 1; i < fila.length; i++) {
-                    if (fila[i].equals(tipoDeSangreDelReceptor)) {
-                        return true;
-                    }
-                }
+        String combinacion = this.getTipoDeSangre() + tipoDeSangreDelReceptor;
+
+        for (String combinacionCompatible : COMPATIBILIDADES) {
+            if (combinacion.equals(combinacionCompatible)) {
+                return true;
             }
         }
 

@@ -38,9 +38,7 @@ public class GestorDeTrasplantesImpl implements GestorDeTrasplantes {
                 listaDePrioridadDeReceptores.remover(receptorEncontrado);
                 listaDeReceptores.remover(receptorEncontrado);
                 listaDeOrganosDisponibles.remover(organo);
-
                 this.listaDeTrasplantesRealizados.agregar(nuevoTrasplanteRealizado);
-
                 break;
             }
         }
