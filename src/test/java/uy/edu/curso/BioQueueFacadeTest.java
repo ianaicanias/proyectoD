@@ -34,6 +34,7 @@ public class BioQueueFacadeTest {
 
     @AfterAll
     public static void finalizacion() {
+        BioQueueFacade.resetearInstancia();
         System.out.println("Tests de la Facade BioQueueFacade finalizados. . .");
     }
 

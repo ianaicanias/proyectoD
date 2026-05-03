@@ -2,6 +2,7 @@ package uy.edu.curso.services;
 
 import uy.edu.curso.ListaEnlazada;
 import uy.edu.curso.classes.TrasplanteImpl;
+import uy.edu.curso.interfaces.ConsultorDeCompatibilidadSanguinea;
 import uy.edu.curso.interfaces.GestorDeTrasplantes;
 import uy.edu.curso.interfaces.Organo;
 import uy.edu.curso.interfaces.Receptor;
@@ -12,9 +13,11 @@ import uy.edu.curso.tda.TDAListaEnlazada;
 public class GestorDeTrasplantesImpl implements GestorDeTrasplantes {
 
     private final TDAListaEnlazada<Trasplante> listaDeTrasplantesRealizados;
+    private final ConsultorDeCompatibilidadSanguinea consultorDeCompatibilidadSanguinea;
 
-    public GestorDeTrasplantesImpl() {
+    public GestorDeTrasplantesImpl(ConsultorDeCompatibilidadSanguinea consultorDeCompatibilidadSanguinea) {
         this.listaDeTrasplantesRealizados = new ListaEnlazada<>();
+        this.consultorDeCompatibilidadSanguinea = consultorDeCompatibilidadSanguinea;
     }
 
     @Override
@@ -29,7 +32,8 @@ public class GestorDeTrasplantesImpl implements GestorDeTrasplantes {
 
         for (int i = 0; i < tamañoDeLaColaDePrioridad; i++) {
             Receptor receptorEncontrado = listaDePrioridadDeReceptores.obtener(i);
-            boolean esCompatible = organo.esCompatible(receptorEncontrado.getTipoDeSangre());
+            boolean esCompatible = consultorDeCompatibilidadSanguinea.esCompatible(
+                    organo.getTipoDeSangre(), receptorEncontrado.getTipoDeSangre());
             boolean esMismoOrgano = organo.getNombre().equals(receptorEncontrado.getTipoDeOrgano());
 
             if (esCompatible && esMismoOrgano) {

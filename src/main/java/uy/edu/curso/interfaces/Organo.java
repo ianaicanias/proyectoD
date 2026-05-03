@@ -17,6 +17,4 @@ public interface Organo {
 
     void setTipoDeSangre(String tipoDeSangre);
 
-    boolean esCompatible(String tipoDeSangreDelReceptor);
-
 }

@@ -1,5 +1,6 @@
 package uy.edu.curso.facade;
 
+import uy.edu.curso.interfaces.ConsultorDeCompatibilidadSanguinea;
 import uy.edu.curso.interfaces.Donante;
 import uy.edu.curso.interfaces.GestorDeDonantes;
 import uy.edu.curso.interfaces.GestorDeOrganos;
@@ -8,6 +9,7 @@ import uy.edu.curso.interfaces.GestorDeTrasplantes;
 import uy.edu.curso.interfaces.Organo;
 import uy.edu.curso.interfaces.Receptor;
 import uy.edu.curso.interfaces.Trasplante;
+import uy.edu.curso.services.ConsultorDeCompatibilidadSanguineaImpl;
 import uy.edu.curso.services.GestorDeDonantesImpl;
 import uy.edu.curso.services.GestorDeOrganosImpl;
 import uy.edu.curso.services.GestorDeReceptoresImpl;
@@ -27,7 +29,9 @@ public class BioQueueFacade {
         this.gestorDeReceptores = new GestorDeReceptoresImpl();
         this.gestorDeDonantes = new GestorDeDonantesImpl();
         this.gestorDeOrganos = new GestorDeOrganosImpl();
-        this.gestorDeTrasplantes = new GestorDeTrasplantesImpl();
+        
+        ConsultorDeCompatibilidadSanguinea consultorDeCompatibilidadSanguinea = new ConsultorDeCompatibilidadSanguineaImpl();
+        this.gestorDeTrasplantes = new GestorDeTrasplantesImpl(consultorDeCompatibilidadSanguinea);
     }
 
     public static BioQueueFacade getInstancia() {
@@ -115,6 +119,20 @@ public class BioQueueFacade {
 
     public String listarTrasplantesRealizados() {
         return this.gestorDeTrasplantes.listarTrasplantesRealizados();
+    }
+
+    /* Únicamente para el uso de Tests, en su versión oficial debe ser eliminado. */
+    
+    public static void resetearInstancia() {
+        instancia = null;
+    }
+
+    public int getCantidadDeReceptores() {
+        return this.gestorDeReceptores.getListaDeReceptores().tamaño();
+    }
+
+    public int getCantidadDeDonantes() {
+        return this.gestorDeDonantes.getListaDeDonantes().tamaño();
     }
 
 }
