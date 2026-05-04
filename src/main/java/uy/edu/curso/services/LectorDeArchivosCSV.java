@@ -1,3 +1,15 @@
+/*
+ * Clase: LectorDeArchivosCSV.
+ * Programadores: Axel Ferreira, Ianai Canias, Thiago Soca, Valentín Guerrico.
+ * Fecha: 03/05/2026.
+ * Copyright: Todos los derechos reservados para los programadores de este archivo, 2026.
+ *
+ * Resumen:
+ * La siguiente clase representa la implementación concreta del lector de archivos
+ * en el sistema BioQueue. Implementa la interfaz LectorDeArchivos y permite la
+ * carga automática de receptores y donantes desde archivos CSV, delegando el
+ * registro de cada entidad a la fachada del sistema.
+ */
 package uy.edu.curso.services;
 
 import java.io.File;
@@ -10,14 +22,43 @@ import uy.edu.curso.interfaces.LectorDeArchivos;
 import uy.edu.curso.interfaces.Receptor;
 
 
+/**
+ * Implementación concreta del lector de archivos CSV del sistema BioQueue.
+ * Implementa @see LectorDeArchivos y permite la carga masiva de receptores
+ * y donantes desde archivos CSV, registrándolos en el sistema a través de
+ * la fachada. 
+ * 
+ * El formato esperado del CSV de receptores es:
+ * cedulaDeIdentidad, nombre, tipoDeOrgano, tipoDeSangre, edad, puntajeDePrioridad.
+ * 
+ * El formato esperado del CSV de donantes es:
+ * cedulaDeIdentidad, nombre, tipoDeOrgano, tipoDeSangre, edad.
+ */
 public class LectorDeArchivosCSV implements LectorDeArchivos {
 
+    /**
+     * Fachada del sistema utilizada para registrar los receptores y donantes
+     * leídos desde los archivos CSV.
+     */
     private final BioQueueFacade bioQueue;
 
+    /**
+     * Constructor de la clase LectorDeArchivosCSV.
+     *
+     * @param bioQueue Fachada del sistema BioQueue a utilizar para el registro.
+     */
     public LectorDeArchivosCSV(BioQueueFacade bioQueue) {
         this.bioQueue = bioQueue;
     }
 
+    /**
+     * Carga receptores desde un archivo CSV e intenta registrar cada uno en el sistema.
+     * Si un receptor ya existe (cédula duplicada), se informa por consola y se omite.
+     * Si el archivo no se encuentra, se informa por consola y no se realiza ninguna acción.
+     * El scanner se cierra siempre en el bloque finally.
+     *
+     * @param rutaDelArchivoDeReceptores Ruta del archivo CSV con los datos de los receptores.
+     */
     @Override
     public void cargarReceptores(String rutaDelArchivoDeReceptores) {
         Scanner scanner = null;
@@ -55,6 +96,14 @@ public class LectorDeArchivosCSV implements LectorDeArchivos {
         }
     }
 
+    /**
+     * Carga donantes desde un archivo CSV e intenta registrar cada uno en el sistema.
+     * Si un donante ya existe (cédula duplicada), se informa por consola y se omite.
+     * Si el archivo no se encuentra, se informa por consola y no se realiza ninguna acción.
+     * El scanner se cierra siempre en el bloque finally.
+     *
+     * @param rutaDelArchivoDeDonantes Ruta del archivo CSV con los datos de los donantes.
+     */
     @Override
     public void cargarDonantes(String rutaDelArchivoDeDonantes) {
         Scanner scanner = null;

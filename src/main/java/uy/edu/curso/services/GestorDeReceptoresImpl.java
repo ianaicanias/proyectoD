@@ -1,3 +1,15 @@
+/*
+ * Clase: GestorDeReceptoresImpl.
+ * Programadores: Axel Ferreira, Ianai Canias, Thiago Soca, Valentín Guerrico.
+ * Fecha: 03/05/2026.
+ * Copyright: Todos los derechos reservados para los programadores de este archivo, 2026.
+ *
+ * Resumen:
+ * La siguiente clase representa la implementación concreta del gestor de receptores
+ * en el sistema BioQueue. Implementa la interfaz GestorDeReceptores y administra
+ * dos listas: el registro general de receptores y la lista de prioridad de receptores
+ * en espera de trasplante, ordenada por puntaje de prioridad y edad como desempate.
+ */
 package uy.edu.curso.services;
 
 import uy.edu.curso.ListaEnlazada;
@@ -7,26 +19,69 @@ import uy.edu.curso.interfaces.Receptor;
 import uy.edu.curso.tda.TDAListaEnlazada;
 
 
+/**
+ * Implementación concreta del gestor de receptores del sistema BioQueue.
+ * Implementa @see GestorDeReceptores y administra dos listas: el registro
+ * general de todos los receptores del sistema, y la lista de prioridad
+ * que mantiene ordenados a los receptores en espera de trasplante según
+ * su puntaje de prioridad, usando la edad como criterio de desempate.
+ */
 public class GestorDeReceptoresImpl implements GestorDeReceptores {
 
+    /**
+     * Lista enlazada que almacena el registro general de todos los receptores
+     * registrados en el sistema.
+     */
     private final TDAListaEnlazada<Receptor> listaDeReceptores;
+
+    /**
+     * Lista enlazada que almacena los receptores en espera activa de trasplante,
+     * ordenada por puntaje de prioridad de mayor a menor. En caso de empate,
+     * se prioriza al receptor de menor edad.
+     */
     private final TDAListaEnlazada<Receptor> listaDePrioridadDeReceptores;
 
+    /**
+     * Constructor de la clase GestorDeReceptoresImpl. Inicializa ambas listas vacías.
+     */
     public GestorDeReceptoresImpl() {
         this.listaDeReceptores = new ListaEnlazada<>();
         this.listaDePrioridadDeReceptores = new ListaEnlazada<>();
     }
 
+    /**
+     * Retorna el registro general de todos los receptores del sistema.
+     *
+     * @return Lista enlazada con todos los receptores registrados.
+     */
     @Override
     public TDAListaEnlazada<Receptor> getListaDeReceptores() {
         return this.listaDeReceptores;
     }
 
+    /**
+     * Retorna la lista de receptores en espera activa de trasplante,
+     * ordenada por prioridad.
+     *
+     * @return Lista enlazada de receptores ordenada por prioridad.
+     */
     @Override
     public TDAListaEnlazada<Receptor> getListaDePrioridadDeReceptores() {
         return this.listaDePrioridadDeReceptores;
     }
 
+    /**
+     * Registra un nuevo receptor en el sistema. Si ya existe un receptor con
+     * la misma cédula de identidad, no se registra y retorna {@code null}.
+     *
+     * @param cedulaDeIdentidad      Cédula de identidad única del receptor.
+     * @param nombre                 Nombre completo del receptor.
+     * @param tipoDeOrganoNecesitado Tipo de órgano que el receptor necesita.
+     * @param tipoDeSangre           Tipo de sangre del receptor.
+     * @param edad                   Edad del receptor en años.
+     * @param puntajeDePrioridad     Puntaje de prioridad clínica del receptor.
+     * @return El receptor creado, o {@code null} si ya existe un receptor con esa cédula.
+     */
     @Override
     public Receptor registrarReceptor(String cedulaDeIdentidad, String nombre, String tipoDeOrganoNecesitado,
             String tipoDeSangre, byte edad, byte puntajeDePrioridad) {
@@ -41,6 +96,13 @@ public class GestorDeReceptoresImpl implements GestorDeReceptores {
         return nuevoReceptor;
     }
 
+    /**
+     * Inserta un receptor en la lista de prioridad manteniendo el orden
+     * de mayor a menor puntaje. En caso de igual puntaje, se ubica antes
+     * al receptor de menor edad.
+     *
+     * @param nuevoReceptor Receptor a insertar en la lista de prioridad.
+     */
     @Override
     public void insertarReceptorEnLaListaDePrioridad(Receptor nuevoReceptor) {
         int tamañoDeLaListaDePrioridad = this.listaDePrioridadDeReceptores.tamaño();
@@ -61,6 +123,12 @@ public class GestorDeReceptoresImpl implements GestorDeReceptores {
         this.listaDePrioridadDeReceptores.agregar(nuevoReceptor);
     }
 
+    /**
+     * Busca un receptor en el sistema por su cédula de identidad.
+     *
+     * @param cedulaDeIdentidadReceptor Cédula de identidad del receptor a buscar.
+     * @return El receptor encontrado, o {@code null} si no existe.
+     */
     @Override
     public Receptor buscarReceptor(String cedulaDeIdentidadReceptor) {
         int tamañoDeLaListaDeReceptores = this.listaDeReceptores.tamaño();
@@ -78,6 +146,13 @@ public class GestorDeReceptoresImpl implements GestorDeReceptores {
         return null;
     }
 
+    /**
+     * Elimina un receptor del sistema por su cédula de identidad,
+     * removiéndolo tanto del registro general como de la lista de prioridad.
+     * Si no existe un receptor con esa cédula, no realiza ninguna acción.
+     *
+     * @param cedulaDeIdentidadReceptor Cédula de identidad del receptor a eliminar.
+     */
     @Override
     public void eliminarReceptor(String cedulaDeIdentidadReceptor) {
         int tamañoDeLaListaDeReceptores = this.listaDeReceptores.tamaño();
@@ -105,6 +180,12 @@ public class GestorDeReceptoresImpl implements GestorDeReceptores {
         }
     }
 
+    /**
+     * Retorna una cadena con el listado de todos los receptores registrados,
+     * incluyendo nombre, cédula, tipo de órgano, tipo de sangre y edad.
+     *
+     * @return Listado de receptores en formato texto.
+     */
     @Override
     public String listarReceptores() {
         int tamañoDeLaListaDeReceptores = this.listaDeReceptores.tamaño();
