@@ -60,7 +60,7 @@ public interface GestorDeReceptores {
      *
      * @param nuevoReceptor Receptor a insertar en la lista de prioridad.
      */
-    void insertarReceptorEnLaListaDePrioridad(Receptor receptor);
+    void insertarReceptorEnLaListaDePrioridad(Receptor nuevoReceptor);
 
     /**
      * Busca un receptor en el sistema por su cédula de identidad.
@@ -68,7 +68,7 @@ public interface GestorDeReceptores {
      * @param cedulaDeIdentidadReceptor Cédula de identidad del receptor a buscar.
      * @return El receptor encontrado, o {@code null} si no existe.
      */
-    Receptor buscarReceptor(String cedulaDeIdentidad);
+    Receptor buscarReceptor(String cedulaDeIdentidadReceptor);
 
     /**
      * Elimina un receptor del sistema por su cédula de identidad,
@@ -77,7 +77,7 @@ public interface GestorDeReceptores {
      *
      * @param cedulaDeIdentidadReceptor Cédula de identidad del receptor a eliminar.
      */
-    void eliminarReceptor(String cedulaDeIdentidad);
+    void eliminarReceptor(String cedulaDeIdentidadReceptor);
 
     /**
      * Retorna una cadena con el listado de todos los receptores registrados,

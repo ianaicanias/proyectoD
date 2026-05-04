@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<testsuite xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="https://maven.apache.org/surefire/maven-surefire-plugin/xsd/surefire-test-report-3.0.xsd" version="3.0" name="uy.edu.curso.LectorDeArchivosCSVTest" time="0.071" tests="6" errors="0" skipped="0" failures="0">
+<testsuite xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="https://maven.apache.org/surefire/maven-surefire-plugin/xsd/surefire-test-report-3.0.xsd" version="3.0" name="uy.edu.curso.LectorDeArchivosCSVTest" time="0.094" tests="6" errors="0" skipped="0" failures="0">
   <properties>
     <property name="java.specification.version" value="17"/>
     <property name="sun.cpu.isalist" value="amd64"/>
@@ -15,7 +15,7 @@
     <property name="sun.java.launcher" value="SUN_STANDARD"/>
     <property name="user.country" value="ES"/>
     <property name="sun.boot.library.path" value="C:\Program Files\Eclipse Adoptium\jdk-17.0.16.8-hotspot\bin"/>
-    <property name="sun.java.command" value="C:\Users\gf352\AppData\Local\Temp\surefire13580434238004701990\surefirebooter-20260503231137437_3.jar C:\Users\gf352\AppData\Local\Temp\surefire13580434238004701990 2026-05-03T23-11-37_202-jvmRun1 surefire-20260503231137437_1tmp surefire_0-20260503231137437_2tmp"/>
+    <property name="sun.java.command" value="C:\Users\gf352\AppData\Local\Temp\surefire8583376321616770367\surefirebooter-20260504124959311_3.jar C:\Users\gf352\AppData\Local\Temp\surefire8583376321616770367 2026-05-04T12-49-59_015-jvmRun1 surefire-20260504124959311_1tmp surefire_0-20260504124959311_2tmp"/>
     <property name="jdk.debug" value="release"/>
     <property name="surefire.test.class.path" value="C:\Users\gf352\OneDrive\Desktop\proyectoD\target\test-classes;C:\Users\gf352\OneDrive\Desktop\proyectoD\target\classes;C:\Users\gf352\.m2\repository\org\junit\jupiter\junit-jupiter\5.10.0\junit-jupiter-5.10.0.jar;C:\Users\gf352\.m2\repository\org\junit\jupiter\junit-jupiter-api\5.10.0\junit-jupiter-api-5.10.0.jar;C:\Users\gf352\.m2\repository\org\opentest4j\opentest4j\1.3.0\opentest4j-1.3.0.jar;C:\Users\gf352\.m2\repository\org\junit\platform\junit-platform-commons\1.10.0\junit-platform-commons-1.10.0.jar;C:\Users\gf352\.m2\repository\org\apiguardian\apiguardian-api\1.1.2\apiguardian-api-1.1.2.jar;C:\Users\gf352\.m2\repository\org\junit\jupiter\junit-jupiter-params\5.10.0\junit-jupiter-params-5.10.0.jar;C:\Users\gf352\.m2\repository\org\junit\jupiter\junit-jupiter-engine\5.10.0\junit-jupiter-engine-5.10.0.jar;C:\Users\gf352\.m2\repository\org\junit\platform\junit-platform-engine\1.10.0\junit-platform-engine-1.10.0.jar;"/>
     <property name="sun.cpu.endian" value="little"/>
@@ -30,7 +30,7 @@
     <property name="line.separator" value="&#10;"/>
     <property name="java.vm.specification.vendor" value="Oracle Corporation"/>
     <property name="java.specification.name" value="Java Platform API Specification"/>
-    <property name="surefire.real.class.path" value="C:\Users\gf352\AppData\Local\Temp\surefire13580434238004701990\surefirebooter-20260503231137437_3.jar"/>
+    <property name="surefire.real.class.path" value="C:\Users\gf352\AppData\Local\Temp\surefire8583376321616770367\surefirebooter-20260504124959311_3.jar"/>
     <property name="user.script" value=""/>
     <property name="sun.management.compiler" value="HotSpot 64-Bit Tiered Compilers"/>
     <property name="java.runtime.version" value="17.0.16+8"/>
@@ -58,7 +58,7 @@
     <property name="sun.io.unicode.encoding" value="UnicodeLittle"/>
     <property name="java.class.version" value="61.0"/>
   </properties>
-  <testcase name="cargarReceptores_archivoCSVCorrecto_registraCorrectamenteTodosLosReceptoresIngresados" classname="uy.edu.curso.LectorDeArchivosCSVTest" time="0.024">
+  <testcase name="cargarReceptores_archivoCSVCorrecto_registraCorrectamenteTodosLosReceptoresIngresados" classname="uy.edu.curso.LectorDeArchivosCSVTest" time="0.029">
     <system-out><![CDATA[Inicializando los tests. . .
 El receptor de nombre: SofÃ­a RodrÃ­guez con cédula: 95822412 fue registrado correctamente.
 El receptor de nombre: Monica SÃ¡nchez con cédula: 28728463 fue registrado correctamente.
@@ -162,7 +162,7 @@ El receptor de nombre: SebastiÃ¡n Cruz con cédula: 15512205 fue registrado co
 El receptor de nombre: Daniela GarcÃ­a con cédula: 96911784 fue registrado correctamente.
 ]]></system-out>
   </testcase>
-  <testcase name="cargarDonantes_archivoCSVCorrecto_registraCorrectamenteTodosLosReceptoresIngresados" classname="uy.edu.curso.LectorDeArchivosCSVTest" time="0.012">
+  <testcase name="cargarDonantes_archivoCSVCorrecto_registraCorrectamenteTodosLosReceptoresIngresados" classname="uy.edu.curso.LectorDeArchivosCSVTest" time="0.02">
     <system-out><![CDATA[El donante de nombre: Bruno Vega con cédula: 58612055 fue registrado correctamente.
 El donante de nombre: HernÃ¡n Herrera con cédula: 33640702 fue registrado correctamente.
 El donante de nombre: Facundo Vega con cédula: 82232344 fue registrado correctamente.
@@ -265,15 +265,15 @@ El donante de nombre: Romina PÃ©rez con cédula: 26395999 fue registrado corre
 El donante de nombre: Maximiliano RodrÃ­guez con cédula: 95831286 fue registrado correctamente.
 ]]></system-out>
   </testcase>
-  <testcase name="cargarReceptores_archivoCSVNoExistente_lanzaFileNotFoundExceptionIndicandoQueNoSePudoAccederAlArchivoSolicitado" classname="uy.edu.curso.LectorDeArchivosCSVTest" time="0.005">
+  <testcase name="cargarReceptores_archivoCSVNoExistente_lanzaFileNotFoundExceptionIndicandoQueNoSePudoAccederAlArchivoSolicitado" classname="uy.edu.curso.LectorDeArchivosCSVTest" time="0.007">
     <system-out><![CDATA[No se pudo encontrar el archivo solicitado. . .
 ]]></system-out>
   </testcase>
-  <testcase name="cargarDonantes_archivoCSVNoExistente_lanzaFileNotFoundExceptionIndicandoQueNoSePudoAccederAlArchivoSolicitado" classname="uy.edu.curso.LectorDeArchivosCSVTest" time="0.001">
+  <testcase name="cargarDonantes_archivoCSVNoExistente_lanzaFileNotFoundExceptionIndicandoQueNoSePudoAccederAlArchivoSolicitado" classname="uy.edu.curso.LectorDeArchivosCSVTest" time="0.002">
     <system-out><![CDATA[No se pudo encontrar el archivo solicitado. . .
 ]]></system-out>
   </testcase>
-  <testcase name="cargarReceptores_archivoCSVCorrectoPeroConReceptoresRepetidos_registraCorrectamenteTodosLosReceptoresIngresadosEvitandoDuplicados" classname="uy.edu.curso.LectorDeArchivosCSVTest" time="0.01">
+  <testcase name="cargarReceptores_archivoCSVCorrectoPeroConReceptoresRepetidos_registraCorrectamenteTodosLosReceptoresIngresadosEvitandoDuplicados" classname="uy.edu.curso.LectorDeArchivosCSVTest" time="0.016">
     <system-out><![CDATA[El receptor de nombre: Daniela SÃ¡nchez con cédula: 20846997 fue registrado correctamente.
 El receptor de nombre: Roberto Romero con cédula: 61103753 fue registrado correctamente.
 El receptor de nombre: Felipe Reyes con cédula: 43708917 fue registrado correctamente.
@@ -376,7 +376,7 @@ El receptor de nombre: Isabella FernÃ¡ndez con cédula: 27883760 no pudo ser r
 El receptor de nombre: SebastiÃ¡n Ruiz con cédula: 71939238 fue registrado correctamente.
 ]]></system-out>
   </testcase>
-  <testcase name="cargarDonantes_archivoCSVCorrectoPeroConDonantesRepetidos_registraCorrectamenteTodosLosDonantesIngresadosEvitandoDuplicados" classname="uy.edu.curso.LectorDeArchivosCSVTest" time="0.009">
+  <testcase name="cargarDonantes_archivoCSVCorrectoPeroConDonantesRepetidos_registraCorrectamenteTodosLosDonantesIngresadosEvitandoDuplicados" classname="uy.edu.curso.LectorDeArchivosCSVTest" time="0.012">
     <system-out><![CDATA[El donante de nombre: Micaela GarcÃ­a con cédula: 39005034 fue registrado correctamente.
 El donante de nombre: Ana SÃ¡nchez con cédula: 39075067 fue registrado correctamente.
 El donante de nombre: VerÃ³nica Ruiz con cédula: 12797042 fue registrado correctamente.

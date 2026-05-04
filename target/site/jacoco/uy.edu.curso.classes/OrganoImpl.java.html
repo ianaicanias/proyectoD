@@ -1,60 +1,147 @@
-<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="es"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>OrganoImpl.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">proyectoD</a> &gt; <a href="index.source.html" class="el_package">uy.edu.curso.classes</a> &gt; <span class="el_source">OrganoImpl.java</span></div><h1>OrganoImpl.java</h1><pre class="source lang-java linenums">package uy.edu.curso.classes;
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="es"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>OrganoImpl.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">proyectoD</a> &gt; <a href="index.source.html" class="el_package">uy.edu.curso.classes</a> &gt; <span class="el_source">OrganoImpl.java</span></div><h1>OrganoImpl.java</h1><pre class="source lang-java linenums">/*
+ * Clase: OrganoImpl.
+ * Programadores: Axel Ferreira, Ianai Canias, Thiago Soca, Valentín Guerrico.
+ * Fecha: 03/05/2026.
+ * Copyright: Todos los derechos reservados para los programadores de este archivo, 2026.
+ *
+ * Resumen:
+ * La siguiente clase representa la implementación concreta de un órgano disponible
+ * para trasplante en el sistema BioQueue. Implementa la interfaz Organo y mantiene
+ * un identificador único autoincremental por cada instancia creada, además de
+ * determinar automáticamente si el órgano es de origen infantil según la edad del donante.
+ */
+package uy.edu.curso.classes;
 
 import uy.edu.curso.interfaces.Donante;
 import uy.edu.curso.interfaces.Organo;
 
 
+/**
+ * Implementación concreta de un órgano disponible para trasplante en el sistema BioQueue.
+ * Implementa @see Organo y genera automáticamente un identificador único por cada
+ * instancia creada. El órgano hereda el tipo de sangre del donante y determina
+ * si es de origen infantil en base a su edad.
+ */
 public class OrganoImpl implements Organo {
 
-<span class="fc" id="L9">    private static long contadorDeOrganosExistentes = 0;</span>
+    /**
+     * Contador estático que se incrementa con cada nuevo órgano creado,
+     * garantizando identificadores únicos en el sistema.
+     */
+<span class="fc" id="L31">    private static long contadorDeOrganosExistentes = 0;</span>
+
+    /**
+     * Identificador único e inmutable del órgano.
+     */
     private final long identificador;
+
+    /**
+     * Indica si el órgano proviene de un donante menor de 18 años.
+     * Se determina automáticamente al momento de la creación.
+     */
     private final boolean esInfantil;
+
+    /**
+     * Donante al que pertenece el órgano. Inmutable una vez asignado.
+     */
     private final Donante donanteDelOrgano;
+
+    /**
+     * Nombre del órgano (ej: &quot;Corazón&quot;, &quot;Riñón&quot;).
+     */
     private String nombre;
+
+    /**
+     * Tipo de sangre del órgano, heredado del donante al momento de la creación.
+     */
     private String tipoDeSangre;
 
-<span class="fc" id="L16">    public OrganoImpl(String nombre, Donante donante) {</span>
-<span class="fc" id="L17">        this.identificador = ++contadorDeOrganosExistentes;</span>
-<span class="fc bfc" id="L18" title="All 2 branches covered.">        this.esInfantil = donante.getEdad() &lt; 18;</span>
-<span class="fc" id="L19">        this.donanteDelOrgano = donante;</span>
-<span class="fc" id="L20">        this.nombre = nombre;</span>
-<span class="fc" id="L21">        this.tipoDeSangre = donante.getTipoDeSangre();</span>
-<span class="fc" id="L22">    }</span>
+    /**
+     * Constructor de la clase OrganoImpl. Asigna automáticamente el identificador único,
+     * determina si el órgano es infantil y obtiene el tipo de sangre del donante.
+     *
+     * @param nombre  Nombre del órgano.
+     * @param donante Donante del cual proviene el órgano.
+     */
+<span class="fc" id="L66">    public OrganoImpl(String nombre, Donante donante) {</span>
+<span class="fc" id="L67">        this.identificador = ++contadorDeOrganosExistentes;</span>
+<span class="fc bfc" id="L68" title="All 2 branches covered.">        this.esInfantil = donante.getEdad() &lt; 18;</span>
+<span class="fc" id="L69">        this.donanteDelOrgano = donante;</span>
+<span class="fc" id="L70">        this.nombre = nombre;</span>
+<span class="fc" id="L71">        this.tipoDeSangre = donante.getTipoDeSangre();</span>
+<span class="fc" id="L72">    }</span>
 
+    /**
+     * Retorna el identificador único del órgano.
+     *
+     * @return Identificador del órgano.
+     */
     @Override
     public long getIdentificador() {
-<span class="fc" id="L26">        return this.identificador;</span>
+<span class="fc" id="L81">        return this.identificador;</span>
     }
 
+    /**
+     * Indica si el órgano proviene de un donante menor de 18 años.
+     *
+     * @return {@code true} si el donante era menor de 18 años, {@code false} en caso contrario.
+     */
     @Override
     public boolean getEsInfantil() {
-<span class="fc" id="L31">        return this.esInfantil;</span>
+<span class="fc" id="L91">        return this.esInfantil;</span>
     }
 
+    /**
+     * Retorna el nombre del órgano.
+     *
+     * @return Nombre del órgano.
+     */
     @Override
     public String getNombre() {
-<span class="fc" id="L36">        return this.nombre;</span>
+<span class="fc" id="L101">        return this.nombre;</span>
     }
 
+    /**
+     * Retorna el tipo de sangre del órgano.
+     *
+     * @return Tipo de sangre del órgano.
+     */
     @Override
     public String getTipoDeSangre() {
-<span class="fc" id="L41">        return this.tipoDeSangre;</span>
+<span class="fc" id="L111">        return this.tipoDeSangre;</span>
     }
 
+    /**
+     * Retorna el donante al que pertenece el órgano.
+     *
+     * @return Donante del órgano.
+     */
     @Override
     public Donante getDonanteDelOrgano() {
-<span class="fc" id="L46">        return this.donanteDelOrgano;</span>
+<span class="fc" id="L121">        return this.donanteDelOrgano;</span>
     }
 
+    /* Métodos pensados para prevenir posibles equivocaciones por parte del usuario. */
+
+    /**
+     * Actualiza el nombre del órgano.
+     *
+     * @param nombre Nuevo nombre del órgano.
+     */
     @Override
     public void setNombre(String nombre) {
-<span class="fc" id="L51">        this.nombre = nombre;</span>
-<span class="fc" id="L52">    }</span>
+<span class="fc" id="L133">        this.nombre = nombre;</span>
+<span class="fc" id="L134">    }</span>
 
+    /**
+     * Actualiza el tipo de sangre del órgano.
+     *
+     * @param tipoDeSangre Nuevo tipo de sangre del órgano.
+     */
     @Override
     public void setTipoDeSangre(String tipoDeSangre) {
-<span class="fc" id="L56">        this.tipoDeSangre = tipoDeSangre;</span>
-<span class="fc" id="L57">    }</span>
+<span class="fc" id="L143">        this.tipoDeSangre = tipoDeSangre;</span>
+<span class="fc" id="L144">    }</span>
 
 }
 </pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.11.202310140853</span></div></body></html>
