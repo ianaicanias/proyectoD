@@ -24,18 +24,22 @@ public abstract class Persona {
      * Cédula de identidad de la persona. Inmutable una vez asignada.
      */
     protected final String cedulaDeIdentidad;
+
     /**
      * Nombre de la persona.
      */
     protected String nombre;
+
     /**
      * Tipo de sangre de la persona.
      */
     protected String tipoDeSangre;
+
     /**
      * Tipo de órgano que solicitará o donará la persona dependiendo de si es receptora o donante.
      */
     protected String tipoDeOrgano;
+    
     /**
      * Edad de la persona.
      */
