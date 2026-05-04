@@ -7,7 +7,7 @@ public interface GestorDeTrasplantes {
 
     TDAListaEnlazada<Trasplante> getListaDeTrasplantesRealizados();
 
-    void asignarOrganoAReceptor(Organo organo, TDAListaEnlazada<Receptor> listaDeReceptores, 
+    boolean asignarOrganoAReceptor(Organo organo, TDAListaEnlazada<Receptor> listaDeReceptores, 
             TDAListaEnlazada<Receptor> listaDePrioridadDeReceptores, TDAListaEnlazada<Organo> listaDeOrganosDisponibles);
     
     Trasplante buscarTrasplante(long identificadorDelTrasplante);

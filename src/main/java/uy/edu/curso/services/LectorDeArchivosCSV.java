@@ -12,10 +12,10 @@ import uy.edu.curso.interfaces.Receptor;
 
 public class LectorDeArchivosCSV implements LectorDeArchivos {
 
-    private final BioQueueFacade facade;
+    private final BioQueueFacade bioQueue;
 
-    public LectorDeArchivosCSV(BioQueueFacade facade) {
-        this.facade = facade;
+    public LectorDeArchivosCSV(BioQueueFacade bioQueue) {
+        this.bioQueue = bioQueue;
     }
 
     @Override
@@ -36,10 +36,11 @@ public class LectorDeArchivosCSV implements LectorDeArchivos {
                 String tipoDeSangre = datosDelNuevoReceptor[3]; 
                 byte edad = Byte.parseByte(datosDelNuevoReceptor[4]); 
                 byte puntajeDePrioridad = Byte.parseByte(datosDelNuevoReceptor[5]);
-                Receptor receptorRegistrado = this.facade.registrarReceptor(cedulaDeIdentidad, nombre, tipoDeOrganoNecesitado, 
+                Receptor receptorRegistrado = this.bioQueue.registrarReceptor(cedulaDeIdentidad, nombre, tipoDeOrganoNecesitado, 
                         tipoDeSangre, edad, puntajeDePrioridad);
 
                 if (receptorRegistrado != null) {
+                    this.bioQueue.insertarReceptorEnLaListaDePrioridad(receptorRegistrado);
                     System.out.println("El receptor de nombre: "+ nombre + " con cédula: " + cedulaDeIdentidad + " fue registrado correctamente.");
                 } else {
                     System.out.println("El receptor de nombre: "+ nombre + " con cédula: " + cedulaDeIdentidad + " no pudo ser registrado.");
@@ -71,7 +72,7 @@ public class LectorDeArchivosCSV implements LectorDeArchivos {
                 String tipoDeOrganoDonado = datosDelNuevoDonante[2];
                 String tipoDeSangre = datosDelNuevoDonante[3]; 
                 byte edad = Byte.parseByte(datosDelNuevoDonante[4]);
-                Donante donanteRegistrado = this.facade.registrarDonante(cedulaDeIdentidad, nombre, 
+                Donante donanteRegistrado = this.bioQueue.registrarDonante(cedulaDeIdentidad, nombre, 
                         tipoDeOrganoDonado, tipoDeSangre, edad);
 
                 if (donanteRegistrado != null) {

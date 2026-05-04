@@ -26,7 +26,7 @@ public class GestorDeTrasplantesImpl implements GestorDeTrasplantes {
     }
 
     @Override
-    public void asignarOrganoAReceptor(Organo organo, TDAListaEnlazada<Receptor> listaDeReceptores, 
+    public boolean asignarOrganoAReceptor(Organo organo, TDAListaEnlazada<Receptor> listaDeReceptores, 
             TDAListaEnlazada<Receptor> listaDePrioridadDeReceptores, TDAListaEnlazada<Organo> listaDeOrganosDisponibles) {
         int tamañoDeLaColaDePrioridad = listaDePrioridadDeReceptores.tamaño();
 
@@ -43,9 +43,12 @@ public class GestorDeTrasplantesImpl implements GestorDeTrasplantes {
                 listaDeReceptores.remover(receptorEncontrado);
                 listaDeOrganosDisponibles.remover(organo);
                 this.listaDeTrasplantesRealizados.agregar(nuevoTrasplanteRealizado);
-                break;
+                
+                return true;
             }
         }
+
+        return false;
     }
 
     @Override

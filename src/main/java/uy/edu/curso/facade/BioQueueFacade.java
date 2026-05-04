@@ -50,11 +50,30 @@ public class BioQueueFacade {
 
     public void insertarReceptorEnLaListaDePrioridad(Receptor receptor) {
         this.gestorDeReceptores.insertarReceptorEnLaListaDePrioridad(receptor);
+        TDAListaEnlazada<Organo> listaDeOrganosDisponibles = this.gestorDeOrganos.getListaDeOrganosDisponibles();
+        int i = 0;
+        
+        while (i < listaDeOrganosDisponibles.tamaño()) {
+            TDAListaEnlazada<Receptor> listaDeReceptoresGeneral = this.gestorDeReceptores.getListaDeReceptores();
+            TDAListaEnlazada<Receptor> listaDePrioridadDeReceptores = this.gestorDeReceptores.getListaDePrioridadDeReceptores();
+            Organo organoDisponible = listaDeOrganosDisponibles.obtener(i);
+
+            boolean fueTrasplantado = this.gestorDeTrasplantes.asignarOrganoAReceptor(organoDisponible, listaDeReceptoresGeneral, 
+                    listaDePrioridadDeReceptores, listaDeOrganosDisponibles);
+
+            if (fueTrasplantado) {
+                break;
+            }
+            i++;
+        }
     }
 
     public Donante registrarDonante(String cedulaDeIdentidad, String nombre, String tipoDeOrganoDonado, String tipoDeSangre, byte edad) {
         Donante nuevoDonante = this.gestorDeDonantes.registrarDonante(cedulaDeIdentidad, nombre, tipoDeOrganoDonado, tipoDeSangre, edad);
-        this.registrarOrgano(tipoDeOrganoDonado, nuevoDonante);
+        
+        if (nuevoDonante != null) {
+            this.registrarOrgano(tipoDeOrganoDonado, nuevoDonante);
+        }
 
         return nuevoDonante;
     }
@@ -121,18 +140,22 @@ public class BioQueueFacade {
         return this.gestorDeTrasplantes.listarTrasplantesRealizados();
     }
 
-    /* Únicamente para el uso de Tests, en su versión oficial debe ser eliminado. */
-    
-    public static void resetearInstancia() {
-        instancia = null;
-    }
-
     public int getCantidadDeReceptores() {
         return this.gestorDeReceptores.getListaDeReceptores().tamaño();
     }
 
     public int getCantidadDeDonantes() {
         return this.gestorDeDonantes.getListaDeDonantes().tamaño();
+    }
+
+    public int getCantidadDeTrasplantes() {
+        return this.gestorDeTrasplantes.getListaDeTrasplantesRealizados().tamaño();
+    }
+
+    /* Únicamente para el uso de Tests, en su versión oficial debe ser eliminado. */
+    
+    public static void resetearInstancia() {
+        instancia = null;
     }
 
 }

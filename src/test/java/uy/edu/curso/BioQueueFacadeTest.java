@@ -268,30 +268,35 @@ public class BioQueueFacadeTest {
     @DisplayName("Buscar un Trasplante Existente")
     public void buscarTrasplante_trasplanteExistente_devuelveElTrasplanteSolicitado() {
         // Arrange
+        int cantidadDeTrasplantesEsperados = bioQueueFacade.getCantidadDeTrasplantes() + 2;
         Receptor receptor = bioQueueFacade.registrarReceptor("11111111", "Juan Perez", 
                 "Riñón", "A+", (byte) 30, (byte) 80);
         bioQueueFacade.insertarReceptorEnLaListaDePrioridad(receptor);
-        bioQueueFacade.registrarDonante("96465787", "Maria Lopez", 
-                "Riñón", "A+", (byte) 25);
-        Donante donante2 = bioQueueFacade.registrarDonante("27372647", "Leandro Lopez", 
-                "Riñón", "A+", (byte) 25);
+        Receptor receptor2 = bioQueueFacade.registrarReceptor("33333333", "Carlos Garcia", 
+                "Riñón", "A+", (byte) 25, (byte) 70);
+        bioQueueFacade.insertarReceptorEnLaListaDePrioridad(receptor2);
+        
+        bioQueueFacade.registrarDonante("96465787", "Maria Lopez", "Riñón", "A+", (byte) 25);
+        Donante donante2 = bioQueueFacade.registrarDonante("27372647", "Leandro Lopez", "Riñón", "A+", (byte) 25);
 
         // Act
         Trasplante trasplanteEncontrado = null;
 
         for (int i = 1; i <= 10; i++) {
             Trasplante trasplanteObtenido = bioQueueFacade.buscarTrasplante(i);
-            
+
             if (trasplanteObtenido != null && trasplanteObtenido.getDonanteDelOrganoDelTrasplante().equals(donante2)) {
                 trasplanteEncontrado = trasplanteObtenido;
                 break;
             }
         }
+        int cantidadDeTrasplantesActuales = bioQueueFacade.getCantidadDeTrasplantes();
 
         // Assert
         assertNotNull(trasplanteEncontrado);
-        assertEquals(receptor, trasplanteEncontrado.getReceptorDelTrasplante());
+        assertEquals(receptor2, trasplanteEncontrado.getReceptorDelTrasplante());
         assertEquals(donante2, trasplanteEncontrado.getDonanteDelOrganoDelTrasplante());
+        assertEquals(cantidadDeTrasplantesEsperados, cantidadDeTrasplantesActuales);
     }
 
 }

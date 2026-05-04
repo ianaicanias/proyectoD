@@ -3,82 +3,58 @@
 import uy.edu.curso.interfaces.Donante;
 import uy.edu.curso.interfaces.Organo;
 
+
 public class OrganoImpl implements Organo {
 
-<span class="fc" id="L8">    private static final String[][] COMPATIBILIDADES = {</span>
-        { &quot;A+&quot;, &quot;A+&quot;, &quot;AB+&quot; },
-        { &quot;A-&quot;, &quot;A+&quot;, &quot;A-&quot;, &quot;AB+&quot;, &quot;AB-&quot; },
-        { &quot;B+&quot;, &quot;B+&quot;, &quot;AB+&quot; },
-        { &quot;B-&quot;, &quot;B+&quot;, &quot;B-&quot;, &quot;AB+&quot;, &quot;AB-&quot; },
-        { &quot;AB+&quot;, &quot;AB+&quot; },
-        { &quot;AB-&quot;, &quot;AB+&quot;, &quot;AB-&quot; },
-        { &quot;O+&quot;, &quot;A+&quot;, &quot;B+&quot;, &quot;AB+&quot;, &quot;O+&quot; },
-        { &quot;O-&quot;, &quot;A+&quot;, &quot;A-&quot;, &quot;B+&quot;, &quot;B-&quot;, &quot;AB+&quot;, &quot;AB-&quot;, &quot;O+&quot;, &quot;O-&quot; }
-    };
-<span class="fc" id="L18">    private static long contadorDeOrganosExistentes = 0;</span>
+<span class="fc" id="L9">    private static long contadorDeOrganosExistentes = 0;</span>
     private final long identificador;
     private final boolean esInfantil;
     private final Donante donanteDelOrgano;
     private String nombre;
     private String tipoDeSangre;
 
-<span class="fc" id="L25">    public OrganoImpl(String nombre, Donante donante) {</span>
-<span class="fc" id="L26">        this.identificador = ++contadorDeOrganosExistentes;</span>
-<span class="fc bfc" id="L27" title="All 2 branches covered.">        this.esInfantil = donante.getEdad() &lt; 18;</span>
-<span class="fc" id="L28">        this.donanteDelOrgano = donante;</span>
-<span class="fc" id="L29">        this.nombre = nombre;</span>
-<span class="fc" id="L30">        this.tipoDeSangre = donante.getTipoDeSangre();</span>
-<span class="fc" id="L31">    }</span>
+<span class="fc" id="L16">    public OrganoImpl(String nombre, Donante donante) {</span>
+<span class="fc" id="L17">        this.identificador = ++contadorDeOrganosExistentes;</span>
+<span class="fc bfc" id="L18" title="All 2 branches covered.">        this.esInfantil = donante.getEdad() &lt; 18;</span>
+<span class="fc" id="L19">        this.donanteDelOrgano = donante;</span>
+<span class="fc" id="L20">        this.nombre = nombre;</span>
+<span class="fc" id="L21">        this.tipoDeSangre = donante.getTipoDeSangre();</span>
+<span class="fc" id="L22">    }</span>
 
     @Override
     public long getIdentificador() {
-<span class="fc" id="L35">        return this.identificador;</span>
+<span class="fc" id="L26">        return this.identificador;</span>
     }
 
     @Override
     public boolean getEsInfantil() {
-<span class="fc" id="L40">        return this.esInfantil;</span>
+<span class="fc" id="L31">        return this.esInfantil;</span>
     }
 
     @Override
     public String getNombre() {
-<span class="fc" id="L45">        return this.nombre;</span>
+<span class="fc" id="L36">        return this.nombre;</span>
     }
 
     @Override
     public String getTipoDeSangre() {
-<span class="fc" id="L50">        return this.tipoDeSangre;</span>
+<span class="fc" id="L41">        return this.tipoDeSangre;</span>
     }
 
     @Override
     public Donante getDonanteDelOrgano() {
-<span class="fc" id="L55">        return this.donanteDelOrgano;</span>
+<span class="fc" id="L46">        return this.donanteDelOrgano;</span>
     }
 
     @Override
     public void setNombre(String nombre) {
-<span class="fc" id="L60">        this.nombre = nombre;</span>
-<span class="fc" id="L61">    }</span>
+<span class="fc" id="L51">        this.nombre = nombre;</span>
+<span class="fc" id="L52">    }</span>
 
     @Override
     public void setTipoDeSangre(String tipoDeSangre) {
-<span class="fc" id="L65">        this.tipoDeSangre = tipoDeSangre;</span>
-<span class="fc" id="L66">    }</span>
-
-    @Override
-    public boolean esCompatible(String tipoDeSangreDelReceptor) {
-<span class="fc bfc" id="L70" title="All 2 branches covered.">        for (String[] fila : COMPATIBILIDADES) {</span>
-<span class="fc bfc" id="L71" title="All 2 branches covered.">            if (fila[0].equals(this.tipoDeSangre)) {</span>
-<span class="fc bfc" id="L72" title="All 2 branches covered.">                for (int i = 1; i &lt; fila.length; i++) {</span>
-<span class="fc bfc" id="L73" title="All 2 branches covered.">                    if (fila[i].equals(tipoDeSangreDelReceptor)) {</span>
-<span class="fc" id="L74">                        return true;</span>
-                    }
-                }
-            }
-        }
-
-<span class="fc" id="L80">        return false;</span>
-    }
+<span class="fc" id="L56">        this.tipoDeSangre = tipoDeSangre;</span>
+<span class="fc" id="L57">    }</span>
 
 }
 </pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.11.202310140853</span></div></body></html>
