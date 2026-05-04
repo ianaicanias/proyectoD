@@ -1,0 +1,149 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="es"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>Persona.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">proyectoD</a> &gt; <a href="index.source.html" class="el_package">uy.edu.curso.classes</a> &gt; <span class="el_source">Persona.java</span></div><h1>Persona.java</h1><pre class="source lang-java linenums">/*
+ * Clase: Persona.
+ * Programadores: Axel Ferreira, Ianai Canias, Thiago Soca, Valentín Guerrico.
+ * Fecha: 03/05/2026.
+ * Copyright: Todos los derechos reservados para los programadores de este archivo, 2026.
+ *
+ * Resumen:
+ * La siguiente clase abstracta representa a una persona dentro del sistema BioQueue.
+ * Sirve como base para DonanteImpl y ReceptorImpl, centralizando los atributos y
+ * comportamientos comunes a toda persona registrada en el sistema, como la cédula
+ * de identidad, nombre, tipo de sangre, tipo de órgano y edad.
+ */
+package uy.edu.curso.classes;
+
+/**
+ * Clase abstracta que representa a una persona dentro del sistema BioQueue.
+ * Sirve como base para las clases @see DonanteImpl y @see ReceptorImpl,
+ * centralizando los atributos y comportamientos comunes a toda persona
+ * registrada en el sistema.
+ */
+public abstract class Persona {
+
+    /**
+     * Cédula de identidad de la persona. Inmutable una vez asignada.
+     */
+    protected final String cedulaDeIdentidad;
+
+    /**
+     * Nombre de la persona.
+     */
+    protected String nombre;
+
+    /**
+     * Tipo de sangre de la persona.
+     */
+    protected String tipoDeSangre;
+
+    /**
+     * Tipo de órgano que solicitará o donará la persona dependiendo de si es receptora o donante.
+     */
+    protected String tipoDeOrgano;
+    
+    /**
+     * Edad de la persona.
+     */
+    protected byte edad;
+
+    /**
+     * Constructor de la clase Persona.
+     * 
+     * @param cedulaDeIdentidad Cédula de identidad única de la persona.
+     * @param nombre Nombre de la persona.
+     * @param tipoDeSangre Tipo de sangre de la persona.
+     * @param tipoDeOrgano Tipo de órgano que la persona solicita o dona, dependiendo de si es receptora o donante.
+     * @param edad Edad de la persona.
+     */
+<span class="fc" id="L57">    public Persona(String cedulaDeIdentidad, String nombre, String tipoDeSangre, String tipoDeOrgano, byte edad) {</span>
+<span class="fc" id="L58">        this.cedulaDeIdentidad = cedulaDeIdentidad;</span>
+<span class="fc" id="L59">        this.nombre = nombre;</span>
+<span class="fc" id="L60">        this.tipoDeSangre = tipoDeSangre;</span>
+<span class="fc" id="L61">        this.tipoDeOrgano = tipoDeOrgano;</span>
+<span class="fc" id="L62">        this.edad = edad;</span>
+<span class="fc" id="L63">    }</span>
+
+    /**
+     * Retorna la cédula de identidad de la persona.
+     *
+     * @return Cédula de identidad de la persona.
+     */
+    public String getCedulaDeIdentidad() {
+<span class="fc" id="L71">        return this.cedulaDeIdentidad;</span>
+    }
+
+    /**
+     * Retorna el nombre de la persona.
+     * 
+     * @return Nombre de la persona.
+     */
+    public String getNombre() {
+<span class="fc" id="L80">        return this.nombre;</span>
+    }
+
+    /**
+     * Retorna el tipo de sangre de la persona.
+     * 
+     * @return Tipo de sangre de la persona.
+     */
+    public String getTipoDeSangre() {
+<span class="fc" id="L89">        return this.tipoDeSangre;</span>
+    }
+
+    /**
+     * Retorna el tipo de órgano asociado a la persona.
+     *
+     * @return Tipo de órgano (solicitado o donado).
+     */
+    public String getTipoDeOrgano() {
+<span class="fc" id="L98">        return this.tipoDeOrgano;</span>
+    }
+
+    /**
+     * Retorna la edad de la persona.
+     * 
+     * @return Edad de la persona.
+     */
+    public byte getEdad() {
+<span class="fc" id="L107">        return this.edad;</span>
+    }
+
+    /**
+     * Actualiza el nombre de la persona.
+     *
+     * @param nombre Nuevo nombre de la persona.
+     */
+    public void setNombre(String nombre) {
+<span class="fc" id="L116">        this.nombre = nombre;</span>
+<span class="fc" id="L117">    }</span>
+
+    /**
+     * Actualiza la edad de la persona.
+     * 
+     * @param edad Nueva edad de la persona.
+     */
+    public void setEdad(byte edad) {
+<span class="fc" id="L125">        this.edad = edad;</span>
+<span class="fc" id="L126">    }</span>
+
+    /* Métodos pensados para prevenir posibles equivocaciones por parte del usuario. */
+
+    /**
+     * Actualiza el tipo de sangre de la persona.
+     * 
+     * @param tipoDeSangre Nuevo tipo de sangre de la persona.
+     */
+    public void setTipoDeSangre(String tipoDeSangre) {
+<span class="fc" id="L136">        this.tipoDeSangre = tipoDeSangre;</span>
+<span class="fc" id="L137">    }</span>
+
+    /**
+     * Actualiza el tipo de órgano asociado a la persona.
+     *
+     * @param tipoDeOrgano Nuevo tipo de órgano solicitado o donado.
+     */
+    public void setTipoDeOrgano(String tipoDeOrgano) {
+<span class="fc" id="L145">        this.tipoDeOrgano = tipoDeOrgano;</span>
+<span class="fc" id="L146">    }</span>
+    
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.11.202310140853</span></div></body></html>

@@ -1,0 +1,363 @@
+package uy.edu.curso;
+
+import org.junit.jupiter.api.AfterAll;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertNull;
+import static org.junit.jupiter.api.Assertions.assertTrue;
+import org.junit.jupiter.api.BeforeAll;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.DisplayName;
+import org.junit.jupiter.api.Test;
+
+import uy.edu.curso.interfaces.Receptor;
+import uy.edu.curso.services.GestorDeReceptoresImpl;
+import uy.edu.curso.tda.TDAListaEnlazada;
+
+
+@DisplayName("Tests para el Gestor de Receptores")
+public class GestorDeReceptoresTest {
+
+    private static GestorDeReceptoresImpl gestorDeReceptoresImpl;
+
+    @BeforeAll
+    public static void inicializacion() {
+        gestorDeReceptoresImpl = new GestorDeReceptoresImpl();
+        System.out.println("Inicializando los tests. . .");
+    }
+
+    @AfterAll
+    public static void finalizacion() {
+        System.out.println("Tests del gestor de receptores finalizados. . .");
+    }
+
+    @BeforeEach
+    public void limpiarDatos() {
+        gestorDeReceptoresImpl = new GestorDeReceptoresImpl();
+    }
+
+    @Test
+    @DisplayName("Crear un Nuevo Gestor de Receptores")
+    public void GestorDeReceptoresImpl_creacionDeUnGestorDeReceptores_seInicializanTantoLaListaComoLaColaCorrectamente() {
+        // Arrange
+        ListaEnlazada<Receptor> listaNoCreada = null;
+        ListaEnlazada<Receptor> listaDePrioridadDeReceptores = null;
+
+        // Act
+        GestorDeReceptoresImpl gestorDeReceptoresImpl2 = new GestorDeReceptoresImpl();
+
+        // Assert
+        assertFalse(gestorDeReceptoresImpl2.getListaDeReceptores() == listaNoCreada);
+        assertFalse(gestorDeReceptoresImpl2.getListaDePrioridadDeReceptores() == listaDePrioridadDeReceptores);
+    }
+
+    @Test
+    @DisplayName("Registrar Correctamente un Nuevo Receptor.")
+    public void registrarReceptor_datosValidos_receptorRegistradoCorrectamente() {
+        // Arrange
+        String cedulaDeIdentidadEsperada = "37432442";
+        String nombreDelReceptorEsperado = "Joaquín Gomez";
+        String tipoDeOrganoNecesitadoEsperado = "Hígado";
+        String tipoDeSangreEsperado = "A+";
+        byte edadEsperada = 19;
+        byte puntajeDePrioridadEsperado = 6;
+
+        // Act
+        Receptor receptorCreado = (Receptor) gestorDeReceptoresImpl.registrarReceptor("37432442", "Joaquín Gomez",
+                "Hígado", "A+", (byte) 19, (byte) 6);
+
+        // Assert
+        assertEquals(cedulaDeIdentidadEsperada, receptorCreado.getCedulaDeIdentidad());
+        assertEquals(nombreDelReceptorEsperado, receptorCreado.getNombre());
+        assertEquals(tipoDeOrganoNecesitadoEsperado, receptorCreado.getTipoDeOrgano());
+        assertEquals(tipoDeSangreEsperado, receptorCreado.getTipoDeSangre());
+        assertEquals(edadEsperada, receptorCreado.getEdad());
+        assertEquals(puntajeDePrioridadEsperado, receptorCreado.getPuntajeDePrioridad());
+        assertTrue(gestorDeReceptoresImpl.buscarReceptor(receptorCreado.getCedulaDeIdentidad()) != null);
+        assertFalse(gestorDeReceptoresImpl.getListaDeReceptores().esVacio());
+    }
+
+    @Test
+    @DisplayName("Registrar Un Receptor Duplicado.")
+    public void registrarReceptor_datosDuplicados_retornaNullIndicandoQueYaExisteElReceptorIngresado() {
+        // Arrange
+        byte tamañoDeListaEsperado = 1;
+
+        // Act
+        Receptor receptorCreado1 = (Receptor) gestorDeReceptoresImpl.registrarReceptor("37432442", "Joaquín Gomez",
+                "Hígado", "A+", (byte) 19, (byte) 6);
+        Receptor receptorCreado2 = (Receptor) gestorDeReceptoresImpl.registrarReceptor("37432442", "Joaquín Gomez",
+                "Hígado", "A+", (byte) 19, (byte) 6);
+
+        // Assert
+        assertTrue(gestorDeReceptoresImpl.buscarReceptor(receptorCreado1.getCedulaDeIdentidad()) != null);
+        assertTrue(gestorDeReceptoresImpl.getListaDeReceptores().tamaño() == tamañoDeListaEsperado);
+        assertNull(receptorCreado2);
+    }
+
+    @Test
+    @DisplayName("Insertar en la Lista de Prioridad un Receptor")
+    public void insertarReceptorEnLaCola_receptorCreadoEnLaListaDeReceptores_insertaCorrectamenteEnLaColaDePrioridadAlReceptor() {
+        // Arrange
+        Receptor receptorCreado = (Receptor) gestorDeReceptoresImpl.registrarReceptor("37432442", "Joaquín Gomez",
+                "Hígado", "A+", (byte) 19, (byte) 6);
+
+        // Act
+        gestorDeReceptoresImpl.insertarReceptorEnLaListaDePrioridad(receptorCreado);
+        TDAListaEnlazada<Receptor> listaDePrioridadDeReceptores = gestorDeReceptoresImpl.getListaDePrioridadDeReceptores();
+
+        // Assert
+        assertEquals(receptorCreado, listaDePrioridadDeReceptores.obtener(listaDePrioridadDeReceptores.tamaño() - 1));
+    }
+
+    @Test
+    @DisplayName("Insertar en la Lista de Prioridad Varios Receptores")
+    public void insertarReceptorEnLaCola_receptoresCreadosEnLaListaDeReceptores_insertaCorrectamenteEnLaColaDePrioridadALosReceptoresPorOrdenDePrioridad() {
+        // Arrange
+        Receptor receptorBaja = (Receptor) gestorDeReceptoresImpl.registrarReceptor(
+                "37432442", "Joaquín Gomez", "Hígado", "A+", (byte) 19, (byte) 3);
+        Receptor receptorAlta = (Receptor) gestorDeReceptoresImpl.registrarReceptor(
+                "12345678", "Ana García", "Hígado", "A+", (byte) 25, (byte) 9);
+        Receptor receptorMedia = (Receptor) gestorDeReceptoresImpl.registrarReceptor(
+                "87654321", "Luis Pérez", "Hígado", "A+", (byte) 30, (byte) 6);
+
+        // Act
+        gestorDeReceptoresImpl.insertarReceptorEnLaListaDePrioridad(receptorBaja);
+        gestorDeReceptoresImpl.insertarReceptorEnLaListaDePrioridad(receptorAlta);
+        gestorDeReceptoresImpl.insertarReceptorEnLaListaDePrioridad(receptorMedia);
+
+        // Assert
+        assertEquals(receptorAlta, gestorDeReceptoresImpl.getListaDePrioridadDeReceptores().obtener(0));
+        assertEquals(receptorMedia, gestorDeReceptoresImpl.getListaDePrioridadDeReceptores().obtener(1));
+        assertEquals(receptorBaja, gestorDeReceptoresImpl.getListaDePrioridadDeReceptores().obtener(2));
+    }
+
+    @Test
+    @DisplayName("Insertar en la Lista de Prioridad con Desempate por Edad")
+    public void insertarReceptorEnLaCola_dosReceptoresConMismoPuntaje_elMenorEnEdadQuedaPrimeroEnLaCola() {
+        // Arrange
+        Receptor receptorMayor = (Receptor) gestorDeReceptoresImpl.registrarReceptor(
+            "11111111", "Carlos López", "Hígado", "A+", (byte) 40, (byte) 6);
+        Receptor receptorMenor = (Receptor) gestorDeReceptoresImpl.registrarReceptor(
+            "22222222", "María Díaz", "Hígado", "A+", (byte) 19, (byte) 6);
+
+        // Act
+        gestorDeReceptoresImpl.insertarReceptorEnLaListaDePrioridad(receptorMayor);
+        gestorDeReceptoresImpl.insertarReceptorEnLaListaDePrioridad(receptorMenor);
+        TDAListaEnlazada<Receptor> listaDePrioridadDeReceptores = gestorDeReceptoresImpl.getListaDePrioridadDeReceptores();
+
+        // Assert
+        assertEquals(receptorMayor, listaDePrioridadDeReceptores.obtener(listaDePrioridadDeReceptores.tamaño() - 1));
+    }
+
+    @Test
+    @DisplayName("Insertar un Receptor en Lista de Prioridad Vacía")
+    public void insertarReceptorEnLaCola_colaVacia_receptorEsElPrimeroYElUltimo() {
+        // Arrange
+        Receptor receptorCreado = (Receptor) gestorDeReceptoresImpl.registrarReceptor(
+            "37432442", "Joaquín Gomez", "Hígado", "A+", (byte) 19, (byte) 6);
+
+        // Act
+        gestorDeReceptoresImpl.insertarReceptorEnLaListaDePrioridad(receptorCreado);
+
+        // Assert
+        assertEquals(1, gestorDeReceptoresImpl.getListaDePrioridadDeReceptores().tamaño());
+        assertEquals(receptorCreado, gestorDeReceptoresImpl.getListaDePrioridadDeReceptores().obtener(0));
+    }
+
+    @Test
+    @DisplayName("Insertar Receptor con Mismo Puntaje e Igual Edad va Después")
+    public void insertarReceptorEnLaCola_mismoPuntajeMismaEdad_elPrimeroRegistradoQuedaPrimero() {
+        // Arrange
+        Receptor receptor1 = (Receptor) gestorDeReceptoresImpl.registrarReceptor(
+            "11111111", "Ana García", "Hígado", "A+", (byte) 25, (byte) 6);
+        Receptor receptor2 = (Receptor) gestorDeReceptoresImpl.registrarReceptor(
+            "22222222", "Luis Pérez", "Hígado", "A+", (byte) 25, (byte) 6);
+
+        // Act
+        gestorDeReceptoresImpl.insertarReceptorEnLaListaDePrioridad(receptor1);
+        gestorDeReceptoresImpl.insertarReceptorEnLaListaDePrioridad(receptor2);
+
+        // Assert
+        assertEquals(receptor1, gestorDeReceptoresImpl.getListaDePrioridadDeReceptores().obtener(0));
+        assertEquals(receptor2, gestorDeReceptoresImpl.getListaDePrioridadDeReceptores().obtener(1));
+    }
+
+    @Test
+    @DisplayName("Eliminar un Receptor que Está al Final de la Lista de Prioridad")
+    public void eliminarReceptor_receptorAlFinalDeLaCola_eliminaCorrectamente() {
+        // Arrange
+        Receptor receptorAlta = (Receptor) gestorDeReceptoresImpl.registrarReceptor(
+            "11111111", "Ana García", "Hígado", "A+", (byte) 25, (byte) 9);
+        Receptor receptorBaja = (Receptor) gestorDeReceptoresImpl.registrarReceptor(
+            "22222222", "Luis Pérez", "Hígado", "A+", (byte) 30, (byte) 3);
+
+        // Ambos en cola — receptorAlta queda primero (prioridad 9)
+        gestorDeReceptoresImpl.insertarReceptorEnLaListaDePrioridad(receptorAlta);
+        gestorDeReceptoresImpl.insertarReceptorEnLaListaDePrioridad(receptorBaja);
+
+        // Act — eliminamos el que está al FINAL de la cola (prioridad 3)
+        gestorDeReceptoresImpl.eliminarReceptor("22222222");
+
+        // Assert
+        assertNull(gestorDeReceptoresImpl.buscarReceptor("22222222"));
+        assertEquals(1, gestorDeReceptoresImpl.getListaDePrioridadDeReceptores().tamaño());
+        assertEquals(receptorAlta, gestorDeReceptoresImpl.getListaDePrioridadDeReceptores().obtener(0));
+    }
+
+    @Test
+    @DisplayName("Buscar un Receptor Correcto.")
+    public void buscarReceptor_listaConReceptorCreado_encuentraYDevuelveElReceptorSolicitado() {
+        // Arrange
+        Receptor receptorCreadoEsperado = (Receptor) gestorDeReceptoresImpl.registrarReceptor("37432442", "Joaquín Gomez",
+                "Hígado", "A+", (byte) 19, (byte) 6);
+
+        // Act
+        Receptor receptorBuscado = gestorDeReceptoresImpl.buscarReceptor("37432442");
+
+        // Assert
+        assertEquals(receptorCreadoEsperado, receptorBuscado);
+        assertEquals(receptorCreadoEsperado.getCedulaDeIdentidad(), receptorBuscado.getCedulaDeIdentidad());
+        assertEquals(receptorCreadoEsperado.getNombre(), receptorBuscado.getNombre());
+        assertEquals(receptorCreadoEsperado.getTipoDeOrgano(), receptorBuscado.getTipoDeOrgano());
+        assertEquals(receptorCreadoEsperado.getTipoDeSangre(), receptorBuscado.getTipoDeSangre());
+        assertEquals(receptorCreadoEsperado.getEdad(), receptorBuscado.getEdad());
+        assertEquals(receptorCreadoEsperado.getPuntajeDePrioridad(), receptorBuscado.getPuntajeDePrioridad());
+    }
+
+    @Test
+    @DisplayName("Buscar un Receptor que No Existe")
+    public void buscarReceptor_listaVacia_retornaNullIndicandoQueNoExisteElReceptor() {
+        // Act
+        Receptor receptorBuscado = gestorDeReceptoresImpl.buscarReceptor("99999999");
+
+        // Assert
+        assertNull(receptorBuscado);
+    }
+
+    @Test
+    @DisplayName("Eliminar un Receptor de la Lista")
+    public void eliminarReceptor_listaConReceptorCreado_encuentraYEliminaElReceptorSolicitado() {
+        // Arrange
+        Receptor receptorCreado = (Receptor) gestorDeReceptoresImpl.registrarReceptor("37432442", "Joaquín Gomez",
+                "Hígado", "A+", (byte) 19, (byte) 6);
+        String cedulaDeIdentidadDelReceptorEliminado = receptorCreado.getCedulaDeIdentidad();
+
+        // Act
+        gestorDeReceptoresImpl.eliminarReceptor(cedulaDeIdentidadDelReceptorEliminado);
+
+        // Assert
+        assertNull(gestorDeReceptoresImpl.buscarReceptor(cedulaDeIdentidadDelReceptorEliminado));
+    }
+
+    @Test
+    @DisplayName("Eliminar un Receptor de la Lista y la Lista de Prioridad")
+    public void eliminarReceptor_receptorEnListaYCola_eliminaDeAmbasEstructuras() {
+        // Arrange
+        Receptor receptorCreado = (Receptor) gestorDeReceptoresImpl.registrarReceptor(
+            "37432442", "Joaquín Gomez", "Hígado", "A+", (byte) 19, (byte) 6);
+        gestorDeReceptoresImpl.insertarReceptorEnLaListaDePrioridad(receptorCreado);
+
+        // Act
+        gestorDeReceptoresImpl.eliminarReceptor("37432442");
+
+        // Assert
+        assertNull(gestorDeReceptoresImpl.buscarReceptor("37432442"));
+        assertTrue(gestorDeReceptoresImpl.getListaDePrioridadDeReceptores().esVacio());
+    }
+
+    @Test
+    @DisplayName("Eliminar un Receptor que No Existe")
+    public void eliminarReceptor_receptorNoExistente_noHaceCambiosEnLasEstructuras() {
+        // Arrange
+        gestorDeReceptoresImpl.registrarReceptor(
+            "37432442", "Joaquín Gomez", "Hígado", "A+", (byte) 19, (byte) 6);
+
+        // Act
+        gestorDeReceptoresImpl.eliminarReceptor("99999999");
+
+        // Assert
+        assertEquals(1, gestorDeReceptoresImpl.getListaDeReceptores().tamaño());
+        assertTrue(gestorDeReceptoresImpl.getListaDePrioridadDeReceptores().esVacio());
+    }
+
+    @Test
+    @DisplayName("Eliminar un Receptor que Solo Está en la Lista")
+    public void eliminarReceptor_receptorSoloEnLista_eliminaSoloDeLaLista() {
+        // Arrange
+        Receptor receptorCreado = (Receptor) gestorDeReceptoresImpl.registrarReceptor(
+            "37432442", "Joaquín Gomez", "Hígado", "A+", (byte) 19, (byte) 6);
+
+        // Act
+        gestorDeReceptoresImpl.eliminarReceptor(receptorCreado.getCedulaDeIdentidad());
+
+        // Assert
+        assertNull(gestorDeReceptoresImpl.buscarReceptor("37432442"));
+        assertTrue(gestorDeReceptoresImpl.getListaDePrioridadDeReceptores().esVacio());
+    }
+
+    @Test
+    @DisplayName("Listar los Receptores de la Lista")
+    public void listarReceptores_listaConReceptoresCreados_retornaUnaListaConTodosLosReceptoresExistentes() {
+        // Arrange
+        Receptor receptorCreado1 = (Receptor) gestorDeReceptoresImpl.registrarReceptor("37432442", "Joaquín Gomez",
+                "Hígado", "A+", (byte) 19, (byte) 6);
+        Receptor receptorCreado2 = (Receptor) gestorDeReceptoresImpl.registrarReceptor("48578471", "Luis Mendez",
+                "Riñón", "O-", (byte) 26, (byte) 3);
+        Receptor receptorCreado3 = (Receptor) gestorDeReceptoresImpl.registrarReceptor("73472730", "Leandro Rodriguez",
+                "Estómago", "A-", (byte) 57, (byte) 9);
+        StringBuilder resultadoEsperado = new StringBuilder();
+
+        resultadoEsperado.append("----------------------- DATOS DE RECEPTORES -----------------------\n");
+        resultadoEsperado.append(receptorCreado1.getNombre());
+        resultadoEsperado.append(", ");
+        resultadoEsperado.append(receptorCreado1.getCedulaDeIdentidad());
+        resultadoEsperado.append(", ");
+        resultadoEsperado.append(receptorCreado1.getTipoDeOrgano());
+        resultadoEsperado.append(", ");
+        resultadoEsperado.append(receptorCreado1.getTipoDeSangre());
+        resultadoEsperado.append(", ");
+        resultadoEsperado.append(receptorCreado1.getEdad());
+        resultadoEsperado.append(".");
+        resultadoEsperado.append("\n");
+        resultadoEsperado.append(receptorCreado2.getNombre());
+        resultadoEsperado.append(", ");
+        resultadoEsperado.append(receptorCreado2.getCedulaDeIdentidad());
+        resultadoEsperado.append(", ");
+        resultadoEsperado.append(receptorCreado2.getTipoDeOrgano());
+        resultadoEsperado.append(", ");
+        resultadoEsperado.append(receptorCreado2.getTipoDeSangre());
+        resultadoEsperado.append(", ");
+        resultadoEsperado.append(receptorCreado2.getEdad());
+        resultadoEsperado.append(".");
+        resultadoEsperado.append("\n");
+        resultadoEsperado.append(receptorCreado3.getNombre());
+        resultadoEsperado.append(", ");
+        resultadoEsperado.append(receptorCreado3.getCedulaDeIdentidad());
+        resultadoEsperado.append(", ");
+        resultadoEsperado.append(receptorCreado3.getTipoDeOrgano());
+        resultadoEsperado.append(", ");
+        resultadoEsperado.append(receptorCreado3.getTipoDeSangre());
+        resultadoEsperado.append(", ");
+        resultadoEsperado.append(receptorCreado3.getEdad());
+        resultadoEsperado.append(".");
+        resultadoEsperado.append("\n");
+
+        // Act
+        String listadoDeReceptores = gestorDeReceptoresImpl.listarReceptores();
+
+        // Assert
+        assertEquals(resultadoEsperado.toString(), listadoDeReceptores);
+    }
+
+    @Test
+    @DisplayName("Listar Receptores con Lista Vacía")
+    public void listarReceptores_listaVacia_retornaSoloElEncabezado() {
+        // Act
+        String resultado = gestorDeReceptoresImpl.listarReceptores();
+
+        // Assert
+        assertEquals("----------------------- DATOS DE RECEPTORES -----------------------\n", resultado);
+    }
+
+}

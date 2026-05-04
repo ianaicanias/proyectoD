@@ -1,0 +1,199 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="es"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>GestorDeOrganosImpl.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">proyectoD</a> &gt; <a href="index.source.html" class="el_package">uy.edu.curso.services</a> &gt; <span class="el_source">GestorDeOrganosImpl.java</span></div><h1>GestorDeOrganosImpl.java</h1><pre class="source lang-java linenums">/*
+ * Clase: GestorDeOrganosImpl.
+ * Programadores: Axel Ferreira, Ianai Canias, Thiago Soca, Valentín Guerrico.
+ * Fecha: 03/05/2026.
+ * Copyright: Todos los derechos reservados para los programadores de este archivo, 2026.
+ *
+ * Resumen:
+ * La siguiente clase representa la implementación concreta del gestor de órganos
+ * en el sistema BioQueue. Implementa la interfaz GestorDeOrganos y administra
+ * el registro, búsqueda, eliminación y listado de órganos disponibles para
+ * trasplante en el sistema.
+ */
+package uy.edu.curso.services;
+
+import uy.edu.curso.ListaEnlazada;
+import uy.edu.curso.classes.OrganoImpl;
+import uy.edu.curso.interfaces.Donante;
+import uy.edu.curso.interfaces.GestorDeOrganos;
+import uy.edu.curso.interfaces.Organo;
+import uy.edu.curso.tda.TDAListaEnlazada;
+
+
+/**
+ * Implementación concreta del gestor de órganos del sistema BioQueue.
+ * Implementa @see GestorDeOrganos y administra el ciclo de vida de los
+ * órganos disponibles, permitiendo registrarlos, buscarlos por distintos
+ * criterios, eliminarlos y listarlos.
+ */
+public class GestorDeOrganosImpl implements GestorDeOrganos {
+
+    /**
+     * Lista enlazada que almacena todos los órganos disponibles para trasplante.
+     */
+    private final TDAListaEnlazada&lt;Organo&gt; listaDeOrganos;
+
+    /**
+     * Constructor de la clase GestorDeOrganosImpl. Inicializa la lista de órganos vacía.
+     */
+<span class="fc" id="L39">    public GestorDeOrganosImpl() {</span>
+<span class="fc" id="L40">        this.listaDeOrganos = new ListaEnlazada&lt;&gt;();</span>
+<span class="fc" id="L41">    }</span>
+
+    /**
+     * Retorna la lista de órganos disponibles para trasplante.
+     *
+     * @return Lista enlazada con todos los órganos disponibles.
+     */
+    @Override
+    public TDAListaEnlazada&lt;Organo&gt; getListaDeOrganosDisponibles() {
+<span class="fc" id="L50">        return this.listaDeOrganos;</span>
+    }
+
+    /**
+     * Registra un nuevo órgano en el sistema asociado a un donante.
+     *
+     * @param nombreDelOrgano  Nombre del órgano a registrar.
+     * @param donanteDelOrgano Donante al que pertenece el órgano.
+     * @return El órgano creado y registrado en el sistema.
+     */
+    @Override
+    public Organo registrarOrgano(String nombreDelOrgano, Donante donanteDelOrgano) {
+<span class="fc" id="L62">        Organo nuevoOrgano = new OrganoImpl(nombreDelOrgano, donanteDelOrgano);</span>
+
+<span class="fc" id="L64">        this.listaDeOrganos.agregar(nuevoOrgano);</span>
+
+<span class="fc" id="L66">        return nuevoOrgano;</span>
+    }
+
+    /**
+     * Busca un órgano en el sistema por su identificador único.
+     *
+     * @param identificadorDelOrgano Identificador único del órgano a buscar.
+     * @return El órgano encontrado, o {@code null} si no existe.
+     */
+    @Override
+    public Organo buscarOrganoPorIdentificador(long identificadorDelOrgano) {
+<span class="fc" id="L77">        int tamañoDeLaListaDeOrganos = this.listaDeOrganos.tamaño();</span>
+<span class="fc" id="L78">        int i = 0;</span>
+
+<span class="fc bfc" id="L80" title="All 2 branches covered.">        while (i &lt; tamañoDeLaListaDeOrganos) {</span>
+<span class="fc" id="L81">            Organo organo = this.listaDeOrganos.obtener(i);</span>
+
+<span class="fc bfc" id="L83" title="All 2 branches covered.">            if (organo.getIdentificador() == identificadorDelOrgano) {</span>
+<span class="fc" id="L84">                return organo;</span>
+            }
+<span class="fc" id="L86">            i++;</span>
+        }
+
+<span class="fc" id="L89">        return null;</span>
+    }
+
+    /**
+     * Busca todos los órganos disponibles con el nombre indicado.
+     * La comparación no distingue entre mayúsculas y minúsculas.
+     *
+     * @param nombreDelOrgano Nombre del órgano a buscar.
+     * @return Lista con los órganos que coinciden con el nombre indicado.
+     */
+    @Override
+    public TDAListaEnlazada&lt;Organo&gt; buscarOrganosPorNombre(String nombreDelOrgano) {
+<span class="fc" id="L101">        TDAListaEnlazada&lt;Organo&gt; resultado = new ListaEnlazada&lt;&gt;();</span>
+<span class="fc" id="L102">        int tamañoDeLaListaDeOrganos = this.listaDeOrganos.tamaño();</span>
+<span class="fc" id="L103">        int i = 0;</span>
+
+<span class="fc bfc" id="L105" title="All 2 branches covered.">        while (i &lt; tamañoDeLaListaDeOrganos) {</span>
+<span class="fc" id="L106">            Organo organo = this.listaDeOrganos.obtener(i);</span>
+
+<span class="fc bfc" id="L108" title="All 2 branches covered.">            if (organo.getNombre().equalsIgnoreCase(nombreDelOrgano)) {</span>
+<span class="fc" id="L109">                resultado.agregar(organo);</span>
+            }
+<span class="fc" id="L111">            i++;</span>
+        }
+
+<span class="fc" id="L114">        return resultado;</span>
+    }
+
+    /**
+     * Busca todos los órganos disponibles con el tipo de sangre indicado.
+     * La comparación no distingue entre mayúsculas y minúsculas.
+     *
+     * @param tipoDeSangreDelOrgano Tipo de sangre a buscar.
+     * @return Lista con los órganos que coinciden con el tipo de sangre indicado.
+     */
+    @Override
+    public TDAListaEnlazada&lt;Organo&gt; buscarOrganosPorTipoDeSangre(String tipoDeSangreDelOrgano) {
+<span class="fc" id="L126">        TDAListaEnlazada&lt;Organo&gt; resultado = new ListaEnlazada&lt;&gt;();</span>
+<span class="fc" id="L127">        int tamañoDeLaListaDeOrganos = this.listaDeOrganos.tamaño();</span>
+<span class="fc" id="L128">        int i = 0;</span>
+
+<span class="fc bfc" id="L130" title="All 2 branches covered.">        while (i &lt; tamañoDeLaListaDeOrganos) {</span>
+<span class="fc" id="L131">            Organo organo = this.listaDeOrganos.obtener(i);</span>
+
+<span class="fc bfc" id="L133" title="All 2 branches covered.">            if (organo.getTipoDeSangre().equalsIgnoreCase(tipoDeSangreDelOrgano)) {</span>
+<span class="fc" id="L134">                resultado.agregar(organo);</span>
+            }
+<span class="fc" id="L136">            i++;</span>
+        }
+
+<span class="fc" id="L139">        return resultado;</span>
+    }
+
+    /**
+     * Elimina un órgano del sistema por su identificador único.
+     * Si no existe un órgano con ese identificador, no realiza ninguna acción.
+     *
+     * @param identificadorDelOrgano Identificador único del órgano a eliminar.
+     */
+    @Override
+    public void eliminarOrgano(long identificadorDelOrgano) {
+<span class="fc" id="L150">        int tamañoDeLaListaDeOrganos = this.listaDeOrganos.tamaño();</span>
+<span class="fc" id="L151">        int i = 0;</span>
+
+<span class="fc bfc" id="L153" title="All 2 branches covered.">        while (i &lt; tamañoDeLaListaDeOrganos) {</span>
+<span class="fc" id="L154">            Organo organo = this.listaDeOrganos.obtener(i);</span>
+
+<span class="fc bfc" id="L156" title="All 2 branches covered.">            if (organo.getIdentificador() == identificadorDelOrgano) {</span>
+<span class="fc" id="L157">                this.listaDeOrganos.remover(i);</span>
+<span class="fc" id="L158">                break;</span>
+            }
+<span class="fc" id="L160">            i++;</span>
+        }
+<span class="fc" id="L162">    }</span>
+
+    /**
+     * Retorna una cadena con el listado de todos los órganos disponibles,
+     * incluyendo identificador, nombre, tipo de sangre, cédula del donante
+     * e indicador de origen infantil.
+     *
+     * @return Listado de órganos disponibles en formato texto.
+     */
+    @Override
+    public String listarOrganosDisponibles() {
+<span class="fc" id="L173">        int tamañoDeLaListaDeOrganos = this.listaDeOrganos.tamaño();</span>
+<span class="fc" id="L174">        int i = 0;</span>
+<span class="fc" id="L175">        StringBuilder resultado = new StringBuilder();</span>
+
+<span class="fc" id="L177">        resultado.append(&quot;----------------------- DATOS DE ÓRGANOS DISPONIBLES -----------------------\n&quot;);</span>
+<span class="fc bfc" id="L178" title="All 2 branches covered.">        while (i &lt; tamañoDeLaListaDeOrganos) {</span>
+<span class="fc" id="L179">            Organo organo = this.listaDeOrganos.obtener(i);</span>
+
+<span class="fc" id="L181">            resultado.append(organo.getIdentificador());</span>
+<span class="fc" id="L182">            resultado.append(&quot;, &quot;);</span>
+<span class="fc" id="L183">            resultado.append(organo.getNombre());</span>
+<span class="fc" id="L184">            resultado.append(&quot;, &quot;);</span>
+<span class="fc" id="L185">            resultado.append(organo.getTipoDeSangre());</span>
+<span class="fc" id="L186">            resultado.append(&quot;, &quot;);</span>
+<span class="fc" id="L187">            resultado.append(organo.getDonanteDelOrgano().getCedulaDeIdentidad());</span>
+<span class="fc" id="L188">            resultado.append(&quot;, &quot;);</span>
+<span class="fc" id="L189">            resultado.append(organo.getEsInfantil());</span>
+<span class="fc" id="L190">            resultado.append(&quot;.&quot;);</span>
+<span class="fc" id="L191">            resultado.append(&quot;\n&quot;);</span>
+<span class="fc" id="L192">            i++;</span>
+        }
+
+<span class="fc" id="L195">        return resultado.toString();</span>
+    }
+    
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.11.202310140853</span></div></body></html>

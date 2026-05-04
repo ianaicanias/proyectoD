@@ -1,0 +1,482 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuite xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="https://maven.apache.org/surefire/maven-surefire-plugin/xsd/surefire-test-report-3.0.xsd" version="3.0" name="uy.edu.curso.LectorDeArchivosCSVTest" time="0.094" tests="6" errors="0" skipped="0" failures="0">
+  <properties>
+    <property name="java.specification.version" value="17"/>
+    <property name="sun.cpu.isalist" value="amd64"/>
+    <property name="sun.jnu.encoding" value="Cp1252"/>
+    <property name="java.class.path" value="C:\Users\gf352\OneDrive\Desktop\proyectoD\target\test-classes;C:\Users\gf352\OneDrive\Desktop\proyectoD\target\classes;C:\Users\gf352\.m2\repository\org\junit\jupiter\junit-jupiter\5.10.0\junit-jupiter-5.10.0.jar;C:\Users\gf352\.m2\repository\org\junit\jupiter\junit-jupiter-api\5.10.0\junit-jupiter-api-5.10.0.jar;C:\Users\gf352\.m2\repository\org\opentest4j\opentest4j\1.3.0\opentest4j-1.3.0.jar;C:\Users\gf352\.m2\repository\org\junit\platform\junit-platform-commons\1.10.0\junit-platform-commons-1.10.0.jar;C:\Users\gf352\.m2\repository\org\apiguardian\apiguardian-api\1.1.2\apiguardian-api-1.1.2.jar;C:\Users\gf352\.m2\repository\org\junit\jupiter\junit-jupiter-params\5.10.0\junit-jupiter-params-5.10.0.jar;C:\Users\gf352\.m2\repository\org\junit\jupiter\junit-jupiter-engine\5.10.0\junit-jupiter-engine-5.10.0.jar;C:\Users\gf352\.m2\repository\org\junit\platform\junit-platform-engine\1.10.0\junit-platform-engine-1.10.0.jar;"/>
+    <property name="java.vm.vendor" value="Eclipse Adoptium"/>
+    <property name="sun.arch.data.model" value="64"/>
+    <property name="user.variant" value=""/>
+    <property name="java.vendor.url" value="https://adoptium.net/"/>
+    <property name="user.timezone" value="America/Montevideo"/>
+    <property name="os.name" value="Windows 11"/>
+    <property name="java.vm.specification.version" value="17"/>
+    <property name="sun.java.launcher" value="SUN_STANDARD"/>
+    <property name="user.country" value="ES"/>
+    <property name="sun.boot.library.path" value="C:\Program Files\Eclipse Adoptium\jdk-17.0.16.8-hotspot\bin"/>
+    <property name="sun.java.command" value="C:\Users\gf352\AppData\Local\Temp\surefire8583376321616770367\surefirebooter-20260504124959311_3.jar C:\Users\gf352\AppData\Local\Temp\surefire8583376321616770367 2026-05-04T12-49-59_015-jvmRun1 surefire-20260504124959311_1tmp surefire_0-20260504124959311_2tmp"/>
+    <property name="jdk.debug" value="release"/>
+    <property name="surefire.test.class.path" value="C:\Users\gf352\OneDrive\Desktop\proyectoD\target\test-classes;C:\Users\gf352\OneDrive\Desktop\proyectoD\target\classes;C:\Users\gf352\.m2\repository\org\junit\jupiter\junit-jupiter\5.10.0\junit-jupiter-5.10.0.jar;C:\Users\gf352\.m2\repository\org\junit\jupiter\junit-jupiter-api\5.10.0\junit-jupiter-api-5.10.0.jar;C:\Users\gf352\.m2\repository\org\opentest4j\opentest4j\1.3.0\opentest4j-1.3.0.jar;C:\Users\gf352\.m2\repository\org\junit\platform\junit-platform-commons\1.10.0\junit-platform-commons-1.10.0.jar;C:\Users\gf352\.m2\repository\org\apiguardian\apiguardian-api\1.1.2\apiguardian-api-1.1.2.jar;C:\Users\gf352\.m2\repository\org\junit\jupiter\junit-jupiter-params\5.10.0\junit-jupiter-params-5.10.0.jar;C:\Users\gf352\.m2\repository\org\junit\jupiter\junit-jupiter-engine\5.10.0\junit-jupiter-engine-5.10.0.jar;C:\Users\gf352\.m2\repository\org\junit\platform\junit-platform-engine\1.10.0\junit-platform-engine-1.10.0.jar;"/>
+    <property name="sun.cpu.endian" value="little"/>
+    <property name="user.home" value="C:\Users\gf352"/>
+    <property name="user.language" value="es"/>
+    <property name="java.specification.vendor" value="Oracle Corporation"/>
+    <property name="java.version.date" value="2025-07-15"/>
+    <property name="java.home" value="C:\Program Files\Eclipse Adoptium\jdk-17.0.16.8-hotspot"/>
+    <property name="file.separator" value="\"/>
+    <property name="basedir" value="C:\Users\gf352\OneDrive\Desktop\proyectoD"/>
+    <property name="java.vm.compressedOopsMode" value="Zero based"/>
+    <property name="line.separator" value="&#10;"/>
+    <property name="java.vm.specification.vendor" value="Oracle Corporation"/>
+    <property name="java.specification.name" value="Java Platform API Specification"/>
+    <property name="surefire.real.class.path" value="C:\Users\gf352\AppData\Local\Temp\surefire8583376321616770367\surefirebooter-20260504124959311_3.jar"/>
+    <property name="user.script" value=""/>
+    <property name="sun.management.compiler" value="HotSpot 64-Bit Tiered Compilers"/>
+    <property name="java.runtime.version" value="17.0.16+8"/>
+    <property name="user.name" value="gf352"/>
+    <property name="path.separator" value=";"/>
+    <property name="os.version" value="10.0"/>
+    <property name="java.runtime.name" value="OpenJDK Runtime Environment"/>
+    <property name="file.encoding" value="Cp1252"/>
+    <property name="java.vm.name" value="OpenJDK 64-Bit Server VM"/>
+    <property name="java.vendor.version" value="Temurin-17.0.16+8"/>
+    <property name="localRepository" value="C:\Users\gf352\.m2\repository"/>
+    <property name="java.vendor.url.bug" value="https://github.com/adoptium/adoptium-support/issues"/>
+    <property name="java.io.tmpdir" value="C:\Users\gf352\AppData\Local\Temp\"/>
+    <property name="java.version" value="17.0.16"/>
+    <property name="user.dir" value="C:\Users\gf352\OneDrive\Desktop\proyectoD"/>
+    <property name="os.arch" value="amd64"/>
+    <property name="java.vm.specification.name" value="Java Virtual Machine Specification"/>
+    <property name="sun.os.patch.level" value=""/>
+    <property name="native.encoding" value="Cp1252"/>
+    <property name="java.library.path" value="C:\Program Files\Eclipse Adoptium\jdk-17.0.16.8-hotspot\bin;C:\WINDOWS\Sun\Java\bin;C:\WINDOWS\system32;C:\WINDOWS;C:\Users\gf352\AppData\Local\Programs\Microsoft VS Code;C:\Program Files\Eclipse Adoptium\jdk-17.0.16.8-hotspot\bin;C:\WINDOWS\system32;C:\WINDOWS;C:\WINDOWS\System32\Wbem;C:\WINDOWS\System32\WindowsPowerShell\v1.0\;C:\WINDOWS\System32\OpenSSH\;C:\Program Files\dotnet\;C:\Program Files\Git\cmd;C:\Program Files\doxygen\bin;C:\Program Files\Microchip\xc8\v2.36\bin;C:\Program Files\Microchip\xc-dsc\v3.21\bin;C:\Program Files\Microchip\xc16\v2.10\bin;C:\Users\gf352\CreateC#Project;C:\Users\gf352\Maven\bin;C:\Users\gf352\AppData\Local\Microsoft\WindowsApps;C:\Users\gf352\.dotnet\tools;C:\Program Files\JetBrains\JetBrains Rider 2024.1.7\bin;;C:\Users\gf352\AppData\Local\Programs\Microsoft VS Code\bin;C:\Users\gf352\Flutter\flutter\bin;C:\Program Files\JetBrains\IntelliJ IDEA 2025.3.1.1\bin;c:\Users\gf352\.vscode\extensions\vscjava.vscode-java-debug-0.59.0\bundled\scripts\noConfigScripts;."/>
+    <property name="java.vm.info" value="mixed mode, sharing"/>
+    <property name="java.vendor" value="Eclipse Adoptium"/>
+    <property name="java.vm.version" value="17.0.16+8"/>
+    <property name="java.specification.maintenance.version" value="1"/>
+    <property name="sun.io.unicode.encoding" value="UnicodeLittle"/>
+    <property name="java.class.version" value="61.0"/>
+  </properties>
+  <testcase name="cargarReceptores_archivoCSVCorrecto_registraCorrectamenteTodosLosReceptoresIngresados" classname="uy.edu.curso.LectorDeArchivosCSVTest" time="0.029">
+    <system-out><![CDATA[Inicializando los tests. . .
+El receptor de nombre: SofÃ­a RodrÃ­guez con cédula: 95822412 fue registrado correctamente.
+El receptor de nombre: Monica SÃ¡nchez con cédula: 28728463 fue registrado correctamente.
+El receptor de nombre: Laura Reyes con cédula: 13999315 fue registrado correctamente.
+El receptor de nombre: Felipe Ortega con cédula: 66306997 fue registrado correctamente.
+El receptor de nombre: Daniela Ruiz con cédula: 66722344 fue registrado correctamente.
+El receptor de nombre: TomÃ¡s SÃ¡nchez con cédula: 22448136 fue registrado correctamente.
+El receptor de nombre: Leandro RamÃ­rez con cédula: 71662963 fue registrado correctamente.
+El receptor de nombre: Carolina NÃºÃ±ez con cédula: 94374605 fue registrado correctamente.
+El receptor de nombre: Felipe HernÃ¡ndez con cédula: 98753260 fue registrado correctamente.
+El receptor de nombre: Romina NÃºÃ±ez con cédula: 47308985 fue registrado correctamente.
+El receptor de nombre: Florencia GonzÃ¡lez con cédula: 99949389 fue registrado correctamente.
+El receptor de nombre: Romina Medina con cédula: 31931511 fue registrado correctamente.
+El receptor de nombre: Carlos Castillo con cédula: 40742311 fue registrado correctamente.
+El receptor de nombre: Claudia Castillo con cédula: 86125617 fue registrado correctamente.
+El receptor de nombre: Santiago Torres con cédula: 29175900 fue registrado correctamente.
+El receptor de nombre: Natalia Morales con cédula: 63606628 fue registrado correctamente.
+El receptor de nombre: Valentina Rivera con cédula: 24716857 fue registrado correctamente.
+El receptor de nombre: Maximiliano Vega con cédula: 61220073 fue registrado correctamente.
+El receptor de nombre: Patricia Cruz con cédula: 25374874 fue registrado correctamente.
+El receptor de nombre: AndrÃ©s Vega con cédula: 68353204 fue registrado correctamente.
+El receptor de nombre: Diego Vargas con cédula: 78139880 fue registrado correctamente.
+El receptor de nombre: Leandro Herrera con cédula: 31682744 fue registrado correctamente.
+El receptor de nombre: Natalia Vargas con cédula: 25014631 fue registrado correctamente.
+El receptor de nombre: Laura Delgado con cédula: 20570592 fue registrado correctamente.
+El receptor de nombre: AndrÃ©s FernÃ¡ndez con cédula: 83793389 fue registrado correctamente.
+El receptor de nombre: Claudia Vargas con cédula: 36998038 fue registrado correctamente.
+El receptor de nombre: SofÃ­a JimÃ©nez con cédula: 70597444 fue registrado correctamente.
+El receptor de nombre: Vanesa Morales con cédula: 88961459 fue registrado correctamente.
+El receptor de nombre: Ana Morales con cédula: 94705205 fue registrado correctamente.
+El receptor de nombre: Isabella Ruiz con cédula: 79008866 fue registrado correctamente.
+El receptor de nombre: HernÃ¡n Cabrera con cédula: 27758595 fue registrado correctamente.
+El receptor de nombre: Roberto SÃ¡nchez con cédula: 64634663 fue registrado correctamente.
+El receptor de nombre: Romina MartÃ­nez con cédula: 65177213 fue registrado correctamente.
+El receptor de nombre: Diego JimÃ©nez con cédula: 55540424 fue registrado correctamente.
+El receptor de nombre: VerÃ³nica GÃ³mez con cédula: 28814949 fue registrado correctamente.
+El receptor de nombre: Vanesa SÃ¡nchez con cédula: 69476001 fue registrado correctamente.
+El receptor de nombre: JoaquÃ­n Delgado con cédula: 32321899 fue registrado correctamente.
+El receptor de nombre: TomÃ¡s GarcÃ­a con cédula: 32097220 fue registrado correctamente.
+El receptor de nombre: Gonzalo Lara con cédula: 66775103 fue registrado correctamente.
+El receptor de nombre: LucÃ­a MartÃ­nez con cédula: 49823450 fue registrado correctamente.
+El receptor de nombre: Soledad Guerrero con cédula: 16729990 fue registrado correctamente.
+El receptor de nombre: Camila GonzÃ¡lez con cédula: 20752378 fue registrado correctamente.
+El receptor de nombre: Ezequiel JimÃ©nez con cédula: 26090908 fue registrado correctamente.
+El receptor de nombre: Soledad Cabrera con cédula: 98231132 fue registrado correctamente.
+El receptor de nombre: Claudia Castillo con cédula: 99889098 fue registrado correctamente.
+El receptor de nombre: Gabriela Vega con cédula: 96637649 fue registrado correctamente.
+El receptor de nombre: Ezequiel SÃ¡nchez con cédula: 93370583 fue registrado correctamente.
+El receptor de nombre: SebastiÃ¡n GonzÃ¡lez con cédula: 27778019 fue registrado correctamente.
+El receptor de nombre: Leandro Vargas con cédula: 68812137 fue registrado correctamente.
+El receptor de nombre: Diego Torres con cédula: 99038526 fue registrado correctamente.
+El receptor de nombre: Florencia HernÃ¡ndez con cédula: 30863865 fue registrado correctamente.
+El receptor de nombre: Santiago Ramos con cédula: 95125977 fue registrado correctamente.
+El receptor de nombre: VerÃ³nica Ruiz con cédula: 95132217 fue registrado correctamente.
+El receptor de nombre: Santiago Rivera con cédula: 95511909 fue registrado correctamente.
+El receptor de nombre: Juan RamÃ­rez con cédula: 85283645 fue registrado correctamente.
+El receptor de nombre: Soledad Lara con cédula: 59555330 fue registrado correctamente.
+El receptor de nombre: Natalia LÃ³pez con cédula: 51373735 fue registrado correctamente.
+El receptor de nombre: Vanesa Rojas con cédula: 57469942 fue registrado correctamente.
+El receptor de nombre: JoaquÃ­n RodrÃ­guez con cédula: 33763566 fue registrado correctamente.
+El receptor de nombre: AndrÃ©s SÃ¡nchez con cédula: 45810056 fue registrado correctamente.
+El receptor de nombre: Romina SuÃ¡rez con cédula: 36786211 fue registrado correctamente.
+El receptor de nombre: Roberto Silva con cédula: 98588154 fue registrado correctamente.
+El receptor de nombre: Alejandra Ramos con cédula: 57130035 fue registrado correctamente.
+El receptor de nombre: Camila Acosta con cédula: 45059710 fue registrado correctamente.
+El receptor de nombre: SebastiÃ¡n Castillo con cédula: 68326160 fue registrado correctamente.
+El receptor de nombre: Santiago LÃ³pez con cédula: 35511941 fue registrado correctamente.
+El receptor de nombre: Patricia DÃ­az con cédula: 82269803 fue registrado correctamente.
+El receptor de nombre: Mateo RamÃ­rez con cédula: 93638503 fue registrado correctamente.
+El receptor de nombre: JoaquÃ­n Castillo con cédula: 99508850 fue registrado correctamente.
+El receptor de nombre: JoaquÃ­n Medina con cédula: 35748341 fue registrado correctamente.
+El receptor de nombre: Juan Vargas con cédula: 83542887 fue registrado correctamente.
+El receptor de nombre: Alejandra Castillo con cédula: 91424737 fue registrado correctamente.
+El receptor de nombre: Facundo Rivera con cédula: 78608612 fue registrado correctamente.
+El receptor de nombre: Bruno Romero con cédula: 99100953 fue registrado correctamente.
+El receptor de nombre: Valentina RodrÃ­guez con cédula: 36726767 fue registrado correctamente.
+El receptor de nombre: Romina Rojas con cédula: 19774839 fue registrado correctamente.
+El receptor de nombre: Isabella Flores con cédula: 63640499 fue registrado correctamente.
+El receptor de nombre: Camila Herrera con cédula: 39372360 fue registrado correctamente.
+El receptor de nombre: MartÃ­n Vega con cédula: 71265269 fue registrado correctamente.
+El receptor de nombre: VerÃ³nica Lara con cédula: 77750178 fue registrado correctamente.
+El receptor de nombre: Isabella Ruiz con cédula: 44788100 fue registrado correctamente.
+El receptor de nombre: Pedro HernÃ¡ndez con cédula: 69038700 fue registrado correctamente.
+El receptor de nombre: Laura Torres con cédula: 82498004 fue registrado correctamente.
+El receptor de nombre: Pedro Rojas con cédula: 38716269 fue registrado correctamente.
+El receptor de nombre: Ana Reyes con cédula: 65804273 fue registrado correctamente.
+El receptor de nombre: Facundo GarcÃ­a con cédula: 61053877 fue registrado correctamente.
+El receptor de nombre: Monica Cruz con cédula: 82238741 fue registrado correctamente.
+El receptor de nombre: VerÃ³nica Delgado con cédula: 46632757 fue registrado correctamente.
+El receptor de nombre: Romina Torres con cédula: 32151928 fue registrado correctamente.
+El receptor de nombre: Ramiro RodrÃ­guez con cédula: 85751409 fue registrado correctamente.
+El receptor de nombre: Ana FernÃ¡ndez con cédula: 34391257 fue registrado correctamente.
+El receptor de nombre: Daniela Medina con cédula: 53868501 fue registrado correctamente.
+El receptor de nombre: MarÃ­a Cruz con cédula: 73123515 fue registrado correctamente.
+El receptor de nombre: Carlos RodrÃ­guez con cédula: 97477029 fue registrado correctamente.
+El receptor de nombre: Isabella Torres con cédula: 30452412 fue registrado correctamente.
+El receptor de nombre: Natalia Rivera con cédula: 44392446 fue registrado correctamente.
+El receptor de nombre: Soledad RodrÃ­guez con cédula: 24508768 fue registrado correctamente.
+El receptor de nombre: Soledad JimÃ©nez con cédula: 20200074 fue registrado correctamente.
+El receptor de nombre: SebastiÃ¡n Cruz con cédula: 15512205 fue registrado correctamente.
+El receptor de nombre: Daniela GarcÃ­a con cédula: 96911784 fue registrado correctamente.
+]]></system-out>
+  </testcase>
+  <testcase name="cargarDonantes_archivoCSVCorrecto_registraCorrectamenteTodosLosReceptoresIngresados" classname="uy.edu.curso.LectorDeArchivosCSVTest" time="0.02">
+    <system-out><![CDATA[El donante de nombre: Bruno Vega con cédula: 58612055 fue registrado correctamente.
+El donante de nombre: HernÃ¡n Herrera con cédula: 33640702 fue registrado correctamente.
+El donante de nombre: Facundo Vega con cédula: 82232344 fue registrado correctamente.
+El donante de nombre: Laura Ruiz con cédula: 42949803 fue registrado correctamente.
+El donante de nombre: Ezequiel Medina con cédula: 72372114 fue registrado correctamente.
+El donante de nombre: Camila Delgado con cédula: 53622663 fue registrado correctamente.
+El donante de nombre: Daniela Ruiz con cédula: 44675473 fue registrado correctamente.
+El donante de nombre: Jimena DÃ­az con cédula: 11362459 fue registrado correctamente.
+El donante de nombre: Micaela Lara con cédula: 64549859 fue registrado correctamente.
+El donante de nombre: AgustÃ­n RodrÃ­guez con cédula: 75876924 fue registrado correctamente.
+El donante de nombre: Gonzalo JimÃ©nez con cédula: 64277800 fue registrado correctamente.
+El donante de nombre: Jimena SuÃ¡rez con cédula: 84285882 fue registrado correctamente.
+El donante de nombre: Florencia Vargas con cédula: 70900658 fue registrado correctamente.
+El donante de nombre: Mateo RamÃ­rez con cédula: 35848226 fue registrado correctamente.
+El donante de nombre: Monica Guerrero con cédula: 39042654 fue registrado correctamente.
+El donante de nombre: NicolÃ¡s Morales con cédula: 36054020 fue registrado correctamente.
+El donante de nombre: Claudia Cruz con cédula: 11898961 fue registrado correctamente.
+El donante de nombre: Vanesa HernÃ¡ndez con cédula: 17318358 fue registrado correctamente.
+El donante de nombre: Diego GarcÃ­a con cédula: 75884623 fue registrado correctamente.
+El donante de nombre: AgustÃ­n Romero con cédula: 74251933 fue registrado correctamente.
+El donante de nombre: SofÃ­a GonzÃ¡lez con cédula: 74119726 fue registrado correctamente.
+El donante de nombre: Bruno MartÃ­nez con cédula: 87446468 fue registrado correctamente.
+El donante de nombre: Gabriela PÃ©rez con cédula: 85543051 fue registrado correctamente.
+El donante de nombre: Maximiliano Morales con cédula: 65857931 fue registrado correctamente.
+El donante de nombre: Gabriela Acosta con cédula: 69421007 fue registrado correctamente.
+El donante de nombre: Ana SÃ¡nchez con cédula: 93352876 fue registrado correctamente.
+El donante de nombre: Laura Rivera con cédula: 98641164 fue registrado correctamente.
+El donante de nombre: AndrÃ©s GarcÃ­a con cédula: 20075036 fue registrado correctamente.
+El donante de nombre: Facundo HernÃ¡ndez con cédula: 89699989 fue registrado correctamente.
+El donante de nombre: Gonzalo Vega con cédula: 47945817 fue registrado correctamente.
+El donante de nombre: Soledad DÃ­az con cédula: 93893865 fue registrado correctamente.
+El donante de nombre: Alejandra Flores con cédula: 40173413 fue registrado correctamente.
+El donante de nombre: AndrÃ©s Vargas con cédula: 18004482 fue registrado correctamente.
+El donante de nombre: Romina Vargas con cédula: 26690465 fue registrado correctamente.
+El donante de nombre: Leandro Delgado con cédula: 77172238 fue registrado correctamente.
+El donante de nombre: VerÃ³nica Castillo con cédula: 15350023 fue registrado correctamente.
+El donante de nombre: Felipe Cabrera con cédula: 22257687 fue registrado correctamente.
+El donante de nombre: Ezequiel LÃ³pez con cédula: 46173157 fue registrado correctamente.
+El donante de nombre: AgustÃ­n Ruiz con cédula: 97444123 fue registrado correctamente.
+El donante de nombre: Laura Guerrero con cédula: 75998319 fue registrado correctamente.
+El donante de nombre: Ramiro SÃ¡nchez con cédula: 53091709 fue registrado correctamente.
+El donante de nombre: NicolÃ¡s Silva con cédula: 76500726 fue registrado correctamente.
+El donante de nombre: Mateo FernÃ¡ndez con cédula: 21819185 fue registrado correctamente.
+El donante de nombre: Ignacio GarcÃ­a con cédula: 64247457 fue registrado correctamente.
+El donante de nombre: Roberto Herrera con cédula: 17275149 fue registrado correctamente.
+El donante de nombre: Ana Reyes con cédula: 69329732 fue registrado correctamente.
+El donante de nombre: Gonzalo Delgado con cédula: 68802946 fue registrado correctamente.
+El donante de nombre: Isabella Rivera con cédula: 91721371 fue registrado correctamente.
+El donante de nombre: Laura Morales con cédula: 64759583 fue registrado correctamente.
+El donante de nombre: Valentina Delgado con cédula: 96934122 fue registrado correctamente.
+El donante de nombre: JoaquÃ­n Guerrero con cédula: 46698468 fue registrado correctamente.
+El donante de nombre: Valentina Medina con cédula: 83989546 fue registrado correctamente.
+El donante de nombre: JoaquÃ­n Romero con cédula: 47077298 fue registrado correctamente.
+El donante de nombre: NicolÃ¡s Vargas con cédula: 10344303 fue registrado correctamente.
+El donante de nombre: Leandro Guerrero con cédula: 69934576 fue registrado correctamente.
+El donante de nombre: TomÃ¡s Vega con cédula: 82937948 fue registrado correctamente.
+El donante de nombre: Ezequiel Medina con cédula: 42051937 fue registrado correctamente.
+El donante de nombre: Monica Guerrero con cédula: 52704903 fue registrado correctamente.
+El donante de nombre: Alejandra Flores con cédula: 99078806 fue registrado correctamente.
+El donante de nombre: Soledad Romero con cédula: 77416376 fue registrado correctamente.
+El donante de nombre: Romina GarcÃ­a con cédula: 80591959 fue registrado correctamente.
+El donante de nombre: Valentina GonzÃ¡lez con cédula: 97883261 fue registrado correctamente.
+El donante de nombre: Gonzalo Silva con cédula: 93652460 fue registrado correctamente.
+El donante de nombre: TomÃ¡s Castillo con cédula: 81621574 fue registrado correctamente.
+El donante de nombre: Carolina GonzÃ¡lez con cédula: 14818295 fue registrado correctamente.
+El donante de nombre: VerÃ³nica SÃ¡nchez con cédula: 22130508 fue registrado correctamente.
+El donante de nombre: Gonzalo Vargas con cédula: 32329103 fue registrado correctamente.
+El donante de nombre: NicolÃ¡s SuÃ¡rez con cédula: 17532195 fue registrado correctamente.
+El donante de nombre: Jimena Rojas con cédula: 42775624 fue registrado correctamente.
+El donante de nombre: Laura Medina con cédula: 33497411 fue registrado correctamente.
+El donante de nombre: Valentina Morales con cédula: 88270025 fue registrado correctamente.
+El donante de nombre: Ramiro GarcÃ­a con cédula: 44269370 fue registrado correctamente.
+El donante de nombre: AndrÃ©s GonzÃ¡lez con cédula: 83363160 fue registrado correctamente.
+El donante de nombre: Bruno Mendoza con cédula: 50151803 fue registrado correctamente.
+El donante de nombre: Roberto Medina con cédula: 50550084 fue registrado correctamente.
+El donante de nombre: Ezequiel SuÃ¡rez con cédula: 61185849 fue registrado correctamente.
+El donante de nombre: MarÃ­a Silva con cédula: 49625201 fue registrado correctamente.
+El donante de nombre: Maximiliano Delgado con cédula: 16582607 fue registrado correctamente.
+El donante de nombre: Felipe DÃ­az con cédula: 57287718 fue registrado correctamente.
+El donante de nombre: Patricia Torres con cédula: 98473848 fue registrado correctamente.
+El donante de nombre: Carlos Vargas con cédula: 96750368 fue registrado correctamente.
+El donante de nombre: HernÃ¡n Torres con cédula: 58970845 fue registrado correctamente.
+El donante de nombre: Camila DÃ­az con cédula: 65767881 fue registrado correctamente.
+El donante de nombre: Florencia Rivera con cédula: 77349752 fue registrado correctamente.
+El donante de nombre: Monica Romero con cédula: 49613214 fue registrado correctamente.
+El donante de nombre: Felipe Silva con cédula: 28892086 fue registrado correctamente.
+El donante de nombre: Juan FernÃ¡ndez con cédula: 62958901 fue registrado correctamente.
+El donante de nombre: Patricia FernÃ¡ndez con cédula: 59470729 fue registrado correctamente.
+El donante de nombre: Natalia SÃ¡nchez con cédula: 95704631 fue registrado correctamente.
+El donante de nombre: Carolina Lara con cédula: 13358751 fue registrado correctamente.
+El donante de nombre: Bruno Vega con cédula: 18484847 fue registrado correctamente.
+El donante de nombre: SofÃ­a Torres con cédula: 64800542 fue registrado correctamente.
+El donante de nombre: SofÃ­a SÃ¡nchez con cédula: 76118957 fue registrado correctamente.
+El donante de nombre: Natalia Cruz con cédula: 70887034 fue registrado correctamente.
+El donante de nombre: Diego Delgado con cédula: 97902129 fue registrado correctamente.
+El donante de nombre: Gonzalo NÃºÃ±ez con cédula: 14391105 fue registrado correctamente.
+El donante de nombre: Natalia SÃ¡nchez con cédula: 41690501 fue registrado correctamente.
+El donante de nombre: SebastiÃ¡n MartÃ­nez con cédula: 96547189 fue registrado correctamente.
+El donante de nombre: Romina PÃ©rez con cédula: 26395999 fue registrado correctamente.
+El donante de nombre: Maximiliano RodrÃ­guez con cédula: 95831286 fue registrado correctamente.
+]]></system-out>
+  </testcase>
+  <testcase name="cargarReceptores_archivoCSVNoExistente_lanzaFileNotFoundExceptionIndicandoQueNoSePudoAccederAlArchivoSolicitado" classname="uy.edu.curso.LectorDeArchivosCSVTest" time="0.007">
+    <system-out><![CDATA[No se pudo encontrar el archivo solicitado. . .
+]]></system-out>
+  </testcase>
+  <testcase name="cargarDonantes_archivoCSVNoExistente_lanzaFileNotFoundExceptionIndicandoQueNoSePudoAccederAlArchivoSolicitado" classname="uy.edu.curso.LectorDeArchivosCSVTest" time="0.002">
+    <system-out><![CDATA[No se pudo encontrar el archivo solicitado. . .
+]]></system-out>
+  </testcase>
+  <testcase name="cargarReceptores_archivoCSVCorrectoPeroConReceptoresRepetidos_registraCorrectamenteTodosLosReceptoresIngresadosEvitandoDuplicados" classname="uy.edu.curso.LectorDeArchivosCSVTest" time="0.016">
+    <system-out><![CDATA[El receptor de nombre: Daniela SÃ¡nchez con cédula: 20846997 fue registrado correctamente.
+El receptor de nombre: Roberto Romero con cédula: 61103753 fue registrado correctamente.
+El receptor de nombre: Felipe Reyes con cédula: 43708917 fue registrado correctamente.
+El receptor de nombre: Ignacio Ruiz con cédula: 33840482 fue registrado correctamente.
+El receptor de nombre: AndrÃ©s FernÃ¡ndez con cédula: 61145210 fue registrado correctamente.
+El receptor de nombre: Romina Ruiz con cédula: 27883760 fue registrado correctamente.
+El receptor de nombre: Diego Flores con cédula: 61414460 fue registrado correctamente.
+El receptor de nombre: Gabriela GÃ³mez con cédula: 64221019 fue registrado correctamente.
+El receptor de nombre: Paula DÃ­az con cédula: 15724583 fue registrado correctamente.
+El receptor de nombre: MartÃ­n GonzÃ¡lez con cédula: 58658147 fue registrado correctamente.
+El receptor de nombre: Camila GÃ³mez con cédula: 10760738 fue registrado correctamente.
+El receptor de nombre: TomÃ¡s PÃ©rez con cédula: 73582545 fue registrado correctamente.
+El receptor de nombre: Leandro RamÃ­rez con cédula: 64039108 fue registrado correctamente.
+El receptor de nombre: Micaela LÃ³pez con cédula: 14974400 fue registrado correctamente.
+El receptor de nombre: Juan HernÃ¡ndez con cédula: 91270059 fue registrado correctamente.
+El receptor de nombre: MartÃ­n HernÃ¡ndez con cédula: 37348796 fue registrado correctamente.
+El receptor de nombre: Daniela FernÃ¡ndez con cédula: 21545260 fue registrado correctamente.
+El receptor de nombre: Ana Reyes con cédula: 33998441 fue registrado correctamente.
+El receptor de nombre: AndrÃ©s Torres con cédula: 66591467 fue registrado correctamente.
+El receptor de nombre: Roberto Ruiz con cédula: 24736089 fue registrado correctamente.
+El receptor de nombre: SofÃ­a GonzÃ¡lez con cédula: 61414460 no pudo ser registrado.
+El receptor de nombre: Carlos FernÃ¡ndez con cédula: 21135441 fue registrado correctamente.
+El receptor de nombre: Felipe Vargas con cédula: 43343887 fue registrado correctamente.
+El receptor de nombre: Daniela Castillo con cédula: 36772158 fue registrado correctamente.
+El receptor de nombre: SofÃ­a GonzÃ¡lez con cédula: 21620366 fue registrado correctamente.
+El receptor de nombre: Diego RamÃ­rez con cédula: 72953355 fue registrado correctamente.
+El receptor de nombre: AndrÃ©s Morales con cédula: 67098936 fue registrado correctamente.
+El receptor de nombre: Carlos HernÃ¡ndez con cédula: 81713878 fue registrado correctamente.
+El receptor de nombre: MartÃ­n GarcÃ­a con cédula: 80963082 fue registrado correctamente.
+El receptor de nombre: Micaela Reyes con cédula: 98623919 fue registrado correctamente.
+El receptor de nombre: Mateo Rivera con cédula: 22057623 fue registrado correctamente.
+El receptor de nombre: Florencia Vargas con cédula: 72102603 fue registrado correctamente.
+El receptor de nombre: Paula Reyes con cédula: 66240329 fue registrado correctamente.
+El receptor de nombre: JoaquÃ­n RodrÃ­guez con cédula: 69285932 fue registrado correctamente.
+El receptor de nombre: Diego Reyes con cédula: 39083949 fue registrado correctamente.
+El receptor de nombre: Camila Castillo con cédula: 43343887 no pudo ser registrado.
+El receptor de nombre: VerÃ³nica GonzÃ¡lez con cédula: 84887041 fue registrado correctamente.
+El receptor de nombre: AgustÃ­n LÃ³pez con cédula: 11022711 fue registrado correctamente.
+El receptor de nombre: MartÃ­n JimÃ©nez con cédula: 33998441 no pudo ser registrado.
+El receptor de nombre: AndrÃ©s RamÃ­rez con cédula: 93741078 fue registrado correctamente.
+El receptor de nombre: VerÃ³nica Vargas con cédula: 86090044 fue registrado correctamente.
+El receptor de nombre: Isabella PÃ©rez con cédula: 16887758 fue registrado correctamente.
+El receptor de nombre: Ignacio Ruiz con cédula: 36585833 fue registrado correctamente.
+El receptor de nombre: Felipe Romero con cédula: 36853671 fue registrado correctamente.
+El receptor de nombre: Pedro RamÃ­rez con cédula: 81244461 fue registrado correctamente.
+El receptor de nombre: Roberto MartÃ­nez con cédula: 40905340 fue registrado correctamente.
+El receptor de nombre: Ana Rivera con cédula: 52463636 fue registrado correctamente.
+El receptor de nombre: Florencia Romero con cédula: 32976360 fue registrado correctamente.
+El receptor de nombre: Roberto GÃ³mez con cédula: 51581581 fue registrado correctamente.
+El receptor de nombre: Valentina Flores con cédula: 31583815 fue registrado correctamente.
+El receptor de nombre: Ana GarcÃ­a con cédula: 77537749 fue registrado correctamente.
+El receptor de nombre: Laura DÃ­az con cédula: 82293578 fue registrado correctamente.
+El receptor de nombre: Isabella Ruiz con cédula: 75669373 fue registrado correctamente.
+El receptor de nombre: Camila SÃ¡nchez con cédula: 88974673 fue registrado correctamente.
+El receptor de nombre: Juan Reyes con cédula: 30438210 fue registrado correctamente.
+El receptor de nombre: Micaela Reyes con cédula: 22057623 no pudo ser registrado.
+El receptor de nombre: SebastiÃ¡n MartÃ­nez con cédula: 60194716 fue registrado correctamente.
+El receptor de nombre: Felipe Torres con cédula: 90455354 fue registrado correctamente.
+El receptor de nombre: Isabella SÃ¡nchez con cédula: 38967313 fue registrado correctamente.
+El receptor de nombre: Santiago LÃ³pez con cédula: 90455354 no pudo ser registrado.
+El receptor de nombre: Micaela Morales con cédula: 64221019 no pudo ser registrado.
+El receptor de nombre: Leandro MartÃ­nez con cédula: 92864801 fue registrado correctamente.
+El receptor de nombre: Florencia Morales con cédula: 20893130 fue registrado correctamente.
+El receptor de nombre: Laura GarcÃ­a con cédula: 43708917 no pudo ser registrado.
+El receptor de nombre: Roberto Reyes con cédula: 38533462 fue registrado correctamente.
+El receptor de nombre: Mateo SÃ¡nchez con cédula: 79612692 fue registrado correctamente.
+El receptor de nombre: NicolÃ¡s PÃ©rez con cédula: 64402511 fue registrado correctamente.
+El receptor de nombre: Diego Flores con cédula: 93741078 no pudo ser registrado.
+El receptor de nombre: Pedro Torres con cédula: 55473870 fue registrado correctamente.
+El receptor de nombre: Florencia MartÃ­nez con cédula: 13127789 fue registrado correctamente.
+El receptor de nombre: Paula GonzÃ¡lez con cédula: 67070182 fue registrado correctamente.
+El receptor de nombre: Gabriela Morales con cédula: 29181264 fue registrado correctamente.
+El receptor de nombre: NicolÃ¡s GonzÃ¡lez con cédula: 98659922 fue registrado correctamente.
+El receptor de nombre: Ignacio RamÃ­rez con cédula: 80249838 fue registrado correctamente.
+El receptor de nombre: Felipe Ruiz con cédula: 36853671 no pudo ser registrado.
+El receptor de nombre: Paula HernÃ¡ndez con cédula: 40905340 no pudo ser registrado.
+El receptor de nombre: VerÃ³nica Morales con cédula: 62091490 fue registrado correctamente.
+El receptor de nombre: Laura RamÃ­rez con cédula: 46158150 fue registrado correctamente.
+El receptor de nombre: Santiago Flores con cédula: 92304466 fue registrado correctamente.
+El receptor de nombre: SofÃ­a Rivera con cédula: 66591467 no pudo ser registrado.
+El receptor de nombre: Daniela FernÃ¡ndez con cédula: 82293578 no pudo ser registrado.
+El receptor de nombre: Leandro Vargas con cédula: 75669373 no pudo ser registrado.
+El receptor de nombre: Carlos Rivera con cédula: 27332840 fue registrado correctamente.
+El receptor de nombre: VerÃ³nica JimÃ©nez con cédula: 28228930 fue registrado correctamente.
+El receptor de nombre: Leandro Flores con cédula: 88974673 no pudo ser registrado.
+El receptor de nombre: MartÃ­n Reyes con cédula: 54251274 fue registrado correctamente.
+El receptor de nombre: NicolÃ¡s GÃ³mez con cédula: 81244461 no pudo ser registrado.
+El receptor de nombre: NicolÃ¡s RodrÃ­guez con cédula: 92304466 no pudo ser registrado.
+El receptor de nombre: AndrÃ©s RodrÃ­guez con cédula: 33625398 fue registrado correctamente.
+El receptor de nombre: VerÃ³nica Ruiz con cédula: 21620366 no pudo ser registrado.
+El receptor de nombre: TomÃ¡s Torres con cédula: 72020224 fue registrado correctamente.
+El receptor de nombre: Pedro Torres con cédula: 36772158 no pudo ser registrado.
+El receptor de nombre: TomÃ¡s Rivera con cédula: 57986183 fue registrado correctamente.
+El receptor de nombre: NicolÃ¡s Torres con cédula: 94827577 fue registrado correctamente.
+El receptor de nombre: NicolÃ¡s Romero con cédula: 21784614 fue registrado correctamente.
+El receptor de nombre: JoaquÃ­n FernÃ¡ndez con cédula: 89915586 fue registrado correctamente.
+El receptor de nombre: VerÃ³nica DÃ­az con cédula: 34025102 fue registrado correctamente.
+El receptor de nombre: Felipe JimÃ©nez con cédula: 61103753 no pudo ser registrado.
+El receptor de nombre: Isabella FernÃ¡ndez con cédula: 27883760 no pudo ser registrado.
+El receptor de nombre: SebastiÃ¡n Ruiz con cédula: 71939238 fue registrado correctamente.
+]]></system-out>
+  </testcase>
+  <testcase name="cargarDonantes_archivoCSVCorrectoPeroConDonantesRepetidos_registraCorrectamenteTodosLosDonantesIngresadosEvitandoDuplicados" classname="uy.edu.curso.LectorDeArchivosCSVTest" time="0.012">
+    <system-out><![CDATA[El donante de nombre: Micaela GarcÃ­a con cédula: 39005034 fue registrado correctamente.
+El donante de nombre: Ana SÃ¡nchez con cédula: 39075067 fue registrado correctamente.
+El donante de nombre: VerÃ³nica Ruiz con cédula: 12797042 fue registrado correctamente.
+El donante de nombre: Roberto GonzÃ¡lez con cédula: 33205638 fue registrado correctamente.
+El donante de nombre: SebastiÃ¡n RodrÃ­guez con cédula: 39005034 no pudo ser registrado.
+El donante de nombre: Roberto RamÃ­rez con cédula: 28278169 fue registrado correctamente.
+El donante de nombre: Jimena GarcÃ­a con cédula: 34757159 fue registrado correctamente.
+El donante de nombre: Facundo GÃ³mez con cédula: 12016401 fue registrado correctamente.
+El donante de nombre: Isabella Flores con cédula: 65359193 fue registrado correctamente.
+El donante de nombre: AndrÃ©s HernÃ¡ndez con cédula: 96332435 fue registrado correctamente.
+El donante de nombre: Paula Flores con cédula: 80418737 fue registrado correctamente.
+El donante de nombre: Facundo Rivera con cédula: 43568271 fue registrado correctamente.
+El donante de nombre: Facundo Castillo con cédula: 87312700 fue registrado correctamente.
+El donante de nombre: MarÃ­a Torres con cédula: 43442571 fue registrado correctamente.
+El donante de nombre: Diego GarcÃ­a con cédula: 76654726 fue registrado correctamente.
+El donante de nombre: Juan PÃ©rez con cédula: 87025010 fue registrado correctamente.
+El donante de nombre: Daniela Romero con cédula: 60049132 fue registrado correctamente.
+El donante de nombre: Santiago DÃ­az con cédula: 56790711 fue registrado correctamente.
+El donante de nombre: Gabriela Ruiz con cédula: 93913037 fue registrado correctamente.
+El donante de nombre: Facundo LÃ³pez con cédula: 48149326 fue registrado correctamente.
+El donante de nombre: SebastiÃ¡n DÃ­az con cédula: 44099521 fue registrado correctamente.
+El donante de nombre: Ana GonzÃ¡lez con cédula: 74237937 fue registrado correctamente.
+El donante de nombre: Paula PÃ©rez con cédula: 62808422 fue registrado correctamente.
+El donante de nombre: Mateo SÃ¡nchez con cédula: 80418737 no pudo ser registrado.
+El donante de nombre: Camila PÃ©rez con cédula: 39075067 no pudo ser registrado.
+El donante de nombre: Ana GonzÃ¡lez con cédula: 70537209 fue registrado correctamente.
+El donante de nombre: Facundo GonzÃ¡lez con cédula: 62232024 fue registrado correctamente.
+El donante de nombre: SebastiÃ¡n HernÃ¡ndez con cédula: 70537209 no pudo ser registrado.
+El donante de nombre: Isabella RodrÃ­guez con cédula: 63834418 fue registrado correctamente.
+El donante de nombre: SofÃ­a Vargas con cédula: 39550620 fue registrado correctamente.
+El donante de nombre: Roberto Rivera con cédula: 48723601 fue registrado correctamente.
+El donante de nombre: MartÃ­n Vargas con cédula: 95942021 fue registrado correctamente.
+El donante de nombre: Ignacio Morales con cédula: 26855954 fue registrado correctamente.
+El donante de nombre: AgustÃ­n RamÃ­rez con cédula: 59850419 fue registrado correctamente.
+El donante de nombre: LucÃ­a Rivera con cédula: 41110344 fue registrado correctamente.
+El donante de nombre: Carlos PÃ©rez con cédula: 45425763 fue registrado correctamente.
+El donante de nombre: VerÃ³nica GarcÃ­a con cédula: 95942021 no pudo ser registrado.
+El donante de nombre: MarÃ­a RamÃ­rez con cédula: 86447533 fue registrado correctamente.
+El donante de nombre: Pedro LÃ³pez con cédula: 71493200 fue registrado correctamente.
+El donante de nombre: Natalia GÃ³mez con cédula: 33073232 fue registrado correctamente.
+El donante de nombre: Ana Reyes con cédula: 30892748 fue registrado correctamente.
+El donante de nombre: Ignacio Morales con cédula: 15995187 fue registrado correctamente.
+El donante de nombre: Camila Flores con cédula: 44931350 fue registrado correctamente.
+El donante de nombre: Carlos Castillo con cédula: 14372870 fue registrado correctamente.
+El donante de nombre: Ignacio Ruiz con cédula: 10419192 fue registrado correctamente.
+El donante de nombre: Romina MartÃ­nez con cédula: 91337727 fue registrado correctamente.
+El donante de nombre: LucÃ­a MartÃ­nez con cédula: 74347213 fue registrado correctamente.
+El donante de nombre: SofÃ­a PÃ©rez con cédula: 36963251 fue registrado correctamente.
+El donante de nombre: VerÃ³nica LÃ³pez con cédula: 12093357 fue registrado correctamente.
+El donante de nombre: Isabella SÃ¡nchez con cédula: 53200252 fue registrado correctamente.
+El donante de nombre: AgustÃ­n Romero con cédula: 37183461 fue registrado correctamente.
+El donante de nombre: Florencia HernÃ¡ndez con cédula: 67904277 fue registrado correctamente.
+El donante de nombre: Romina Ruiz con cédula: 91488804 fue registrado correctamente.
+El donante de nombre: Isabella FernÃ¡ndez con cédula: 14378347 fue registrado correctamente.
+El donante de nombre: Pedro Castillo con cédula: 81977055 fue registrado correctamente.
+El donante de nombre: Isabella FernÃ¡ndez con cédula: 58113427 fue registrado correctamente.
+El donante de nombre: NicolÃ¡s GarcÃ­a con cédula: 95294581 fue registrado correctamente.
+El donante de nombre: Natalia Vargas con cédula: 91711765 fue registrado correctamente.
+El donante de nombre: Roberto FernÃ¡ndez con cédula: 37183461 no pudo ser registrado.
+El donante de nombre: MartÃ­n GonzÃ¡lez con cédula: 44333704 fue registrado correctamente.
+El donante de nombre: Romina PÃ©rez con cédula: 65687244 fue registrado correctamente.
+El donante de nombre: Isabella SÃ¡nchez con cédula: 31397178 fue registrado correctamente.
+El donante de nombre: Felipe Vargas con cédula: 84728591 fue registrado correctamente.
+El donante de nombre: Facundo HernÃ¡ndez con cédula: 17588272 fue registrado correctamente.
+El donante de nombre: Santiago Morales con cédula: 10419192 no pudo ser registrado.
+El donante de nombre: Gabriela GarcÃ­a con cédula: 71493200 no pudo ser registrado.
+El donante de nombre: MarÃ­a GÃ³mez con cédula: 12093357 no pudo ser registrado.
+El donante de nombre: MartÃ­n Vargas con cédula: 45586380 fue registrado correctamente.
+El donante de nombre: Laura GonzÃ¡lez con cédula: 76654726 no pudo ser registrado.
+El donante de nombre: Natalia SÃ¡nchez con cédula: 12387417 fue registrado correctamente.
+El donante de nombre: Ignacio MartÃ­nez con cédula: 20652788 fue registrado correctamente.
+El donante de nombre: VerÃ³nica Flores con cédula: 54247603 fue registrado correctamente.
+El donante de nombre: Jimena JimÃ©nez con cédula: 33830905 fue registrado correctamente.
+El donante de nombre: Natalia RamÃ­rez con cédula: 39550620 no pudo ser registrado.
+El donante de nombre: MarÃ­a Castillo con cédula: 12016401 no pudo ser registrado.
+El donante de nombre: Isabella Flores con cédula: 50478341 fue registrado correctamente.
+El donante de nombre: Felipe HernÃ¡ndez con cédula: 15995187 no pudo ser registrado.
+El donante de nombre: LucÃ­a DÃ­az con cédula: 30892748 no pudo ser registrado.
+El donante de nombre: Ana PÃ©rez con cédula: 62803626 fue registrado correctamente.
+El donante de nombre: TomÃ¡s PÃ©rez con cédula: 39848345 fue registrado correctamente.
+El donante de nombre: Valentina SÃ¡nchez con cédula: 78778848 fue registrado correctamente.
+El donante de nombre: Diego LÃ³pez con cédula: 14069583 fue registrado correctamente.
+El donante de nombre: Micaela GonzÃ¡lez con cédula: 96332435 no pudo ser registrado.
+El donante de nombre: Paula RamÃ­rez con cédula: 31656058 fue registrado correctamente.
+El donante de nombre: Roberto Ruiz con cédula: 67904277 no pudo ser registrado.
+El donante de nombre: VerÃ³nica HernÃ¡ndez con cédula: 50232081 fue registrado correctamente.
+El donante de nombre: AndrÃ©s Morales con cédula: 14282511 fue registrado correctamente.
+El donante de nombre: JoaquÃ­n Morales con cédula: 71423618 fue registrado correctamente.
+El donante de nombre: TomÃ¡s GÃ³mez con cédula: 95294581 no pudo ser registrado.
+El donante de nombre: Micaela FernÃ¡ndez con cédula: 30083130 fue registrado correctamente.
+El donante de nombre: VerÃ³nica Ruiz con cédula: 18674502 fue registrado correctamente.
+El donante de nombre: AgustÃ­n HernÃ¡ndez con cédula: 10014898 fue registrado correctamente.
+El donante de nombre: MarÃ­a SÃ¡nchez con cédula: 76875395 fue registrado correctamente.
+El donante de nombre: Leandro Castillo con cédula: 91488804 no pudo ser registrado.
+El donante de nombre: Felipe Rivera con cédula: 50711123 fue registrado correctamente.
+El donante de nombre: Pedro HernÃ¡ndez con cédula: 80943121 fue registrado correctamente.
+El donante de nombre: Roberto Reyes con cédula: 34757159 no pudo ser registrado.
+El donante de nombre: MartÃ­n GarcÃ­a con cédula: 18674502 no pudo ser registrado.
+El donante de nombre: Florencia GÃ³mez con cédula: 83727799 fue registrado correctamente.
+El donante de nombre: NicolÃ¡s Morales con cédula: 99431188 fue registrado correctamente.
+]]></system-out>
+  </testcase>
+</testsuite>

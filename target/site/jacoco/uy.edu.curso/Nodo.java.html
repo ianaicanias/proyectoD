@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="es"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>Nodo.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">proyectoD</a> &gt; <a href="index.source.html" class="el_package">uy.edu.curso</a> &gt; <span class="el_source">Nodo.java</span></div><h1>Nodo.java</h1><pre class="source lang-java linenums">/*
+ * Clase: Nodo.
+ * Programadores: Axel Ferreira, Ianai Canias, Thiago Soca, Valentín Guerrico.
+ * Fecha: 15/04/2026.
+ * Copyright: Todos los derechos reservados para los programadores de este archivo, 2026.
+ *
+ * Resumen:
+ * La siguiente clase representa un nodo genérico utilizado en estructuras
+ * de datos enlazadas, como listas y colas, almacenando un dato y una referencia
+ * al siguiente nodo.
+ */
+package uy.edu.curso;
+
+
+/**
+ * Representa un nodo genérico que almacena un dato y una referencia
+ * al siguiente nodo en una estructura enlazada.
+ *
+ * @param &lt;T&gt; el tipo de dato almacenado en el nodo
+ */
+public class Nodo&lt;T&gt; {
+
+    /**
+     * Dato almacenado en el nodo.
+     */
+    private T dato;
+
+    /**
+     * Referencia al siguiente nodo en la estructura.
+     */
+    private Nodo&lt;T&gt; siguiente;
+
+    /**
+     * Crea un nodo vacío sin dato ni referencia al siguiente nodo.
+     */
+<span class="fc" id="L36">    public Nodo() {</span>
+<span class="fc" id="L37">    }</span>
+
+    /**
+     * Crea un nodo con un dato y una referencia al siguiente nodo.
+     *
+     * @param dato el dato a almacenar en el nodo
+     * @param siguiente referencia al siguiente nodo
+     */
+<span class="fc" id="L45">    public Nodo(T dato, Nodo&lt;T&gt; siguiente) {</span>
+<span class="fc" id="L46">        this.dato = dato;</span>
+<span class="fc" id="L47">        this.siguiente = siguiente;</span>
+<span class="fc" id="L48">    }</span>
+
+    /**
+     * Obtiene el dato almacenado en el nodo.
+     *
+     * @return el dato contenido en el nodo
+     */
+    public T getDato() {
+<span class="fc" id="L56">        return this.dato;</span>
+    }
+
+    /**
+     * Obtiene la referencia al siguiente nodo.
+     *
+     * @return el siguiente nodo, o {@code null} si no existe
+     */
+    public Nodo&lt;T&gt; getSiguiente() {
+<span class="fc" id="L65">        return this.siguiente;</span>
+    }
+
+    /**
+     * Establece la referencia al siguiente nodo.
+     *
+     * @param siguiente el nodo que será el siguiente en la estructura
+     */
+    public void setSiguiente(Nodo&lt;T&gt; siguiente) {
+<span class="fc" id="L74">        this.siguiente = siguiente;</span>
+<span class="fc" id="L75">    }</span>
+
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.11.202310140853</span></div></body></html>
