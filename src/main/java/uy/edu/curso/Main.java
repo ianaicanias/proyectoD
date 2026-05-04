@@ -1,3 +1,17 @@
+/*
+ * Clase: Main.
+ * Programadores: Axel Ferreira, Ianai Canias, Thiago Soca, Valentín Guerrico.
+ * Fecha: 04/05/2026.
+ *
+ * Resumen:
+ * Clase principal del sistema BioQueue. Se encarga de interactuar con el usuario
+ * a través de consola, permitiendo la ejecución de las distintas funcionalidades
+ * del sistema, como registro, búsqueda, eliminación y listado de entidades,
+ * así como la carga de datos desde archivos CSV.
+ *
+ * Utiliza el patrón Facade mediante BioQueueFacade para desacoplar la lógica
+ * de negocio de la interfaz de usuario.
+ */
 package uy.edu.curso;
 
 import java.util.Scanner;
@@ -12,12 +26,36 @@ import uy.edu.curso.services.LectorDeArchivosCSV;
 import uy.edu.curso.tda.TDAListaEnlazada;
 
 
+/**
+ * Clase principal del sistema BioQueue.
+ * Gestiona la interacción con el usuario mediante consola y coordina
+ * la ejecución de las funcionalidades del sistema a través de un menú.
+ */
 public class Main {
 
+    /**
+     * Instancia única del facade del sistema BioQueue.
+     * Permite acceder a las funcionalidades principales sin exponer la lógica interna.
+     */
     private static final BioQueueFacade BIO_QUEUE = BioQueueFacade.getInstancia();
+
+    /**
+     * Scanner utilizado para la lectura de datos ingresados por el usuario desde consola.
+     */
     private static final Scanner SCANNER = new Scanner(System.in);
+
+    /**
+     * Componente encargado de la carga de datos desde archivos externos (CSV).
+     */
     private static final LectorDeArchivos LECTOR_DE_ARCHIVOS = new LectorDeArchivosCSV(BIO_QUEUE);
 
+    /**
+     * Punto de entrada del sistema.
+     * Ejecuta un menú interactivo en consola que permite al usuario acceder
+     * a las distintas funcionalidades del sistema hasta que decida salir.
+     *
+     * @param args Argumentos de línea de comandos (no utilizados).
+     */
     public static void main(String[] args) {
         int opcion = -1;
 
@@ -90,6 +128,9 @@ public class Main {
         SCANNER.close();
     }
 
+    /**
+     * Muestra el menú principal del sistema por consola.
+     */
     private static void mostrarMenu() {
         System.out.println("\n==================== Sistema BioQueue ====================");
         System.out.println("1. Registrar Receptor");
@@ -113,6 +154,10 @@ public class Main {
         System.out.print("Ingrese una opción: ");
     }
 
+    /**
+     * Registra un nuevo receptor solicitando los datos por consola.
+     * Si el registro es exitoso, se inserta automáticamente en la lista de prioridad.
+     */
     private static void registrarReceptor() {
         System.out.print("Cédula de identidad: ");
         String cedula = SCANNER.nextLine();
@@ -137,6 +182,10 @@ public class Main {
         }
     }
 
+    /**
+     * Registra un nuevo donante solicitando los datos por consola.
+     * Luego del registro, intenta automáticamente asignar un órgano a un receptor compatible.
+     */
     private static void registrarDonante() {
         int cantidadDeTrasplantesAntes = BIO_QUEUE.getCantidadDeTrasplantes();
         int cantidadDeTrasplantesDespues;
@@ -168,6 +217,9 @@ public class Main {
         }
     }
 
+    /**
+     * Carga receptores desde un archivo CSV especificado por el usuario.
+     */
     private static void registrarReceptoresPorCSV() {
         System.out.print("Ingrese la ruta al archivo con el registro de nuevos receptores (CSV): ");
         String rutaDelArchivoDeReceptores = SCANNER.nextLine();
@@ -175,6 +227,9 @@ public class Main {
         LECTOR_DE_ARCHIVOS.cargarReceptores(rutaDelArchivoDeReceptores);
     }
 
+    /**
+     * Carga donantes desde un archivo CSV especificado por el usuario.
+     */
     private static void registrarDonantesPorCSV() {
         System.out.print("Ingrese la ruta al archivo con el registro de nuevos donantes (CSV): ");
         String rutaDelArchivoDeDonantes = SCANNER.nextLine();
@@ -182,6 +237,9 @@ public class Main {
         LECTOR_DE_ARCHIVOS.cargarDonantes(rutaDelArchivoDeDonantes);
     }
 
+    /**
+     * Busca un receptor por cédula de identidad.
+     */
     private static void buscarReceptor() {
         System.out.print("Cédula de identidad del receptor: ");
         String cedula = SCANNER.nextLine();
@@ -195,6 +253,9 @@ public class Main {
         }
     }
 
+    /**
+     * Busca un donante por cédula de identidad.
+     */
     private static void buscarDonante() {
         System.out.print("Cédula de identidad del donante: ");
         String cedula = SCANNER.nextLine();
@@ -208,6 +269,9 @@ public class Main {
         }
     }
 
+    /**
+     * Busca un órgano por su identificador único.
+     */
     private static void buscarOrganoPorIdentificador() {
         System.out.print("Identificador del órgano: ");
         long id = Long.parseLong(SCANNER.nextLine());
@@ -221,6 +285,9 @@ public class Main {
         }
     }
 
+    /**
+     * Busca órganos por nombre.
+     */
     private static void buscarOrganosPorNombre() {
         System.out.print("Nombre del órgano: ");
         String nombreDelOrgano = SCANNER.nextLine();
@@ -239,6 +306,9 @@ public class Main {
         }
     }
 
+    /**
+     * Busca órganos por tipo de sangre.
+     */
     private static void buscarOrganosPorTipoDeSangre() {
         System.out.print("Tipo de sangre del órgano: ");
         String tipoDeSangreDelOrgano = SCANNER.nextLine();
@@ -257,6 +327,9 @@ public class Main {
         }
     }
 
+    /**
+     * Busca un trasplante por su identificador.
+     */
     private static void buscarTrasplante() {
         System.out.print("Identificador del trasplante: ");
         long id = Long.parseLong(SCANNER.nextLine());
@@ -270,6 +343,9 @@ public class Main {
         }
     }
 
+    /**
+     * Elimina un receptor del sistema.
+     */
     private static void eliminarReceptor() {
         System.out.print("Cédula de identidad del receptor a eliminar: ");
         String cedula = SCANNER.nextLine();
@@ -278,6 +354,9 @@ public class Main {
         System.out.println("Receptor eliminado correctamente.");
     }
 
+    /**
+     * Elimina un donante del sistema.
+     */
     private static void eliminarDonante() {
         System.out.print("Cédula de identidad del donante a eliminar: ");
         String cedula = SCANNER.nextLine();
@@ -286,6 +365,9 @@ public class Main {
         System.out.println("Donante eliminado correctamente.");
     }
 
+    /**
+     * Elimina un órgano del sistema.
+     */
     private static void eliminarOrgano() {
         System.out.print("Identificador del órgano a eliminar: ");
         long id = Long.parseLong(SCANNER.nextLine());
@@ -294,6 +376,12 @@ public class Main {
         System.out.println("Órgano eliminado correctamente.");
     }
 
+    /**
+     * Lee un número entero desde consola.
+     * Si la entrada es inválida, retorna -1.
+     *
+     * @return Número ingresado o -1 en caso de error.
+     */
     private static int leerInt() {
         try {
             return Integer.parseInt(SCANNER.nextLine());
