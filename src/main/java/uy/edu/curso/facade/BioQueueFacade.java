@@ -89,6 +89,33 @@ public class BioQueueFacade {
     }
 
     /**
+     * Retorna la cantidad de receptores registrados en el sistema.
+     *
+     * @return Cantidad de receptores.
+     */
+    public int getCantidadDeReceptores() {
+        return this.gestorDeReceptores.getListaDeReceptores().tamaño();
+    }
+
+    /**
+     * Retorna la cantidad de donantes registrados en el sistema.
+     *
+     * @return Cantidad de donantes.
+     */
+    public int getCantidadDeDonantes() {
+        return this.gestorDeDonantes.getListaDeDonantes().tamaño();
+    }
+
+    /**
+     * Retorna la cantidad de trasplantes realizados en el sistema.
+     *
+     * @return Cantidad de trasplantes realizados.
+     */
+    public int getCantidadDeTrasplantes() {
+        return this.gestorDeTrasplantes.getListaDeTrasplantesRealizados().tamaño();
+    }
+
+    /**
      * Registra un nuevo receptor en el sistema.
      *
      * @param cedulaDeIdentidad      Cédula de identidad única del receptor.
@@ -292,33 +319,6 @@ public class BioQueueFacade {
      */
     public String listarTrasplantesRealizados() {
         return this.gestorDeTrasplantes.listarTrasplantesRealizados();
-    }
-
-    /**
-     * Retorna la cantidad de receptores registrados en el sistema.
-     *
-     * @return Cantidad de receptores.
-     */
-    public int getCantidadDeReceptores() {
-        return this.gestorDeReceptores.getListaDeReceptores().tamaño();
-    }
-
-    /**
-     * Retorna la cantidad de donantes registrados en el sistema.
-     *
-     * @return Cantidad de donantes.
-     */
-    public int getCantidadDeDonantes() {
-        return this.gestorDeDonantes.getListaDeDonantes().tamaño();
-    }
-
-    /**
-     * Retorna la cantidad de trasplantes realizados en el sistema.
-     *
-     * @return Cantidad de trasplantes realizados.
-     */
-    public int getCantidadDeTrasplantes() {
-        return this.gestorDeTrasplantes.getListaDeTrasplantesRealizados().tamaño();
     }
 
     /* Únicamente para el uso de Tests, en su versión final debería de ser eliminado. */

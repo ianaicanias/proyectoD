@@ -66,7 +66,7 @@ import uy.edu.curso.tda.TDAListaEnlazada;
 
 <span class="fc bfc" id="L67" title="All 2 branches covered.">        if (actual == null) {</span>
 <span class="fc" id="L68">            this.primero = nuevoNodo;</span>
-<span class="fc" id="L69">        } else {</span>
+        } else {
 <span class="fc bfc" id="L70" title="All 2 branches covered.">            while (actual.getSiguiente() != null) {</span>
 <span class="fc" id="L71">                actual = actual.getSiguiente();</span>
             }
@@ -97,7 +97,7 @@ import uy.edu.curso.tda.TDAListaEnlazada;
 <span class="fc bfc" id="L97" title="All 4 branches covered.">        if (actual == null || index == 0) {</span>
 <span class="fc" id="L98">            nuevoNodo.setSiguiente(actual);</span>
 <span class="fc" id="L99">            this.primero = nuevoNodo;</span>
-<span class="fc" id="L100">        } else {</span>
+        } else {
 <span class="fc" id="L101">            int i = 1;</span>
 
 <span class="fc bfc" id="L103" title="All 2 branches covered.">            while (i &lt; index) {</span>
@@ -212,7 +212,7 @@ import uy.edu.curso.tda.TDAListaEnlazada;
 <span class="fc" id="L212">                return true;</span>
             }
 <span class="fc" id="L214">            actual = actual.getSiguiente();</span>
-        }
+<span class="fc" id="L215">        }</span>
 
 <span class="fc" id="L217">        return false;</span>
     }

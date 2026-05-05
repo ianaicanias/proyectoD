@@ -42,7 +42,7 @@ BioQueue es un sistema de gestión de trasplantes de órganos que permite admini
 
 ## Diagrama de Clases - UML
 
-![Diagrama de Clases UML](DiagramaDeClasesUML.png)
+![Diagrama de Clases UML](DiagramaDeClasesUMLBioQueue.png)
 
 ## Tabla de Compatibilidades Sanguíneas Utilizada
 

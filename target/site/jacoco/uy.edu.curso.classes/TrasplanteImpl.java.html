@@ -30,7 +30,7 @@ public class TrasplanteImpl implements Trasplante {
      * Contador estático que se incrementa con cada nuevo trasplante registrado,
      * garantizando identificadores únicos en el sistema.
      */
-<span class="fc" id="L33">    private static long cantidadDeTrasplanteRealizados = 0;</span>
+<span class="fc" id="L33">    private static long cantidadDeTrasplantesRealizados = 0;</span>
 
     /**
      * Identificador único e inmutable del trasplante.
@@ -60,7 +60,7 @@ public class TrasplanteImpl implements Trasplante {
      * @param organoTrasplantado    Órgano que será trasplantado.
      */
 <span class="fc" id="L62">    public TrasplanteImpl(Receptor receptorDelTrasplante, Organo organoTrasplantado) {</span>
-<span class="fc" id="L63">        this.identificador = ++cantidadDeTrasplanteRealizados;</span>
+<span class="fc" id="L63">        this.identificador = ++cantidadDeTrasplantesRealizados;</span>
 <span class="fc" id="L64">        this.receptorDelTrasplante = receptorDelTrasplante;</span>
 <span class="fc" id="L65">        this.organoTrasplantado = organoTrasplantado;</span>
 <span class="fc" id="L66">        this.donanteDelOrganoDelTrasplante = organoTrasplantado.getDonanteDelOrgano();</span>
