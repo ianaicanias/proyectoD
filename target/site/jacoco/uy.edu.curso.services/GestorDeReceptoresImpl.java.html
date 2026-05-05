@@ -89,7 +89,7 @@ public class GestorDeReceptoresImpl implements GestorDeReceptores {
 <span class="fc" id="L89">            return null;</span>
         }
 <span class="fc" id="L91">        Receptor nuevoReceptor = new ReceptorImpl(cedulaDeIdentidad, nombre, tipoDeOrganoNecesitado,</span>
-<span class="fc" id="L92">                tipoDeSangre, edad, puntajeDePrioridad);</span>
+                tipoDeSangre, edad, puntajeDePrioridad);
 
 <span class="fc" id="L94">        this.listaDeReceptores.agregar(nuevoReceptor);</span>
 
@@ -111,37 +111,37 @@ public class GestorDeReceptoresImpl implements GestorDeReceptores {
 <span class="fc bfc" id="L111" title="All 2 branches covered.">        while (i &lt; tamañoDeLaListaDePrioridad) {</span>
 <span class="fc" id="L112">            Receptor receptorActual = this.listaDePrioridadDeReceptores.obtener(i);</span>
 <span class="fc bfc" id="L113" title="All 2 branches covered.">            boolean mayorPrioridad = nuevoReceptor.getPuntajeDePrioridad() &gt; receptorActual.getPuntajeDePrioridad();</span>
-<span class="fc bfc" id="L114" title="All 4 branches covered.">            boolean igualPrioridadConDesempate = (nuevoReceptor.getPuntajeDePrioridad() == receptorActual.getPuntajeDePrioridad())</span>
-<span class="fc" id="L115">                    &amp;&amp; (nuevoReceptor.getEdad() &lt; receptorActual.getEdad());</span>
+<span class="fc bfc" id="L114" title="All 2 branches covered.">            boolean igualPrioridadConDesempate = (nuevoReceptor.getPuntajeDePrioridad() == receptorActual.getPuntajeDePrioridad())</span>
+<span class="fc bfc" id="L115" title="All 2 branches covered.">                    &amp;&amp; (nuevoReceptor.getEdad() &lt; receptorActual.getEdad());</span>
 
 <span class="fc bfc" id="L117" title="All 4 branches covered.">            if (mayorPrioridad || igualPrioridadConDesempate) {</span>
 <span class="fc" id="L118">                this.listaDePrioridadDeReceptores.agregar(i, nuevoReceptor);</span>
 <span class="fc" id="L119">                return;</span>
             }
 <span class="fc" id="L121">            i++;</span>
-        }
+<span class="fc" id="L122">        }</span>
 <span class="fc" id="L123">        this.listaDePrioridadDeReceptores.agregar(nuevoReceptor);</span>
 <span class="fc" id="L124">    }</span>
 
     /**
      * Busca un receptor en el sistema por su cédula de identidad.
      *
-     * @param cedulaDeIdentidadReceptor Cédula de identidad del receptor a buscar.
+     * @param cedulaDeIdentidadDelReceptor Cédula de identidad del receptor a buscar.
      * @return El receptor encontrado, o {@code null} si no existe.
      */
     @Override
-    public Receptor buscarReceptor(String cedulaDeIdentidadReceptor) {
+    public Receptor buscarReceptor(String cedulaDeIdentidadDelReceptor) {
 <span class="fc" id="L134">        int tamañoDeLaListaDeReceptores = this.listaDeReceptores.tamaño();</span>
 <span class="fc" id="L135">        int i = 0;</span>
 
 <span class="fc bfc" id="L137" title="All 2 branches covered.">        while (i &lt; tamañoDeLaListaDeReceptores) {</span>
 <span class="fc" id="L138">            Receptor receptorEncontrado = this.listaDeReceptores.obtener(i);</span>
 
-<span class="fc bfc" id="L140" title="All 2 branches covered.">            if (receptorEncontrado.getCedulaDeIdentidad().equals(cedulaDeIdentidadReceptor)) {</span>
+<span class="fc bfc" id="L140" title="All 2 branches covered.">            if (receptorEncontrado.getCedulaDeIdentidad().equals(cedulaDeIdentidadDelReceptor)) {</span>
 <span class="fc" id="L141">                return receptorEncontrado;</span>
             }
 <span class="fc" id="L143">            i++;</span>
-        }
+<span class="fc" id="L144">        }</span>
 
 <span class="fc" id="L146">        return null;</span>
     }
@@ -151,10 +151,10 @@ public class GestorDeReceptoresImpl implements GestorDeReceptores {
      * removiéndolo tanto del registro general como de la lista de prioridad.
      * Si no existe un receptor con esa cédula, no realiza ninguna acción.
      *
-     * @param cedulaDeIdentidadReceptor Cédula de identidad del receptor a eliminar.
+     * @param cedulaDeIdentidadDelReceptor Cédula de identidad del receptor a eliminar.
      */
     @Override
-    public void eliminarReceptor(String cedulaDeIdentidadReceptor) {
+    public void eliminarReceptor(String cedulaDeIdentidadDelReceptor) {
 <span class="fc" id="L158">        int tamañoDeLaListaDeReceptores = this.listaDeReceptores.tamaño();</span>
 <span class="fc" id="L159">        int tamañoDeLaListaDePrioridad = this.listaDePrioridadDeReceptores.tamaño();</span>
 <span class="fc" id="L160">        int i = 0;</span>
@@ -163,21 +163,21 @@ public class GestorDeReceptoresImpl implements GestorDeReceptores {
 <span class="fc bfc" id="L163" title="All 2 branches covered.">        while (i &lt; tamañoDeLaListaDeReceptores) {</span>
 <span class="fc" id="L164">            Receptor receptorEncontrado = this.listaDeReceptores.obtener(i);</span>
 
-<span class="fc bfc" id="L166" title="All 2 branches covered.">            if (receptorEncontrado.getCedulaDeIdentidad().equals(cedulaDeIdentidadReceptor)) {</span>
+<span class="fc bfc" id="L166" title="All 2 branches covered.">            if (receptorEncontrado.getCedulaDeIdentidad().equals(cedulaDeIdentidadDelReceptor)) {</span>
 <span class="fc" id="L167">                this.listaDeReceptores.remover(i);</span>
 <span class="fc" id="L168">                break;</span>
             }
 <span class="fc" id="L170">            i++;</span>
-        }
+<span class="fc" id="L171">        }</span>
 <span class="fc bfc" id="L172" title="All 2 branches covered.">        while (j &lt; tamañoDeLaListaDePrioridad) {</span>
 <span class="fc" id="L173">            Receptor receptorEncontrado = this.listaDePrioridadDeReceptores.obtener(j);</span>
 
-<span class="fc bfc" id="L175" title="All 2 branches covered.">            if (receptorEncontrado.getCedulaDeIdentidad().equals(cedulaDeIdentidadReceptor)) {</span>
+<span class="fc bfc" id="L175" title="All 2 branches covered.">            if (receptorEncontrado.getCedulaDeIdentidad().equals(cedulaDeIdentidadDelReceptor)) {</span>
 <span class="fc" id="L176">                this.listaDePrioridadDeReceptores.remover(j);</span>
 <span class="fc" id="L177">                break;</span>
             }
 <span class="fc" id="L179">            j++;</span>
-        }
+<span class="fc" id="L180">        }</span>
 <span class="fc" id="L181">    }</span>
 
     /**
@@ -210,7 +210,7 @@ public class GestorDeReceptoresImpl implements GestorDeReceptores {
 <span class="fc" id="L210">            pagina.append(renglon.toString());</span>
 <span class="fc" id="L211">            pagina.append(&quot;\n&quot;);</span>
 <span class="fc" id="L212">            i++;</span>
-        }
+<span class="fc" id="L213">        }</span>
 
 <span class="fc" id="L215">        return pagina.toString();</span>
     }

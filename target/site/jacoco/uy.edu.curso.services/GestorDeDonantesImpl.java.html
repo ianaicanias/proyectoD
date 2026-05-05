@@ -76,22 +76,22 @@ public class GestorDeDonantesImpl implements GestorDeDonantes {
     /**
      * Busca un donante en el sistema por su cédula de identidad.
      *
-     * @param cedulaDeIdentidad Cédula de identidad del donante a buscar.
+     * @param cedulaDeIdentidadDelDonante Cédula de identidad del donante a buscar.
      * @return El donante encontrado, o {@code null} si no existe.
      */
     @Override
-    public Donante buscarDonante(String cedulaDeIdentidad) {
+    public Donante buscarDonante(String cedulaDeIdentidadDelDonante) {
 <span class="fc" id="L84">        int tamañoDeLaListaDeDonantes = this.listaDeDonantes.tamaño();</span>
 <span class="fc" id="L85">        int i = 0;</span>
 
 <span class="fc bfc" id="L87" title="All 2 branches covered.">        while (i &lt; tamañoDeLaListaDeDonantes) {</span>
 <span class="fc" id="L88">            String cedulaDeIdentidadDonanteEncontrado = this.listaDeDonantes.obtener(i).getCedulaDeIdentidad();</span>
 
-<span class="fc bfc" id="L90" title="All 2 branches covered.">            if (cedulaDeIdentidadDonanteEncontrado.equals(cedulaDeIdentidad)) {</span>
+<span class="fc bfc" id="L90" title="All 2 branches covered.">            if (cedulaDeIdentidadDonanteEncontrado.equals(cedulaDeIdentidadDelDonante)) {</span>
 <span class="fc" id="L91">                return this.listaDeDonantes.obtener(i);</span>
             }
 <span class="fc" id="L93">            i++;</span>
-        }
+<span class="fc" id="L94">        }</span>
         
 <span class="fc" id="L96">        return null;</span>
     }
@@ -100,22 +100,22 @@ public class GestorDeDonantesImpl implements GestorDeDonantes {
      * Elimina un donante del sistema por su cédula de identidad.
      * Si no existe un donante con esa cédula, no realiza ninguna acción.
      *
-     * @param cedulaDeIdentidad Cédula de identidad del donante a eliminar.
+     * @param cedulaDeIdentidadDelDonante Cédula de identidad del donante a eliminar.
      */
     @Override
-    public void eliminarDonante(String cedulaDeIdentidad) {
+    public void eliminarDonante(String cedulaDeIdentidadDelDonante) {
 <span class="fc" id="L107">        int tamañoDeLaListaDeDonantes = this.listaDeDonantes.tamaño();</span>
 <span class="fc" id="L108">        int i = 0;</span>
         
 <span class="fc bfc" id="L110" title="All 2 branches covered.">        while (i &lt; tamañoDeLaListaDeDonantes) {</span>
 <span class="fc" id="L111">            String cedulaDeIdentidadDonanteEncontrado = this.listaDeDonantes.obtener(i).getCedulaDeIdentidad();</span>
 
-<span class="fc bfc" id="L113" title="All 2 branches covered.">            if (cedulaDeIdentidadDonanteEncontrado.equals(cedulaDeIdentidad)) {</span>
+<span class="fc bfc" id="L113" title="All 2 branches covered.">            if (cedulaDeIdentidadDonanteEncontrado.equals(cedulaDeIdentidadDelDonante)) {</span>
 <span class="fc" id="L114">                this.listaDeDonantes.remover(i);</span>
 <span class="fc" id="L115">                break;</span>
             }
 <span class="fc" id="L117">            i++;</span>
-        }
+<span class="fc" id="L118">        }</span>
 <span class="fc" id="L119">    }</span>
 
     /**
@@ -148,7 +148,7 @@ public class GestorDeDonantesImpl implements GestorDeDonantes {
 <span class="fc" id="L148">            pagina.append(renglon.toString());</span>
 <span class="fc" id="L149">            pagina.append(&quot;\n&quot;);</span>
 <span class="fc" id="L150">            i++;</span>
-        }
+<span class="fc" id="L151">        }</span>
 
 <span class="fc" id="L153">        return pagina.toString();</span>
     }

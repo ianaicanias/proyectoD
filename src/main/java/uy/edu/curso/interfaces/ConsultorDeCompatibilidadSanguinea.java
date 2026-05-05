@@ -15,8 +15,9 @@ package uy.edu.curso.interfaces;
 
 /**
  * Interfaz que define el comportamiento de un consultor de compatibilidad sanguínea.
- * Las clases que implementen esta interfaz deberán proporcionar la lógica necesaria
- * para determinar si un tipo de sangre de un donante es compatible con el de un receptor.
+ * Las clases que implementen esta interfaz (ejemplo: @see ConsultorDeCompatibilidadSanguineaImpl) 
+ * deberán proporcionar la lógica necesaria para determinar si un tipo de sangre de un donante 
+ * es compatible con el de un receptor.
  */
 public interface ConsultorDeCompatibilidadSanguinea {
 

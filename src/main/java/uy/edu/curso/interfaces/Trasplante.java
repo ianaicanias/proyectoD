@@ -13,7 +13,7 @@ package uy.edu.curso.interfaces;
 
 
 /**
- * Interfaz que representa un trasplante en el sistema.
+ * Interfaz que representa un trasplante en el sistema, @see TrasplanteImpl.
  * Proporciona métodos para acceder a la información asociada a un trasplante
  * realizado, incluyendo el órgano trasplantado, su donante y el receptor.
  */

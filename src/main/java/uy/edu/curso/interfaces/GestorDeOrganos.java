@@ -16,7 +16,7 @@ import uy.edu.curso.tda.TDAListaEnlazada;
 
 
 /**
- * Interfaz que define el comportamiento de un gestor de órganos.
+ * Interfaz que define el comportamiento de un gestor de órganos, @see GestorDeOrganosImpl.
  * Proporciona métodos para la administración de órganos disponibles en el sistema,
  * incluyendo su registro, búsqueda por distintos criterios, eliminación y listado.
  */

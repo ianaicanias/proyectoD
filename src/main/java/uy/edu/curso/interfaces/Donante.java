@@ -16,8 +16,8 @@ package uy.edu.curso.interfaces;
 /**
  * Interfaz que representa a un donante de órganos en el sistema.
  * Define los métodos necesarios para acceder y modificar la información
- * básica y médica del donante, utilizada en los procesos de compatibilidad
- * y asignación de órganos.
+ * básica y médica del donante, @see DonanteImpl, utilizada en los procesos de 
+ * compatibilidad y asignación de órganos.
  */
 public interface Donante {
 

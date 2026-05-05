@@ -16,7 +16,7 @@ import uy.edu.curso.tda.TDAListaEnlazada;
 
 
 /**
- * Interfaz que define el comportamiento de un gestor de trasplantes.
+ * Interfaz que define el comportamiento de un gestor de trasplantes, @see GestorDeTrasplantesImpl.
  * Proporciona métodos para la asignación de órganos a receptores y la
  * administración del historial de trasplantes realizados en el sistema.
  */

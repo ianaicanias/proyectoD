@@ -92,6 +92,16 @@ public class OrganoImpl implements Organo {
     }
 
     /**
+     * Retorna el donante al que pertenece el órgano.
+     *
+     * @return Donante del órgano.
+     */
+    @Override
+    public Donante getDonanteDelOrgano() {
+        return this.donanteDelOrgano;
+    }
+
+    /**
      * Retorna el nombre del órgano.
      *
      * @return Nombre del órgano.
@@ -109,16 +119,6 @@ public class OrganoImpl implements Organo {
     @Override
     public String getTipoDeSangre() {
         return this.tipoDeSangre;
-    }
-
-    /**
-     * Retorna el donante al que pertenece el órgano.
-     *
-     * @return Donante del órgano.
-     */
-    @Override
-    public Donante getDonanteDelOrgano() {
-        return this.donanteDelOrgano;
     }
 
     /* Métodos pensados para prevenir posibles equivocaciones por parte del usuario. */

@@ -15,7 +15,7 @@ import uy.edu.curso.tda.TDAListaEnlazada;
 
 
 /**
- * Interfaz que define el comportamiento de un gestor de donantes.
+ * Interfaz que define el comportamiento de un gestor de donantes, @see GestorDeDonantesImpl.
  * Proporciona métodos para la administración de donantes dentro del sistema,
  * incluyendo su registro, búsqueda, eliminación y listado.
  */
@@ -45,18 +45,18 @@ public interface GestorDeDonantes {
     /**
      * Busca un donante en el sistema por su cédula de identidad.
      *
-     * @param cedulaDeIdentidad Cédula de identidad del donante a buscar.
+     * @param cedulaDeIdentidadDelDonante Cédula de identidad del donante a buscar.
      * @return El donante encontrado, o {@code null} si no existe.
      */
-    Donante buscarDonante(String cedulaDeIdentidad);
+    Donante buscarDonante(String cedulaDeIdentidadDelDonante);
 
     /**
      * Elimina un donante del sistema por su cédula de identidad.
      * Si no existe un donante con esa cédula, no realiza ninguna acción.
      *
-     * @param cedulaDeIdentidad Cédula de identidad del donante a eliminar.
+     * @param cedulaDeIdentidadDelDonante Cédula de identidad del donante a eliminar.
      */
-    void eliminarDonante(String cedulaDeIdentidad);
+    void eliminarDonante(String cedulaDeIdentidadDelDonante);
 
     /**
      * Retorna una cadena con el listado de todos los donantes registrados,
