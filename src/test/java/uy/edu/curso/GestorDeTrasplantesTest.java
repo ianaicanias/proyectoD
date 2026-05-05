@@ -6,7 +6,6 @@ import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static org.junit.jupiter.api.Assertions.assertNull;
 import static org.junit.jupiter.api.Assertions.assertTrue;
-
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
@@ -23,6 +22,7 @@ import uy.edu.curso.interfaces.GestorDeTrasplantes;
 import uy.edu.curso.interfaces.Organo;
 import uy.edu.curso.interfaces.Receptor;
 import uy.edu.curso.interfaces.Trasplante;
+import uy.edu.curso.services.ConsultorDeCompatibilidadSanguineaImpl;
 import uy.edu.curso.services.GestorDeDonantesImpl;
 import uy.edu.curso.services.GestorDeOrganosImpl;
 import uy.edu.curso.services.GestorDeReceptoresImpl;
@@ -40,7 +40,7 @@ public class GestorDeTrasplantesTest {
 
     @BeforeAll
     public static void inicializacion() {
-        gestorDeTrasplantes = new GestorDeTrasplantesImpl();
+        gestorDeTrasplantes = new GestorDeTrasplantesImpl(new ConsultorDeCompatibilidadSanguineaImpl());
         gestorDeDonantes = new GestorDeDonantesImpl();
         gestorDeOrganos = new GestorDeOrganosImpl();
         gestorDeReceptores = new GestorDeReceptoresImpl();
@@ -54,7 +54,7 @@ public class GestorDeTrasplantesTest {
 
     @BeforeEach
     public void limpiarDatos() {
-        gestorDeTrasplantes = new GestorDeTrasplantesImpl();
+        gestorDeTrasplantes = new GestorDeTrasplantesImpl(new ConsultorDeCompatibilidadSanguineaImpl());
         gestorDeDonantes = new GestorDeDonantesImpl();
         gestorDeOrganos = new GestorDeOrganosImpl();
         gestorDeReceptores = new GestorDeReceptoresImpl();
@@ -65,7 +65,7 @@ public class GestorDeTrasplantesTest {
     @DisplayName("Creación de un Gestor de Trasplantes Correctamente")
     public void GestorDeTrasplantesImpl_llamadaAlConstructor_gestorDeTrasplantesCreadoCorrectamenteConSuLista() {
         // Act
-        GestorDeTrasplantes gestorDeTrasplantesNuevo = new GestorDeTrasplantesImpl();
+        GestorDeTrasplantes gestorDeTrasplantesNuevo = new GestorDeTrasplantesImpl(new ConsultorDeCompatibilidadSanguineaImpl());
 
         // Assert
         assertNotNull(gestorDeTrasplantesNuevo.getListaDeTrasplantesRealizados());
@@ -78,14 +78,14 @@ public class GestorDeTrasplantesTest {
         // Arrange
         Receptor nuevoReceptor = gestorDeReceptores.registrarReceptor("62362723", "Leonardo Perez", 
                 "Riñón", "A+", (byte) 29, (byte) 7);
-        gestorDeReceptores.insertarReceptorEnLaCola(nuevoReceptor);
+        gestorDeReceptores.insertarReceptorEnLaListaDePrioridad(nuevoReceptor);
         Donante nuevoDonante = gestorDeDonantes.registrarDonante("84588393", "Rodrigo Lopez", 
                 "Riñón", "A+", (byte) 32);
         Organo nuevoOrgano = gestorDeOrganos.registrarOrgano("Riñón", nuevoDonante);
 
         // Act
         gestorDeTrasplantes.asignarOrganoAReceptor(nuevoOrgano, gestorDeReceptores.getListaDeReceptores(), 
-                gestorDeReceptores.getColaDePrioridadDeReceptores(), gestorDeOrganos.getListaDeOrganosDisponibles());
+                gestorDeReceptores.getListaDePrioridadDeReceptores(), gestorDeOrganos.getListaDeOrganosDisponibles());
         Trasplante trasplanteEncontrado = null;
 
         for (int i = 0; i <= 10; i++) {
@@ -110,7 +110,7 @@ public class GestorDeTrasplantesTest {
 
         // Assert
         assertFalse(gestorDeReceptores.getListaDeReceptores().contiene(nuevoReceptor));
-        assertFalse(gestorDeReceptores.getColaDePrioridadDeReceptores().contiene(nuevoReceptor));
+        assertFalse(gestorDeReceptores.getListaDePrioridadDeReceptores().contiene(nuevoReceptor));
         assertFalse(gestorDeOrganos.getListaDeOrganosDisponibles().contiene(nuevoOrgano));
         assertEquals(trasplanteGeneradoEsperado.toString(), gestorDeTrasplantes.listarTrasplantesRealizados());
     }
@@ -122,12 +122,12 @@ public class GestorDeTrasplantesTest {
         // Arrange
         Receptor nuevoReceptor = gestorDeReceptores.registrarReceptor("62362723", "Leonardo Perez", 
                 "Riñón", "A+", (byte) 29, (byte) 7);
-        gestorDeReceptores.insertarReceptorEnLaCola(nuevoReceptor);
+        gestorDeReceptores.insertarReceptorEnLaListaDePrioridad(nuevoReceptor);
         Donante nuevoDonante = gestorDeDonantes.registrarDonante("84588393", "Rodrigo Lopez", 
                 "Riñón", "A+", (byte) 32);
         Organo nuevoOrgano = gestorDeOrganos.registrarOrgano("Riñón", nuevoDonante);
         gestorDeTrasplantes.asignarOrganoAReceptor(nuevoOrgano, gestorDeReceptores.getListaDeReceptores(), 
-                gestorDeReceptores.getColaDePrioridadDeReceptores(), gestorDeOrganos.getListaDeOrganosDisponibles());
+                gestorDeReceptores.getListaDePrioridadDeReceptores(), gestorDeOrganos.getListaDeOrganosDisponibles());
 
         // Act
         Trasplante trasplanteEncontrado = null;
@@ -154,12 +154,12 @@ public class GestorDeTrasplantesTest {
         // Arrange
         Receptor nuevoReceptor = gestorDeReceptores.registrarReceptor("43223432", "Marcelo Perez", 
                 "Riñón", "A+", (byte) 29, (byte) 7);
-        gestorDeReceptores.insertarReceptorEnLaCola(nuevoReceptor);
+        gestorDeReceptores.insertarReceptorEnLaListaDePrioridad(nuevoReceptor);
         Donante nuevoDonante = gestorDeDonantes.registrarDonante("78675439", "Rodrigo Tejeira", 
                 "Riñón", "A+", (byte) 32);
         Organo nuevoOrgano = gestorDeOrganos.registrarOrgano("Riñón", nuevoDonante);
         gestorDeTrasplantes.asignarOrganoAReceptor(nuevoOrgano, gestorDeReceptores.getListaDeReceptores(), 
-                gestorDeReceptores.getColaDePrioridadDeReceptores(), gestorDeOrganos.getListaDeOrganosDisponibles());
+                gestorDeReceptores.getListaDePrioridadDeReceptores(), gestorDeOrganos.getListaDeOrganosDisponibles());
 
         // Act
         Trasplante trasplanteRealizado = gestorDeTrasplantes.buscarTrasplante(497589734);
@@ -175,7 +175,7 @@ public class GestorDeTrasplantesTest {
         // Arrange
         Receptor nuevoReceptor = gestorDeReceptores.registrarReceptor("62362723", "Leonardo Perez", 
                 "Riñón", "A+", (byte) 29, (byte) 7);
-        gestorDeReceptores.insertarReceptorEnLaCola(nuevoReceptor);
+        gestorDeReceptores.insertarReceptorEnLaListaDePrioridad(nuevoReceptor);
         Donante nuevoDonante = gestorDeDonantes.registrarDonante("84588393", "Rodrigo Lopez", 
                 "Riñón", "AB-", (byte) 32);
         Organo nuevoOrgano = gestorDeOrganos.registrarOrgano("Riñón", nuevoDonante);
@@ -185,11 +185,11 @@ public class GestorDeTrasplantesTest {
 
         // Act
         gestorDeTrasplantes.asignarOrganoAReceptor(nuevoOrgano, gestorDeReceptores.getListaDeReceptores(), 
-                gestorDeReceptores.getColaDePrioridadDeReceptores(), gestorDeOrganos.getListaDeOrganosDisponibles());
+                gestorDeReceptores.getListaDePrioridadDeReceptores(), gestorDeOrganos.getListaDeOrganosDisponibles());
 
         // Assert
         assertTrue(gestorDeReceptores.getListaDeReceptores().contiene(nuevoReceptor));
-        assertTrue(gestorDeReceptores.getColaDePrioridadDeReceptores().contiene(nuevoReceptor));
+        assertTrue(gestorDeReceptores.getListaDePrioridadDeReceptores().contiene(nuevoReceptor));
         assertTrue(gestorDeOrganos.getListaDeOrganosDisponibles().contiene(nuevoOrgano));
         assertEquals(trasplanteGeneradoEsperado.toString(), gestorDeTrasplantes.listarTrasplantesRealizados());
     }
@@ -210,11 +210,11 @@ public class GestorDeTrasplantesTest {
 
         // Act
         gestorDeTrasplantes.asignarOrganoAReceptor(nuevoOrgano, gestorDeReceptores.getListaDeReceptores(), 
-                gestorDeReceptores.getColaDePrioridadDeReceptores(), gestorDeOrganos.getListaDeOrganosDisponibles());
+                gestorDeReceptores.getListaDePrioridadDeReceptores(), gestorDeOrganos.getListaDeOrganosDisponibles());
 
         // Assert
         assertTrue(gestorDeReceptores.getListaDeReceptores().contiene(nuevoReceptor));
-        assertEquals(0, gestorDeReceptores.getColaDePrioridadDeReceptores().tamaño());
+        assertEquals(0, gestorDeReceptores.getListaDePrioridadDeReceptores().tamaño());
         assertTrue(gestorDeOrganos.getListaDeOrganosDisponibles().contiene(nuevoOrgano));
         assertEquals(trasplanteGeneradoEsperado.toString(), gestorDeTrasplantes.listarTrasplantesRealizados());
         assertEquals(0, gestorDeTrasplantes.getListaDeTrasplantesRealizados().tamaño());
@@ -227,7 +227,7 @@ public class GestorDeTrasplantesTest {
         // Arrange
         Receptor nuevoReceptor = gestorDeReceptores.registrarReceptor("62362723", "Leonardo Perez", 
                 "Páncreas", "A+", (byte) 29, (byte) 7);
-        gestorDeReceptores.insertarReceptorEnLaCola(nuevoReceptor);
+        gestorDeReceptores.insertarReceptorEnLaListaDePrioridad(nuevoReceptor);
         Donante nuevoDonante = gestorDeDonantes.registrarDonante("84588393", "Rodrigo Lopez", 
                 "Riñón", "A+", (byte) 32);
         Organo nuevoOrgano = gestorDeOrganos.registrarOrgano("Riñón", nuevoDonante);
@@ -237,11 +237,11 @@ public class GestorDeTrasplantesTest {
 
         // Act
         gestorDeTrasplantes.asignarOrganoAReceptor(nuevoOrgano, gestorDeReceptores.getListaDeReceptores(), 
-                gestorDeReceptores.getColaDePrioridadDeReceptores(), gestorDeOrganos.getListaDeOrganosDisponibles());
+                gestorDeReceptores.getListaDePrioridadDeReceptores(), gestorDeOrganos.getListaDeOrganosDisponibles());
 
         // Assert
         assertTrue(gestorDeReceptores.getListaDeReceptores().contiene(nuevoReceptor));
-        assertTrue(gestorDeReceptores.getColaDePrioridadDeReceptores().contiene(nuevoReceptor));
+        assertTrue(gestorDeReceptores.getListaDePrioridadDeReceptores().contiene(nuevoReceptor));
         assertTrue(gestorDeOrganos.getListaDeOrganosDisponibles().contiene(nuevoOrgano));
         assertEquals(trasplanteGeneradoEsperado.toString(), gestorDeTrasplantes.listarTrasplantesRealizados());
         assertEquals(0, gestorDeTrasplantes.getListaDeTrasplantesRealizados().tamaño());
@@ -254,7 +254,7 @@ public class GestorDeTrasplantesTest {
         // Arrange
         Receptor nuevoReceptor = gestorDeReceptores.registrarReceptor("62362723", "Leonardo Perez", 
                 "Páncreas", "A+", (byte) 29, (byte) 7);
-        gestorDeReceptores.insertarReceptorEnLaCola(nuevoReceptor);
+        gestorDeReceptores.insertarReceptorEnLaListaDePrioridad(nuevoReceptor);
         Donante nuevoDonante = gestorDeDonantes.registrarDonante("84588393", "Rodrigo Lopez", 
                 "Riñón", "AB-", (byte) 32);
         Organo nuevoOrgano = gestorDeOrganos.registrarOrgano("Riñón", nuevoDonante);
@@ -264,11 +264,11 @@ public class GestorDeTrasplantesTest {
 
         // Act
         gestorDeTrasplantes.asignarOrganoAReceptor(nuevoOrgano, gestorDeReceptores.getListaDeReceptores(), 
-                gestorDeReceptores.getColaDePrioridadDeReceptores(), gestorDeOrganos.getListaDeOrganosDisponibles());
+                gestorDeReceptores.getListaDePrioridadDeReceptores(), gestorDeOrganos.getListaDeOrganosDisponibles());
 
         // Assert
         assertTrue(gestorDeReceptores.getListaDeReceptores().contiene(nuevoReceptor));
-        assertTrue(gestorDeReceptores.getColaDePrioridadDeReceptores().contiene(nuevoReceptor));
+        assertTrue(gestorDeReceptores.getListaDePrioridadDeReceptores().contiene(nuevoReceptor));
         assertTrue(gestorDeOrganos.getListaDeOrganosDisponibles().contiene(nuevoOrgano));
         assertEquals(trasplanteGeneradoEsperado.toString(), gestorDeTrasplantes.listarTrasplantesRealizados());
         assertEquals(0, gestorDeTrasplantes.getListaDeTrasplantesRealizados().tamaño());

@@ -1,27 +1,69 @@
-<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="es"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>ReceptorImpl.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">proyectoD</a> &gt; <a href="index.source.html" class="el_package">uy.edu.curso.classes</a> &gt; <span class="el_source">ReceptorImpl.java</span></div><h1>ReceptorImpl.java</h1><pre class="source lang-java linenums">package uy.edu.curso.classes;
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="es"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>ReceptorImpl.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">proyectoD</a> &gt; <a href="index.source.html" class="el_package">uy.edu.curso.classes</a> &gt; <span class="el_source">ReceptorImpl.java</span></div><h1>ReceptorImpl.java</h1><pre class="source lang-java linenums">/*
+ * Clase: ReceptorImpl.
+ * Programadores: Axel Ferreira, Ianai Canias, Thiago Soca, Valentín Guerrico.
+ * Fecha: 03/05/2026.
+ * Copyright: Todos los derechos reservados para los programadores de este archivo, 2026.
+ *
+ * Resumen:
+ * La siguiente clase representa la implementación concreta de un receptor de órganos
+ * en el sistema BioQueue. Extiende Persona e implementa la interfaz Receptor,
+ * agregando el puntaje de prioridad que determina el orden de atención en la
+ * lista de espera de trasplantes.
+ */
+package uy.edu.curso.classes;
 
 import uy.edu.curso.interfaces.Receptor;
 
 
+/**
+ * Implementación concreta de un receptor de órganos en el sistema BioQueue.
+ * Extiende @see Persona e implementa @see Receptor, heredando los atributos
+ * comunes de una persona y agregando el puntaje de prioridad que determina
+ * el orden de atención en la lista de espera.
+ */
 public class ReceptorImpl extends Persona implements Receptor {
 
+    /**
+     * Puntaje de prioridad del receptor, determinado por su gravedad clínica.
+     * A mayor puntaje, mayor prioridad en la lista de espera.
+     */
     private byte puntajeDePrioridad;
 
+    /**
+     * Constructor de la clase ReceptorImpl.
+     *
+     * @param cedulaDeIdentidad      Cédula de identidad única del receptor.
+     * @param nombre                 Nombre completo del receptor.
+     * @param tipoDeOrganoNecesitado Tipo de órgano que el receptor necesita.
+     * @param tipoDeSangre           Tipo de sangre del receptor.
+     * @param edad                   Edad del receptor en años.
+     * @param puntajeDePrioridad     Puntaje de prioridad clínica del receptor.
+     */
     public ReceptorImpl(String cedulaDeIdentidad, String nombre, String tipoDeOrganoNecesitado, 
             String tipoDeSangre, byte edad, byte puntajeDePrioridad) {
-<span class="fc" id="L12">        super(cedulaDeIdentidad, nombre, tipoDeSangre, tipoDeOrganoNecesitado, edad);</span>
-<span class="fc" id="L13">        this.puntajeDePrioridad = puntajeDePrioridad;</span>
-<span class="fc" id="L14">    }</span>
+<span class="fc" id="L44">        super(cedulaDeIdentidad, nombre, tipoDeSangre, tipoDeOrganoNecesitado, edad);</span>
+<span class="fc" id="L45">        this.puntajeDePrioridad = puntajeDePrioridad;</span>
+<span class="fc" id="L46">    }</span>
 
+    /**
+     * Retorna el puntaje de prioridad del receptor.
+     *
+     * @return Puntaje de prioridad del receptor.
+     */
     @Override
     public byte getPuntajeDePrioridad() {
-<span class="fc" id="L18">        return this.puntajeDePrioridad;</span>
+<span class="fc" id="L55">        return this.puntajeDePrioridad;</span>
     }
 
+    /**
+     * Actualiza el puntaje de prioridad del receptor.
+     *
+     * @param puntajeDePrioridad Nuevo puntaje de prioridad del receptor.
+     */
     @Override
     public void setPuntajeDePrioridad(byte puntajeDePrioridad) {
-<span class="fc" id="L23">        this.puntajeDePrioridad = puntajeDePrioridad;</span>
-<span class="fc" id="L24">    }</span>
+<span class="fc" id="L65">        this.puntajeDePrioridad = puntajeDePrioridad;</span>
+<span class="fc" id="L66">    }</span>
 
 }
 </pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.11.202310140853</span></div></body></html>

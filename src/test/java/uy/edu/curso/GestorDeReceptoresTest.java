@@ -12,6 +12,7 @@ import org.junit.jupiter.api.Test;
 
 import uy.edu.curso.interfaces.Receptor;
 import uy.edu.curso.services.GestorDeReceptoresImpl;
+import uy.edu.curso.tda.TDAListaEnlazada;
 
 
 @DisplayName("Tests para el Gestor de Receptores")
@@ -40,14 +41,14 @@ public class GestorDeReceptoresTest {
     public void GestorDeReceptoresImpl_creacionDeUnGestorDeReceptores_seInicializanTantoLaListaComoLaColaCorrectamente() {
         // Arrange
         ListaEnlazada<Receptor> listaNoCreada = null;
-        ColaEnlazada<Receptor> colaDePrioridadNoCreada = null;
+        ListaEnlazada<Receptor> listaDePrioridadDeReceptores = null;
 
         // Act
         GestorDeReceptoresImpl gestorDeReceptoresImpl2 = new GestorDeReceptoresImpl();
 
         // Assert
         assertFalse(gestorDeReceptoresImpl2.getListaDeReceptores() == listaNoCreada);
-        assertFalse(gestorDeReceptoresImpl2.getColaDePrioridadDeReceptores() == colaDePrioridadNoCreada);
+        assertFalse(gestorDeReceptoresImpl2.getListaDePrioridadDeReceptores() == listaDePrioridadDeReceptores);
     }
 
     @Test
@@ -95,21 +96,22 @@ public class GestorDeReceptoresTest {
     }
 
     @Test
-    @DisplayName("Insertar en la Cola de Prioridad un Receptor")
+    @DisplayName("Insertar en la Lista de Prioridad un Receptor")
     public void insertarReceptorEnLaCola_receptorCreadoEnLaListaDeReceptores_insertaCorrectamenteEnLaColaDePrioridadAlReceptor() {
         // Arrange
         Receptor receptorCreado = (Receptor) gestorDeReceptoresImpl.registrarReceptor("37432442", "Joaquín Gomez",
                 "Hígado", "A+", (byte) 19, (byte) 6);
 
         // Act
-        gestorDeReceptoresImpl.insertarReceptorEnLaCola(receptorCreado);
+        gestorDeReceptoresImpl.insertarReceptorEnLaListaDePrioridad(receptorCreado);
+        TDAListaEnlazada<Receptor> listaDePrioridadDeReceptores = gestorDeReceptoresImpl.getListaDePrioridadDeReceptores();
 
         // Assert
-        assertEquals(receptorCreado, gestorDeReceptoresImpl.getColaDePrioridadDeReceptores().frente());
+        assertEquals(receptorCreado, listaDePrioridadDeReceptores.obtener(listaDePrioridadDeReceptores.tamaño() - 1));
     }
 
     @Test
-    @DisplayName("Insertar en la Cola de Prioridad Varios Receptores")
+    @DisplayName("Insertar en la Lista de Prioridad Varios Receptores")
     public void insertarReceptorEnLaCola_receptoresCreadosEnLaListaDeReceptores_insertaCorrectamenteEnLaColaDePrioridadALosReceptoresPorOrdenDePrioridad() {
         // Arrange
         Receptor receptorBaja = (Receptor) gestorDeReceptoresImpl.registrarReceptor(
@@ -120,19 +122,18 @@ public class GestorDeReceptoresTest {
                 "87654321", "Luis Pérez", "Hígado", "A+", (byte) 30, (byte) 6);
 
         // Act
-        gestorDeReceptoresImpl.insertarReceptorEnLaCola(receptorBaja);
-        gestorDeReceptoresImpl.insertarReceptorEnLaCola(receptorAlta);
-        gestorDeReceptoresImpl.insertarReceptorEnLaCola(receptorMedia);
+        gestorDeReceptoresImpl.insertarReceptorEnLaListaDePrioridad(receptorBaja);
+        gestorDeReceptoresImpl.insertarReceptorEnLaListaDePrioridad(receptorAlta);
+        gestorDeReceptoresImpl.insertarReceptorEnLaListaDePrioridad(receptorMedia);
 
         // Assert
-        assertEquals(receptorBaja.getCedulaDeIdentidad(), gestorDeReceptoresImpl.getColaDePrioridadDeReceptores().frente().getCedulaDeIdentidad());
-        assertEquals(receptorAlta, gestorDeReceptoresImpl.getColaDePrioridadDeReceptores().quitaDeCola());
-        assertEquals(receptorMedia, gestorDeReceptoresImpl.getColaDePrioridadDeReceptores().quitaDeCola());
-        assertEquals(receptorBaja, gestorDeReceptoresImpl.getColaDePrioridadDeReceptores().quitaDeCola());
+        assertEquals(receptorAlta, gestorDeReceptoresImpl.getListaDePrioridadDeReceptores().obtener(0));
+        assertEquals(receptorMedia, gestorDeReceptoresImpl.getListaDePrioridadDeReceptores().obtener(1));
+        assertEquals(receptorBaja, gestorDeReceptoresImpl.getListaDePrioridadDeReceptores().obtener(2));
     }
 
     @Test
-    @DisplayName("Insertar en la Cola con Desempate por Edad")
+    @DisplayName("Insertar en la Lista de Prioridad con Desempate por Edad")
     public void insertarReceptorEnLaCola_dosReceptoresConMismoPuntaje_elMenorEnEdadQuedaPrimeroEnLaCola() {
         // Arrange
         Receptor receptorMayor = (Receptor) gestorDeReceptoresImpl.registrarReceptor(
@@ -141,26 +142,27 @@ public class GestorDeReceptoresTest {
             "22222222", "María Díaz", "Hígado", "A+", (byte) 19, (byte) 6);
 
         // Act
-        gestorDeReceptoresImpl.insertarReceptorEnLaCola(receptorMayor);
-        gestorDeReceptoresImpl.insertarReceptorEnLaCola(receptorMenor);
+        gestorDeReceptoresImpl.insertarReceptorEnLaListaDePrioridad(receptorMayor);
+        gestorDeReceptoresImpl.insertarReceptorEnLaListaDePrioridad(receptorMenor);
+        TDAListaEnlazada<Receptor> listaDePrioridadDeReceptores = gestorDeReceptoresImpl.getListaDePrioridadDeReceptores();
 
         // Assert
-        assertEquals(receptorMayor, gestorDeReceptoresImpl.getColaDePrioridadDeReceptores().frente());
+        assertEquals(receptorMayor, listaDePrioridadDeReceptores.obtener(listaDePrioridadDeReceptores.tamaño() - 1));
     }
 
     @Test
-    @DisplayName("Insertar un Receptor en Cola Vacía")
+    @DisplayName("Insertar un Receptor en Lista de Prioridad Vacía")
     public void insertarReceptorEnLaCola_colaVacia_receptorEsElPrimeroYElUltimo() {
         // Arrange
         Receptor receptorCreado = (Receptor) gestorDeReceptoresImpl.registrarReceptor(
             "37432442", "Joaquín Gomez", "Hígado", "A+", (byte) 19, (byte) 6);
 
         // Act
-        gestorDeReceptoresImpl.insertarReceptorEnLaCola(receptorCreado);
+        gestorDeReceptoresImpl.insertarReceptorEnLaListaDePrioridad(receptorCreado);
 
         // Assert
-        assertEquals(1, gestorDeReceptoresImpl.getColaDePrioridadDeReceptores().tamaño());
-        assertEquals(receptorCreado, gestorDeReceptoresImpl.getColaDePrioridadDeReceptores().quitaDeCola());
+        assertEquals(1, gestorDeReceptoresImpl.getListaDePrioridadDeReceptores().tamaño());
+        assertEquals(receptorCreado, gestorDeReceptoresImpl.getListaDePrioridadDeReceptores().obtener(0));
     }
 
     @Test
@@ -173,16 +175,16 @@ public class GestorDeReceptoresTest {
             "22222222", "Luis Pérez", "Hígado", "A+", (byte) 25, (byte) 6);
 
         // Act
-        gestorDeReceptoresImpl.insertarReceptorEnLaCola(receptor1);
-        gestorDeReceptoresImpl.insertarReceptorEnLaCola(receptor2);
+        gestorDeReceptoresImpl.insertarReceptorEnLaListaDePrioridad(receptor1);
+        gestorDeReceptoresImpl.insertarReceptorEnLaListaDePrioridad(receptor2);
 
         // Assert
-        assertEquals(receptor1, gestorDeReceptoresImpl.getColaDePrioridadDeReceptores().quitaDeCola());
-        assertEquals(receptor2, gestorDeReceptoresImpl.getColaDePrioridadDeReceptores().quitaDeCola());
+        assertEquals(receptor1, gestorDeReceptoresImpl.getListaDePrioridadDeReceptores().obtener(0));
+        assertEquals(receptor2, gestorDeReceptoresImpl.getListaDePrioridadDeReceptores().obtener(1));
     }
 
     @Test
-    @DisplayName("Eliminar un Receptor que Está al Final de la Cola")
+    @DisplayName("Eliminar un Receptor que Está al Final de la Lista de Prioridad")
     public void eliminarReceptor_receptorAlFinalDeLaCola_eliminaCorrectamente() {
         // Arrange
         Receptor receptorAlta = (Receptor) gestorDeReceptoresImpl.registrarReceptor(
@@ -191,16 +193,16 @@ public class GestorDeReceptoresTest {
             "22222222", "Luis Pérez", "Hígado", "A+", (byte) 30, (byte) 3);
 
         // Ambos en cola — receptorAlta queda primero (prioridad 9)
-        gestorDeReceptoresImpl.insertarReceptorEnLaCola(receptorAlta);
-        gestorDeReceptoresImpl.insertarReceptorEnLaCola(receptorBaja);
+        gestorDeReceptoresImpl.insertarReceptorEnLaListaDePrioridad(receptorAlta);
+        gestorDeReceptoresImpl.insertarReceptorEnLaListaDePrioridad(receptorBaja);
 
         // Act — eliminamos el que está al FINAL de la cola (prioridad 3)
         gestorDeReceptoresImpl.eliminarReceptor("22222222");
 
         // Assert
         assertNull(gestorDeReceptoresImpl.buscarReceptor("22222222"));
-        assertEquals(1, gestorDeReceptoresImpl.getColaDePrioridadDeReceptores().tamaño());
-        assertEquals(receptorAlta, gestorDeReceptoresImpl.getColaDePrioridadDeReceptores().quitaDeCola());
+        assertEquals(1, gestorDeReceptoresImpl.getListaDePrioridadDeReceptores().tamaño());
+        assertEquals(receptorAlta, gestorDeReceptoresImpl.getListaDePrioridadDeReceptores().obtener(0));
     }
 
     @Test
@@ -249,19 +251,19 @@ public class GestorDeReceptoresTest {
     }
 
     @Test
-    @DisplayName("Eliminar un Receptor de la Lista y la Cola")
+    @DisplayName("Eliminar un Receptor de la Lista y la Lista de Prioridad")
     public void eliminarReceptor_receptorEnListaYCola_eliminaDeAmbasEstructuras() {
         // Arrange
         Receptor receptorCreado = (Receptor) gestorDeReceptoresImpl.registrarReceptor(
             "37432442", "Joaquín Gomez", "Hígado", "A+", (byte) 19, (byte) 6);
-        gestorDeReceptoresImpl.insertarReceptorEnLaCola(receptorCreado);
+        gestorDeReceptoresImpl.insertarReceptorEnLaListaDePrioridad(receptorCreado);
 
         // Act
         gestorDeReceptoresImpl.eliminarReceptor("37432442");
 
         // Assert
         assertNull(gestorDeReceptoresImpl.buscarReceptor("37432442"));
-        assertTrue(gestorDeReceptoresImpl.getColaDePrioridadDeReceptores().esVacio());
+        assertTrue(gestorDeReceptoresImpl.getListaDePrioridadDeReceptores().esVacio());
     }
 
     @Test
@@ -276,7 +278,7 @@ public class GestorDeReceptoresTest {
 
         // Assert
         assertEquals(1, gestorDeReceptoresImpl.getListaDeReceptores().tamaño());
-        assertTrue(gestorDeReceptoresImpl.getColaDePrioridadDeReceptores().esVacio());
+        assertTrue(gestorDeReceptoresImpl.getListaDePrioridadDeReceptores().esVacio());
     }
 
     @Test
@@ -291,7 +293,7 @@ public class GestorDeReceptoresTest {
 
         // Assert
         assertNull(gestorDeReceptoresImpl.buscarReceptor("37432442"));
-        assertTrue(gestorDeReceptoresImpl.getColaDePrioridadDeReceptores().esVacio());
+        assertTrue(gestorDeReceptoresImpl.getListaDePrioridadDeReceptores().esVacio());
     }
 
     @Test

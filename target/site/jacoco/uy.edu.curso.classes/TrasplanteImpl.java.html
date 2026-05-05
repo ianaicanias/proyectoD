@@ -1,4 +1,16 @@
-<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="es"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>TrasplanteImpl.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">proyectoD</a> &gt; <a href="index.source.html" class="el_package">uy.edu.curso.classes</a> &gt; <span class="el_source">TrasplanteImpl.java</span></div><h1>TrasplanteImpl.java</h1><pre class="source lang-java linenums">package uy.edu.curso.classes;
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="es"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>TrasplanteImpl.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">proyectoD</a> &gt; <a href="index.source.html" class="el_package">uy.edu.curso.classes</a> &gt; <span class="el_source">TrasplanteImpl.java</span></div><h1>TrasplanteImpl.java</h1><pre class="source lang-java linenums">/*
+ * Clase: TrasplanteImpl.
+ * Programadores: Axel Ferreira, Ianai Canias, Thiago Soca, Valentín Guerrico.
+ * Fecha: 03/05/2026.
+ * Copyright: Todos los derechos reservados para los programadores de este archivo, 2026.
+ *
+ * Resumen:
+ * La siguiente clase representa la implementación concreta de un trasplante realizado
+ * en el sistema BioQueue. Implementa la interfaz Trasplante y registra la transacción
+ * entre un receptor, un órgano y su donante, manteniendo un identificador único
+ * autoincremental por cada trasplante efectuado.
+ */
+package uy.edu.curso.classes;
 
 import uy.edu.curso.interfaces.Donante;
 import uy.edu.curso.interfaces.Organo;
@@ -6,47 +18,106 @@ import uy.edu.curso.interfaces.Receptor;
 import uy.edu.curso.interfaces.Trasplante;
 
 
+/**
+ * Implementación concreta de un trasplante realizado en el sistema BioQueue.
+ * Implementa @see Trasplante y registra la asignación de un órgano a un receptor,
+ * incluyendo la referencia al donante correspondiente. Genera un identificador
+ * único autoincremental por cada trasplante efectuado.
+ */
 public class TrasplanteImpl implements Trasplante {
 
-<span class="fc" id="L11">    private static long CANTIDAD_DE_TRASPLANTES_REALIZADOS = 0;</span>
+    /**
+     * Contador estático que se incrementa con cada nuevo trasplante registrado,
+     * garantizando identificadores únicos en el sistema.
+     */
+<span class="fc" id="L33">    private static long cantidadDeTrasplantesRealizados = 0;</span>
+
+    /**
+     * Identificador único e inmutable del trasplante.
+     */
     private final long identificador;
+
+    /**
+     * Receptor que recibe el órgano en el trasplante.
+     */
     private final Receptor receptorDelTrasplante;
+
+    /**
+     * Órgano trasplantado al receptor.
+     */
     private final Organo organoTrasplantado;
+
+    /**
+     * Donante del órgano trasplantado, obtenido directamente del órgano.
+     */
     private final Donante donanteDelOrganoDelTrasplante;
 
-<span class="fc" id="L17">    public TrasplanteImpl(Receptor receptorDelTrasplante, Organo organoTrasplantado) {</span>
-<span class="fc" id="L18">        this.identificador = ++CANTIDAD_DE_TRASPLANTES_REALIZADOS;</span>
-<span class="fc" id="L19">        this.receptorDelTrasplante = receptorDelTrasplante;</span>
-<span class="fc" id="L20">        this.organoTrasplantado = organoTrasplantado;</span>
-<span class="fc" id="L21">        this.donanteDelOrganoDelTrasplante = organoTrasplantado.getDonanteDelOrgano();</span>
-<span class="fc" id="L22">    }</span>
+    /**
+     * Constructor de la clase TrasplanteImpl. Asigna automáticamente el identificador único
+     * y obtiene el donante a partir del órgano trasplantado.
+     *
+     * @param receptorDelTrasplante Receptor que recibe el órgano.
+     * @param organoTrasplantado    Órgano que será trasplantado.
+     */
+<span class="fc" id="L62">    public TrasplanteImpl(Receptor receptorDelTrasplante, Organo organoTrasplantado) {</span>
+<span class="fc" id="L63">        this.identificador = ++cantidadDeTrasplantesRealizados;</span>
+<span class="fc" id="L64">        this.receptorDelTrasplante = receptorDelTrasplante;</span>
+<span class="fc" id="L65">        this.organoTrasplantado = organoTrasplantado;</span>
+<span class="fc" id="L66">        this.donanteDelOrganoDelTrasplante = organoTrasplantado.getDonanteDelOrgano();</span>
+<span class="fc" id="L67">    }</span>
 
+    /**
+     * Retorna el identificador único del trasplante.
+     *
+     * @return Identificador del trasplante.
+     */
     @Override
     public long getIdentificador() {
-<span class="fc" id="L26">        return this.identificador;</span>
+<span class="fc" id="L76">        return this.identificador;</span>
     }
     
+    /**
+     * Retorna el receptor del trasplante.
+     *
+     * @return Receptor que recibió el órgano.
+     */
     @Override
     public Receptor getReceptorDelTrasplante() {
-<span class="fc" id="L31">        return this.receptorDelTrasplante;</span>
+<span class="fc" id="L86">        return this.receptorDelTrasplante;</span>
     }
 
+    /**
+     * Retorna el órgano trasplantado.
+     *
+     * @return Órgano trasplantado al receptor.
+     */
     @Override
     public Organo getOrganoTrasplantado() {
-<span class="fc" id="L36">        return this.organoTrasplantado;</span>
+<span class="fc" id="L96">        return this.organoTrasplantado;</span>
     }
 
+    /**
+     * Retorna el donante del órgano trasplantado.
+     *
+     * @return Donante del órgano.
+     */
     @Override
     public Donante getDonanteDelOrganoDelTrasplante() {
-<span class="fc" id="L41">        return this.donanteDelOrganoDelTrasplante;</span>
+<span class="fc" id="L106">        return this.donanteDelOrganoDelTrasplante;</span>
     }
 
+    /**
+     * Retorna una representación en texto del trasplante realizado,
+     * incluyendo el identificador, el órgano, el donante y el receptor.
+     *
+     * @return Cadena de texto con los datos del trasplante.
+     */
     @Override
     public String toString() {
-<span class="fc" id="L46">        return &quot;Trasplante realizado, con ID: &quot; + identificador + &quot;.\n&quot; </span>
-<span class="fc" id="L47">                + &quot;Órgano: &quot; + organoTrasplantado.getNombre() + &quot;.\n&quot;</span>
-<span class="fc" id="L48">                + &quot;De parte del donante: &quot; + donanteDelOrganoDelTrasplante.getNombre() + &quot;.\n&quot;</span>
-<span class="fc" id="L49">                + &quot;Para el receptor: &quot; + receptorDelTrasplante.getNombre() + &quot;.&quot;;</span>
+<span class="fc" id="L117">        return &quot;Trasplante realizado, con ID: &quot; + identificador + &quot;.\n&quot; </span>
+<span class="fc" id="L118">                + &quot;Órgano: &quot; + organoTrasplantado.getNombre() + &quot;.\n&quot;</span>
+<span class="fc" id="L119">                + &quot;De parte del donante: &quot; + donanteDelOrganoDelTrasplante.getNombre() + &quot;.\n&quot;</span>
+<span class="fc" id="L120">                + &quot;Para el receptor: &quot; + receptorDelTrasplante.getNombre() + &quot;.&quot;;</span>
     }
 
 }
