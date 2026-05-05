@@ -14,7 +14,7 @@ package uy.edu.curso.interfaces;
 
 
 /**
- * Interfaz que representa un órgano en el sistema.
+ * Interfaz que representa un órgano en el sistema, @see OrganoImpl.
  * Proporciona métodos para acceder y modificar la información asociada al órgano,
  * utilizada en los procesos de asignación y compatibilidad de trasplantes.
  */
@@ -35,6 +35,13 @@ public interface Organo {
     boolean getEsInfantil();
 
     /**
+     * Retorna el donante al que pertenece el órgano.
+     *
+     * @return Donante del órgano.
+     */
+    Donante getDonanteDelOrgano();
+
+    /**
      * Retorna el nombre del órgano.
      *
      * @return Nombre del órgano.
@@ -47,13 +54,6 @@ public interface Organo {
      * @return Tipo de sangre del órgano.
      */
     String getTipoDeSangre();
-
-    /**
-     * Retorna el donante al que pertenece el órgano.
-     *
-     * @return Donante del órgano.
-     */
-    Donante getDonanteDelOrgano();
 
     /* Métodos pensados para prevenir posibles equivocaciones por parte del usuario. */
 

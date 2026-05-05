@@ -126,18 +126,18 @@ public class GestorDeReceptoresImpl implements GestorDeReceptores {
     /**
      * Busca un receptor en el sistema por su cédula de identidad.
      *
-     * @param cedulaDeIdentidadReceptor Cédula de identidad del receptor a buscar.
+     * @param cedulaDeIdentidadDelReceptor Cédula de identidad del receptor a buscar.
      * @return El receptor encontrado, o {@code null} si no existe.
      */
     @Override
-    public Receptor buscarReceptor(String cedulaDeIdentidadReceptor) {
+    public Receptor buscarReceptor(String cedulaDeIdentidadDelReceptor) {
         int tamañoDeLaListaDeReceptores = this.listaDeReceptores.tamaño();
         int i = 0;
 
         while (i < tamañoDeLaListaDeReceptores) {
             Receptor receptorEncontrado = this.listaDeReceptores.obtener(i);
 
-            if (receptorEncontrado.getCedulaDeIdentidad().equals(cedulaDeIdentidadReceptor)) {
+            if (receptorEncontrado.getCedulaDeIdentidad().equals(cedulaDeIdentidadDelReceptor)) {
                 return receptorEncontrado;
             }
             i++;
@@ -151,10 +151,10 @@ public class GestorDeReceptoresImpl implements GestorDeReceptores {
      * removiéndolo tanto del registro general como de la lista de prioridad.
      * Si no existe un receptor con esa cédula, no realiza ninguna acción.
      *
-     * @param cedulaDeIdentidadReceptor Cédula de identidad del receptor a eliminar.
+     * @param cedulaDeIdentidadDelReceptor Cédula de identidad del receptor a eliminar.
      */
     @Override
-    public void eliminarReceptor(String cedulaDeIdentidadReceptor) {
+    public void eliminarReceptor(String cedulaDeIdentidadDelReceptor) {
         int tamañoDeLaListaDeReceptores = this.listaDeReceptores.tamaño();
         int tamañoDeLaListaDePrioridad = this.listaDePrioridadDeReceptores.tamaño();
         int i = 0;
@@ -163,7 +163,7 @@ public class GestorDeReceptoresImpl implements GestorDeReceptores {
         while (i < tamañoDeLaListaDeReceptores) {
             Receptor receptorEncontrado = this.listaDeReceptores.obtener(i);
 
-            if (receptorEncontrado.getCedulaDeIdentidad().equals(cedulaDeIdentidadReceptor)) {
+            if (receptorEncontrado.getCedulaDeIdentidad().equals(cedulaDeIdentidadDelReceptor)) {
                 this.listaDeReceptores.remover(i);
                 break;
             }
@@ -172,7 +172,7 @@ public class GestorDeReceptoresImpl implements GestorDeReceptores {
         while (j < tamañoDeLaListaDePrioridad) {
             Receptor receptorEncontrado = this.listaDePrioridadDeReceptores.obtener(j);
 
-            if (receptorEncontrado.getCedulaDeIdentidad().equals(cedulaDeIdentidadReceptor)) {
+            if (receptorEncontrado.getCedulaDeIdentidad().equals(cedulaDeIdentidadDelReceptor)) {
                 this.listaDePrioridadDeReceptores.remover(j);
                 break;
             }

@@ -14,7 +14,7 @@ package uy.edu.curso.interfaces;
 
 
 /**
- * Interfaz que representa a un receptor en el sistema.
+ * Interfaz que representa a un receptor en el sistema, @see ReceptorImpl.
  * Proporciona métodos para acceder y modificar la información del receptor,
  * utilizada en los procesos de asignación de órganos según compatibilidad
  * y prioridad.

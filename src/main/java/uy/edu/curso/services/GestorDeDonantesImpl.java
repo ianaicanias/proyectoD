@@ -76,18 +76,18 @@ public class GestorDeDonantesImpl implements GestorDeDonantes {
     /**
      * Busca un donante en el sistema por su cédula de identidad.
      *
-     * @param cedulaDeIdentidad Cédula de identidad del donante a buscar.
+     * @param cedulaDeIdentidadDelDonante Cédula de identidad del donante a buscar.
      * @return El donante encontrado, o {@code null} si no existe.
      */
     @Override
-    public Donante buscarDonante(String cedulaDeIdentidad) {
+    public Donante buscarDonante(String cedulaDeIdentidadDelDonante) {
         int tamañoDeLaListaDeDonantes = this.listaDeDonantes.tamaño();
         int i = 0;
 
         while (i < tamañoDeLaListaDeDonantes) {
             String cedulaDeIdentidadDonanteEncontrado = this.listaDeDonantes.obtener(i).getCedulaDeIdentidad();
 
-            if (cedulaDeIdentidadDonanteEncontrado.equals(cedulaDeIdentidad)) {
+            if (cedulaDeIdentidadDonanteEncontrado.equals(cedulaDeIdentidadDelDonante)) {
                 return this.listaDeDonantes.obtener(i);
             }
             i++;
@@ -100,17 +100,17 @@ public class GestorDeDonantesImpl implements GestorDeDonantes {
      * Elimina un donante del sistema por su cédula de identidad.
      * Si no existe un donante con esa cédula, no realiza ninguna acción.
      *
-     * @param cedulaDeIdentidad Cédula de identidad del donante a eliminar.
+     * @param cedulaDeIdentidadDelDonante Cédula de identidad del donante a eliminar.
      */
     @Override
-    public void eliminarDonante(String cedulaDeIdentidad) {
+    public void eliminarDonante(String cedulaDeIdentidadDelDonante) {
         int tamañoDeLaListaDeDonantes = this.listaDeDonantes.tamaño();
         int i = 0;
         
         while (i < tamañoDeLaListaDeDonantes) {
             String cedulaDeIdentidadDonanteEncontrado = this.listaDeDonantes.obtener(i).getCedulaDeIdentidad();
 
-            if (cedulaDeIdentidadDonanteEncontrado.equals(cedulaDeIdentidad)) {
+            if (cedulaDeIdentidadDonanteEncontrado.equals(cedulaDeIdentidadDelDonante)) {
                 this.listaDeDonantes.remover(i);
                 break;
             }

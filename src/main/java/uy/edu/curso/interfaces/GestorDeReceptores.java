@@ -16,7 +16,7 @@ import uy.edu.curso.tda.TDAListaEnlazada;
 
 
 /**
- * Interfaz que define el comportamiento de un gestor de receptores.
+ * Interfaz que define el comportamiento de un gestor de receptores, @see GestorDeReceptoresImpl.
  * Proporciona métodos para la administración de receptores en el sistema,
  * incluyendo su registro, búsqueda, eliminación y manejo de una lista de
  * prioridad basada en el puntaje asignado a cada receptor.
@@ -65,19 +65,19 @@ public interface GestorDeReceptores {
     /**
      * Busca un receptor en el sistema por su cédula de identidad.
      *
-     * @param cedulaDeIdentidadReceptor Cédula de identidad del receptor a buscar.
+     * @param cedulaDeIdentidadDelReceptor Cédula de identidad del receptor a buscar.
      * @return El receptor encontrado, o {@code null} si no existe.
      */
-    Receptor buscarReceptor(String cedulaDeIdentidadReceptor);
+    Receptor buscarReceptor(String cedulaDeIdentidadDelReceptor);
 
     /**
      * Elimina un receptor del sistema por su cédula de identidad,
      * removiéndolo tanto del registro general como de la lista de prioridad.
      * Si no existe un receptor con esa cédula, no realiza ninguna acción.
      *
-     * @param cedulaDeIdentidadReceptor Cédula de identidad del receptor a eliminar.
+     * @param cedulaDeIdentidadDelReceptor Cédula de identidad del receptor a eliminar.
      */
-    void eliminarReceptor(String cedulaDeIdentidadReceptor);
+    void eliminarReceptor(String cedulaDeIdentidadDelReceptor);
 
     /**
      * Retorna una cadena con el listado de todos los receptores registrados,
