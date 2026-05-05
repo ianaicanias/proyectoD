@@ -22,6 +22,7 @@ import uy.edu.curso.interfaces.GestorDeTrasplantes;
 import uy.edu.curso.interfaces.Organo;
 import uy.edu.curso.interfaces.Receptor;
 import uy.edu.curso.interfaces.Trasplante;
+import uy.edu.curso.services.ConsultorDeCompatibilidadSanguineaImpl;
 import uy.edu.curso.services.GestorDeDonantesImpl;
 import uy.edu.curso.services.GestorDeOrganosImpl;
 import uy.edu.curso.services.GestorDeReceptoresImpl;
@@ -39,7 +40,7 @@ public class GestorDeTrasplantesTest {
 
     @BeforeAll
     public static void inicializacion() {
-        gestorDeTrasplantes = new GestorDeTrasplantesImpl();
+        gestorDeTrasplantes = new GestorDeTrasplantesImpl(new ConsultorDeCompatibilidadSanguineaImpl());
         gestorDeDonantes = new GestorDeDonantesImpl();
         gestorDeOrganos = new GestorDeOrganosImpl();
         gestorDeReceptores = new GestorDeReceptoresImpl();
@@ -53,7 +54,7 @@ public class GestorDeTrasplantesTest {
 
     @BeforeEach
     public void limpiarDatos() {
-        gestorDeTrasplantes = new GestorDeTrasplantesImpl();
+        gestorDeTrasplantes = new GestorDeTrasplantesImpl(new ConsultorDeCompatibilidadSanguineaImpl());
         gestorDeDonantes = new GestorDeDonantesImpl();
         gestorDeOrganos = new GestorDeOrganosImpl();
         gestorDeReceptores = new GestorDeReceptoresImpl();
@@ -64,7 +65,7 @@ public class GestorDeTrasplantesTest {
     @DisplayName("Creación de un Gestor de Trasplantes Correctamente")
     public void GestorDeTrasplantesImpl_llamadaAlConstructor_gestorDeTrasplantesCreadoCorrectamenteConSuLista() {
         // Act
-        GestorDeTrasplantes gestorDeTrasplantesNuevo = new GestorDeTrasplantesImpl();
+        GestorDeTrasplantes gestorDeTrasplantesNuevo = new GestorDeTrasplantesImpl(new ConsultorDeCompatibilidadSanguineaImpl());
 
         // Assert
         assertNotNull(gestorDeTrasplantesNuevo.getListaDeTrasplantesRealizados());

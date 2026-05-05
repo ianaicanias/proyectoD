@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="es"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>ConsultorDeCompatibilidadSanguineaImpl.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">proyectoD</a> &gt; <a href="index.source.html" class="el_package">uy.edu.curso.services</a> &gt; <span class="el_source">ConsultorDeCompatibilidadSanguineaImpl.java</span></div><h1>ConsultorDeCompatibilidadSanguineaImpl.java</h1><pre class="source lang-java linenums">/*
+ * Clase: ConsultorDeCompatibilidadSanguineaImpl.
+ * Programadores: Axel Ferreira, Ianai Canias, Thiago Soca, Valentín Guerrico.
+ * Fecha: 03/05/2026.
+ * Copyright: Todos los derechos reservados para los programadores de este archivo, 2026.
+ *
+ * Resumen:
+ * La siguiente clase representa la implementación concreta del consultor de
+ * compatibilidad sanguínea en el sistema BioQueue. Implementa la interfaz
+ * ConsultorDeCompatibilidadSanguinea y encapsula las reglas médicas de
+ * compatibilidad entre tipos de sangre de donantes y receptores.
+ */
+package uy.edu.curso.services;
+
+import uy.edu.curso.interfaces.ConsultorDeCompatibilidadSanguinea;
+
+
+/**
+ * Implementación concreta del consultor de compatibilidad sanguínea.
+ * Implementa @see ConsultorDeCompatibilidadSanguinea y encapsula las reglas
+ * médicas de compatibilidad entre tipos de sangre, determinando si un órgano
+ * de un donante puede ser trasplantado a un receptor dado.
+ */
+<span class="fc" id="L24">public class ConsultorDeCompatibilidadSanguineaImpl implements ConsultorDeCompatibilidadSanguinea {</span>
+
+    /**
+     * Tabla de combinaciones compatibles entre tipos de sangre de donante y receptor.
+     * Cada entrada representa una combinación válida en formato &quot;TipoDonanteTipoReceptor&quot;
+     * (ej: &quot;A+AB+&quot; indica que un donante A+ es compatible con un receptor AB+).
+     * Las reglas son fijas y están determinadas por criterios médicos.
+     * Para más detalle ver la tabla de compatibilidades al final del README del proyecto.
+     */
+<span class="fc" id="L33">    private static final String[] COMPATIBILIDADES = { </span>
+        &quot;A+A+&quot;, &quot;A+AB+&quot;, 
+        &quot;A-A+&quot;, &quot;A-A-&quot;, &quot;A-AB+&quot;, &quot;A-AB-&quot;, 
+        &quot;B+B+&quot;, &quot;B+AB+&quot;, 
+        &quot;B-B+&quot;, &quot;B-B-&quot;, &quot;B-AB+&quot;, &quot;B-AB-&quot;, 
+        &quot;AB+AB+&quot;, 
+        &quot;AB-AB+&quot;, &quot;AB-AB-&quot;,
+        &quot;O+A+&quot;, &quot;O+B+&quot;, &quot;O+AB+&quot;, &quot;O+O+&quot;,
+        &quot;O-A+&quot;, &quot;O-A-&quot;, &quot;O-B+&quot;, &quot;O-B-&quot;, &quot;O-AB+&quot;, &quot;O-AB-&quot;, &quot;O-O+&quot;, &quot;O-O-&quot;
+    };
+
+    /**
+     * Determina si un tipo de sangre de donante es compatible con el de un receptor,
+     * consultando la tabla de compatibilidades médicas.
+     *
+     * @param tipoDeSangreDelDonante   Tipo de sangre del donante.
+     * @param tipoDeSangreDelReceptor  Tipo de sangre del receptor.
+     * @return {@code true} si los tipos de sangre son compatibles, {@code false} en caso contrario.
+     */
+    @Override
+    public boolean esCompatible(String tipoDeSangreDelDonante, String tipoDeSangreDelReceptor) {
+<span class="fc" id="L54">        String combinacion = tipoDeSangreDelDonante + tipoDeSangreDelReceptor;</span>
+
+<span class="fc bfc" id="L56" title="All 2 branches covered.">        for (String combinacionCompatible : COMPATIBILIDADES) {</span>
+<span class="fc bfc" id="L57" title="All 2 branches covered.">            if (combinacion.equals(combinacionCompatible)) {</span>
+<span class="fc" id="L58">                return true;</span>
+            }
+        }
+
+<span class="fc" id="L62">        return false;</span>
+    }
+
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.11.202310140853</span></div></body></html>
