@@ -21,18 +21,23 @@ BioQueue es un sistema de gestión de trasplantes de órganos que permite admini
 ## Estructura del Proyecto
 
 - `classes/` - Entidades del dominio (DonanteImpl, ReceptorImpl, OrganoImpl, TrasplanteImpl, Persona).
-  - `Organo` verifica la compatibilidad sanguínea con el receptor.
-  - `Trasplante` registra el historial de cada trasplante realizado.
+  - `DonanteImpl` - Representa a una persona que dona un órgano al sistema.
+  - `ReceptorImpl` - Representa a una persona que necesita un órgano y está en lista de espera.
+  - `Persona` - Clase abstracta base que centraliza los atributos comunes de donantes y receptores.
+  - `OrganoImpl` - Representa un órgano disponible para trasplante, asociado a su donante.
+  - `TrasplanteImpl` - Registra el historial de cada trasplante realizado.
 - `interfaces/` - Contratos de cada entidad del sistema.
 - `services/` - Lógica de negocio.
-  - `GestorDeOrganos` - Administra los órganos disponibles.
-  - `GestorDeReceptores` - Administra la cola de prioridad de receptores.
-  - `GestorDeDonantes` - Administra la lista de donantes del sistema.
-  - `GestorDeTrasplantes` - Orquesta la asignación de órganos y registra los trasplantes.
+  - `GestorDeOrganosImpl` - Administra los órganos disponibles.
+  - `GestorDeReceptoresImpl` - Administra la lista de prioridad de receptores.
+  - `GestorDeDonantesImpl` - Administra la lista de donantes del sistema.
+  - `GestorDeTrasplantesImpl` - Orquesta la asignación de órganos y registra los trasplantes.
+  - `ConsultorDeCompatibilidadSanguineaImpl` - Encapsula las reglas médicas de compatibilidad entre tipos de sangre de donante y receptor.
+  - `LectorDeArchivosCSV` - Permite la carga masiva de receptores y donantes desde archivos CSV.
 - `facade/` - Punto de entrada único al sistema (BioQueueFacade).
 - `tda/` - Estructuras de datos propias (TDAListaEnlazada, TDAColaEnlazada).
 - `Main` - Clase principal de funcionamiento del sistema.
-- `ListaEnlazada, ColaEnlazada, Nodo` - Clases de estructuras de datos implementadas.
+- `ListaEnlazada, Nodo` - Clases de estructuras de datos implementadas.
 
 ## Tecnologías Utilizadas
 
